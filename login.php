@@ -121,6 +121,7 @@ $bdd=NULL;
                     input.nextElementSibling.name = 'eye-off-outline';
                 }
             }
+
             let pass1 = document.getElementById('cp1');
             let pass2 = document.getElementById('cp2');
             let pass3 = document.getElementById('cp3');
