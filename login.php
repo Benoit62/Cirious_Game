@@ -124,14 +124,14 @@ $bdd=NULL;
             let pass1 = document.getElementById('cp1');
             let pass2 = document.getElementById('cp2');
             let pass3 = document.getElementById('cp3');
-            pass1.addEventListener('click', () => {
-                changeInput(document.getElementById('pass1'));
+           pass1.addEventListener('click', () => {
+                changeInput(document.getElementById('mdp_co'));
             });
             pass2.addEventListener('click', () => {
-                changeInput(document.getElementById('pass2'));
+                changeInput(document.getElementById('mdp'));
             });
             pass3.addEventListener('click', () => {
-                changeInput(document.getElementById('pass3'));
+                changeInput(document.getElementById('verif_mdp'));
             });
         </script>
         <script>
