@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ISeed</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet">
+</head>
+<body>
+    
+    <div class="lignes">
+        <div class="l1"></div>
+        <div class="l2"></div>
+    </div>
+
+    <div class="container-first">
+        <h1><span>I</span><span>Seed - </span><span>Plant </span><span>Different</span></h1>
+        <div class="container-btns">
+            <a href="login.php" class="btn-first b1"><span>S'inscrire</span></a>
+            <a href="login.php" class="btn-first b2"><span>Se Connecter</span></a>
+        </div>
+    </div>
+
+    <img src="https://svgsilh.com/svg/2022491.svg" class="logo">
+
+
+    <ul class="medias">
+        <li class="bulle"></li>
+        <li class="bulle"></li>
+        <li class="bulle"></li>
+        <li class="bulle"></li>
+    </ul>
+
+
+    <script>
+        const btn = document.querySelector('.container-btns');
+        btn.onmousemove = function(e){
+            const x = e.pageX - btn.offsetLeft;
+            const y = e.pageY - btn.offsetTop;
+
+            btn.style.setProperty('--x', x + 'px');
+            btn.style.setProperty('--y', y + 'px');
+        }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"></script>
+    <script>
+        const titreSpans = document.querySelectorAll("h1 span");
+        const btns = document.querySelectorAll(".btn-first");
+        const logo = document.querySelector(".logo");
+        const medias = document.querySelectorAll(".bulle");
+        const l1 = document.querySelector(".l1");
+        const l2 = document.querySelector(".l2");
+
+        window.addEventListener("load", () => {
+        const TL = gsap.timeline({ paused: true });
+
+        TL.staggerFrom(
+            titreSpans,
+            1,
+            { top: -50, opacity: 0, ease: "power2.out" },
+            0.3
+        )
+            .staggerFrom(btns, 1, { opacity: 0, ease: "power2.out" }, 0.3, "-=1")
+            .from(l1, 1, { width: 0, ease: "power2.out" }, "-=2")
+            .from(l2, 1, { width: 0, ease: "power2.out" }, "-=2")
+            .from(logo, 0.4, { transform: "scale(0)", ease: "power2.out" }, "-=2")
+            .staggerFrom(medias, 1, { right: -200, ease: "power2.out" }, 0.3, "-=1");
+
+        TL.play();
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,4 @@
+AuthName "Page d'administration protégée"
+AuthType Basic
+AuthUserFile "D:/xampp/htdocs/OFour/admin/.htpasswd"
+Require valid-user

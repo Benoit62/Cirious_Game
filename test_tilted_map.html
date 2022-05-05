@@ -10,13 +10,14 @@
 
 <body>
     <script type="text/javascript">
-        var house;
-        var player;
-        var cursors;
+        let house;
+        let player;
+        let cursors;
 
         function hitHouse(player, house)
         {
             //this.physics.pause();
+
 
             house.setTint(0xff6800);
         }
@@ -27,32 +28,59 @@
             }
 
             preload() {
-                this.load.image('map', 'img/grass_background.jpg');
-                this.load.image('house', 'img/house.png');
                 this.load.spritesheet('dude', 'img/dude.png', { frameWidth: 32, frameHeight: 48 });
+
+                this.load.image("tuiles1", "map/32x32_map_tile_v3.1_MARGINLESS.png");
+                this.load.image("cows", "map/cow_eat.png");
+                this.load.image("pigs", "map/pig_eat.png");
+                this.load.image("sheeps", "map/sheep_eat.png");
+                this.load.image("tuiles2", "map/terrain.png");
+
+                this.load.tilemapTiledJSON("carte", "map/europe.json");  
             }
 
             create() {
-                //Camera and background
-                this.cameras.main.setBounds(0, 0, 417, 626);
-
-                this.add.image(0, 0, 'map').setOrigin(0);
-
-                this.cameras.main.setZoom(2);
-                this.cameras.main.centerOn(0, 0);
+                this.cameras.main.zoom = 0.5;
 
 
-                // Facilities
-                house = this.physics.add.staticGroup();
-                house.create(100, 100, 'house').setScale(0.2).refreshBody();
+                // Map 
+                let carteDuNiveau = this.add.tilemap("carte");
+                let tileset = carteDuNiveau.addTilesetImage(
+                    "32x32_map_tile_v3.1_MARGINLESS",
+                    "tuiles1"
+                ); 
 
-                var houseEvent = this.add.image(100, 100, 'house').setScale(0.2);
-                houseEvent.setInteractive();
-                houseEvent.on('clicked', this.clickHandler, this);
+                let backgroundLayer = carteDuNiveau.createStaticLayer(
+                    "finition",
+                    tileset
+                );
 
+                // chargement du calque calque_background_2
+                let backgroundLayer2 = carteDuNiveau.createStaticLayer(
+                    "colision",
+                    tileset
+                );
+
+                // chargement du calque calque_plateformes
+                let backgroundLayer3 = carteDuNiveau.createStaticLayer(
+                    "Layer",
+                    tileset
+                );  
+
+                
 
                 // Player
-                player = this.physics.add.sprite(200, 100, 'dude');
+                player = this.physics.add.sprite(700, 500, 'dude');
+
+                this.cameras.main.startFollow(player, true);
+
+                this.physics.world.setBounds(0, 0, 1920, 1088);
+                //  ajout du champs de la caméra de taille identique à celle du monde
+                this.cameras.main.setBounds(0, 0, 1920, 1088);
+
+                backgroundLayer2.setCollisionByProperty({ estSolide: true }); 
+                this.physics.add.collider(player, backgroundLayer2);
+
 
                 //  Our player animations, turning, walking left and walking right.
                 this.anims.create({
@@ -87,32 +115,9 @@
                     frameRate: 20
                 });
 
-                player.setCollideWorldBounds(true);
                 
 
-                this.physics.add.collider(player, house, hitHouse, null, this);
-
-                //  Input Events
                 cursors = this.input.keyboard.createCursorKeys();
-
-                /*var controlConfig = {
-                    camera: this.cameras.main,
-                    left: cursors.left,
-                    right: cursors.right,
-                    up: cursors.up,
-                    down: cursors.down,
-                    zoomIn: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q),
-                    zoomOut: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E),
-                    acceleration: 0.06,
-                    drag: 0.0005,
-                    maxSpeed: 1.0
-                };
-
-                this.controls = new Phaser.Cameras.Controls.SmoothedKeyControl(controlConfig);*/
-
-                this.input.on('gameobjectup', function (pointer, gameObject){
-                    gameObject.emit('clicked', gameObject);
-                }, this);
             }
 
             update(time, delta) {
@@ -162,22 +167,6 @@
                 {
                     player.setVelocityY(-330);
                 }
-            }
-
-            clickHandler (obj) {
-                console.log(obj);
-                console.log(player.x, player.y);
-                console.log(obj.x, obj.y, obj.height, obj.width);
-                console.log('X + ', obj.x+(obj.width/2));
-                console.log('X - ', obj.x-(obj.width/2));
-                console.log('Y + ', obj.y+(obj.height/2));
-                console.log('Y - ', obj.y-(obj.height/2));
-                let scaleX = obj._scaleX;
-                let scaleY = obj._scaleY;
-                if(player.x < obj.x+(obj.width*scaleX/1.5) && player.x > obj.x-(obj.width*scaleX/1.5) && player.y < obj.y+(obj.height*scaleY/1.5) && player.y > obj.y-(obj.height*scaleY/1.5)) {
-                    console.log('ok');
-                }
-                obj.setTint(0xff6800);
             }
 
             
