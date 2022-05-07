@@ -36,6 +36,7 @@ include("config/configbdd.php");
                 this.load.image('europe', 'assets/europe.png');
                 this.load.image('header', 'assets/header.png');
                 this.load.image('off', 'assets/off.png');
+                this.load.image('globe', 'assets/globe.png');
                 this.load.spritesheet('dude', 'assets/dude.png', {
                     frameWidth: 32,
                     frameHeight: 48
@@ -289,15 +290,21 @@ include("config/configbdd.php");
             {
                 super({ key: 'sceneD' });
                 this.turnOff;
+                this.globe;
             }
 
             create ()
             {
                 this.add.image(0, 0, 'header');
                 this.turnOff = this.add.image(window.innerWidth-25, 25, 'off').setInteractive();
+                this.globe = this.add.image(window.innerWidth-55, 25, 'globe').setInteractive();
 
                 this.turnOff.on('pointerup', function() {
                     window.location.href = 'profil.php';
+                }, this);
+
+                this.globe.on('pointerup', function() {
+                    //this.scene.start('sceneE');
                 }, this)
             }
 
