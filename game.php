@@ -34,6 +34,9 @@ include("config/configbdd.php");
             preload() {
                 this.load.image('map', 'assets/map.png');
                 this.load.image('europe', 'assets/europe.png');
+                this.load.image('header', 'assets/header.png');
+                this.load.image('off', 'assets/off.png');
+                this.load.image('globe', 'assets/globe.png');
                 this.load.spritesheet('dude', 'assets/dude.png', {
                     frameWidth: 32,
                     frameHeight: 48
@@ -109,7 +112,7 @@ include("config/configbdd.php");
                         this.scene.start('sceneA');
                     } else {
                         progress(i);
-                        i++;
+                        i+=10;
                     }
                 }
             }
@@ -144,28 +147,25 @@ include("config/configbdd.php");
 
         class SceneB extends Phaser.Scene {
 
-            constructor() {
-                super({
-                    key: 'sceneB'
-                });
+            constructor ()
+            {
+                super({ key: 'sceneB' });
             }
 
-            create() {
+            create ()
+            {
                 // Ajout de la map et centrage
                 const map = this.add.image(0, 0, 'map');
-                Phaser.Display.Align.In.Center(map, this.add.zone(window.innerWidth / 2, window.innerHeight / 2, window.innerWidth, window.innerHeight));
-
+                Phaser.Display.Align.In.Center(map, this.add.zone(window.innerWidth/2, window.innerHeight/2, window.innerWidth, window.innerHeight));
+                
                 // Setup de la camera
                 let zoom = 1;
-                while (1632 * zoom > window.innerHeight) zoom -= 0.1;
+                while(1632*zoom > window.innerHeight) zoom -= 0.05;
                 this.cameras.main.zoom = zoom;
+                
+                this.input.once('pointerdown', function () {
 
-                this.input.once('pointerdown', function() {
-
-                    this.scene.start('sceneC', {
-                        id: 1,
-                        zone: 'europe'
-                    });
+                    this.scene.start('sceneC', { id: 1, zone: 'europe' });
 
                 }, this);
             }
@@ -174,73 +174,59 @@ include("config/configbdd.php");
 
         class SceneC extends Phaser.Scene {
 
-            constructor() {
-                super({
-                    key: 'sceneC'
-                });
+            constructor ()
+            {
+                super({ key: 'sceneC' });
                 this.player;
                 this.cursors;
             }
 
-            create(data) {
+            create (data)
+            {
                 const farm = this.add.image(0, 0, data.zone);
-                Phaser.Display.Align.In.Center(farm, this.add.zone(window.innerWidth / 2, window.innerHeight / 2, window.innerWidth, window.innerHeight));
+                //Phaser.Display.Align.In.Center(farm, this.add.zone(window.innerWidth/2, window.innerHeight/2, window.innerWidth, window.innerHeight));
                 this.cameras.main.zoom = 1;
 
                 // Player
-                this.player = this.physics.add.sprite(window.innerWidth / 2, window.innerHeight / 2, 'dude');
-                Phaser.Display.Align.In.Center(this.player, this.add.zone(window.innerWidth / 2, window.innerHeight / 2, window.innerWidth, window.innerHeight));
+                this.player = this.physics.add.sprite(800, -270, 'dude');
+                //Phaser.Display.Align.In.Center(this.player, this.add.zone(window.innerWidth/2, window.innerHeight/2, window.innerWidth, window.innerHeight));
                 //  Our player animations, turning, walking left and walking right.
                 this.anims.create({
                     key: 'left',
-                    frames: this.anims.generateFrameNumbers('dude', {
-                        start: 0,
-                        end: 3
-                    }),
+                    frames: this.anims.generateFrameNumbers('dude', { start: 0, end: 3 }),
                     frameRate: 10,
                     repeat: -1
                 });
 
                 this.anims.create({
                     key: 'turn',
-                    frames: [{
-                        key: 'dude',
-                        frame: 4
-                    }],
+                    frames: [ { key: 'dude', frame: 4 } ],
                     frameRate: 20
                 });
 
                 this.anims.create({
                     key: 'right',
-                    frames: this.anims.generateFrameNumbers('dude', {
-                        start: 5,
-                        end: 8
-                    }),
+                    frames: this.anims.generateFrameNumbers('dude', { start: 5, end: 8 }),
                     frameRate: 10,
                     repeat: -1
                 });
 
                 this.anims.create({
                     key: 'up',
-                    frames: [{
-                        key: 'dude',
-                        frame: 4
-                    }],
+                    frames: [ { key: 'dude', frame: 4 } ],
                     frameRate: 20
                 });
 
                 this.anims.create({
                     key: 'down',
-                    frames: [{
-                        key: 'dude',
-                        frame: 4
-                    }],
+                    frames: [ { key: 'dude', frame: 4 } ],
                     frameRate: 20
                 });
 
 
-                this.cameras.main.setBounds(farm.x - farm.width / 2, farm.y - farm.height / 2, farm.width, farm.height);
-                this.physics.world.setBounds(farm.x - farm.width / 2, farm.y - farm.height / 2, farm.width, farm.height);
+                // On décale la caméra par rapport à la hauteur du header
+                this.cameras.main.setBounds(farm.x-farm.width/2, farm.y-farm.height/2-50, farm.width, farm.height+50);
+                this.physics.world.setBounds(farm.x-farm.width/2, farm.y-farm.height/2, farm.width, farm.height);
 
                 console.log(farm);
 
@@ -251,37 +237,80 @@ include("config/configbdd.php");
 
                 //  Input Events
                 this.cursors = this.input.keyboard.createCursorKeys();
+
+                this.scene.launch('sceneD');
             }
 
             update() {
 
-                if (this.cursors.up.isDown) {
+                if (this.cursors.up.isDown)
+                {
                     this.player.setVelocityY(-160);
                     //player.anims.play('up', true);
-                } else if (this.cursors.down.isDown) {
+                }
+                else if (this.cursors.down.isDown)
+                {
                     this.player.setVelocityY(160);
 
                     //player.anims.play('down', true);
-                } else {
+                }
+                else
+                {
                     this.player.setVelocityY(0);
                 }
 
-                if (this.cursors.left.isDown) {
+                if (this.cursors.left.isDown)
+                {
                     this.player.setVelocityX(-160);
 
                     this.player.anims.play('left', true);
-                } else if (this.cursors.right.isDown) {
+                }
+                else if (this.cursors.right.isDown)
+                {
                     this.player.setVelocityX(160);
 
                     this.player.anims.play('right', true);
-                } else {
+                } 
+                else
+                {
                     this.player.setVelocityX(0);
                 }
 
-                if (!this.cursors.left.isDown && !this.cursors.right.isDown) {
-
+                if(!this.cursors.left.isDown && !this.cursors.right.isDown) {
+                    
                     this.player.anims.play('turn', true);
                 }
+            }
+
+        }
+
+        class SceneD extends Phaser.Scene {
+
+            constructor ()
+            {
+                super({ key: 'sceneD' });
+                this.turnOff;
+                this.globe;
+            }
+
+            create ()
+            {
+                this.add.image(0, 0, 'header');
+                this.turnOff = this.add.image(window.innerWidth-25, 25, 'off').setInteractive();
+                this.globe = this.add.image(window.innerWidth-55, 25, 'globe').setInteractive();
+
+                this.turnOff.on('pointerup', function() {
+                    window.location.href = 'profil.php';
+                }, this);
+
+                this.globe.on('pointerup', function() {
+                    //this.scene.start('sceneE');
+                }, this)
+            }
+
+            update() {
+
+                
             }
 
         }
@@ -295,7 +324,7 @@ include("config/configbdd.php");
             physics: {
                 default: 'arcade',
             },
-            scene: [Loading, SceneA, SceneB, SceneC]
+            scene: [Loading, SceneA, SceneB, SceneC, SceneD]
         };
 
         var game = new Phaser.Game(config);
