@@ -125,6 +125,7 @@ $query->closeCursor();
       </div>
 
     </form>
+    <a href="game.php">Jouer</a>
 
 
 
