@@ -131,14 +131,14 @@ body {
     color: #111;
 }
 
-a {
+form a {
     position: relative;
     display: flex;
     text-decoration: none;
     color: #111;
 }
 
-a:hover {
+form a:hover {
     background: #0084ff;
     color: #fff;
     border-radius: 10px;
