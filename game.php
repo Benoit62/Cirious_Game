@@ -23,6 +23,7 @@ include("config/configbdd.php");
 
 <body>
     <script type="text/javascript">
+        //loading par le S
         class Loading extends Phaser.Scene {
 
             constructor() {
@@ -50,7 +51,7 @@ include("config/configbdd.php");
                 var loadingText = this.make.text({
                     x: width / 2,
                     y: height / 2 - 50,
-                    text: 'Loading...',
+                    text: 'Loading.',
                     style: {
                         font: '20px monospace',
                         fill: '#ffffff'
@@ -70,30 +71,42 @@ include("config/configbdd.php");
                 percentText.setOrigin(0.5, 0.5);
 
 
-
+                var tmp = 'Loading';
+                //update bar et txt loading
+                //magie noire
                 function progress(value) {
                     percentText.setText(parseInt(value) + '%');
                     progressBar.clear();
                     progressBar.fillStyle(0xffffff, 1);
                     progressBar.fillRect(width / 2 - 150, height / 2 - 15, 3 * value, 30);
+                    if (value % 10 == 7) {
+                        var points = '';
+                        for (let j = 0; j <= value % 3; j++) {
+                            points += '.';
+                        }
+                        loadingText.setText(tmp + points);
+                        //console.log(value);
+                    }
+                    
                 };
-
+                //event loop pour l'update
                 var i = 0;
                 var timedEvent = this.time.addEvent({
-                    delay: 50,
+                    delay: 75,
                     callback: onEvent,
                     callbackScope: this,
                     loop: true
                 });
-
+                //callBack
                 function onEvent() {
+                    //si la bar est full
                     if (i == 100) {
                         timedEvent.remove(false);
                         progressBar.destroy();
                         progressBox.destroy();
                         loadingText.destroy();
                         percentText.destroy();
-                        this.scene.start('sceneA')
+                        this.scene.start('sceneA');
                     } else {
                         progress(i);
                         i++;
@@ -103,6 +116,7 @@ include("config/configbdd.php");
 
         }
 
+        //scenes par Benoit
         class SceneA extends Phaser.Scene {
 
             constructor() {
