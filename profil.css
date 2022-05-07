@@ -131,6 +131,21 @@ body {
     color: #111;
 }
 
+a{
+    cursor: default;
+}
+.menu a {
+    position: relative;
+    display: flex;
+    text-decoration: none;
+    color: #111;
+}
+
+.menu a:hover {
+    background: #0084ff;
+    color: #fff;
+    border-radius: 10px;
+}
 form a {
     position: relative;
     display: flex;
