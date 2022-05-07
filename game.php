@@ -35,6 +35,7 @@ include("config/configbdd.php");
                 this.load.image('map', 'assets/map.png');
                 this.load.image('europe', 'assets/europe.png');
                 this.load.image('header', 'assets/header.png');
+                this.load.image('off', 'assets/off.png');
                 this.load.spritesheet('dude', 'assets/dude.png', {
                     frameWidth: 32,
                     frameHeight: 48
@@ -110,7 +111,7 @@ include("config/configbdd.php");
                         this.scene.start('sceneA');
                     } else {
                         progress(i);
-                        i++;
+                        i+=10;
                     }
                 }
             }
@@ -287,13 +288,17 @@ include("config/configbdd.php");
             constructor ()
             {
                 super({ key: 'sceneD' });
-                this.player;
-                this.cursors;
+                this.turnOff;
             }
 
             create ()
             {
                 this.add.image(0, 0, 'header');
+                this.turnOff = this.add.image(window.innerWidth-25, 25, 'off').setInteractive();
+
+                this.turnOff.on('pointerup', function() {
+                    window.location.href = 'profil.php';
+                }, this)
             }
 
             update() {
