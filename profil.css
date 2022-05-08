@@ -131,14 +131,29 @@ body {
     color: #111;
 }
 
-a {
+a{
+    cursor: default;
+}
+.menu a {
     position: relative;
     display: flex;
     text-decoration: none;
     color: #111;
 }
 
-a:hover {
+.menu a:hover {
+    background: #0084ff;
+    color: #fff;
+    border-radius: 10px;
+}
+form a {
+    position: relative;
+    display: flex;
+    text-decoration: none;
+    color: #111;
+}
+
+form a:hover {
     background: #0084ff;
     color: #fff;
     border-radius: 10px;
