@@ -162,12 +162,42 @@ include("config/configbdd.php");
                 let zoom = 1;
                 while(1632*zoom > window.innerHeight) zoom -= 0.05;
                 this.cameras.main.zoom = zoom;
+
+
+                var shape = new Phaser.Geom.Polygon([
+                    -350, -400,
+                    200, -400,
+                    1100, 200,
+                    1100, 600,
+                    -500, 200
+                ]);
+                var graphics = this.add.graphics();
+                graphics.lineStyle(20, 0x00aa00);
+                graphics.beginPath();
+
+                graphics.moveTo(shape.points[0].x, shape.points[0].y);
+
+                for (var i = 1; i < shape.points.length; i++)
+                {
+                    graphics.lineTo(shape.points[i].x, shape.points[i].y);
+                }
+
+                graphics.closePath();
+                graphics.strokePath();
+
+                graphics.setInteractive();
+
+                graphics.on('pointerdown', function() {
+                    console.log('yes');
+                }, this);
+
+
                 
-                this.input.once('pointerdown', function () {
+                /*this.input.once('pointerdown', function () {
 
                     this.scene.start('sceneC', { id: 1, zone: 'europe' });
 
-                }, this);
+                }, this);*/
             }
 
         }
