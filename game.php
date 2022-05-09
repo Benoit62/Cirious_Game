@@ -223,8 +223,8 @@ include("config/configbdd.php");
 
                 this.foret = this.add.image(0, 0, 'foretile').setInteractive();
                 Phaser.Display.Align.In.Center(this.foret, this.add.zone(window.innerWidth/2, window.innerHeight/2, window.innerWidth, window.innerHeight));
-                this.foret.setX(this.foret.x+602);
-                this.foret.setY(this.foret.y+346);
+                this.foret.setX(this.foret.x+692);
+                this.foret.setY(this.foret.y+300);
                 this.foret.once('pointerdown', function(){
                     if(this.data.get('unlock').includes('foret')) {
                         if(this.scene.isSleeping('foretScene')) {                        
