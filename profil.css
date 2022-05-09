@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap');
-
 * {
     margin: 0;
     padding: 0;
@@ -9,7 +8,7 @@
 
 body {
     display: flex;
-    
+
     min-height: 100vh;
     background: #f7f7f7;
 }
@@ -131,9 +130,10 @@ body {
     color: #111;
 }
 
-a{
+a {
     cursor: default;
 }
+
 .menu a {
     position: relative;
     display: flex;
@@ -146,6 +146,7 @@ a{
     color: #fff;
     border-radius: 10px;
 }
+
 form a {
     position: relative;
     display: flex;
@@ -222,9 +223,9 @@ form a:hover {
 }
 
 
-#popup .choise a{
+#popup .choise a {
     display: inline-block;
-    
+
     display: flex;
     justify-content: center;
 }
@@ -232,13 +233,101 @@ form a:hover {
 #popup input:focus {
     border-color: #ff4754;
 }
+
 #popup input {
     width: 90%;
     margin-bottom: 10px;
     margin-top: 10px;
 }
 
-.choise a{
-    float:left;
+.choise a {
+    float: left;
     margin-left: 25%;
+}
+
+
+
+.container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    background-color: #111;
+    
+}
+
+.container a {
+    position: relative;
+    display: inline-block;
+    padding: 15px 30px;
+    color: #fff;
+    background: transparent;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin: 40px;
+    letter-spacing: 2px;
+    text-decoration: none;
+    transition: 0.5s;
+    transition-delay: 0s;
+    -webkit-box-reflect: below 0px linear-gradient(transparent, #0002);
+}
+
+.container a:hover {
+    transition-delay: 1.5s;
+    color: #000;
+}
+
+
+.container a span {
+    position: relative;
+    z-index: 10;
+}
+
+.container a:before {
+    content: '';
+    position: absolute;
+    left: -20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 2px;
+    background: red;
+    transition: width 0.5s, left 0.5s, height 0.5s, box-shadow 0.5s;
+    transition-delay: 1s, 0.5s, 0s, 0s;
+    box-shadow: 5px -8px 0 red,
+        5px 8px 0 red;
+}
+
+.container a:hover:before {
+    width: 60%;
+    height: 100%;
+    left: -2px;
+    transition-delay: 0s, 0.5s, 1s, 1s;
+    box-shadow: 0px 0 0 red,
+        0px 0 0 red;
+}
+
+.container a:after {
+    content: '';
+    position: absolute;
+    right: -20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 2px;
+    background: red;
+    transition: width 0.5s, right 0.5s, height 0.5s, box-shadow 0.5s;
+    transition-delay: 1s, 0.5s, 0s, 0s;
+    box-shadow: -5px -8px 0 red,
+        -5px 8px 0 red;
+}
+
+.container a:hover:after {
+    width: 60%;
+    height: 100%;
+    right: -2px;
+    transition-delay: 0s, 0.5s, 1s, 1s;
+    box-shadow: 0px 0 0 red,
+        0px 0 0 red;
 }
