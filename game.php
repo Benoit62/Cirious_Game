@@ -33,7 +33,12 @@ include("config/configbdd.php");
             }
             preload() {
                 this.load.image('map', 'assets/map.png');
+                this.load.image('europeile', 'assets/europeile.png');
+                this.load.image('desertile', 'assets/desertile.png');
+                this.load.image('foretile', 'assets/foretile.png');
+                this.load.image('glaceile', 'assets/glaceile.png');
                 this.load.image('europe', 'assets/europe.png');
+                this.load.image('desert', 'assets/desert.png');
                 this.load.image('header', 'assets/header.png');
                 this.load.image('off', 'assets/off.png');
                 this.load.image('globe', 'assets/globe.png');
@@ -153,38 +158,133 @@ include("config/configbdd.php");
             constructor ()
             {
                 super({ key: 'sceneB' });
+                this.europe;
+                this.desert;
+                this.glace;
+                this.foret;
             }
 
             create ()
             {
+                // Data
+                this.data.set('unlock', ['europe']);
+                this.data.set('lock', ['desert', 'foret', 'glace']);
+
                 // Ajout de la map et centrage
                 const map = this.add.image(0, 0, 'map');
                 Phaser.Display.Align.In.Center(map, this.add.zone(window.innerWidth/2, window.innerHeight/2, window.innerWidth, window.innerHeight));
                 
                 // Setup de la camera
-                let zoom = 1;
-                while(1632*zoom > window.innerHeight) zoom -= 0.05;
+                let zoom = 0.3;
+                //while(1632*zoom > window.innerHeight) zoom -= 0.05;
                 this.cameras.main.zoom = zoom;
 
-                
-                this.input.once('pointerdown', function () {
 
-                    if(this.scene.isSleeping('sceneC')) {                        
-                        this.scene.wake('sceneC', { id: 1, zone: 'europe' });
+                this.glace = this.add.image(0/*1614*/, 0/*-500*/, 'glaceile').setInteractive();
+                Phaser.Display.Align.In.Center(this.glace, this.add.zone(window.innerWidth/2, window.innerHeight/2, window.innerWidth, window.innerHeight));
+                this.glace.setX(this.glace.x+982);
+                this.glace.setY(this.glace.y-772);
+                this.glace.once('pointerdown', function(){
+                    if(this.data.get('unlock').includes('glace')) {
+                        if(this.scene.isSleeping('glaceScene')) {                        
+                            this.scene.wake('glaceScene');
+                        }
+                        else {
+                            this.scene.start('glaceScene');
+                        }
                     }
                     else {
-                        this.scene.start('sceneC', { id: 1, zone: 'europe' });
+                        this.lockText();
                     }
                 }, this);
+
+                
+
+                this.desert = this.add.image(0, 0, 'desertile').setInteractive();
+                Phaser.Display.Align.In.Center(this.desert, this.add.zone(window.innerWidth/2, window.innerHeight/2, window.innerWidth, window.innerHeight));
+                this.desert.setX(this.desert.x-702);
+                this.desert.setY(this.desert.y+446);
+                this.desert.once('pointerdown', function(){
+                    if(this.data.get('unlock').includes('desert')) {
+                        if(this.scene.isSleeping('desertScene')) {                        
+                            this.scene.wake('desertScene');
+                        }
+                        else {
+                            this.scene.start('desertScene');
+                        }
+                    }
+                    else {
+                        this.lockText();
+                    }
+                }, this);
+
+
+
+
+                this.foret = this.add.image(0, 0, 'foretile').setInteractive();
+                Phaser.Display.Align.In.Center(this.foret, this.add.zone(window.innerWidth/2, window.innerHeight/2, window.innerWidth, window.innerHeight));
+                this.foret.setX(this.foret.x+602);
+                this.foret.setY(this.foret.y+346);
+                this.foret.once('pointerdown', function(){
+                    if(this.data.get('unlock').includes('foret')) {
+                        if(this.scene.isSleeping('foretScene')) {                        
+                            this.scene.wake('foretScene');
+                        }
+                        else {
+                            this.scene.start('foretScene');
+                        }
+                    }
+                    else {
+                        this.lockText();
+                    }
+                }, this);
+
+
+
+
+                this.europe = this.add.image(0, 0, 'europeile').setInteractive();
+                Phaser.Display.Align.In.Center(this.europe, this.add.zone(window.innerWidth/2, window.innerHeight/2, window.innerWidth, window.innerHeight));
+                this.europe.setX(this.europe.x-318);
+                this.europe.setY(this.europe.y-250);
+                this.europe.once('pointerdown', function(){
+                    if(this.data.get('unlock').includes('europe')) {
+                        if(this.scene.isSleeping('europeScene')) {                        
+                            this.scene.wake('europeScene');
+                        }
+                        else {
+                            this.scene.start('europeScene');
+                        }
+                    }
+                }, this);
+
+                
+                /*this.input.once('pointerdown', function () {
+
+                    if(this.scene.isSleeping('europeScene')) {                        
+                        this.scene.wake('europeScene');
+                    }
+                    else {
+                        this.scene.start('europeScene');
+                    }
+                }, this);*/
+            }
+
+            lockText() {
+                let text = this.add.text(602, 572, 'Not unlocked yet', { fontFamily: 'Arial', fontSize: 100, color: '#000000', fontWeight: 900 });
+                Phaser.Display.Align.In.Center(text, this.add.zone(window.innerWidth/2, window.innerHeight/2, window.innerWidth, window.innerHeight));
+                setTimeout(() => {
+                    text.destroy();
+                }, 2000);
+                console.log('Not unlocked')
             }
 
         }
 
-        class SceneC extends Phaser.Scene {
+        class Europe extends Phaser.Scene {
 
             constructor ()
             {
-                super({ key: 'sceneC' });
+                super({ key: 'europeScene' });
                 this.player;
                 this.cursors;
                 this.animal1;
@@ -195,9 +295,9 @@ include("config/configbdd.php");
                 this.field2;
             }
 
-            create (data)
+            create ()
             {
-                const farm = this.add.image(0, 0, data.zone);
+                const farm = this.add.image(0, 0, 'europe');
                 //Phaser.Display.Align.In.Center(farm, this.add.zone(window.innerWidth/2, window.innerHeight/2, window.innerWidth, window.innerHeight));
                 this.cameras.main.zoom = 0.9;
 
@@ -261,15 +361,128 @@ include("config/configbdd.php");
                 }, this);
 
 
-                this.animal1 = this.add.image(0, 0, 'build').setInteractive().setScale(0.5);
-                this.animal1.setData('lvl', 0);
+                this.animal1 = this.add.image(0, 0, 'build').setInteractive().setScale(0.5).setDataEnabled();
+                this.animal1.data.set('lvl', 0);
                 this.animal1.on('pointerdown', function() {
-                    if(this.animal1.getData('lvl') == 0) this.animal1 = this.add.image(0, 0, 'pig', 1);
-                    if(this.animal1.getData('lvl') == 1) this.animal1 = this.add.image(0, 0, 'pig', 2);
-                    if(this.animal1.getData('lvl') == 2) this.animal1 = this.add.image(0, 0, 'pig', 3);
-                    this.animal1.setData('lvl', this.animal1.getData('lvl')+1);
-                    console.log(this.animal1.getData('value'));
+                    this.animal1 = this.add.image(0, 0, 'pig', 0);
                 }, this);
+
+                this.scene.launch('headerScene');
+            }
+
+            update() {
+
+                if (this.cursors.up.isDown)
+                {
+                    this.player.setVelocityY(-160);
+                    //player.anims.play('up', true);
+                }
+                else if (this.cursors.down.isDown)
+                {
+                    this.player.setVelocityY(160);
+
+                    //player.anims.play('down', true);
+                }
+                else
+                {
+                    this.player.setVelocityY(0);
+                }
+
+                if (this.cursors.left.isDown)
+                {
+                    this.player.setVelocityX(-160);
+
+                    this.player.anims.play('left', true);
+                }
+                else if (this.cursors.right.isDown)
+                {
+                    this.player.setVelocityX(160);
+
+                    this.player.anims.play('right', true);
+                } 
+                else
+                {
+                    this.player.setVelocityX(0);
+                }
+
+                if(!this.cursors.left.isDown && !this.cursors.right.isDown) {
+                    
+                    this.player.anims.play('turn', true);
+                }
+            }
+
+        }
+
+
+        class Desert extends Phaser.Scene {
+
+            constructor ()
+            {
+                super({ key: 'desertScene' });
+                this.player;
+                this.cursors;
+                this.animal1;
+                this.animal2;
+                this.struct1;
+                this.struct2;
+                this.field1;
+                this.field2;
+            }
+
+            create ()
+            {
+                const farm = this.add.image(0, 0, 'desert');
+                //Phaser.Display.Align.In.Center(farm, this.add.zone(window.innerWidth/2, window.innerHeight/2, window.innerWidth, window.innerHeight));
+                this.cameras.main.zoom = 0.9;
+
+                // Player
+                this.player = this.physics.add.sprite(800, -270, 'dude').setDepth(2000);
+                //Phaser.Display.Align.In.Center(this.player, this.add.zone(window.innerWidth/2, window.innerHeight/2, window.innerWidth, window.innerHeight));
+                //  Our player animations, turning, walking left and walking right.
+                this.anims.create({
+                    key: 'left',
+                    frames: this.anims.generateFrameNumbers('dude', { start: 0, end: 3 }),
+                    frameRate: 10,
+                    repeat: -1
+                });
+
+                this.anims.create({
+                    key: 'turn',
+                    frames: [ { key: 'dude', frame: 4 } ],
+                    frameRate: 20
+                });
+
+                this.anims.create({
+                    key: 'right',
+                    frames: this.anims.generateFrameNumbers('dude', { start: 5, end: 8 }),
+                    frameRate: 10,
+                    repeat: -1
+                });
+
+                this.anims.create({
+                    key: 'up',
+                    frames: [ { key: 'dude', frame: 4 } ],
+                    frameRate: 20
+                });
+
+                this.anims.create({
+                    key: 'down',
+                    frames: [ { key: 'dude', frame: 4 } ],
+                    frameRate: 20
+                });
+
+
+                // On décale la caméra par rapport à la hauteur du header
+                this.cameras.main.setBounds(farm.x-farm.width/2, farm.y-farm.height/2-50, farm.width, farm.height+50);
+                this.physics.world.setBounds(farm.x-farm.width/2, farm.y-farm.height/2, farm.width, farm.height);
+
+                this.cameras.main.startFollow(this.player);
+
+
+                this.player.setCollideWorldBounds(true);
+
+                //  Input Events
+                this.cursors = this.input.keyboard.createCursorKeys();
 
                 this.scene.launch('sceneD');
             }
@@ -317,11 +530,247 @@ include("config/configbdd.php");
 
         }
 
-        class SceneD extends Phaser.Scene {
+
+        class Glace extends Phaser.Scene {
 
             constructor ()
             {
-                super({ key: 'sceneD' });
+                super({ key: 'glaceScene' });
+                this.player;
+                this.cursors;
+                this.animal1;
+                this.animal2;
+                this.struct1;
+                this.struct2;
+                this.field1;
+                this.field2;
+            }
+
+            create ()
+            {
+                const farm = this.add.image(0, 0, 'desert');
+                //Phaser.Display.Align.In.Center(farm, this.add.zone(window.innerWidth/2, window.innerHeight/2, window.innerWidth, window.innerHeight));
+                this.cameras.main.zoom = 0.9;
+
+                // Player
+                this.player = this.physics.add.sprite(800, -270, 'dude').setDepth(2000);
+                //Phaser.Display.Align.In.Center(this.player, this.add.zone(window.innerWidth/2, window.innerHeight/2, window.innerWidth, window.innerHeight));
+                //  Our player animations, turning, walking left and walking right.
+                this.anims.create({
+                    key: 'left',
+                    frames: this.anims.generateFrameNumbers('dude', { start: 0, end: 3 }),
+                    frameRate: 10,
+                    repeat: -1
+                });
+
+                this.anims.create({
+                    key: 'turn',
+                    frames: [ { key: 'dude', frame: 4 } ],
+                    frameRate: 20
+                });
+
+                this.anims.create({
+                    key: 'right',
+                    frames: this.anims.generateFrameNumbers('dude', { start: 5, end: 8 }),
+                    frameRate: 10,
+                    repeat: -1
+                });
+
+                this.anims.create({
+                    key: 'up',
+                    frames: [ { key: 'dude', frame: 4 } ],
+                    frameRate: 20
+                });
+
+                this.anims.create({
+                    key: 'down',
+                    frames: [ { key: 'dude', frame: 4 } ],
+                    frameRate: 20
+                });
+
+
+                // On décale la caméra par rapport à la hauteur du header
+                this.cameras.main.setBounds(farm.x-farm.width/2, farm.y-farm.height/2-50, farm.width, farm.height+50);
+                this.physics.world.setBounds(farm.x-farm.width/2, farm.y-farm.height/2, farm.width, farm.height);
+
+                this.cameras.main.startFollow(this.player);
+
+
+                this.player.setCollideWorldBounds(true);
+
+                //  Input Events
+                this.cursors = this.input.keyboard.createCursorKeys();
+
+                this.scene.launch('sceneD');
+            }
+
+            update() {
+
+                if (this.cursors.up.isDown)
+                {
+                    this.player.setVelocityY(-160);
+                    //player.anims.play('up', true);
+                }
+                else if (this.cursors.down.isDown)
+                {
+                    this.player.setVelocityY(160);
+
+                    //player.anims.play('down', true);
+                }
+                else
+                {
+                    this.player.setVelocityY(0);
+                }
+
+                if (this.cursors.left.isDown)
+                {
+                    this.player.setVelocityX(-160);
+
+                    this.player.anims.play('left', true);
+                }
+                else if (this.cursors.right.isDown)
+                {
+                    this.player.setVelocityX(160);
+
+                    this.player.anims.play('right', true);
+                } 
+                else
+                {
+                    this.player.setVelocityX(0);
+                }
+
+                if(!this.cursors.left.isDown && !this.cursors.right.isDown) {
+                    
+                    this.player.anims.play('turn', true);
+                }
+            }
+
+        }
+
+
+
+        class Foret extends Phaser.Scene {
+
+            constructor ()
+            {
+                super({ key: 'foretScene' });
+                this.player;
+                this.cursors;
+                this.animal1;
+                this.animal2;
+                this.struct1;
+                this.struct2;
+                this.field1;
+                this.field2;
+            }
+
+            create ()
+            {
+                const farm = this.add.image(0, 0, 'desert');
+                //Phaser.Display.Align.In.Center(farm, this.add.zone(window.innerWidth/2, window.innerHeight/2, window.innerWidth, window.innerHeight));
+                this.cameras.main.zoom = 0.9;
+
+                // Player
+                this.player = this.physics.add.sprite(800, -270, 'dude').setDepth(2000);
+                //Phaser.Display.Align.In.Center(this.player, this.add.zone(window.innerWidth/2, window.innerHeight/2, window.innerWidth, window.innerHeight));
+                //  Our player animations, turning, walking left and walking right.
+                this.anims.create({
+                    key: 'left',
+                    frames: this.anims.generateFrameNumbers('dude', { start: 0, end: 3 }),
+                    frameRate: 10,
+                    repeat: -1
+                });
+
+                this.anims.create({
+                    key: 'turn',
+                    frames: [ { key: 'dude', frame: 4 } ],
+                    frameRate: 20
+                });
+
+                this.anims.create({
+                    key: 'right',
+                    frames: this.anims.generateFrameNumbers('dude', { start: 5, end: 8 }),
+                    frameRate: 10,
+                    repeat: -1
+                });
+
+                this.anims.create({
+                    key: 'up',
+                    frames: [ { key: 'dude', frame: 4 } ],
+                    frameRate: 20
+                });
+
+                this.anims.create({
+                    key: 'down',
+                    frames: [ { key: 'dude', frame: 4 } ],
+                    frameRate: 20
+                });
+
+
+                // On décale la caméra par rapport à la hauteur du header
+                this.cameras.main.setBounds(farm.x-farm.width/2, farm.y-farm.height/2-50, farm.width, farm.height+50);
+                this.physics.world.setBounds(farm.x-farm.width/2, farm.y-farm.height/2, farm.width, farm.height);
+
+                this.cameras.main.startFollow(this.player);
+
+
+                this.player.setCollideWorldBounds(true);
+
+                //  Input Events
+                this.cursors = this.input.keyboard.createCursorKeys();
+
+                this.scene.launch('sceneD');
+            }
+
+            update() {
+
+                if (this.cursors.up.isDown)
+                {
+                    this.player.setVelocityY(-160);
+                    //player.anims.play('up', true);
+                }
+                else if (this.cursors.down.isDown)
+                {
+                    this.player.setVelocityY(160);
+
+                    //player.anims.play('down', true);
+                }
+                else
+                {
+                    this.player.setVelocityY(0);
+                }
+
+                if (this.cursors.left.isDown)
+                {
+                    this.player.setVelocityX(-160);
+
+                    this.player.anims.play('left', true);
+                }
+                else if (this.cursors.right.isDown)
+                {
+                    this.player.setVelocityX(160);
+
+                    this.player.anims.play('right', true);
+                } 
+                else
+                {
+                    this.player.setVelocityX(0);
+                }
+
+                if(!this.cursors.left.isDown && !this.cursors.right.isDown) {
+                    
+                    this.player.anims.play('turn', true);
+                }
+            }
+
+        }
+
+
+        class Header extends Phaser.Scene {
+
+            constructor ()
+            {
+                super({ key: 'headerScene' });
                 this.turnOff;
                 this.globe;
             }
@@ -337,8 +786,8 @@ include("config/configbdd.php");
                 }, this);
 
                 this.globe.on('pointerup', function() {
-                    this.scene.sleep('sceneC');
-                    this.scene.stop('sceneD');
+                    this.scene.sleep('europeScene');
+                    this.scene.stop('headerScene');
                     this.scene.start('sceneB');
                 }, this)
             }
@@ -359,7 +808,7 @@ include("config/configbdd.php");
             physics: {
                 default: 'arcade',
             },
-            scene: [Loading, SceneA, SceneB, SceneC, SceneD]
+            scene: [Loading, SceneA, SceneB, Europe, Desert, Glace, Header]
         };
 
         var game = new Phaser.Game(config);
