@@ -37,6 +37,8 @@ include("config/configbdd.php");
                 this.load.image('header', 'assets/header.png');
                 this.load.image('off', 'assets/off.png');
                 this.load.image('globe', 'assets/globe.png');
+                this.load.image('tank', 'assets/tank.png');
+                this.load.image('build', 'assets/build.png');
                 this.load.spritesheet('dude', 'assets/dude.png', {
                     frameWidth: 32,
                     frameHeight: 48
@@ -163,41 +165,16 @@ include("config/configbdd.php");
                 while(1632*zoom > window.innerHeight) zoom -= 0.05;
                 this.cameras.main.zoom = zoom;
 
-
-                var shape = new Phaser.Geom.Polygon([
-                    -350, -400,
-                    200, -400,
-                    1100, 200,
-                    1100, 600,
-                    -500, 200
-                ]);
-                var graphics = this.add.graphics();
-                graphics.lineStyle(20, 0x00aa00);
-                graphics.beginPath();
-
-                graphics.moveTo(shape.points[0].x, shape.points[0].y);
-
-                for (var i = 1; i < shape.points.length; i++)
-                {
-                    graphics.lineTo(shape.points[i].x, shape.points[i].y);
-                }
-
-                graphics.closePath();
-                graphics.strokePath();
-
-                graphics.setInteractive();
-
-                graphics.on('pointerdown', function() {
-                    console.log('yes');
-                }, this);
-
-
                 
-                /*this.input.once('pointerdown', function () {
+                this.input.once('pointerdown', function () {
 
-                    this.scene.start('sceneC', { id: 1, zone: 'europe' });
-
-                }, this);*/
+                    if(this.scene.isSleeping('sceneC')) {                        
+                        this.scene.wake('sceneC', { id: 1, zone: 'europe' });
+                    }
+                    else {
+                        this.scene.start('sceneC', { id: 1, zone: 'europe' });
+                    }
+                }, this);
             }
 
         }
@@ -209,16 +186,22 @@ include("config/configbdd.php");
                 super({ key: 'sceneC' });
                 this.player;
                 this.cursors;
+                this.animal1;
+                this.animal2;
+                this.struct1;
+                this.struct2;
+                this.field1;
+                this.field2;
             }
 
             create (data)
             {
                 const farm = this.add.image(0, 0, data.zone);
                 //Phaser.Display.Align.In.Center(farm, this.add.zone(window.innerWidth/2, window.innerHeight/2, window.innerWidth, window.innerHeight));
-                this.cameras.main.zoom = 1;
+                this.cameras.main.zoom = 0.9;
 
                 // Player
-                this.player = this.physics.add.sprite(800, -270, 'dude');
+                this.player = this.physics.add.sprite(800, -270, 'dude').setDepth(2000);
                 //Phaser.Display.Align.In.Center(this.player, this.add.zone(window.innerWidth/2, window.innerHeight/2, window.innerWidth, window.innerHeight));
                 //  Our player animations, turning, walking left and walking right.
                 this.anims.create({
@@ -267,6 +250,16 @@ include("config/configbdd.php");
 
                 //  Input Events
                 this.cursors = this.input.keyboard.createCursorKeys();
+
+
+
+                this.struct1 = this.add.image(300, -180, 'build').setInteractive().setScale(0.8);
+                this.struct1.setData('lvl', 0);
+                this.struct1.on('pointerdown', function() {
+                    if(this.struct1.getData('lvl') == 0) this.struct1 = this.add.image(0, 0, 'tank');
+                    if(this.struct1.getData('lvl') == 1) this.struct1 = this.add.image(0, 0, 'tank');
+                    if(this.struct1.getData('lvl') == 2) this.struct1 = this.add.image(0, 0, 'tank');
+                }, this);
 
                 this.scene.launch('sceneD');
             }
@@ -334,7 +327,9 @@ include("config/configbdd.php");
                 }, this);
 
                 this.globe.on('pointerup', function() {
-                    //this.scene.start('sceneE');
+                    this.scene.sleep('sceneC');
+                    this.scene.stop('sceneD');
+                    this.scene.start('sceneB');
                 }, this)
             }
 
