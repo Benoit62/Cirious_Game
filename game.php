@@ -82,7 +82,7 @@ include("config/configbdd.php");
                     progressBar.clear();
                     progressBar.fillStyle(0xffffff, 1);
                     progressBar.fillRect(width / 2 - 150, height / 2 - 15, 3 * value, 30);
-                    if (value % 10 == 7) {
+                    if (value % 20 == 12) {
                         var points = '';
                         for (let j = 0; j <= value % 3; j++) {
                             points += '.';
@@ -95,7 +95,7 @@ include("config/configbdd.php");
                 //event loop pour l'update
                 var i = 0;
                 var timedEvent = this.time.addEvent({
-                    delay: 75,
+                    delay: 25,
                     callback: onEvent,
                     callbackScope: this,
                     loop: true
@@ -112,7 +112,7 @@ include("config/configbdd.php");
                         this.scene.start('sceneA');
                     } else {
                         progress(i);
-                        i+=10;
+                        i+=1;
                     }
                 }
             }
