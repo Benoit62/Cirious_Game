@@ -175,57 +175,18 @@ include("config/configbdd.php");
                 Phaser.Display.Align.In.Center(map, this.add.zone(window.innerWidth/2, window.innerHeight/2, window.innerWidth, window.innerHeight));
                 
                 // Setup de la camera
-                let zoom = 0.3;
-                //while(1632*zoom > window.innerHeight) zoom -= 0.05;
+                let zoom = 1;
+                while(1632*zoom > window.innerHeight) zoom -= 0.05;
                 this.cameras.main.zoom = zoom;
-
-
-                this.glace = this.add.image(0, 0, 'glaceile').setInteractive();
-                Phaser.Display.Align.In.Center(this.glace, this.add.zone(window.innerWidth/2, window.innerHeight/2, window.innerWidth, window.innerHeight));
-                this.glace.setX(this.glace.x+982);
-                this.glace.setY(this.glace.y-772);
-                this.glace.once('pointerdown', function(){
-                    if(this.data.get('unlock').includes('glace')) {
-                        if(this.scene.isSleeping('glaceScene')) {                        
-                            this.scene.wake('glaceScene');
-                        }
-                        else {
-                            this.scene.start('glaceScene');
-                        }
-                    }
-                    else {
-                        this.lockText();
-                    }
-                }, this);
-
-                
-
-                this.desert = this.add.image(0, 0, 'desertile').setInteractive();
-                Phaser.Display.Align.In.Center(this.desert, this.add.zone(window.innerWidth/2, window.innerHeight/2, window.innerWidth, window.innerHeight));
-                this.desert.setX(this.desert.x-702);
-                this.desert.setY(this.desert.y+446);
-                this.desert.once('pointerdown', function(){
-                    if(this.data.get('unlock').includes('desert')) {
-                        if(this.scene.isSleeping('desertScene')) {                        
-                            this.scene.wake('desertScene');
-                        }
-                        else {
-                            this.scene.start('desertScene');
-                        }
-                    }
-                    else {
-                        this.lockText();
-                    }
-                }, this);
 
 
 
 
                 this.foret = this.add.image(0, 0, 'foretile').setInteractive();
                 Phaser.Display.Align.In.Center(this.foret, this.add.zone(window.innerWidth/2, window.innerHeight/2, window.innerWidth, window.innerHeight));
-                this.foret.setX(this.foret.x+692);
-                this.foret.setY(this.foret.y+302);
-                this.foret.once('pointerdown', function(){
+                this.foret.setX(this.foret.x+780);
+                this.foret.setY(this.foret.y+218);
+                this.foret.on('pointerdown', function(){
                     if(this.data.get('unlock').includes('foret')) {
                         if(this.scene.isSleeping('foretScene')) {                        
                             this.scene.wake('foretScene');
@@ -246,17 +207,61 @@ include("config/configbdd.php");
                 Phaser.Display.Align.In.Center(this.europe, this.add.zone(window.innerWidth/2, window.innerHeight/2, window.innerWidth, window.innerHeight));
                 this.europe.setX(this.europe.x-318);
                 this.europe.setY(this.europe.y-250);
-                this.europe.once('pointerdown', function(){
+                this.europe.on('pointerdown', function(){
                     if(this.data.get('unlock').includes('europe')) {
                         if(this.scene.isSleeping('europeScene')) {                        
                             this.scene.wake('europeScene');
+
+                            this.scene.sleep('sceneB');
                         }
                         else {
                             this.scene.start('europeScene');
                         }
+                        this.scene.launch('headerScene');
                     }
                 }, this);
 
+
+                
+
+                this.desert = this.add.image(0, 0, 'desertile').setInteractive();
+                Phaser.Display.Align.In.Center(this.desert, this.add.zone(window.innerWidth/2, window.innerHeight/2, window.innerWidth, window.innerHeight));
+                this.desert.setX(this.desert.x-702);
+                this.desert.setY(this.desert.y+446);
+                this.desert.on('pointerdown', function(){
+                    if(this.data.get('unlock').includes('desert')) {
+                        if(this.scene.isSleeping('desertScene')) {                        
+                            this.scene.wake('desertScene');
+                        }
+                        else {
+                            this.scene.start('desertScene');
+                        }
+                    }
+                    else {
+                        this.lockText();
+                    }
+                }, this);
+
+                
+
+
+                this.glace = this.add.image(0, 0, 'glaceile').setInteractive();
+                Phaser.Display.Align.In.Center(this.glace, this.add.zone(window.innerWidth/2, window.innerHeight/2, window.innerWidth, window.innerHeight));
+                this.glace.setX(this.glace.x+982);
+                this.glace.setY(this.glace.y-772);
+                this.glace.on('pointerdown', function(){
+                    if(this.data.get('unlock').includes('glace')) {
+                        if(this.scene.isSleeping('glaceScene')) {                        
+                            this.scene.wake('glaceScene');
+                        }
+                        else {
+                            this.scene.start('glaceScene');
+                        }
+                    }
+                    else {
+                        this.lockText();
+                    }
+                }, this);
                 
                 /*this.input.once('pointerdown', function () {
 
@@ -299,7 +304,7 @@ include("config/configbdd.php");
             {
                 const farm = this.add.image(0, 0, 'europe');
                 //Phaser.Display.Align.In.Center(farm, this.add.zone(window.innerWidth/2, window.innerHeight/2, window.innerWidth, window.innerHeight));
-                this.cameras.main.zoom = 0.9;
+                this.cameras.main.zoom = 0.8;
 
                 // Player
                 this.player = this.physics.add.sprite(800, -270, 'dude').setDepth(2000);
@@ -361,18 +366,12 @@ include("config/configbdd.php");
                 }, this);
 
 
-                this.animal1 = this.add.image(0, 0, 'build').setInteractive().setScale(0.5).setDataEnabled();
+                this.animal1 = this.add.image(-16, 304, 'build').setInteractive().setScale(0.7).setDataEnabled();
                 this.animal1.data.set('lvl', 0);
                 this.animal1.on('pointerdown', function() {
-                    this.animal1 = this.add.image(0, 0, 'pig', 0);
+                    this.animal1 = this.add.image(-16, 304, 'pig', 0);
                 }, this);
 
-                if(this.scene.isSleeping('headerScene')) {                        
-                    this.scene.wake('headerScene');
-                }
-                else {
-                    this.scene.launch('headerScene');
-                }
             }
 
             update() {
@@ -488,8 +487,6 @@ include("config/configbdd.php");
 
                 //  Input Events
                 this.cursors = this.input.keyboard.createCursorKeys();
-
-                this.scene.launch('sceneD');
             }
 
             update() {
@@ -605,8 +602,6 @@ include("config/configbdd.php");
 
                 //  Input Events
                 this.cursors = this.input.keyboard.createCursorKeys();
-
-                this.scene.launch('sceneD');
             }
 
             update() {
@@ -723,8 +718,6 @@ include("config/configbdd.php");
 
                 //  Input Events
                 this.cursors = this.input.keyboard.createCursorKeys();
-
-                this.scene.launch('sceneD');
             }
 
             update() {
@@ -792,8 +785,13 @@ include("config/configbdd.php");
 
                 this.globe.on('pointerup', function() {
                     this.scene.sleep('europeScene');
-                    this.scene.stop('headerScene');
-                    this.scene.start('sceneB');
+                    this.scene.sleep('headerScene');
+                    if(this.scene.isSleeping('sceneB')) {
+                        this.scene.wake('sceneB');
+                    }
+                    else {
+                        this.scene.start('sceneB');
+                    }
                 }, this)
             }
 
