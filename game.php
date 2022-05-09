@@ -39,6 +39,7 @@ include("config/configbdd.php");
                 this.load.image('globe', 'assets/globe.png');
                 this.load.image('tank', 'assets/tank.png');
                 this.load.image('build', 'assets/build.png');
+                this.load.spritesheet('pig', 'assets/pig_spritesheet.png', { frameWidth: 416, frameHeight: 416 });
                 this.load.spritesheet('dude', 'assets/dude.png', {
                     frameWidth: 32,
                     frameHeight: 48
@@ -253,12 +254,21 @@ include("config/configbdd.php");
 
 
 
-                this.struct1 = this.add.image(300, -180, 'build').setInteractive().setScale(0.8);
+                this.struct1 = this.add.image(352, -192, 'build').setInteractive().setScale(0.5);
                 this.struct1.setData('lvl', 0);
                 this.struct1.on('pointerdown', function() {
-                    if(this.struct1.getData('lvl') == 0) this.struct1 = this.add.image(0, 0, 'tank');
-                    if(this.struct1.getData('lvl') == 1) this.struct1 = this.add.image(0, 0, 'tank');
-                    if(this.struct1.getData('lvl') == 2) this.struct1 = this.add.image(0, 0, 'tank');
+                    if(this.struct1.getData('lvl') == 0) this.struct1 = this.add.image(352, -192, 'tank');
+                }, this);
+
+
+                this.animal1 = this.add.image(0, 0, 'build').setInteractive().setScale(0.5);
+                this.animal1.setData('lvl', 0);
+                this.animal1.on('pointerdown', function() {
+                    if(this.animal1.getData('lvl') == 0) this.animal1 = this.add.image(0, 0, 'pig', 1);
+                    if(this.animal1.getData('lvl') == 1) this.animal1 = this.add.image(0, 0, 'pig', 2);
+                    if(this.animal1.getData('lvl') == 2) this.animal1 = this.add.image(0, 0, 'pig', 3);
+                    this.animal1.setData('lvl', this.animal1.getData('lvl')+1);
+                    console.log(this.animal1.getData('value'));
                 }, this);
 
                 this.scene.launch('sceneD');
