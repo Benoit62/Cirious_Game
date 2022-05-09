@@ -120,7 +120,7 @@ include("config/configbdd.php");
                         this.scene.start('sceneA');
                     } else {
                         progress(i);
-                        i+=1;
+                        i+=10;
                     }
                 }
             }
@@ -180,7 +180,7 @@ include("config/configbdd.php");
                 this.cameras.main.zoom = zoom;
 
 
-                this.glace = this.add.image(0/*1614*/, 0/*-500*/, 'glaceile').setInteractive();
+                this.glace = this.add.image(0, 0, 'glaceile').setInteractive();
                 Phaser.Display.Align.In.Center(this.glace, this.add.zone(window.innerWidth/2, window.innerHeight/2, window.innerWidth, window.innerHeight));
                 this.glace.setX(this.glace.x+982);
                 this.glace.setY(this.glace.y-772);
@@ -367,7 +367,12 @@ include("config/configbdd.php");
                     this.animal1 = this.add.image(0, 0, 'pig', 0);
                 }, this);
 
-                this.scene.launch('headerScene');
+                if(this.scene.isSleeping('headerScene')) {                        
+                    this.scene.wake('headerScene');
+                }
+                else {
+                    this.scene.launch('headerScene');
+                }
             }
 
             update() {
