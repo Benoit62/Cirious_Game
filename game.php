@@ -381,14 +381,10 @@ include("config/configbdd.php");
                 }, this);
 
 
-                this.animal1 = this.add.image(0, 0, 'build').setInteractive().setScale(0.5);
+                this.animal1 = this.add.image(-16, 304, 'build').setInteractive().setScale(0.5);
                 this.animal1.setData('lvl', 0);
                 this.animal1.on('pointerdown', function() {
-                    if (this.animal1.getData('lvl') == 0) this.animal1 = this.add.image(0, 0, 'pig', 1);
-                    if (this.animal1.getData('lvl') == 1) this.animal1 = this.add.image(0, 0, 'pig', 2);
-                    if (this.animal1.getData('lvl') == 2) this.animal1 = this.add.image(0, 0, 'pig', 3);
-                    this.animal1.setData('lvl', this.animal1.getData('lvl') + 1);
-                    console.log(this.animal1.getData('value'));
+                    if (this.animal1.getData('lvl') == 0) this.animal1 = this.add.image(-16, 304, 'pig');
                 }, this);
 
 
