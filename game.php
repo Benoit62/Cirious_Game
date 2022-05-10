@@ -67,6 +67,18 @@ include("config/configbdd.php");
 
                 //Player
                 this.load.spritesheet('dude', 'assets/dude.png', { frameWidth: 32, frameHeight: 48 });
+
+
+                // Chargement des icons du Menu
+                this.load.image("search", "assets/Menu/search.png");
+                this.load.image("builder", "assets/Menu/build.png");
+                this.load.image("planter", "assets/Menu/planter.png");
+                this.load.image("recolter", "assets/Menu/recolter.png");
+                this.load.image("animal", "assets/Menu/pet-food.png");
+                this.load.image("gestion", "assets/Menu/gestion.png"); 
+                this.load.image("upgrade", "assets/Menu/upgrade.png"); 
+                // Chargement du Cercle autour des icons
+                this.load.image("circle", "assets/Menu/Circle.png"); 
             }
             create() {
                 var progressBar = this.add.graphics();
@@ -236,6 +248,7 @@ include("config/configbdd.php");
                             this.scene.start('europeScene');
                         }
                         this.scene.launch('headerScene');
+                        this.scene.launch('menuScene');
                     }
                 }, this);
 
@@ -332,8 +345,8 @@ include("config/configbdd.php");
                     }
                 }, this);
 
-                this.moneyText = this.add.text(25, 20, 'Monitoring Registry');
-                this.batOverlap = this.add.text(300, 20, 'Checking overlap');
+                this.moneyText = this.add.text(5, 20, 'Monitoring Registry');
+                this.batOverlap = this.add.text(200, 20, 'Checking overlap');
 
                 //  Check the Registry and hit our callback every time the 'money' value is updated
                 this.registry.events.on('changedata', function(){
@@ -347,11 +360,230 @@ include("config/configbdd.php");
                 
             }
 
-            displayButton(bat){
+            /*displayButton(bat){
                 let button = this.add.image(500, 20, 'off').setInteractive();
                 button.on('pointerdown', function(){
                     this.europeScene.upgradeBat(bat);
                 }, this)
+            }*/
+
+        }
+
+
+        class Menu extends Phaser.Scene {
+
+            constructor ()
+            {
+                super({ key: 'menuScene' });
+                this.europeScene;
+
+                this.search;
+                this.build;
+                this.planter;
+                this.recolter;
+                this.animal;
+                this.tank;
+                this.upgrade;
+
+                this.circleBuild;
+                this.circlePlanter;
+                this.circleUpgrade;
+
+                this.batOverlap = {
+                    key:0,
+                    x:0,
+                    y:0,
+                    type:'',
+                    level:0,
+                    name:'',
+                    scale:0,
+                    money:0,
+                    plant:'',
+                };
+            }
+
+            create ()
+            {
+                this.scene.bringToTop('menuScene');
+                //this.scene.setVisible(false);
+                this.europeScene = this.scene.get('europeScene');
+
+                this.upgrade = this.add.image(window.innerWidth - 40, 100, "upgrade").setScale(0.1).setInteractive();
+                this.upgrade.on('pointerdown', function(){
+                    if((this.batOverlap.type == 'animal' || this.batOverlap.type == 'struct') && this.batOverlap.level < this.batOverlap.maxlvl && this.batOverlap.level != 0) {
+                        this.europeScene.upgradeBat(this.batOverlap);
+                    }
+                }, this);
+
+                
+                // Si le level est à 0 on affiche le bouton construction
+                this.build = this.add.image(window.innerWidth - 40, 160, "builder").setScale(0.1).setInteractive();
+                this.build.on('pointerdown', function(){
+                    if((this.batOverlap.type == 'animal' || this.batOverlap.type == 'struct') && this.batOverlap.level == 0) {
+                        this.europeScene.buildBat(this.batOverlap, 'tank');
+                    }
+                }, this);
+                
+
+                // Si c'est un champ vide
+                this.planter = this.add.image(window.innerWidth - 40, 220, "planter").setScale(0.1).setInteractive();
+                this.planter.on('pointerdown', function(){
+                    if(this.batOverlap.type == 'field' && this.batOverlap.plant == "none" && this.batOverlap.level == 1) {
+                        this.europeScene.plant(this.batOverlap);
+                    }
+                }, this);
+
+                
+                this.circleUpgrade = this.add.image(window.innerWidth - 40,100, "circle").setScale(0.1).setVisible(false);
+                this.circleBuild = this.add.image(window.innerWidth - 40,160, "circle").setScale(0.1).setVisible(false);
+                this.circlePlanter = this.add.image(window.innerWidth - 40,220, "circle").setScale(0.1).setVisible(false);
+
+                /*this.search = this.add.image(window.innerWidth - 40, 80, "search").setScale(0.1);
+                this.build = this.add.image(window.innerWidth - 40,160, "builder").setScale(0.1);
+                this.planter = this.add.image(window.innerWidth - 40,240, "planter").setScale(0.1);
+                this.recolter = this.add.image(window.innerWidth - 40,320, "recolter").setScale(0.1);
+                this.animal = this.add.image(window.innerWidth - 40,400, "animal").setScale(0.1);
+                this.tank = this.add.image(window.innerWidth - 40,480, "gestion").setScale(0.1);
+                this.upgrade = this.add.image(window.innerWidth - 40,80, "upgrade").setScale(0.1);
+
+                // Apparition des cercles
+                var circle1 = this.add.image(window.innerWidth - 40,80, "circle").setScale(0.1);
+                var circle2 = this.add.image(window.innerWidth - 40,160, "circle").setScale(0.1);
+                var circle3 = this.add.image(window.innerWidth - 40,240, "circle").setScale(0.1);
+                var circle4 = this.add.image(window.innerWidth - 40,320, "circle").setScale(0.1);
+                var circle5 = this.add.image(window.innerWidth - 40,400, "circle").setScale(0.1);
+                var circle6 = this.add.image(window.innerWidth - 40,480, "circle").setScale(0.1);
+
+                // Opacité des cercles à 0
+                circle1.alpha = 0;
+                circle2.alpha = 0;
+                circle3.alpha = 0;
+                circle4.alpha = 0;
+                circle5.alpha = 0;
+                circle6.alpha = 0;
+
+                
+                this.search.setInteractive().setVisible(false);
+                this.build.setInteractive().setVisible(false);
+                this.planter.setInteractive().setVisible(false);
+                this.recolter.setInteractive().setVisible(false);
+                this.animal.setInteractive().setVisible(false);
+                this.tank.setInteractive().setVisible(false);
+                this.upgrade.setInteractive().setVisible(false);
+
+                // Opacité à 1 quand on clic
+                /*this.search.on('pointermove', function (pointer) {
+                    circle1.alpha = 1;
+                    });
+
+                // Opacité à 0
+                this.search.on('pointerout', function (pointer) {
+                    circle1.alpha = 0;
+                    });
+
+                // Opacité à 0
+                this.search.on('pointerup', function (pointer) {
+                    circle1.alpha = 0;
+                    });
+
+
+
+
+                this.build.on('pointermove', function (pointer) {
+                    circle2.alpha = 1;
+                    });
+
+                this.build.on('pointerout', function (pointer) {
+                    circle2.alpha = 0;
+                    });
+
+                this.build.on('pointerup', function (pointer) {
+                    circle2.alpha = 0;
+                    });
+
+
+
+                this.planter.on('pointermove', function (pointer) {
+                    circle3.alpha = 1;
+                    });
+
+                this.planter.on('pointerout', function (pointer) {
+                    circle3.alpha = 0;
+                    });
+
+                this.planter.on('pointerup', function (pointer) {
+                    circle3.alpha = 0;
+                    });
+
+
+
+                this.recolter.on('pointermove', function (pointer) {
+                    circle4.alpha = 1;
+                    });
+
+                this.recolter.on('pointerout', function (pointer) {
+                    circle4.alpha = 0;
+                    });
+
+                this.recolter.on('pointerup', function (pointer) {
+                    circle4.alpha = 0;
+                    });
+
+
+
+                this.animal.on('pointermove', function (pointer) {
+                    circle5.alpha = 1;
+                    });
+
+                this.animal.on('pointerout', function (pointer) {
+                    circle5.alpha = 0;
+                    });
+
+                this.animal.on('pointerup', function (pointer) {
+                    circle5.alpha = 0;
+                    });
+
+
+
+                this.tank.on('pointermove', function (pointer) {
+                    circle6.alpha = 1;
+                    });
+
+                this.tank.on('pointerout', function (pointer) {
+                    circle6.alpha = 0;
+                    });
+
+                this.tank.on('pointerup', function (pointer) {
+                    circle6.alpha = 0;
+                    });*/
+            }
+
+            update() {
+                if((this.batOverlap.type == 'animal' || this.batOverlap.type == 'struct') && this.batOverlap.level < this.batOverlap.maxlvl && this.batOverlap.level != 0) {
+                    this.circleUpgrade.setVisible(true);
+                }
+                else {
+                    this.circleUpgrade.setVisible(false);
+                }
+
+                if((this.batOverlap.type == 'animal' || this.batOverlap.type == 'struct') && this.batOverlap.level == 0) {
+                    this.circleBuild.setVisible(true);
+                }
+                else {
+                    this.circleBuild.setVisible(false);
+                }
+
+                if(this.batOverlap.type == 'field' && this.batOverlap.plant == "none" && this.batOverlap.level == 1) {
+                    this.circlePlanter.setVisible(true);
+                }
+                else {
+                    this.circlePlanter.setVisible(false);
+                }
+                
+            }
+
+            getBatOverlap(bat){
+                this.batOverlap = bat;
             }
 
         }
@@ -365,7 +597,7 @@ include("config/configbdd.php");
             physics: {
                 default: 'arcade',
             },
-            scene: [Loading, SceneA, Map, Europe, Desert, Glace, Header]
+            scene: [Loading, SceneA, Map, Europe, Desert, Glace, Header, Menu]
         };
 
         var game = new Phaser.Game(config);

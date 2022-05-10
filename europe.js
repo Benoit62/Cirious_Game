@@ -18,6 +18,7 @@ class Europe extends Phaser.Scene {
         this.money = 0;
 
         this.headerScene;
+        this.menuScene;
     }
 
     create() {
@@ -28,6 +29,7 @@ class Europe extends Phaser.Scene {
             y:304,
             type:'animal',
             level:1,
+            maxlvl:3,
             name:'pig',
             scale:0.7,
             money:10
@@ -38,6 +40,7 @@ class Europe extends Phaser.Scene {
             y:-304,
             type:'animal',
             level:1,
+            maxlvl:3,
             name:'cow',
             scale:0.7,
             money:10
@@ -50,6 +53,7 @@ class Europe extends Phaser.Scene {
             y:-192,
             type:'struct',
             level:1,
+            maxlvl:3,
             name:'tank',
             scale:0.5,
             money:5
@@ -57,9 +61,10 @@ class Europe extends Phaser.Scene {
         this.data.set('bat4', {
             key:4,
             x:352,
-            y:-452,
+            y:-448,
             type:'struct',
             level:0,
+            maxlvl:3,
             name:'build',
             scale:0.5,
             money:0
@@ -74,7 +79,8 @@ class Europe extends Phaser.Scene {
             level:1,
             name:'labor',
             scale:0.8,
-            money:0
+            money:0,
+            plant:'none',
         });
         this.data.set('bat6', {
             key:6,
@@ -96,6 +102,7 @@ class Europe extends Phaser.Scene {
             y:-404,
             type:'house',
             level:1,
+            maxlvl:3,
             name:'house',
             scale:0.5,
             money:0
@@ -121,13 +128,17 @@ class Europe extends Phaser.Scene {
         
 
 
-        const farm = this.add.image(0, 0, 'europe');
-        //Phaser.Display.Align.In.Center(farm, this.add.zone(window.innerWidth/2, window.innerHeight/2, window.innerWidth, window.innerHeight));
+        const farm = this.physics.add.image(0, 0, 'europe');
+        
         this.cameras.main.zoom = 0.8;
 
         // Player
         this.player = this.physics.add.sprite(800, -250, 'dude').setDepth(2000);
-        //Phaser.Display.Align.In.Center(this.player, this.add.zone(window.innerWidth/2, window.innerHeight/2, window.innerWidth, window.innerHeight));
+
+        
+        this.physics.add.overlap(this.player, farm, this.closeOverLap, function(){ return true; }, this);
+
+
         //  Our player animations, turning, walking left and walking right.
         this.anims.create({
             key: 'left',
@@ -177,20 +188,21 @@ class Europe extends Phaser.Scene {
         });
 
 
+        // On délimite la map aux bords de l'image
         // On décale la caméra par rapport à la hauteur du header
         this.cameras.main.setBounds(farm.x - farm.width / 2, farm.y - farm.height / 2 - 50, farm.width, farm.height + 50);
         this.physics.world.setBounds(farm.x - farm.width / 2, farm.y - farm.height / 2, farm.width, farm.height);
 
-        console.log(farm);
-
+        // Pour suivre le joueur avec la camera
         this.cameras.main.startFollow(this.player);
 
-
+        // Ajoute une collision entre le joueur et les bords de la map
         this.player.setCollideWorldBounds(true);
 
         //  Input Events
         this.cursors = this.input.keyboard.createCursorKeys();
 
+        // Affiche tous les batiments prédéfinis dans la data
         let j = 0;
         for(let i in this.data.values) {
             let bat = this.data.values[i];
@@ -201,7 +213,7 @@ class Europe extends Phaser.Scene {
             else {
                 this.images.push(this.physics.add.image(bat.x, bat.y, 'build').setScale(bat.scale));
             }
-            this.physics.add.overlap(this.player, this.images[j], this.overlapBat, function(){ return true; }, this);
+            this.physics.add.overlap(this.player, this.images[j], this.overlapBat, null, this);
             j++;
         }
         console.log(this.images);
@@ -238,11 +250,9 @@ class Europe extends Phaser.Scene {
         // Will hold a per-step velocity (distance)
         this.tempVelocity = new Phaser.Math.Vector2();
 
-
-        this.scene.launch('sceneD');
-
-        
+        // On recupère les scenes annexes
         this.headerScene = this.scene.get('headerScene');
+        this.menuScene = this.scene.get('menuScene');
     }
 
     update() {
@@ -311,15 +321,34 @@ class Europe extends Phaser.Scene {
                 returnBat = bat;
             }
         }
-        this.registry.set('bat', 'x : '+returnBat.x+', y : '+returnBat.y+' Type : '+returnBat.type+' Name : '+returnBat.name);
-        this.headerScene.displayButton(returnBat);
+        this.registry.set('bat', 'x : '+returnBat.x+', y : '+returnBat.y+' Type : '+returnBat.type+' Name : '+returnBat.name+' Level : '+returnBat.level);
+        
+        this.menuScene.getBatOverlap(returnBat);
     }
 
+
     upgradeBat(bat) {
-        if(bat.type == 'animal') {
+        console.log('Upgrade batiment : ', bat)
+        if(bat.type == 'animal' || bat.type == 'struct') {
+            if(bat.level < bat.maxlvl && bat.level != 0) {
+                bat.level+=1;
+                console.log('Upgraded !', bat.key, bat.level);
+                this.images[bat.key-1].setFrame(bat.level-1);
+            }
+        }
+    }
+    buildBat(bat, type) {
+        console.log('Construction batiment : ', bat);
+        if(bat.level == 0 && bat.name == "build") {
             bat.level+=1;
-            console.log(bat.key, bat.level);
-            this.images[bat.key-1].setFrame(bat.level-1);
+            this.images[bat.key-1] = this.physics.add.image(bat.x, bat.y, type, bat.level-1);
+        }
+    }
+    plant(bat) {
+        console.log('Construction batiment : ', bat);
+        if(bat.type == 'field' && bat.plant == "none" && bat.level == 1) {
+            bat.plant = 'graine';
+            this.images[bat.key-1] = this.physics.add.image(bat.x, bat.y, 'sprout');
         }
     }
 
