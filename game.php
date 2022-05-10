@@ -176,7 +176,7 @@ include("config/configbdd.php");
                 
                 // Setup de la camera
                 let zoom = 1;
-                while(1632*zoom > window.innerHeight) zoom -= 0.05;
+                while(1632*zoom > window.innerHeight) zoom -= 0.01;
                 this.cameras.main.zoom = zoom;
 
 
@@ -279,7 +279,7 @@ include("config/configbdd.php");
                 Phaser.Display.Align.In.Center(text, this.add.zone(window.innerWidth/2, window.innerHeight/2, window.innerWidth, window.innerHeight));
                 setTimeout(() => {
                     text.destroy();
-                }, 2000);
+                }, 1000);
                 console.log('Not unlocked')
             }
 
