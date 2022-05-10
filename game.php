@@ -5,7 +5,6 @@ if (!isset($_SESSION['autorisation']) && $_SESSION['autorisation'] != 'iseed') {
 }
 
 include("config/configbdd.php");
-
 ?>
 
 
@@ -598,14 +597,13 @@ include("config/configbdd.php");
             }
 
             overlapBat(player, obj) {
-                console.log(bat);
                 for(let i in this.data.values) {
                     let bat = this.data.values[i];
                     if(obj.x == bat.x && obj.y == bat.y) {
                         returnBat = bat;
                     }
                 }
-                this.registry.set('bat', 'x : '+bat.x+', y : '+bat.y+' ');
+                this.registry.set('bat', 'x : '+returnBat.x+', y : '+returnBat.y+' Type : '+returnBat.name);
             }
 
             projectRect(rect, body, time) {
