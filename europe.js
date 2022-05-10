@@ -16,6 +16,8 @@ class Europe extends Phaser.Scene {
         this.images = [];
 
         this.money = 0;
+
+        this.headerScene;
     }
 
     create() {
@@ -189,17 +191,18 @@ class Europe extends Phaser.Scene {
         //  Input Events
         this.cursors = this.input.keyboard.createCursorKeys();
 
-
+        let j = 0;
         for(let i in this.data.values) {
             let bat = this.data.values[i];
             console.log(bat, bat.x, bat.y, bat.name, bat.level-1);
             if(bat.level > 0 && bat.name != 'build') {
-                this.images[i] = this.physics.add.image(bat.x, bat.y, bat.name, bat.level-1);
+                this.images.push(this.physics.add.image(bat.x, bat.y, bat.name, bat.level-1));
             }
             else {
-                this.images[i] = this.physics.add.image(bat.x, bat.y, 'build').setScale(bat.scale);
+                this.images.push(this.physics.add.image(bat.x, bat.y, 'build').setScale(bat.scale));
             }
-            this.physics.add.overlap(this.player, this.images[i], this.overlapBat, function(){ return true; }, this);
+            this.physics.add.overlap(this.player, this.images[j], this.overlapBat, function(){ return true; }, this);
+            j++;
         }
         console.log(this.images);
 
@@ -237,6 +240,9 @@ class Europe extends Phaser.Scene {
 
 
         this.scene.launch('sceneD');
+
+        
+        this.headerScene = this.scene.get('headerScene');
     }
 
     update() {
@@ -305,7 +311,16 @@ class Europe extends Phaser.Scene {
                 returnBat = bat;
             }
         }
-        this.registry.set('bat', 'x : '+returnBat.x+', y : '+returnBat.y+' Type : '+returnBat.name);
+        this.registry.set('bat', 'x : '+returnBat.x+', y : '+returnBat.y+' Type : '+returnBat.type+' Name : '+returnBat.name);
+        this.headerScene.displayButton(returnBat);
+    }
+
+    upgradeBat(bat) {
+        if(bat.type == 'animal') {
+            bat.level+=1;
+            console.log(bat.key, bat.level);
+            this.images[bat.key-1].setFrame(bat.level-1);
+        }
     }
 
     projectRect(rect, body, time) {

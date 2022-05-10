@@ -280,16 +280,6 @@ include("config/configbdd.php");
                         this.lockText();
                     }
                 }, this);
-                
-                /*this.input.once('pointerdown', function () {
-
-                    if(this.scene.isSleeping('europeScene')) {                        
-                        this.scene.wake('europeScene');
-                    }
-                    else {
-                        this.scene.start('europeScene');
-                    }
-                }, this);*/
             }
 
             lockText() {
@@ -314,10 +304,14 @@ include("config/configbdd.php");
                 this.globe;
                 this.moneyText;
                 this.batOverlap;
+
+                this.europeScene;
             }
 
             create ()
             {
+                this.europeScene = this.scene.get('europeScene');
+
                 this.add.image(0, 0, 'header');
                 
                 this.turnOff = this.add.image(window.innerWidth-25, 25, 'off').setInteractive();
@@ -351,6 +345,13 @@ include("config/configbdd.php");
             update() {
 
                 
+            }
+
+            displayButton(bat){
+                let button = this.add.image(500, 20, 'off').setInteractive();
+                button.on('pointerdown', function(){
+                    this.europeScene.upgradeBat(bat);
+                }, this)
             }
 
         }
