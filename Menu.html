@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>projet les mec</title>
+    <script src="http://cdn.jsdelivr.net/npm/phaser@3.11.0/dist/phaser.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+          
+    <script type="text/javascript">
+
+        class Example extends Phaser.Scene {
+            constructor() {
+                super();
+            }
+
+            preload() {
+                // Chargement des icons du Menu
+                this.load.image("search", "assets/Menu/search.png");
+                this.load.image("build", "assets/Menu/build.png");
+                this.load.image("planter", "assets/Menu/planter.png");
+                this.load.image("recolter", "assets/Menu/recolter.png");
+                this.load.image("animal", "assets/Menu/pet-food.png");
+                this.load.image("tank", "assets/Menu/tank.png"); 
+
+                // Chargement du Cercle autour des icons
+                this.load.image("circle", "assets/Menu/Circle.png"); 
+            }
+        
+            create() {
+                // Zoom
+                this.cameras.main.zoom = 0.5;
+
+                // Apparition des icons
+                var search = this.add.image(2150,0, "search").setScale(0.25);
+                var build = this.add.image(2150,210, "build").setScale(0.25);
+                var planter = this.add.image(2150,420, "planter").setScale(0.25);
+                var recolter = this.add.image(2150,630, "recolter").setScale(0.25);
+                var animal = this.add.image(2150,840, "animal").setScale(0.25);
+                var tank = this.add.image(2150,1050, "tank").setScale(0.25);
+
+                // Apparition des cercles
+                var circle1 = this.add.image(2150,0, "circle").setScale(0.25);
+                var circle2 = this.add.image(2150,210, "circle").setScale(0.25);
+                var circle3 = this.add.image(2150,420, "circle").setScale(0.25);
+                var circle4 = this.add.image(2150,630, "circle").setScale(0.25);
+                var circle5 = this.add.image(2150,840, "circle").setScale(0.25);
+                var circle6 = this.add.image(2150,1050, "circle").setScale(0.25);
+
+                // Opacité des cercles à 0
+                circle1.alpha = 0;
+                circle2.alpha = 0;
+                circle3.alpha = 0;
+                circle4.alpha = 0;
+                circle5.alpha = 0;
+                circle6.alpha = 0;
+
+                
+                search.setInteractive();
+                build.setInteractive();
+                planter.setInteractive();
+                recolter.setInteractive();
+                animal.setInteractive();
+                tank.setInteractive();
+                
+
+                // Opacité à 1 quand on clic
+                search.on('pointerdown', function (pointer) {
+                    circle1.alpha = 1;
+                    });
+
+                // Opacité à 0
+                search.on('pointerout', function (pointer) {
+                    circle1.alpha = 0;
+                    });
+
+                // Opacité à 0
+                search.on('pointerup', function (pointer) {
+                    circle1.alpha = 0;
+                    });
+
+
+
+
+                build.on('pointerdown', function (pointer) {
+                    circle2.alpha = 1;
+                    });
+
+                build.on('pointerout', function (pointer) {
+                    circle2.alpha = 0;
+                    });
+
+                build.on('pointerup', function (pointer) {
+                    circle2.alpha = 0;
+                    });
+
+
+
+                planter.on('pointerdown', function (pointer) {
+                    circle3.alpha = 1;
+                    });
+
+                planter.on('pointerout', function (pointer) {
+                    circle3.alpha = 0;
+                    });
+
+                planter.on('pointerup', function (pointer) {
+                    circle3.alpha = 0;
+                    });
+
+
+
+                recolter.on('pointerdown', function (pointer) {
+                    circle4.alpha = 1;
+                    });
+
+                recolter.on('pointerout', function (pointer) {
+                    circle4.alpha = 0;
+                    });
+
+                recolter.on('pointerup', function (pointer) {
+                    circle4.alpha = 0;
+                    });
+
+
+
+                animal.on('pointerdown', function (pointer) {
+                    circle5.alpha = 1;
+                    });
+
+                animal.on('pointerout', function (pointer) {
+                    circle5.alpha = 0;
+                    });
+
+                animal.on('pointerup', function (pointer) {
+                    circle5.alpha = 0;
+                    });
+
+
+
+                tank.on('pointerdown', function (pointer) {
+                    circle6.alpha = 1;
+                    });
+
+                tank.on('pointerout', function (pointer) {
+                    circle6.alpha = 0;
+                    });
+
+                tank.on('pointerup', function (pointer) {
+                    circle6.alpha = 0;
+                    });
+                
+
+                
+
+
+               
+        
+            }
+
+            update(time, delta) {
+                
+            }
+
+            
+            
+        }
+
+        const config = {
+            type: Phaser.AUTO,
+            parent: 'phaser-example',
+            width: window.innerWidth,
+            height: window.innerHeight,
+            pixelArt: true,
+            physics: {
+                default: 'arcade',
+            },
+            scene: [Example]
+        };
+
+        const game = new Phaser.Game(config);
+
+
+        
+    </script>
+
+</body>
+
+</html>
