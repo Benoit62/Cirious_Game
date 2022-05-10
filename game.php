@@ -55,7 +55,12 @@ include("config/configbdd.php");
                 this.load.spritesheet('tank', 'assets/tank.png', { frameWidth: 192, frameHeight: 192 });
                 this.load.spritesheet('house', 'assets/house.png', { frameWidth: 384, frameHeight: 256 });
                 
+
+                // Champs et cultures
+                this.load.spritesheet('labor', 'assets/labor.png', { frameWidth: 288, frameHeight: 416 });
                 
+
+                //Player
                 this.load.spritesheet('dude', 'assets/dude.png', { frameWidth: 32, frameHeight: 48 });
             }
             create() {
@@ -364,8 +369,8 @@ include("config/configbdd.php");
                     x:-784,
                     y:-303,
                     type:'field',
-                    level:0,
-                    name:'build',
+                    level:1,
+                    name:'labor',
                     scale:0.8,
                     money:0
                 });
@@ -592,9 +597,15 @@ include("config/configbdd.php");
                 this.registry.set('money', this.money);
             }
 
-            overlapBat(player, bat) {
+            overlapBat(player, obj) {
                 console.log(bat);
-                this.registry.set('bat', 'x : '+bat.x+', y : '+bat.y);
+                for(let i in this.data.values) {
+                    let bat = this.data.values[i];
+                    if(obj.x == bat.x && obj.y == bat.y) {
+                        returnBat = bat;
+                    }
+                }
+                this.registry.set('bat', 'x : '+bat.x+', y : '+bat.y+' ');
             }
 
             projectRect(rect, body, time) {
