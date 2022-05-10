@@ -346,11 +346,13 @@ include("config/configbdd.php");
                 }, this);
 
                 this.moneyText = this.add.text(5, 20, 'Monitoring Registry');
+                this.moneyPerTickText = this.add.text(80, 20, 'Monitoring Registry');
                 this.batOverlap = this.add.text(200, 20, 'Checking overlap');
 
                 //  Check the Registry and hit our callback every time the 'money' value is updated
                 this.registry.events.on('changedata', function(){
                     this.moneyText.setText(this.registry.get('money'));
+                    this.moneyPerTickText.setText(this.registry.get('moneyPerTick')+'/s');
                     this.batOverlap.setText(this.registry.get('bat'));
                 }, this);
             }

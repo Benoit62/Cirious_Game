@@ -15,10 +15,12 @@ class Europe extends Phaser.Scene {
 
         this.images = [];
 
-        this.money = 0;
+        this.money = 1000000;
 
         this.headerScene;
         this.menuScene;
+
+        this.timedEvent;
     }
 
     create() {
@@ -32,7 +34,8 @@ class Europe extends Phaser.Scene {
             maxlvl:3,
             name:'pig',
             scale:0.7,
-            money:10
+            money:10,
+            cost:100000
         });
         this.data.set('bat2', {
             key:2,
@@ -43,7 +46,8 @@ class Europe extends Phaser.Scene {
             maxlvl:3,
             name:'cow',
             scale:0.7,
-            money:10
+            money:10,
+            cost:100000
         });
 
         // Structures
@@ -56,7 +60,8 @@ class Europe extends Phaser.Scene {
             maxlvl:3,
             name:'tank',
             scale:0.5,
-            money:5
+            money:5,
+            cost:150000
         });
         this.data.set('bat4', {
             key:4,
@@ -67,7 +72,8 @@ class Europe extends Phaser.Scene {
             maxlvl:3,
             name:'build',
             scale:0.5,
-            money:0
+            money:5,
+            cost:150000
         });
 
         //Champs
@@ -80,7 +86,8 @@ class Europe extends Phaser.Scene {
             name:'labor',
             scale:0.8,
             money:0,
-            plant:'none',
+            cost:5000,
+            plant:'none'
         });
         this.data.set('bat6', {
             key:6,
@@ -90,7 +97,9 @@ class Europe extends Phaser.Scene {
             level:0,
             name:'build',
             scale:0.8,
-            money:0
+            money:0,
+            cost:5000,
+            plant:'none'
         });
 
 
@@ -105,7 +114,8 @@ class Europe extends Phaser.Scene {
             maxlvl:3,
             name:'house',
             scale:0.5,
-            money:0
+            money:0,
+            cost:200000
         });
 
         /*
@@ -253,6 +263,10 @@ class Europe extends Phaser.Scene {
         // On recupère les scenes annexes
         this.headerScene = this.scene.get('headerScene');
         this.menuScene = this.scene.get('menuScene');
+
+
+        // Fonction de timer pour calcul toutes les 5 secondes
+        //this.timedEvent = this.time.addEvent(100, this.calcul, [], this, true);
     }
 
     update() {
@@ -303,6 +317,21 @@ class Europe extends Phaser.Scene {
             .strokeRectShape(this.playerRect);*/
 
 
+
+        // Calcul de l'argent
+        let moneyPerTick = 0;
+        for(let i in this.data.values) {
+            let bat = this.data.values[i];
+            if(bat.level > 0 && bat.name != 'build') {
+                moneyPerTick+=bat.money;
+            }
+        }
+        this.money+=moneyPerTick;
+        this.registry.set('money', this.money);
+        this.registry.set('moneyPerTick', moneyPerTick*100);
+    }
+
+    calcul() {
         // Calcul de l'argent
         for(let i in this.data.values) {
             let bat = this.data.values[i];
@@ -331,17 +360,25 @@ class Europe extends Phaser.Scene {
         console.log('Upgrade batiment : ', bat)
         if(bat.type == 'animal' || bat.type == 'struct') {
             if(bat.level < bat.maxlvl && bat.level != 0) {
-                bat.level+=1;
-                console.log('Upgraded !', bat.key, bat.level);
-                this.images[bat.key-1].setFrame(bat.level-1);
+                if(this.money >= bat.cost) {
+                    bat.level+=1;
+                    this.money-=bat.cost;
+                    bat.money*=5;
+                    console.log('Upgraded !', bat.key, bat.level);
+                    this.images[bat.key-1].setFrame(bat.level-1);
+                }
             }
         }
     }
     buildBat(bat, type) {
         console.log('Construction batiment : ', bat);
         if(bat.level == 0 && bat.name == "build") {
-            bat.level+=1;
-            this.images[bat.key-1] = this.physics.add.image(bat.x, bat.y, type, bat.level-1);
+            if(this.money >= bat.cost) {
+                bat.level+=1;
+                bat.name = 'type';
+                this.money-=bat.cost;
+                this.images[bat.key-1] = this.physics.add.image(bat.x, bat.y, type, bat.level-1);
+            }
         }
     }
     plant(bat) {
