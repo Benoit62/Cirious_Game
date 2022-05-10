@@ -32,6 +32,7 @@ include("config/configbdd.php");
                 });
             }
             preload() {
+                // Maps et icones
                 this.load.image('map', 'assets/map.png');
                 this.load.image('europeile', 'assets/europeile.png');
                 this.load.image('desertile', 'assets/desertile.png');
@@ -42,13 +43,19 @@ include("config/configbdd.php");
                 this.load.image('header', 'assets/header.png');
                 this.load.image('off', 'assets/off.png');
                 this.load.image('globe', 'assets/globe.png');
-                this.load.image('tank', 'assets/tank.png');
+
+
                 this.load.image('build', 'assets/build.png');
+                
+                // Batiments ferme
                 this.load.spritesheet('pig', 'assets/pig_spritesheet.png', { frameWidth: 416, frameHeight: 416 });
-                this.load.spritesheet('dude', 'assets/dude.png', {
-                    frameWidth: 32,
-                    frameHeight: 48
-                });
+                this.load.spritesheet('cow', 'assets/cow_spritesheet.png', { frameWidth: 416, frameHeight: 416 });
+                this.load.spritesheet('sheep', 'assets/sheep_spritesheet.png', { frameWidth: 416, frameHeight: 416 });
+                this.load.spritesheet('tank', 'assets/tank.png', { frameWidth: 192, frameHeight: 192 });
+                this.load.spritesheet('house', 'assets/house.png', { frameWidth: 384, frameHeight: 256 });
+                
+                
+                this.load.spritesheet('dude', 'assets/dude.png', { frameWidth: 32, frameHeight: 48 });
             }
             create() {
                 var progressBar = this.add.graphics();
@@ -148,16 +155,16 @@ include("config/configbdd.php");
             }
 
             start() {
-                this.scene.start('sceneB');
+                this.scene.start('mapScene');
             }
 
         }
 
-        class SceneB extends Phaser.Scene {
+        class Map extends Phaser.Scene {
 
             constructor ()
             {
-                super({ key: 'sceneB' });
+                super({ key: 'mapScene' });
                 this.europe;
                 this.desert;
                 this.glace;
@@ -212,7 +219,7 @@ include("config/configbdd.php");
                         if(this.scene.isSleeping('europeScene')) {                        
                             this.scene.wake('europeScene');
 
-                            this.scene.sleep('sceneB');
+                            this.scene.sleep('mapScene');
                         }
                         else {
                             this.scene.start('europeScene');
@@ -299,15 +306,119 @@ include("config/configbdd.php");
                 this.struct2;
                 this.field1;
                 this.field2;
+
+                this.images = [];
+
+                this.money = 0;
             }
 
             create() {
+                // Animaux
+                this.data.set('bat1', {
+                    key:1,
+                    x:-16,
+                    y:304,
+                    type:'animal',
+                    level:1,
+                    name:'pig',
+                    scale:0.7,
+                    money:10
+                });
+                this.data.set('bat2', {
+                    key:2,
+                    x:-16,
+                    y:-304,
+                    type:'animal',
+                    level:1,
+                    name:'cow',
+                    scale:0.7,
+                    money:10
+                });
+
+                // Structures
+                this.data.set('bat3', {
+                    key:3,
+                    x:352,
+                    y:-192,
+                    type:'struct',
+                    level:1,
+                    name:'tank',
+                    scale:0.5,
+                    money:5
+                });
+                this.data.set('bat4', {
+                    key:4,
+                    x:352,
+                    y:-452,
+                    type:'struct',
+                    level:0,
+                    name:'build',
+                    scale:0.5,
+                    money:0
+                });
+
+                //Champs
+                this.data.set('bat5', {
+                    key:5,
+                    x:-784,
+                    y:-303,
+                    type:'field',
+                    level:0,
+                    name:'build',
+                    scale:0.8,
+                    money:0
+                });
+                this.data.set('bat6', {
+                    key:6,
+                    x:-784,
+                    y:175,
+                    type:'field',
+                    level:0,
+                    name:'build',
+                    scale:0.8,
+                    money:0
+                });
+
+
+
+                // Maison/labo
+                this.data.set('bat9', {
+                    key:9,
+                    x:768,
+                    y:-404,
+                    type:'house',
+                    level:1,
+                    name:'house',
+                    scale:0.5,
+                    money:0
+                });
+
+                /*
+                this.data.set('bat7', {
+                    key:7,
+                    x:0,
+                    y:0,
+                    type:'field',
+                    level:0,
+                    name:'build'
+                });
+                this.data.set('bat8', {
+                    key:8,
+                    x:0,
+                    y:0,
+                    type:'field',
+                    level:1,
+                    name:'build'
+                });*/
+                
+
+
                 const farm = this.add.image(0, 0, 'europe');
                 //Phaser.Display.Align.In.Center(farm, this.add.zone(window.innerWidth/2, window.innerHeight/2, window.innerWidth, window.innerHeight));
                 this.cameras.main.zoom = 0.8;
 
                 // Player
-                this.player = this.physics.add.sprite(800, -270, 'dude').setDepth(2000);
+                this.player = this.physics.add.sprite(800, -250, 'dude').setDepth(2000);
                 //Phaser.Display.Align.In.Center(this.player, this.add.zone(window.innerWidth/2, window.innerHeight/2, window.innerWidth, window.innerHeight));
                 //  Our player animations, turning, walking left and walking right.
                 this.anims.create({
@@ -373,8 +484,20 @@ include("config/configbdd.php");
                 this.cursors = this.input.keyboard.createCursorKeys();
 
 
+                for(let i in this.data.values) {
+                    let bat = this.data.values[i];
+                    console.log(bat, bat.x, bat.y, bat.name, bat.level-1);
+                    if(bat.level > 0 && bat.name != 'build') {
+                        this.images[i] = this.physics.add.image(bat.x, bat.y, bat.name, bat.level-1);
+                    }
+                    else {
+                        this.images[i] = this.physics.add.image(bat.x, bat.y, 'build').setScale(bat.scale);
+                    }
+                    this.physics.add.overlap(this.player, this.images[i], this.overlapBat, function(){ return true; }, this);
+                }
+                console.log(this.images);
 
-                this.struct1 = this.add.image(352, -192, 'build').setInteractive().setScale(0.5);
+                /*this.struct1 = this.add.image(352, -192, 'build').setInteractive().setScale(0.5);
                 this.struct1.setData('lvl', 0);
                 this.struct1.on('pointerdown', function() {
                     if (this.struct1.getData('lvl') == 0) this.struct1 = this.add.image(352, -192, 'tank');
@@ -385,7 +508,7 @@ include("config/configbdd.php");
                 this.animal1.setData('lvl', 0);
                 this.animal1.on('pointerdown', function() {
                     if (this.animal1.getData('lvl') == 0) this.animal1 = this.add.image(-16, 304, 'pig');
-                }, this);
+                }, this);*/
 
 
 
@@ -456,6 +579,21 @@ include("config/configbdd.php");
                     .clear()
                     .strokePoints(this.Bounds.points)
                     .strokeRectShape(this.playerRect);*/
+
+
+                // Calcul de l'argent
+                for(let i in this.data.values) {
+                    let bat = this.data.values[i];
+                    if(bat.level > 0 && bat.name != 'build') {
+                        this.money+=bat.money;
+                    }
+                }
+                this.registry.set('money', this.money);
+            }
+
+            overlapBat(player, bat) {
+                console.log(bat);
+                this.registry.set('bat', 'x : '+bat.x+', y : '+bat.y);
             }
 
             projectRect(rect, body, time) {
@@ -849,6 +987,8 @@ include("config/configbdd.php");
                 super({ key: 'headerScene' });
                 this.turnOff;
                 this.globe;
+                this.moneyText;
+                this.batOverlap;
             }
 
             create ()
@@ -864,13 +1004,22 @@ include("config/configbdd.php");
                 this.globe.on('pointerup', function() {
                     this.scene.sleep('europeScene');
                     this.scene.sleep('headerScene');
-                    if(this.scene.isSleeping('sceneB')) {
-                        this.scene.wake('sceneB');
+                    if(this.scene.isSleeping('mapScene')) {
+                        this.scene.wake('mapScene');
                     }
                     else {
-                        this.scene.start('sceneB');
+                        this.scene.start('mapScene');
                     }
-                }, this)
+                }, this);
+
+                this.moneyText = this.add.text(25, 20, 'Monitoring Registry');
+                this.batOverlap = this.add.text(300, 20, 'Checking overlap');
+
+                //  Check the Registry and hit our callback every time the 'money' value is updated
+                this.registry.events.on('changedata', function(){
+                    this.moneyText.setText(this.registry.get('money'));
+                    this.batOverlap.setText(this.registry.get('bat'));
+                }, this);
             }
 
             update() {
@@ -889,7 +1038,7 @@ include("config/configbdd.php");
             physics: {
                 default: 'arcade',
             },
-            scene: [Loading, SceneA, SceneB, Europe, Desert, Glace, Header]
+            scene: [Loading, SceneA, Map, Europe, Desert, Glace, Header]
         };
 
         var game = new Phaser.Game(config);
