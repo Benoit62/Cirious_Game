@@ -287,9 +287,10 @@ include("config/configbdd.php");
 
         class Europe extends Phaser.Scene {
 
-            constructor ()
-            {
-                super({ key: 'europeScene' });
+            constructor() {
+                super({
+                    key: 'europeScene'
+                });
                 this.player;
                 this.cursors;
                 this.animal1;
@@ -300,8 +301,7 @@ include("config/configbdd.php");
                 this.field2;
             }
 
-            create ()
-            {
+            create() {
                 const farm = this.add.image(0, 0, 'europe');
                 //Phaser.Display.Align.In.Center(farm, this.add.zone(window.innerWidth/2, window.innerHeight/2, window.innerWidth, window.innerHeight));
                 this.cameras.main.zoom = 0.8;
@@ -312,40 +312,55 @@ include("config/configbdd.php");
                 //  Our player animations, turning, walking left and walking right.
                 this.anims.create({
                     key: 'left',
-                    frames: this.anims.generateFrameNumbers('dude', { start: 0, end: 3 }),
+                    frames: this.anims.generateFrameNumbers('dude', {
+                        start: 0,
+                        end: 3
+                    }),
                     frameRate: 10,
                     repeat: -1
                 });
 
                 this.anims.create({
                     key: 'turn',
-                    frames: [ { key: 'dude', frame: 4 } ],
+                    frames: [{
+                        key: 'dude',
+                        frame: 4
+                    }],
                     frameRate: 20
                 });
 
                 this.anims.create({
                     key: 'right',
-                    frames: this.anims.generateFrameNumbers('dude', { start: 5, end: 8 }),
+                    frames: this.anims.generateFrameNumbers('dude', {
+                        start: 5,
+                        end: 8
+                    }),
                     frameRate: 10,
                     repeat: -1
                 });
 
                 this.anims.create({
                     key: 'up',
-                    frames: [ { key: 'dude', frame: 4 } ],
+                    frames: [{
+                        key: 'dude',
+                        frame: 4
+                    }],
                     frameRate: 20
                 });
 
                 this.anims.create({
                     key: 'down',
-                    frames: [ { key: 'dude', frame: 4 } ],
+                    frames: [{
+                        key: 'dude',
+                        frame: 4
+                    }],
                     frameRate: 20
                 });
 
 
                 // On décale la caméra par rapport à la hauteur du header
-                this.cameras.main.setBounds(farm.x-farm.width/2, farm.y-farm.height/2-50, farm.width, farm.height+50);
-                this.physics.world.setBounds(farm.x-farm.width/2, farm.y-farm.height/2, farm.width, farm.height);
+                this.cameras.main.setBounds(farm.x - farm.width / 2, farm.y - farm.height / 2 - 50, farm.width, farm.height + 50);
+                this.physics.world.setBounds(farm.x - farm.width / 2, farm.y - farm.height / 2, farm.width, farm.height);
 
                 console.log(farm);
 
@@ -362,60 +377,127 @@ include("config/configbdd.php");
                 this.struct1 = this.add.image(352, -192, 'build').setInteractive().setScale(0.5);
                 this.struct1.setData('lvl', 0);
                 this.struct1.on('pointerdown', function() {
-                    if(this.struct1.getData('lvl') == 0) this.struct1 = this.add.image(352, -192, 'tank');
+                    if (this.struct1.getData('lvl') == 0) this.struct1 = this.add.image(352, -192, 'tank');
                 }, this);
 
 
-                this.animal1 = this.add.image(-16, 304, 'build').setInteractive().setScale(0.7).setDataEnabled();
-                this.animal1.data.set('lvl', 0);
+                this.animal1 = this.add.image(0, 0, 'build').setInteractive().setScale(0.5);
+                this.animal1.setData('lvl', 0);
                 this.animal1.on('pointerdown', function() {
-                    this.animal1 = this.add.image(-16, 304, 'pig', 0);
+                    if (this.animal1.getData('lvl') == 0) this.animal1 = this.add.image(0, 0, 'pig', 1);
+                    if (this.animal1.getData('lvl') == 1) this.animal1 = this.add.image(0, 0, 'pig', 2);
+                    if (this.animal1.getData('lvl') == 2) this.animal1 = this.add.image(0, 0, 'pig', 3);
+                    this.animal1.setData('lvl', this.animal1.getData('lvl') + 1);
+                    console.log(this.animal1.getData('value'));
                 }, this);
 
+
+
+                //debug
+                /*this.debug = this.add.graphics({
+                    lineStyle: {
+                        color: 0xffff00
+                    }
+                });*/
+                //polygone des hitboxs
+                var data = [-335, -530, -960, -530, -960, 540, -390, 540, -390, 470, -330, 470, -330, 400, -270, 400, -270, 140, -320, 125, -540, 125, -540, 300, -640, 390, -680, 390, -700, 430, -780, 430, -790, 460, -840, 460, -860, 490, -960, 490, -960, -80, -620, -80, -560, 5, -515, 20, -370, 20, -370, -50, -430, -100, -430, -385, -590, -385, -590, -210, -620, -210, -620, -80, -960, -80, -960, -530, -560, -530, -560, -490, -335, -490, -335, -530];
+                // The boundary
+                this.Bounds = new Phaser.Geom.Polygon(data);
+
+                // Will represent the player body
+                this.playerRect = new Phaser.Geom.Rectangle();
+
+                // Will hold a per-step velocity (distance)
+                this.tempVelocity = new Phaser.Math.Vector2();
+
+
+                this.scene.launch('sceneD');
             }
 
             update() {
-
-                if (this.cursors.up.isDown)
-                {
+                if (this.cursors.up.isDown) {
                     this.player.setVelocityY(-160);
                     //player.anims.play('up', true);
-                }
-                else if (this.cursors.down.isDown)
-                {
+                } else if (this.cursors.down.isDown) {
                     this.player.setVelocityY(160);
 
                     //player.anims.play('down', true);
-                }
-                else
-                {
+                } else {
                     this.player.setVelocityY(0);
                 }
 
-                if (this.cursors.left.isDown)
-                {
+                if (this.cursors.left.isDown) {
                     this.player.setVelocityX(-160);
 
                     this.player.anims.play('left', true);
-                }
-                else if (this.cursors.right.isDown)
-                {
+                } else if (this.cursors.right.isDown) {
                     this.player.setVelocityX(160);
 
                     this.player.anims.play('right', true);
-                } 
-                else
-                {
+                } else {
                     this.player.setVelocityX(0);
                 }
 
-                if(!this.cursors.left.isDown && !this.cursors.right.isDown) {
-                    
+                if (!this.cursors.left.isDown && !this.cursors.right.isDown) {
+
                     this.player.anims.play('turn', true);
                 }
+                this.body = this.player.body;
+
+                // Move the player rectangle ahead by one step of the provisional velocity
+                this.projectRect(this.playerRect, this.body, 1 / this.physics.world.fps);
+
+                // Check if the player rectangle is within the polygon and "block" the body on any corresponding axes
+                this.setBlocked(this.body.blocked, this.playerRect, this.Bounds);
+
+                // Limit the provisional velocity based on the blocked axes
+                this.clampVelocity(this.body.velocity, this.body.blocked);
+
+                // Draw the polygons
+                //debug
+                /*
+                this.debug
+                    .clear()
+                    .strokePoints(this.Bounds.points)
+                    .strokeRectShape(this.playerRect);*/
+            }
+
+            projectRect(rect, body, time) {
+                this.tempVelocity.copy(body.velocity).scale(time);
+                Phaser.Geom.Rectangle.CopyFrom(this.body, rect);
+                Phaser.Geom.Rectangle.OffsetPoint(rect, this.tempVelocity);
+            }
+
+            clampVelocity(velocity, blocked) {
+                if (blocked.left) velocity.x = Phaser.Math.Clamp(velocity.x, 0, Infinity);
+                if (blocked.right) velocity.x = Phaser.Math.Clamp(velocity.x, -Infinity, 0);
+                if (blocked.up) velocity.y = Phaser.Math.Clamp(velocity.y, 0, Infinity);
+                if (blocked.down) velocity.y = Phaser.Math.Clamp(velocity.y, -Infinity, 0);
+            }
+
+            setBlocked(blocked, rect, bounds) {
+                if (bounds.contains(rect.left, rect.top)) {
+                    blocked.left = true;
+                    blocked.up = true;
+                }
+                if (bounds.contains(rect.left, rect.bottom)) {
+                    blocked.left = true;
+                    blocked.down = true;
+                }
+                if (bounds.contains(rect.right, rect.top)) {
+                    blocked.right = true;
+                    blocked.up = true;
+                }
+                if (bounds.contains(rect.right, rect.bottom)) {
+                    blocked.right = true;
+                    blocked.down = true;
+                }
+
+                blocked.none = !blocked.left && !blocked.right && !blocked.up && !blocked.down;
             }
 
         }
+
 
 
         class Desert extends Phaser.Scene {
