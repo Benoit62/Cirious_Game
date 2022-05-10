@@ -28,7 +28,7 @@ $bdd=NULL;
                             <input id="pseudo_co" type="text" name="pseudo" value="" placeholder="Username" minlength="2" maxlength="30" required>
                             <input id="mdp_co" type="password" name="mdp" value="" placeholder="Password" minlength="2" maxlength="200" autocomplete="current-password" required>
 						    <ion-icon id="cp1" name="eye-off-outline"></ion-icon>
-                            <input type="submit" name="valider" value="connexion">
+                            <input type="submit" name="valider" value="Connexion">
                             <p class="signup">don't have an account? <a href="#" onclick="toggleForm();">Create an account.</a></p>
                         </form>
                     </div>
@@ -60,7 +60,7 @@ $bdd=NULL;
 						    <ion-icon id="cp2" name="eye-off-outline"></ion-icon>
                             <input id="verif_mdp" type="password" name="verif_mdp" value="" placeholder="Confirm Password" minlength="2" maxlength="256" required>
 						    <ion-icon id="cp3" name="eye-off-outline"></ion-icon>
-                            <input type="submit" name="valider" value="inscription">
+                            <input type="submit" name="valider" value="Inscription">
                             <p class="signup">Already have an account? <a href="#" onclick="toggleForm();">Sign in.</a></p>
                         </form>
                         <div>
