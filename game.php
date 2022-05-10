@@ -57,6 +57,7 @@ include("config/configbdd.php");
 
                 // Champs et cultures
                 this.load.spritesheet('labor', 'assets/labor.png', { frameWidth: 288, frameHeight: 416 });
+                this.load.spritesheet('sprout', 'assets/sprout.png', { frameWidth: 288, frameHeight: 416 });
                 
 
                 //Player
@@ -597,6 +598,7 @@ include("config/configbdd.php");
             }
 
             overlapBat(player, obj) {
+                let returnBat;
                 for(let i in this.data.values) {
                     let bat = this.data.values[i];
                     if(obj.x == bat.x && obj.y == bat.y) {
