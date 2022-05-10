@@ -5,6 +5,7 @@ if (!isset($_SESSION['autorisation']) && $_SESSION['autorisation'] != 'iseed') {
 }
 
 include("config/configbdd.php");
+
 ?>
 
 
