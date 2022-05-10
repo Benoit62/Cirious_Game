@@ -994,6 +994,7 @@ include("config/configbdd.php");
             create ()
             {
                 this.add.image(0, 0, 'header');
+                
                 this.turnOff = this.add.image(window.innerWidth-25, 25, 'off').setInteractive();
                 this.globe = this.add.image(window.innerWidth-55, 25, 'globe').setInteractive();
 
