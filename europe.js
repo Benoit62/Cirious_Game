@@ -375,7 +375,7 @@ class Europe extends Phaser.Scene {
         if(bat.level == 0 && bat.name == "build") {
             if(this.money >= bat.cost) {
                 bat.level+=1;
-                bat.name = 'type';
+                bat.name = type;
                 this.money-=bat.cost;
                 this.images[bat.key-1] = this.physics.add.image(bat.x, bat.y, type, bat.level-1);
             }
