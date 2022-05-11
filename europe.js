@@ -31,11 +31,9 @@ class Europe extends Phaser.Scene {
             y:304,
             type:'animal',
             level:0,
-            maxlvl:3,
             name:'build',
             scale:0.7,
-            money:10,
-            cost:100000
+            ref:{}
         });
         this.data.set('bat2', {
             key:2,
@@ -43,11 +41,9 @@ class Europe extends Phaser.Scene {
             y:-304,
             type:'animal',
             level:2,
-            maxlvl:3,
             name:'cow',
             scale:0.7,
-            money:10,
-            cost:100000
+            ref:{}
         });
 
         // Structures
@@ -57,11 +53,9 @@ class Europe extends Phaser.Scene {
             y:-192,
             type:'struct',
             level:1,
-            maxlvl:3,
             name:'tank',
             scale:0.5,
-            money:5,
-            cost:150000
+            ref:{}
         });
         this.data.set('bat4', {
             key:4,
@@ -69,11 +63,9 @@ class Europe extends Phaser.Scene {
             y:-448,
             type:'struct',
             level:0,
-            maxlvl:3,
             name:'build',
             scale:0.5,
-            money:5,
-            cost:150000
+            ref:{}
         });
 
         //Champs
@@ -86,7 +78,7 @@ class Europe extends Phaser.Scene {
             name:'labor',
             scale:0.8,
             money:0,
-            cost:10000,
+            ref:{},
             plant:'none',
             plantCost:5000
         });
@@ -99,7 +91,7 @@ class Europe extends Phaser.Scene {
             name:'build',
             scale:0.8,
             money:0,
-            cost:10000,
+            ref:{},
             plant:'none',
             plantCost:5000
         });
@@ -110,7 +102,7 @@ class Europe extends Phaser.Scene {
         this.data.set('bat9', {
             key:9,
             x:768,
-            y:-404,
+            y:-416,
             type:'house',
             level:1,
             maxlvl:3,
@@ -202,7 +194,7 @@ class Europe extends Phaser.Scene {
 
         // On délimite la map aux bords de l'image
         // On décale la caméra par rapport à la hauteur du header
-        this.cameras.main.setBounds(farm.x - farm.width / 2, farm.y - farm.height / 2 - 50, farm.width, farm.height + 50);
+        this.cameras.main.setBounds(farm.x - farm.width / 2 - 250, farm.y - farm.height / 2 - 55, farm.width + 250, farm.height + 50);
         this.physics.world.setBounds(farm.x - farm.width / 2, farm.y - farm.height / 2, farm.width, farm.height);
 
         // Pour suivre le joueur avec la camera
