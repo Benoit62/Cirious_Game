@@ -15,7 +15,7 @@ class Europe extends Phaser.Scene {
 
         this.images = [];
 
-        this.money = 1000000;
+        this.money = 500000;
 
         this.headerScene;
         this.menuScene;
@@ -30,9 +30,9 @@ class Europe extends Phaser.Scene {
             x:-16,
             y:304,
             type:'animal',
-            level:1,
+            level:0,
             maxlvl:3,
-            name:'pig',
+            name:'build',
             scale:0.7,
             money:10,
             cost:100000
@@ -42,7 +42,7 @@ class Europe extends Phaser.Scene {
             x:-16,
             y:-304,
             type:'animal',
-            level:1,
+            level:2,
             maxlvl:3,
             name:'cow',
             scale:0.7,
@@ -86,8 +86,9 @@ class Europe extends Phaser.Scene {
             name:'labor',
             scale:0.8,
             money:0,
-            cost:5000,
-            plant:'none'
+            cost:10000,
+            plant:'none',
+            plantCost:5000
         });
         this.data.set('bat6', {
             key:6,
@@ -98,8 +99,9 @@ class Europe extends Phaser.Scene {
             name:'build',
             scale:0.8,
             money:0,
-            cost:5000,
-            plant:'none'
+            cost:10000,
+            plant:'none',
+            plantCost:5000
         });
 
 
@@ -363,21 +365,21 @@ class Europe extends Phaser.Scene {
                 if(this.money >= bat.cost) {
                     bat.level+=1;
                     this.money-=bat.cost;
-                    bat.money*=5;
+                    bat.money*=2;
                     console.log('Upgraded !', bat.key, bat.level);
                     this.images[bat.key-1].setFrame(bat.level-1);
                 }
             }
         }
     }
-    buildBat(bat, type) {
+    buildBat(bat, name) {
         console.log('Construction batiment : ', bat);
         if(bat.level == 0 && bat.name == "build") {
             if(this.money >= bat.cost) {
                 bat.level+=1;
-                bat.name = type;
+                bat.name = name;
                 this.money-=bat.cost;
-                this.images[bat.key-1] = this.physics.add.image(bat.x, bat.y, type, bat.level-1);
+                this.images[bat.key-1] = this.physics.add.image(bat.x, bat.y, name, bat.level-1);
             }
         }
     }

@@ -421,8 +421,12 @@ include("config/configbdd.php");
                 // Si le level est à 0 on affiche le bouton construction
                 this.build = this.add.image(window.innerWidth - 40, 160, "builder").setScale(0.1).setInteractive();
                 this.build.on('pointerdown', function(){
-                    if((this.batOverlap.type == 'animal' || this.batOverlap.type == 'struct') && this.batOverlap.level == 0) {
-                        this.europeScene.buildBat(this.batOverlap, 'tank');
+                    if((this.batOverlap.type == 'animal' || this.batOverlap.type == 'struct' || this.batOverlap.type == 'field') && this.batOverlap.level == 0) {
+                        if(this.batOverlap.type == 'animal') name = 'pig';
+                        if(this.batOverlap.type == 'struct') name = 'tank';
+                        if(this.batOverlap.type == 'field') name = 'labor';
+
+                        this.europeScene.buildBat(this.batOverlap, name);
                     }
                 }, this);
                 
@@ -568,7 +572,7 @@ include("config/configbdd.php");
                     this.circleUpgrade.setVisible(false);
                 }
 
-                if((this.batOverlap.type == 'animal' || this.batOverlap.type == 'struct') && this.batOverlap.level == 0) {
+                if((this.batOverlap.type == 'animal' || this.batOverlap.type == 'struct' || this.batOverlap.type == 'field') && this.batOverlap.level == 0) {
                     this.circleBuild.setVisible(true);
                 }
                 else {
