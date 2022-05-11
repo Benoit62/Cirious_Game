@@ -445,7 +445,7 @@ include("config/configbdd.php");
                 //this.scene.setVisible(false);
                 this.europeScene = this.scene.get('europeScene');
 
-                this.add.image(100, 1548, 'menu');
+                this.add.image(100, 1548, 'menu').setScale(1.05);
 
                 // Bouton (512x512) en scale 0.1 (51.2x51.2)
 
