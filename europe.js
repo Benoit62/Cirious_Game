@@ -79,8 +79,8 @@ class Europe extends Phaser.Scene {
             scale:0.8,
             money:0,
             ref:{},
-            plant:'none',
-            plantCost:5000
+            plant:false,
+            seed:{}
         });
         this.data.set('bat6', {
             key:6,
@@ -92,8 +92,8 @@ class Europe extends Phaser.Scene {
             scale:0.8,
             money:0,
             ref:{},
-            plant:'none',
-            plantCost:5000
+            plant:false,
+            seed:{}
         });
 
 
@@ -137,7 +137,7 @@ class Europe extends Phaser.Scene {
         this.cameras.main.zoom = 0.8;
 
         // Player
-        this.player = this.physics.add.sprite(800, -250, 'dude').setDepth(2000);
+        this.player = this.physics.add.sprite(800, -250, 'farmer').setDepth(2000).setScale(0.7);
 
         
         this.physics.add.overlap(this.player, farm, this.closeOverLap, function(){ return true; }, this);
@@ -146,9 +146,9 @@ class Europe extends Phaser.Scene {
         //  Our player animations, turning, walking left and walking right.
         this.anims.create({
             key: 'left',
-            frames: this.anims.generateFrameNumbers('dude', {
-                start: 0,
-                end: 3
+            frames: this.anims.generateFrameNumbers('farmer', {
+                start: 3,
+                end: 5
             }),
             frameRate: 10,
             repeat: -1
@@ -157,17 +157,17 @@ class Europe extends Phaser.Scene {
         this.anims.create({
             key: 'turn',
             frames: [{
-                key: 'dude',
-                frame: 4
+                key: 'farmer',
+                frame: 0
             }],
             frameRate: 20
         });
 
         this.anims.create({
             key: 'right',
-            frames: this.anims.generateFrameNumbers('dude', {
-                start: 5,
-                end: 8
+            frames: this.anims.generateFrameNumbers('farmer', {
+                start: 9,
+                end: 11
             }),
             frameRate: 10,
             repeat: -1
@@ -176,8 +176,8 @@ class Europe extends Phaser.Scene {
         this.anims.create({
             key: 'up',
             frames: [{
-                key: 'dude',
-                frame: 4
+                key: 'farmer',
+                frame: 0
             }],
             frameRate: 20
         });
@@ -185,8 +185,8 @@ class Europe extends Phaser.Scene {
         this.anims.create({
             key: 'down',
             frames: [{
-                key: 'dude',
-                frame: 4
+                key: 'farmer',
+                frame: 0
             }],
             frameRate: 20
         });
@@ -251,10 +251,10 @@ class Europe extends Phaser.Scene {
 
     update() {
         if (this.cursors.up.isDown) {
-            this.player.setVelocityY(-160);
+            this.player.setVelocityY(-350);
             //player.anims.play('up', true);
         } else if (this.cursors.down.isDown) {
-            this.player.setVelocityY(160);
+            this.player.setVelocityY(350);
 
             //player.anims.play('down', true);
         } else {
@@ -262,11 +262,11 @@ class Europe extends Phaser.Scene {
         }
 
         if (this.cursors.left.isDown) {
-            this.player.setVelocityX(-160);
+            this.player.setVelocityX(-350);
 
             this.player.anims.play('left', true);
         } else if (this.cursors.right.isDown) {
-            this.player.setVelocityX(160);
+            this.player.setVelocityX(350);
 
             this.player.anims.play('right', true);
         } else {
@@ -370,11 +370,16 @@ class Europe extends Phaser.Scene {
             }
         }
     }
-    plant(bat) {
-        console.log('Construction batiment : ', bat);
-        if(bat.type == 'field' && bat.plant == "none" && bat.level == 1) {
-            bat.plant = 'graine';
-            this.images[bat.key-1] = this.physics.add.image(bat.x, bat.y, 'sprout');
+    plant(bat, seed) {
+        console.log('Plantation : ', bat);
+        if(bat.type == 'field' && !bat.plant && bat.level == 1 && bat.tag == 'labor') {
+            if(this.money >= seed.buildPlant) {
+                bat.plant = true;
+                bat.tag = seed.tag;
+                bat.seed = seed;
+                console.log('Planted !', bat);
+                this.images[bat.key-1] = this.physics.add.image(bat.x, bat.y, seed.tag);
+            }
         }
     }
 

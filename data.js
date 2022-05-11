@@ -4,9 +4,7 @@ let data = [
         type:'struct',
         lvlMax:3,
         buildCost:40000,
-        upgrade1:10000,
-        upgrade2:20000,
-        upgrade3:30000,
+        upgrade:[0,10000,20000,30000],
         money:[0,2,5,10],
         name:'Reservoir d\'eau',
         desc:'Le tank pemret de recuperer et stocker de l\'eau qui pourra être utilisé pour les cultures'
@@ -16,9 +14,7 @@ let data = [
         type:'animal',
         lvlMax:3,
         buildCost:40000,
-        upgrade1:20000,
-        upgrade2:35000,
-        upgrade3:60000,
+        upgrade:[0,20000,35000,60000],
         money:[0,3,8,20],
         name:'Cochon',
         desc:'Tout est bon dans le cochon'
@@ -28,9 +24,7 @@ let data = [
         type:'animal',
         lvlMax:3,
         buildCost:40000,
-        upgrade1:20000,
-        upgrade2:35000,
-        upgrade3:60000,
+        upgrade:[0,20000,35000,60000],
         money:[0,3,8,20],
         name:'Vache',
         desc:'Tout est bon dans la vache'
@@ -40,9 +34,7 @@ let data = [
         type:'animal',
         lvlMax:3,
         buildCost:40000,
-        upgrade1:20000,
-        upgrade2:35000,
-        upgrade3:60000,
+        upgrade:[0,20000,35000,60000],
         money:[0,3,8,20],
         name:'Mouton',
         desc:'Tout est bon dans le mouton'
@@ -52,9 +44,7 @@ let data = [
         type:'field',
         lvlMax:1,
         buildCost:10000,
-        upgrade1:0,
-        upgrade2:0,
-        upgrade3:0,
+        upgrade:[0,0,0,0],
         money:[0, 0],
         name:'Champs',
         desc:'Savez-vous plantez des choux, à la mode, à la mode. Savez-voud planter des choux, à la mode de chez-nous'
@@ -63,11 +53,37 @@ let data = [
         tag:'house',
         type:'house',
         lvlMax:2,
-        upgrade1:1000000,
-        upgrade2:2000000,
+        upgrade:[0,1000000,2000000],
         money:[0,10,25,60],
         name:'Maison',
         desc:'Lieu de recherche et d\'innovation'
+    },
+
+    {
+        tag:'ble',
+        type:'plant',
+        buildPlant:5000,
+        money:10000,
+        name:'Blé',
+        desc:'Miam'
+    },
+
+    {
+        tag:'carrot',
+        type:'plant',
+        buildPlant:5000,
+        money:10000,
+        name:'Carrotes',
+        desc:'Miam'
+    },
+
+    {
+        tag:'mais',
+        type:'plant',
+        buildPlant:5000,
+        money:10000,
+        name:'Maïs',
+        desc:'Miam'
     },
     
 ];
