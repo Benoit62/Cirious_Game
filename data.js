@@ -21,9 +21,11 @@ let data = [
         upgrade1:20000,
         upgrade2:35000,
         upgrade3:60000,
-        money1:3,
-        money2:8,
-        money3:20,
+        money:{
+            lvl1:3,
+            lvl2:8,
+            lvl3:20,
+        },
         name:'Cochon',
         desc:'Tout est bon dans le cochon'
     },
@@ -35,9 +37,11 @@ let data = [
         upgrade1:20000,
         upgrade2:35000,
         upgrade3:60000,
-        money1:3,
-        money2:8,
-        money3:20,
+        money:{
+            lvl1:3,
+            lvl2:8,
+            lvl3:20,
+        },
         name:'Vache',
         desc:'Tout est bon dans la vache'
     },
@@ -55,9 +59,14 @@ let data = [
         name:'Champs',
         desc:'Savez-vous plantez des choux, à la mode, à la mode. Savez-voud planter des choux, à la mode de chez-nous'
     },
+    
 ];
 
 
 function getByType(type) {
     return data.filter(value => type == value.type);
+}
+
+function getByTag(tag) {
+    return data.filter(value => tag == value.tag);
 }

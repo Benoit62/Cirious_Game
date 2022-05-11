@@ -430,19 +430,19 @@ include("config/configbdd.php");
 
                 let j = 0;
                 for(let i of getByType('animal')) {
-                    console.log(i);
-                    this.animals[i.tag] = this.add.image(35, 100 + j*30, i.tag+"-button").setScale(0.1).setInteractive()/*.setVisible(false)*/;
+                    this.animals[i.tag] = this.add.image(35, 155 + j*35*2, i.tag+"-button").setScale(0.1).setInteractive().setVisible(false)/*.setVisible(false)*/;
                     this.animals[i.tag].on('pointerdown', function(){
                         if(this.batOverlap.type == 'animal' && this.batOverlap.level == 0) {
-                            this.europeScene.buildBat(this.batOverlap, i.tag);
+                            this.europeScene.buildBat(this.batOverlap, i);
                         }
                     }, this);
+                    j++;
                 }
                  
 
                 this.upgrade = this.add.image(35, 90, "upgrade").setScale(0.1).setInteractive();
                 this.upgrade.on('pointerdown', function(){
-                    if((this.batOverlap.type == 'animal' || this.batOverlap.type == 'struct') && this.batOverlap.level < this.batOverlap.maxlvl && this.batOverlap.level != 0) {
+                    if((this.batOverlap.type == 'animal' || this.batOverlap.type == 'struct') && this.batOverlap.level < this.batOverlap.ref.lvlMax && this.batOverlap.level != 0) {
                         this.europeScene.upgradeBat(this.batOverlap);
                     }
                 }, this);
@@ -451,11 +451,9 @@ include("config/configbdd.php");
                 // Si le level est à 0 on affiche le bouton construction
                 this.build = this.add.image(100, 90, "builder").setScale(0.1).setInteractive();
                 this.build.on('pointerdown', function(){
-                    console.log(this.animals);
                     if((this.batOverlap.type == 'animal' || this.batOverlap.type == 'struct' || this.batOverlap.type == 'field') && this.batOverlap.level == 0) {
                         if(this.batOverlap.type == 'animal') {
                             for(let i of getByType('animal')) {
-                                console.log(this.animals[i.tag]);
                                 this.animals[i.tag].setVisible(true);
                             }
                         }

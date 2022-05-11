@@ -15,7 +15,7 @@ class Europe extends Phaser.Scene {
 
         this.images = [];
 
-        this.money = 500000;
+        this.money = 5000000;
 
         this.headerScene;
         this.menuScene;
@@ -31,7 +31,7 @@ class Europe extends Phaser.Scene {
             y:304,
             type:'animal',
             level:0,
-            name:'build',
+            tag:'build',
             scale:0.7,
             ref:{}
         });
@@ -41,7 +41,7 @@ class Europe extends Phaser.Scene {
             y:-304,
             type:'animal',
             level:2,
-            name:'cow',
+            tag:'cow',
             scale:0.7,
             ref:{}
         });
@@ -53,7 +53,7 @@ class Europe extends Phaser.Scene {
             y:-192,
             type:'struct',
             level:1,
-            name:'tank',
+            tag:'tank',
             scale:0.5,
             ref:{}
         });
@@ -63,7 +63,7 @@ class Europe extends Phaser.Scene {
             y:-448,
             type:'struct',
             level:0,
-            name:'build',
+            tag:'build',
             scale:0.5,
             ref:{}
         });
@@ -75,7 +75,7 @@ class Europe extends Phaser.Scene {
             y:-303,
             type:'field',
             level:1,
-            name:'labor',
+            tag:'labor',
             scale:0.8,
             money:0,
             ref:{},
@@ -88,7 +88,7 @@ class Europe extends Phaser.Scene {
             y:175,
             type:'field',
             level:0,
-            name:'build',
+            tag:'build',
             scale:0.8,
             money:0,
             ref:{},
@@ -106,7 +106,7 @@ class Europe extends Phaser.Scene {
             type:'house',
             level:1,
             maxlvl:3,
-            name:'house',
+            tag:'house',
             scale:0.5,
             money:0,
             cost:200000
@@ -127,7 +127,7 @@ class Europe extends Phaser.Scene {
             y:0,
             type:'field',
             level:1,
-            name:'build'
+            tag:'build'
         });*/
         
 
@@ -210,9 +210,9 @@ class Europe extends Phaser.Scene {
         let j = 0;
         for(let i in this.data.values) {
             let bat = this.data.values[i];
-            console.log(bat, bat.x, bat.y, bat.name, bat.level-1);
-            if(bat.level > 0 && bat.name != 'build') {
-                this.images.push(this.physics.add.image(bat.x, bat.y, bat.name, bat.level-1));
+            if(bat.level > 0 && bat.tag != 'build') {
+                this.images.push(this.physics.add.image(bat.x, bat.y, bat.tag, bat.level-1));
+                console.log(getByTag(bat.tag));
             }
             else {
                 this.images.push(this.physics.add.image(bat.x, bat.y, 'build').setScale(bat.scale));
@@ -220,7 +220,7 @@ class Europe extends Phaser.Scene {
             this.physics.add.overlap(this.player, this.images[j], this.overlapBat, null, this);
             j++;
         }
-        console.log(this.images);
+        console.log(this.data.values);
 
         /*this.struct1 = this.add.image(352, -192, 'build').setInteractive().setScale(0.5);
         this.struct1.setData('lvl', 0);
@@ -316,8 +316,9 @@ class Europe extends Phaser.Scene {
         let moneyPerTick = 0;
         for(let i in this.data.values) {
             let bat = this.data.values[i];
-            if(bat.level > 0 && bat.name != 'build') {
-                moneyPerTick+=bat.money;
+            if(bat.level > 0 && bat.tag != 'build') {
+                moneyPerTick+=0;
+                //console.log(bat.ref.money);
             }
         }
         this.money+=moneyPerTick;
@@ -329,8 +330,8 @@ class Europe extends Phaser.Scene {
         // Calcul de l'argent
         for(let i in this.data.values) {
             let bat = this.data.values[i];
-            if(bat.level > 0 && bat.name != 'build') {
-                this.money+=bat.money;
+            if(bat.level > 0 && bat.tag != 'build') {
+                this.money+=bat.ref.money.lvl+bat.level;
             }
         }
         this.registry.set('money', this.money);
@@ -344,7 +345,7 @@ class Europe extends Phaser.Scene {
                 returnBat = bat;
             }
         }
-        this.registry.set('bat', 'x : '+returnBat.x+', y : '+returnBat.y+' Type : '+returnBat.type+' Name : '+returnBat.name+' Level : '+returnBat.level);
+        this.registry.set('bat', 'x : '+returnBat.x+', y : '+returnBat.y+' Type : '+returnBat.type+' Tag : '+returnBat.tag+' Level : '+returnBat.level);
         
         this.menuScene.getBatOverlap(returnBat);
     }
@@ -353,25 +354,26 @@ class Europe extends Phaser.Scene {
     upgradeBat(bat) {
         console.log('Upgrade batiment : ', bat)
         if(bat.type == 'animal' || bat.type == 'struct') {
-            if(bat.level < bat.maxlvl && bat.level != 0) {
-                if(this.money >= bat.cost) {
+            if(bat.level < bat.ref.lvlMax && bat.level != 0) {
+                if(this.money >= bat.ref.buildCost) {
                     bat.level+=1;
-                    this.money-=bat.cost;
-                    bat.money*=2;
-                    console.log('Upgraded !', bat.key, bat.level);
+                    this.money-=bat.ref.buildCost;
+                    console.log('Upgraded !', bat);
                     this.images[bat.key-1].setFrame(bat.level-1);
                 }
             }
         }
     }
-    buildBat(bat, name) {
+    buildBat(bat, ref) {
         console.log('Construction batiment : ', bat);
-        if(bat.level == 0 && bat.name == "build") {
-            if(this.money >= bat.cost) {
+        if(bat.level == 0 && bat.tag == "build") {
+            if(this.money >= ref.buildCost) {
                 bat.level+=1;
-                bat.name = name;
-                this.money-=bat.cost;
-                this.images[bat.key-1] = this.physics.add.image(bat.x, bat.y, name, bat.level-1);
+                bat.tag = ref.tag;
+                bat.ref = ref;
+                this.money -= ref.buildCost;
+                console.log('Upgraded !', bat);
+                this.images[bat.key-1] = this.physics.add.image(bat.x, bat.y, bat.tag, bat.level-1);
             }
         }
     }
