@@ -198,7 +198,7 @@ class Europe extends Phaser.Scene {
 
         // On délimite la map aux bords de l'image
         // On décale la caméra par rapport à la hauteur du header
-        this.cameras.main.setBounds(farm.x - farm.width / 2 - 250, farm.y - farm.height / 2 - 55, farm.width + 250, farm.height + 50);
+        this.cameras.main.setBounds(farm.x - farm.width / 2 - 250, farm.y - farm.height / 2 - 60, farm.width + 250, farm.height + 60);
         this.physics.world.setBounds(farm.x - farm.width / 2, farm.y - farm.height / 2, farm.width, farm.height);
 
         // Pour suivre le joueur avec la camera

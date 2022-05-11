@@ -88,6 +88,8 @@ include("config/configbdd.php");
                 this.load.image("bison-button", "assets/menu/bison.png"); 
                 this.load.image("chamel-button", "assets/menu/chameau.png"); 
                 this.load.image("renne-button", "assets/menu/rennes.png"); 
+
+                this.load.image("labor-button", "assets/menu/labouer.png"); 
                 
                 this.load.image("carrot-button", "assets/menu/carrot.png"); 
                 this.load.image("ble-button", "assets/menu/ble.png"); 
@@ -415,6 +417,7 @@ include("config/configbdd.php");
 
                 this.animals = [];
                 this.plants = [];
+                this.fields = [];
 
                 this.circleBuild;
                 this.circlePlanter;
@@ -442,7 +445,7 @@ include("config/configbdd.php");
                 //this.scene.setVisible(false);
                 this.europeScene = this.scene.get('europeScene');
 
-                this.add.image(100, 1550, 'menu');
+                this.add.image(100, 1548, 'menu');
 
                 // Bouton (512x512) en scale 0.1 (51.2x51.2)
 
@@ -477,6 +480,22 @@ include("config/configbdd.php");
                     }, this);
                     k++;
                 }
+
+
+                // Création des boutons Champs
+                let l = 0;
+                for(let i of getByType('field')) {
+                    this.plants[i.tag] = this.add.image(35, 155 + l*35*2, i.tag+"-button").setScale(0.1).setInteractive().setVisible(false)/*.setVisible(false)*/;
+                    this.plants[i.tag].on('pointerdown', function(){
+                        if(this.batOverlap.type == 'field' && !this.batOverlap.plant && this.batOverlap.level == 1 && this.batOverlap.tag == 'labor') {
+                            this.europeScene.plant(this.batOverlap, i);
+                            for(let i of getByType('plant')) {
+                                this.plants[i.tag].setVisible(false);
+                            }
+                        }
+                    }, this);
+                    l++;
+                }
                  
                 // Bouton upgrade
                 this.upgrade = this.add.image(35, 90, "upgrade").setScale(0.1).setInteractive();
@@ -496,21 +515,15 @@ include("config/configbdd.php");
                                 this.animals[i.tag].setVisible(true);
                             }
                         }
-
-                        //this.europeScene.buildBat(this.batOverlap, name);
-                    }
-                }, this);
-                
-
-                // Bouton planter
-                this.planter = this.add.image(165, 90, "planter").setScale(0.1).setInteractive();
-                this.planter.on('pointerdown', function(){
-                    if(this.batOverlap.type == 'field' && !this.batOverlap.plant && this.batOverlap.level == 1 && this.batOverlap.tag == 'labor') {
-                        for(let i of getByType('plant')) {
-                            this.plants[i.tag].setVisible(true);
+                        if(this.batOverlap.type == 'field' && !this.batOverlap.plant) {
+                            for(let i of getByType('field')) {
+                                this.fields[i.tag].setVisible(true);
+                            }
                         }
                     }
+                    
                 }, this);
+                
 
                 
                 this.circleUpgrade = this.add.image(35,90, "circle").setScale(0.1).setVisible(false);
