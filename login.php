@@ -48,6 +48,7 @@ $bdd=NULL;
                         <i></i>
                         <i></i>
                         <i></i>
+                        
                     </div>
                 </div>
                 <div class="user signupBx">
