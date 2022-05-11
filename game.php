@@ -523,6 +523,17 @@ include("config/configbdd.php");
                     }
                     
                 }, this);
+
+                // Bouton planter
+                this.planter = this.add.image(165, 90, "planter").setScale(0.1).setInteractive();
+                this.planter.on('pointerdown', function(){
+                    if(this.batOverlap.type == 'field' && !this.batOverlap.plant && this.batOverlap.level == 1 && this.batOverlap.tag == 'labor') {
+                        for(let i of getByType('plant')) {
+                            this.plants[i.tag].setVisible(true);
+                        }
+                    }
+                    
+                }, this);
                 
 
                 
