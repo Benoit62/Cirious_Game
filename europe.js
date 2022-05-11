@@ -15,7 +15,7 @@ class Europe extends Phaser.Scene {
 
         this.images = [];
 
-        this.money = 1000000;
+        this.money = 500000;
 
         this.headerScene;
         this.menuScene;
@@ -30,24 +30,20 @@ class Europe extends Phaser.Scene {
             x:-16,
             y:304,
             type:'animal',
-            level:1,
-            maxlvl:3,
-            name:'pig',
+            level:0,
+            name:'build',
             scale:0.7,
-            money:10,
-            cost:100000
+            ref:{}
         });
         this.data.set('bat2', {
             key:2,
             x:-16,
             y:-304,
             type:'animal',
-            level:1,
-            maxlvl:3,
+            level:2,
             name:'cow',
             scale:0.7,
-            money:10,
-            cost:100000
+            ref:{}
         });
 
         // Structures
@@ -57,11 +53,9 @@ class Europe extends Phaser.Scene {
             y:-192,
             type:'struct',
             level:1,
-            maxlvl:3,
             name:'tank',
             scale:0.5,
-            money:5,
-            cost:150000
+            ref:{}
         });
         this.data.set('bat4', {
             key:4,
@@ -69,11 +63,9 @@ class Europe extends Phaser.Scene {
             y:-448,
             type:'struct',
             level:0,
-            maxlvl:3,
             name:'build',
             scale:0.5,
-            money:5,
-            cost:150000
+            ref:{}
         });
 
         //Champs
@@ -86,8 +78,9 @@ class Europe extends Phaser.Scene {
             name:'labor',
             scale:0.8,
             money:0,
-            cost:5000,
-            plant:'none'
+            ref:{},
+            plant:'none',
+            plantCost:5000
         });
         this.data.set('bat6', {
             key:6,
@@ -98,8 +91,9 @@ class Europe extends Phaser.Scene {
             name:'build',
             scale:0.8,
             money:0,
-            cost:5000,
-            plant:'none'
+            ref:{},
+            plant:'none',
+            plantCost:5000
         });
 
 
@@ -108,7 +102,7 @@ class Europe extends Phaser.Scene {
         this.data.set('bat9', {
             key:9,
             x:768,
-            y:-404,
+            y:-416,
             type:'house',
             level:1,
             maxlvl:3,
@@ -200,7 +194,7 @@ class Europe extends Phaser.Scene {
 
         // On délimite la map aux bords de l'image
         // On décale la caméra par rapport à la hauteur du header
-        this.cameras.main.setBounds(farm.x - farm.width / 2, farm.y - farm.height / 2 - 50, farm.width, farm.height + 50);
+        this.cameras.main.setBounds(farm.x - farm.width / 2 - 250, farm.y - farm.height / 2 - 55, farm.width + 250, farm.height + 50);
         this.physics.world.setBounds(farm.x - farm.width / 2, farm.y - farm.height / 2, farm.width, farm.height);
 
         // Pour suivre le joueur avec la camera
@@ -363,21 +357,21 @@ class Europe extends Phaser.Scene {
                 if(this.money >= bat.cost) {
                     bat.level+=1;
                     this.money-=bat.cost;
-                    bat.money*=5;
+                    bat.money*=2;
                     console.log('Upgraded !', bat.key, bat.level);
                     this.images[bat.key-1].setFrame(bat.level-1);
                 }
             }
         }
     }
-    buildBat(bat, type) {
+    buildBat(bat, name) {
         console.log('Construction batiment : ', bat);
         if(bat.level == 0 && bat.name == "build") {
             if(this.money >= bat.cost) {
                 bat.level+=1;
-                bat.name = type;
+                bat.name = name;
                 this.money-=bat.cost;
-                this.images[bat.key-1] = this.physics.add.image(bat.x, bat.y, type, bat.level-1);
+                this.images[bat.key-1] = this.physics.add.image(bat.x, bat.y, name, bat.level-1);
             }
         }
     }
