@@ -255,10 +255,10 @@ class Europe extends Phaser.Scene {
 
     update() {
         if (this.cursors.up.isDown) {
-            this.player.setVelocityY(-350);
+            this.player.setVelocityY(-550);
             //player.anims.play('up', true);
         } else if (this.cursors.down.isDown) {
-            this.player.setVelocityY(350);
+            this.player.setVelocityY(550);
 
             //player.anims.play('down', true);
         } else {
@@ -266,11 +266,11 @@ class Europe extends Phaser.Scene {
         }
 
         if (this.cursors.left.isDown) {
-            this.player.setVelocityX(-350);
+            this.player.setVelocityX(-550);
 
             this.player.anims.play('left', true);
         } else if (this.cursors.right.isDown) {
-            this.player.setVelocityX(350);
+            this.player.setVelocityX(550);
 
             this.player.anims.play('right', true);
         } else {

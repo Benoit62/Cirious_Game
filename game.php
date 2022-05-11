@@ -45,7 +45,6 @@ include("config/configbdd.php");
                 this.load.image('foretile', 'assets/foretile.png');
                 this.load.image('glaceile', 'assets/glaceile.png');
                 this.load.image('europe', 'assets/europe.png');
-                this.load.image('desert', 'assets/desert.png');
                 this.load.image('header', 'assets/header.png');
                 this.load.image('off', 'assets/off.png');
                 this.load.image('globe', 'assets/globe.png');
@@ -89,7 +88,7 @@ include("config/configbdd.php");
                 this.load.image("chamel-button", "assets/menu/chameau.png"); 
                 this.load.image("renne-button", "assets/menu/rennes.png"); 
 
-                this.load.image("labor-button", "assets/menu/labouer.png"); 
+                this.load.image("labor-button", "assets/menu/labourer.png"); 
                 
                 this.load.image("carrot-button", "assets/menu/carrot.png"); 
                 this.load.image("ble-button", "assets/menu/ble.png"); 
@@ -482,15 +481,15 @@ include("config/configbdd.php");
                 }
 
 
-                // Création des boutons Champs
+                // Création du bouton Labourer
                 let l = 0;
                 for(let i of getByType('field')) {
-                    this.plants[i.tag] = this.add.image(35, 155 + l*35*2, i.tag+"-button").setScale(0.1).setInteractive().setVisible(false)/*.setVisible(false)*/;
-                    this.plants[i.tag].on('pointerdown', function(){
-                        if(this.batOverlap.type == 'field' && !this.batOverlap.plant && this.batOverlap.level == 1 && this.batOverlap.tag == 'labor') {
-                            this.europeScene.plant(this.batOverlap, i);
-                            for(let i of getByType('plant')) {
-                                this.plants[i.tag].setVisible(false);
+                    this.fields[i.tag] = this.add.image(35, 155 + l*35*2, i.tag+"-button").setScale(0.1).setInteractive().setVisible(false)/*.setVisible(false)*/;
+                    this.fields[i.tag].on('pointerdown', function(){
+                        if(this.batOverlap.type == 'field' && !this.batOverlap.plant && this.batOverlap.level == 0 && this.batOverlap.tag == 'build') {
+                            this.europeScene.buildBat(this.batOverlap, i);
+                            for(let i of getByType('field')) {
+                                this.fields[i.tag].setVisible(false);
                             }
                         }
                     }, this);
