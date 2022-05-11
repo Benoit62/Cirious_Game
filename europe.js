@@ -212,7 +212,7 @@ class Europe extends Phaser.Scene {
             let bat = this.data.values[i];
             if(bat.level > 0 && bat.tag != 'build') {
                 this.images.push(this.physics.add.image(bat.x, bat.y, bat.tag, bat.level-1));
-                console.log(getByTag(bat.tag));
+                bat.ref = getByTag(bat.tag)[0];
             }
             else {
                 this.images.push(this.physics.add.image(bat.x, bat.y, 'build').setScale(bat.scale));
@@ -221,20 +221,6 @@ class Europe extends Phaser.Scene {
             j++;
         }
         console.log(this.data.values);
-
-        /*this.struct1 = this.add.image(352, -192, 'build').setInteractive().setScale(0.5);
-        this.struct1.setData('lvl', 0);
-        this.struct1.on('pointerdown', function() {
-            if (this.struct1.getData('lvl') == 0) this.struct1 = this.add.image(352, -192, 'tank');
-        }, this);
-
-
-        this.animal1 = this.add.image(-16, 304, 'build').setInteractive().setScale(0.5);
-        this.animal1.setData('lvl', 0);
-        this.animal1.on('pointerdown', function() {
-            if (this.animal1.getData('lvl') == 0) this.animal1 = this.add.image(-16, 304, 'pig');
-        }, this);*/
-
 
 
         //debug
@@ -372,7 +358,7 @@ class Europe extends Phaser.Scene {
                 bat.tag = ref.tag;
                 bat.ref = ref;
                 this.money -= ref.buildCost;
-                console.log('Upgraded !', bat);
+                console.log('Builded !', bat);
                 this.images[bat.key-1] = this.physics.add.image(bat.x, bat.y, bat.tag, bat.level-1);
             }
         }

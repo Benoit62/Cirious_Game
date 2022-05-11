@@ -432,8 +432,11 @@ include("config/configbdd.php");
                 for(let i of getByType('animal')) {
                     this.animals[i.tag] = this.add.image(35, 155 + j*35*2, i.tag+"-button").setScale(0.1).setInteractive().setVisible(false)/*.setVisible(false)*/;
                     this.animals[i.tag].on('pointerdown', function(){
-                        if(this.batOverlap.type == 'animal' && this.batOverlap.level == 0) {
+                        if(this.batOverlap.type == 'animal' && this.batOverlap.level == 0 && this.batOverlap.tag == 'build') {
                             this.europeScene.buildBat(this.batOverlap, i);
+                            for(let i of getByType('animal')) {
+                                this.animals[i.tag].setVisible(false);
+                            }
                         }
                     }, this);
                     j++;
@@ -451,7 +454,7 @@ include("config/configbdd.php");
                 // Si le level est à 0 on affiche le bouton construction
                 this.build = this.add.image(100, 90, "builder").setScale(0.1).setInteractive();
                 this.build.on('pointerdown', function(){
-                    if((this.batOverlap.type == 'animal' || this.batOverlap.type == 'struct' || this.batOverlap.type == 'field') && this.batOverlap.level == 0) {
+                    if((this.batOverlap.type == 'animal' || this.batOverlap.type == 'struct' || this.batOverlap.type == 'field') && this.batOverlap.level == 0 && this.batOverlap.tag == 'build') {
                         if(this.batOverlap.type == 'animal') {
                             for(let i of getByType('animal')) {
                                 this.animals[i.tag].setVisible(true);
@@ -480,14 +483,14 @@ include("config/configbdd.php");
             }
 
             update() {
-                if((this.batOverlap.type == 'animal' || this.batOverlap.type == 'struct') && this.batOverlap.level < this.batOverlap.maxlvl && this.batOverlap.level != 0) {
+                if((this.batOverlap.type == 'animal' || this.batOverlap.type == 'struct') && this.batOverlap.level < this.batOverlap.ref.lvlMax && this.batOverlap.level != 0) {
                     this.circleUpgrade.setVisible(true);
                 }
                 else {
                     this.circleUpgrade.setVisible(false);
                 }
 
-                if((this.batOverlap.type == 'animal' || this.batOverlap.type == 'struct' || this.batOverlap.type == 'field') && this.batOverlap.level == 0) {
+                if((this.batOverlap.type == 'animal' || this.batOverlap.type == 'struct' || this.batOverlap.type == 'field') && this.batOverlap.level == 0 && this.batOverlap.tag == 'build') {
                     this.circleBuild.setVisible(true);
                 }
                 else {
