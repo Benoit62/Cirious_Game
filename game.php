@@ -78,8 +78,15 @@ include("config/configbdd.php");
                 this.load.image("animal", "assets/menu/pet-food.png");
                 this.load.image("gestion", "assets/menu/gestion.png"); 
                 this.load.image("upgrade", "assets/menu/upgrade.png"); 
+                
+                this.load.image("cow-button", "assets/menu/cow.png"); 
+                this.load.image("pig-button", "assets/menu/pig.png"); 
+                this.load.image("sheep-button", "assets/menu/sheep.png"); 
+                this.load.image("bison-button", "assets/menu/bison.png"); 
+                this.load.image("chamel-button", "assets/menu/chameau.png"); 
+                this.load.image("renne-button", "assets/menu/rennes.png"); 
                 // Chargement des autres assets du menu
-                this.load.image("circle", "assets/menu/Circle.png"); 
+                this.load.image("circle", "assets/menu/circle.png"); 
                 this.load.image("menu", "assets/menu/menu.png"); 
             }
             create() {

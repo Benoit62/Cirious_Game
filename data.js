@@ -28,6 +28,20 @@ let data = [
         desc:'Tout est bon dans le cochon'
     },
     {
+        tag:'cow',
+        type:'animal',
+        lvlMax:3,
+        buildCost:40000,
+        upgrade1:20000,
+        upgrade2:35000,
+        upgrade3:60000,
+        money1:3,
+        money2:8,
+        money3:20,
+        name:'Vache',
+        desc:'Tout est bon dans la vache'
+    },
+    {
         tag:'labor',
         type:'field',
         lvlMax:1,
