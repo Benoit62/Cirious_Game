@@ -15,7 +15,7 @@ class Europe extends Phaser.Scene {
 
         this.images = [];
 
-        this.money = 5000000;
+        this.money = 50000;
 
         this.headerScene;
         this.menuScene;
@@ -79,7 +79,6 @@ class Europe extends Phaser.Scene {
             level:1,
             tag:'labor',
             scale:0.8,
-            money:0,
             ref:{},
             plant:false,
             seed:{},
@@ -93,13 +92,38 @@ class Europe extends Phaser.Scene {
             level:0,
             tag:'build',
             scale:0.8,
-            money:0,
             ref:{},
             plant:false,
             seed:{},
             grow:0
         });
-
+        this.data.set('bat7', {
+            key:7,
+            x:+720,
+            y:48,
+            type:'field',
+            level:0,
+            tag:'build',
+            scale:0.8,
+            ref:{},
+            plant:false,
+            seed:{},
+            grow:0
+        });
+        this.data.set('bat8', {
+            key:8,
+            x:+690,
+            y:400,
+            type:'field',
+            level:0,
+            tag:'build',
+            scale:0.6,
+            ref:{},
+            plant:false,
+            seed:{},
+            grow:0,
+            rotate:true
+        });
 
 
         // Maison/labo
@@ -109,31 +133,12 @@ class Europe extends Phaser.Scene {
             y:-416,
             type:'house',
             level:1,
-            maxlvl:3,
             tag:'house',
             scale:0.5,
-            money:0,
-            cost:200000
+            ref:{}
         });
 
-        /*
-        this.data.set('bat7', {
-            key:7,
-            x:0,
-            y:0,
-            type:'field',
-            level:0,
-            name:'build'
-        });
-        this.data.set('bat8', {
-            key:8,
-            x:0,
-            y:0,
-            type:'field',
-            level:1,
-            tag:'build'
-        });*/
-        
+       
 
 
         const farm = this.physics.add.image(0, 0, 'europe');
@@ -217,6 +222,9 @@ class Europe extends Phaser.Scene {
             if(bat.level > 0 && bat.tag != 'build') {
                 this.images.push(this.physics.add.image(bat.x, bat.y, bat.tag, bat.level-1));
                 bat.ref = getByTag(bat.tag)[0];
+                if(bat.rotate) {
+                    this.images[j].rotation = 3.141592/2;
+                }
             }
             else {
                 this.images.push(this.physics.add.image(bat.x, bat.y, 'build').setScale(bat.scale));
@@ -356,11 +364,11 @@ class Europe extends Phaser.Scene {
 
     upgradeBat(bat) {
         console.log('Upgrade batiment : ', bat)
-        if(bat.type == 'animal' || bat.type == 'struct') {
+        if(bat.type == 'animal' || bat.type == 'struct' || bat.type == 'house') {
             if(bat.level < bat.ref.lvlMax && bat.level != 0) {
-                if(this.money >= bat.ref.buildCost) {
+                if(this.money >= bat.ref.upgrade[bat.level]) {
+                    this.money-=bat.ref.upgrade[bat.level];
                     bat.level+=1;
-                    this.money-=bat.ref.buildCost;
                     console.log('Upgraded !', bat);
                     this.images[bat.key-1].setFrame(bat.level-1);
                 }
@@ -377,6 +385,9 @@ class Europe extends Phaser.Scene {
                 this.money -= ref.buildCost;
                 console.log('Builded !', bat);
                 this.images[bat.key-1] = this.physics.add.image(bat.x, bat.y, bat.tag, bat.level-1);
+                if(bat.rotate) {
+                    this.images[bat.key-1].rotation = 3.141592/2;
+                }
             }
         }
     }
@@ -401,6 +412,18 @@ class Europe extends Phaser.Scene {
                     this.images[bat.key-1].setFrame(bat.grow);
                 }
             }
+        }
+    }
+    recolte(bat) {
+        console.log('Recolte : ', bat);
+        if(bat.type == 'field' && bat.plant && bat.level == 1 && bat.tag != 'labor' && bat.grow == bat.seed.maxGrow) {
+            bat.plant = false;
+            bat.tag = 'labor';
+            bat.grow = 0;
+            this.money += bat.seed.money;
+            bat.seed = {};
+            console.log('Recolté !', bat);
+            this.images[bat.key-1].destroy();
         }
     }
 

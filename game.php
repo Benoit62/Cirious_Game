@@ -78,7 +78,7 @@ include("config/configbdd.php");
                 this.load.image("builder", "assets/menu/build.png");
                 this.load.image("planter", "assets/menu/planter.png");
                 this.load.image("recolter", "assets/menu/recolter.png");
-                this.load.image("animal", "assets/menu/pet-food.png");
+                this.load.image("feed", "assets/menu/pet-food.png");
                 this.load.image("gestion", "assets/menu/gestion.png"); 
                 this.load.image("upgrade", "assets/menu/upgrade.png"); 
                 
@@ -455,7 +455,7 @@ include("config/configbdd.php");
                 // Création des boutons Animaux
                 let j = 0;
                 for(let i of getByType('animal')) {
-                    this.animals[i.tag] = this.add.image(35, 155 + j*35*2, i.tag+"-button").setScale(0.1).setInteractive().setVisible(false)/*.setVisible(false)*/;
+                    this.animals[i.tag] = this.add.image(50 +(j%4)*65, 250, i.tag+"-button").setScale(0.1).setInteractive().setVisible(false)/*.setVisible(false)*/;
                     this.animals[i.tag].on('pointerdown', function(){
                         if(this.batOverlap.type == 'animal' && this.batOverlap.level == 0 && this.batOverlap.tag == 'build') {
                             this.europeScene.buildBat(this.batOverlap, i);
@@ -471,7 +471,7 @@ include("config/configbdd.php");
                 // Création des boutons Plantes
                 let k = 0;
                 for(let i of getByType('plant')) {
-                    this.plants[i.tag] = this.add.image(35, 155 + k*35*2, i.tag+"-button").setScale(0.1).setInteractive().setVisible(false)/*.setVisible(false)*/;
+                    this.plants[i.tag] = this.add.image(50 +(k%4)*65, 250, i.tag+"-button").setScale(0.1).setInteractive().setVisible(false)/*.setVisible(false)*/;
                     this.plants[i.tag].on('pointerdown', function(){
                         if(this.batOverlap.type == 'field' && !this.batOverlap.plant && this.batOverlap.level == 1 && this.batOverlap.tag == 'labor') {
                             this.europeScene.plant(this.batOverlap, i);
@@ -487,7 +487,7 @@ include("config/configbdd.php");
                 // Création du bouton Labourer
                 let l = 0;
                 for(let i of getByType('field')) {
-                    this.fields[i.tag] = this.add.image(35, 155 + l*35*2, i.tag+"-button").setScale(0.1).setInteractive().setVisible(false)/*.setVisible(false)*/;
+                    this.fields[i.tag] = this.add.image(50 +(l%4)*65, 250, i.tag+"-button").setScale(0.1).setInteractive().setVisible(false)/*.setVisible(false)*/;
                     this.fields[i.tag].on('pointerdown', function(){
                         if(this.batOverlap.type == 'field' && !this.batOverlap.plant && this.batOverlap.level == 0 && this.batOverlap.tag == 'build') {
                             this.europeScene.buildBat(this.batOverlap, i);
@@ -503,7 +503,7 @@ include("config/configbdd.php");
                 // Création des boutons Structures
                 let m = 0;
                 for(let i of getByType('struct')) {
-                    this.structs[i.tag] = this.add.image(35, 155 + m*35*2, i.tag+"-button").setScale(0.1).setInteractive().setVisible(false)/*.setVisible(false)*/;
+                    this.structs[i.tag] = this.add.image(50 +(m%4)*65, 250, i.tag+"-button").setScale(0.1).setInteractive().setVisible(false)/*.setVisible(false)*/;
                     this.structs[i.tag].on('pointerdown', function(){
                         if(this.batOverlap.type == 'struct' && this.batOverlap.level == 0 && this.batOverlap.tag == 'build') {
                             this.europeScene.buildBat(this.batOverlap, i);
@@ -519,7 +519,7 @@ include("config/configbdd.php");
                 // Bouton upgrade
                 this.upgrade = this.add.image(50, 120, "upgrade").setScale(0.1).setInteractive();
                 this.upgrade.on('pointerdown', function(){
-                    if((this.batOverlap.type == 'animal' || this.batOverlap.type == 'struct') && this.batOverlap.level < this.batOverlap.ref.lvlMax && this.batOverlap.level != 0) {
+                    if((this.batOverlap.type == 'animal' || this.batOverlap.type == 'struct' || this.batOverlap.type == 'house') && this.batOverlap.level < this.batOverlap.ref.lvlMax && this.batOverlap.level != 0) {
                         this.europeScene.upgradeBat(this.batOverlap);
                     }
                 }, this);
@@ -563,9 +563,7 @@ include("config/configbdd.php");
                 this.recolter = this.add.image(245, 120, "recolter").setScale(0.1).setInteractive();
                 this.recolter.on('pointerdown', function(){
                     if(this.batOverlap.type == 'field' && this.batOverlap.plant && this.batOverlap.level == 1 && this.batOverlap.tag != 'labor' && this.batOverlap.grow == this.batOverlap.seed.maxGrow) {
-                        /*for(let i of getByType('plant')) {
-                            this.plants[i.tag].setVisible(true);
-                        }*/
+                        this.europeScene.recolte(this.batOverlap);
                     }
                     
                 }, this);
@@ -573,7 +571,7 @@ include("config/configbdd.php");
 
 
                 // Bouton Nourrir
-                this.feed = this.add.image(50, 185, "recolter").setScale(0.1).setInteractive();
+                this.feed = this.add.image(50, 185, "feed").setScale(0.1).setInteractive();
                 this.feed.on('pointerdown', function(){
                     if(this.batOverlap.type == 'animal' && this.batOverlap.level > 0) {
                         /*for(let i of getByType('plant')) {
@@ -591,12 +589,12 @@ include("config/configbdd.php");
                 this.circleRecolte = this.add.image(245,120, "circle").setScale(0.1).setVisible(false);
                 this.circleFeed = this.add.image(50,185, "circle").setScale(0.1).setVisible(false);
 
-                this.text = this.add.text(5, 300, '', { lineSpacing:5 });
+                this.text = this.add.text(8, 300, '', { lineSpacing:5, wordWrap: { width: 284 } });
             }
 
             update() {
                 //Upgrade
-                if((this.batOverlap.type == 'animal' || this.batOverlap.type == 'struct') && this.batOverlap.level < this.batOverlap.ref.lvlMax && this.batOverlap.level != 0) {
+                if((this.batOverlap.type == 'animal' || this.batOverlap.type == 'struct' || this.batOverlap.type == 'house') && this.batOverlap.level < this.batOverlap.ref.lvlMax && this.batOverlap.level != 0) {
                     this.circleUpgrade.setVisible(true);
                 }
                 else {
@@ -610,6 +608,21 @@ include("config/configbdd.php");
                 else {
                     this.circleBuild.setVisible(false);
                 }
+                if(this.batOverlap.type != 'animal') {
+                    for(let i of getByType('animal')) {
+                        this.animals[i.tag].setVisible(false);
+                    }
+                }
+                if(this.batOverlap.type != 'struct') {
+                    for(let i of getByType('struct')) {
+                        this.structs[i.tag].setVisible(false);
+                    }
+                }
+                if(this.batOverlap.type != 'field') {
+                    for(let i of getByType('field')) {
+                        this.fields[i.tag].setVisible(false);
+                    }
+                }
 
                 //Planter
                 if(this.batOverlap.type == 'field' && !this.batOverlap.plant && this.batOverlap.level == 1 && this.batOverlap.tag == 'labor') {
@@ -617,6 +630,9 @@ include("config/configbdd.php");
                 }
                 else {
                     this.circlePlanter.setVisible(false);
+                    for(let i of getByType('plant')) {
+                        this.plants[i.tag].setVisible(false);
+                    }
                 }
 
                 //Recolter
@@ -661,6 +677,9 @@ include("config/configbdd.php");
                             }
                             tmpText+='\nDescription : '+this.batOverlap.seed.desc;
                         }
+                    }
+                    if(this.batOverlap.tag != 'build') {
+                        tmpText+='\nDescription : '+this.batOverlap.ref.desc;
                     }
                     this.text.setText(tmpText);
                 }
