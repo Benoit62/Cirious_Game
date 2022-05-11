@@ -549,10 +549,25 @@ include("config/configbdd.php");
                     if(this.batOverlap.ref.name) {
                         tmpText+='Name : '+this.batOverlap.ref.name;
                     }
-                    tmpText+='\nType : '+this.batOverlap.type+'\nNiveau : '+this.batOverlap.level;
-                    if(this.batOverlap.ref.money) {
+                    tmpText+='\nType : '+this.batOverlap.type;
+                    if(this.batOverlap.type != 'field') {
+                        tmpText+='\nNiveau : '+this.batOverlap.level;
+                    }
+                    if(this.batOverlap.ref.money && this.batOverlap.type != 'field') {
                         let moneyPerSec = this.batOverlap.ref.money[this.batOverlap.level] * 100
                         tmpText+='\n'+moneyPerSec+'/s';
+                    }
+                    if(this.batOverlap.type == 'field') {
+                        if(this.batOverlap.plant) {
+                            tmpText+='\nCulture : '+this.batOverlap.seed.name;
+                            if(this.batOverlap.grow < this.batOverlap.seed.maxGrow){
+                                tmpText+='\nCroissance : '+this.batOverlap.grow;
+                            }
+                            else {
+                                tmpText+='\nCroissance : Max';
+                            }
+                            tmpText+='\nDescription : '+this.batOverlap.seed.desc;
+                        }
                     }
                     this.text.setText(tmpText);
                 }
