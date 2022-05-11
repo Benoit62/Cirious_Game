@@ -77,8 +77,9 @@ include("config/configbdd.php");
                 this.load.image("animal", "assets/Menu/pet-food.png");
                 this.load.image("gestion", "assets/Menu/gestion.png"); 
                 this.load.image("upgrade", "assets/Menu/upgrade.png"); 
-                // Chargement du Cercle autour des icons
+                // Chargement des autres assets du menu
                 this.load.image("circle", "assets/Menu/Circle.png"); 
+                this.load.image("menu", "assets/Menu/menu.png"); 
             }
             create() {
                 var progressBar = this.add.graphics();
