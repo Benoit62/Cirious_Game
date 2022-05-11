@@ -302,25 +302,32 @@ class Europe extends Phaser.Scene {
         let moneyPerTick = 0;
         for(let i in this.data.values) {
             let bat = this.data.values[i];
-            if(bat.level > 0 && bat.tag != 'build') {
-                moneyPerTick+=0;
-                //console.log(bat.ref.money);
+            if(bat.level > 0 && bat.tag != 'build' && bat.type != 'labor') {
+                if(typeof bat.ref.money[bat.level] == "number") {
+                    moneyPerTick+=bat.ref.money[bat.level];
+                }
             }
         }
         this.money+=moneyPerTick;
         this.registry.set('money', this.money);
         this.registry.set('moneyPerTick', moneyPerTick*100);
+
     }
 
+    // Calcul de l'argent
     calcul() {
-        // Calcul de l'argent
+        let moneyPerTick = 0;
         for(let i in this.data.values) {
             let bat = this.data.values[i];
-            if(bat.level > 0 && bat.tag != 'build') {
-                this.money+=bat.ref.money.lvl+bat.level;
+            if(bat.level > 0 && bat.tag != 'build' && bat.type != 'labor') {
+                if(typeof bat.ref.money[bat.level] == "number") {
+                    moneyPerTick+=bat.ref.money[bat.level];
+                }
             }
         }
+        this.money+=moneyPerTick;
         this.registry.set('money', this.money);
+        this.registry.set('moneyPerTick', moneyPerTick*100);
     }
 
     overlapBat(player, obj) {
