@@ -336,8 +336,8 @@ include("config/configbdd.php");
 
                 this.add.image(0, 0, 'header');
                 
-                this.turnOff = this.add.image(window.innerWidth-25, 25, 'off').setInteractive();
-                this.globe = this.add.image(window.innerWidth-55, 25, 'globe').setInteractive();
+                this.turnOff = this.add.image(window.innerWidth-25, 25, 'off').setInteractive().setScale(0.08);
+                this.globe = this.add.image(window.innerWidth-75, 25, 'globe').setInteractive().setScale(0.08);
 
                 this.turnOff.on('pointerup', function() {
                     window.location.href = 'profil.php';
@@ -346,6 +346,7 @@ include("config/configbdd.php");
                 this.globe.on('pointerup', function() {
                     this.scene.sleep('europeScene');
                     this.scene.sleep('headerScene');
+                    this.scene.sleep('menuScene');
                     if(this.scene.isSleeping('mapScene')) {
                         this.scene.wake('mapScene');
                     }
@@ -505,8 +506,18 @@ include("config/configbdd.php");
                 }
 
 
+                
                 if(this.batOverlap.key != 0) {
-                    this.text.setText('Type : '+this.batOverlap.type+'\nName : '+this.batOverlap.name+'\nNiveau : '+this.batOverlap.level+'\n');
+                    let tmpText = '';
+                    if(this.batOverlap.ref.name) {
+                        tmpText+='Name : '+this.batOverlap.ref.name;
+                    }
+                    tmpText+='\nType : '+this.batOverlap.type+'\nNiveau : '+this.batOverlap.level;
+                    if(this.batOverlap.ref.money) {
+                        let moneyPerSec = this.batOverlap.ref.money[this.batOverlap.level] * 100
+                        tmpText+='\n'+moneyPerSec+'/s';
+                    }
+                    this.text.setText(tmpText);
                 }
                 
             }
