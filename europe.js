@@ -21,6 +21,8 @@ class Europe extends Phaser.Scene {
         this.menuScene;
 
         this.timedEvent;
+
+        this.timer = 0;
     }
 
     create() {
@@ -80,7 +82,8 @@ class Europe extends Phaser.Scene {
             money:0,
             ref:{},
             plant:false,
-            seed:{}
+            seed:{},
+            grow:0
         });
         this.data.set('bat6', {
             key:6,
@@ -93,7 +96,8 @@ class Europe extends Phaser.Scene {
             money:0,
             ref:{},
             plant:false,
-            seed:{}
+            seed:{},
+            grow:0
         });
 
 
@@ -302,7 +306,7 @@ class Europe extends Phaser.Scene {
         let moneyPerTick = 0;
         for(let i in this.data.values) {
             let bat = this.data.values[i];
-            if(bat.level > 0 && bat.tag != 'build' && bat.type != 'labor') {
+            if(bat.level > 0 && bat.tag != 'build' && bat.type != 'field') {
                 if(typeof bat.ref.money[bat.level] == "number") {
                     moneyPerTick+=bat.ref.money[bat.level];
                 }
@@ -312,6 +316,12 @@ class Europe extends Phaser.Scene {
         this.registry.set('money', this.money);
         this.registry.set('moneyPerTick', moneyPerTick*100);
 
+
+        this.timer++;
+        if(this.timer == 500){
+            this.grow();
+            this.timer = 0 - Phaser.Math.Between(0, 500);
+        }
     }
 
     // Calcul de l'argent
@@ -378,7 +388,18 @@ class Europe extends Phaser.Scene {
                 bat.tag = seed.tag;
                 bat.seed = seed;
                 console.log('Planted !', bat);
-                this.images[bat.key-1] = this.physics.add.image(bat.x, bat.y, seed.tag);
+                this.images[bat.key-1] = this.physics.add.image(bat.x, bat.y, seed.tag, bat.grow);
+            }
+        }
+    }
+    grow() {
+        for(let i in this.data.values) {
+            let bat = this.data.values[i];
+            if(bat.level == 1 && bat.type == 'field' && bat.tag != 'labor' && bat.plant) {
+                if(bat.grow < bat.seed.maxGrow) {
+                    bat.grow++;
+                    this.images[bat.key-1].setFrame(bat.grow);
+                }
             }
         }
     }

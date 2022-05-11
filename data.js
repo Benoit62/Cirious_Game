@@ -45,7 +45,6 @@ let data = [
         lvlMax:1,
         buildCost:10000,
         upgrade:[0,0,0,0],
-        money:[0, 0],
         name:'Champs',
         desc:'Savez-vous plantez des choux, à la mode, à la mode. Savez-voud planter des choux, à la mode de chez-nous'
     },
@@ -64,6 +63,7 @@ let data = [
         type:'plant',
         buildPlant:5000,
         money:10000,
+        maxGrow:3,
         name:'Blé',
         desc:'Miam'
     },
@@ -73,6 +73,7 @@ let data = [
         type:'plant',
         buildPlant:5000,
         money:10000,
+        maxGrow:3,
         name:'Carrotes',
         desc:'Miam'
     },
@@ -82,6 +83,7 @@ let data = [
         type:'plant',
         buildPlant:5000,
         money:10000,
+        maxGrow:3,
         name:'Maïs',
         desc:'Miam'
     },
