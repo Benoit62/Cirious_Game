@@ -10,6 +10,16 @@ let data = [
         desc:'Le tank pemret de recuperer et stocker de l\'eau qui pourra être utilisé pour les cultures'
     },
     {
+        tag:'solaire',
+        type:'struct',
+        lvlMax:3,
+        buildCost:80000,
+        upgrade:[0,15000,30000,50000],
+        money:[0,5,15,30],
+        name:'Panneau solaire',
+        desc:'Le panneau solaire permet de produire d\'électricité'
+    },
+    {
         tag:'pig',
         type:'animal',
         lvlMax:3,

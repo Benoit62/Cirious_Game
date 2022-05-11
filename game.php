@@ -57,6 +57,7 @@ include("config/configbdd.php");
                 this.load.spritesheet('cow', 'assets/cow_spritesheet.png', { frameWidth: 416, frameHeight: 416 });
                 this.load.spritesheet('sheep', 'assets/sheep_spritesheet.png', { frameWidth: 416, frameHeight: 416 });
                 this.load.spritesheet('tank', 'assets/tank.png', { frameWidth: 192, frameHeight: 192 });
+                this.load.spritesheet('solaire', 'assets/solaire.png', { frameWidth: 192, frameHeight: 192 });
                 this.load.spritesheet('house', 'assets/house.png', { frameWidth: 384, frameHeight: 256 });
                 
 
@@ -89,6 +90,8 @@ include("config/configbdd.php");
                 this.load.image("renne-button", "assets/menu/rennes.png"); 
 
                 this.load.image("labor-button", "assets/menu/labourer.png"); 
+                this.load.image("tank-button", "assets/menu/tank.png"); 
+                this.load.image("solaire-button", "assets/menu/solaire.png"); 
                 
                 this.load.image("carrot-button", "assets/menu/carrot.png"); 
                 this.load.image("ble-button", "assets/menu/ble.png"); 
@@ -406,17 +409,17 @@ include("config/configbdd.php");
                 super({ key: 'menuScene' });
                 this.europeScene;
 
-                this.search;
+                this.upgrade;
                 this.build;
                 this.planter;
                 this.recolter;
-                this.animal;
-                this.tank;
-                this.upgrade;
+                this.feed;
+                this.search;
 
                 this.animals = [];
                 this.plants = [];
                 this.fields = [];
+                this.structs = [];
 
                 this.circleBuild;
                 this.circlePlanter;
@@ -444,9 +447,9 @@ include("config/configbdd.php");
                 //this.scene.setVisible(false);
                 this.europeScene = this.scene.get('europeScene');
 
-                this.add.image(100, 1548, 'menu');
+                this.add.image(144, 1548, 'menu');
 
-                // Bouton (512x512) en scale 0.1 (51.2x51.2)
+                // Bouton (512x512) en scale 0.1 (51.2x51.2) + 65 a chaque fois
 
 
                 // Création des boutons Animaux
@@ -495,9 +498,26 @@ include("config/configbdd.php");
                     }, this);
                     l++;
                 }
+
+
+                // Création des boutons Structures
+                let m = 0;
+                for(let i of getByType('struct')) {
+                    this.structs[i.tag] = this.add.image(35, 155 + m*35*2, i.tag+"-button").setScale(0.1).setInteractive().setVisible(false)/*.setVisible(false)*/;
+                    this.structs[i.tag].on('pointerdown', function(){
+                        if(this.batOverlap.type == 'struct' && this.batOverlap.level == 0 && this.batOverlap.tag == 'build') {
+                            this.europeScene.buildBat(this.batOverlap, i);
+                            for(let i of getByType('struct')) {
+                                this.structs[i.tag].setVisible(false);
+                            }
+                        }
+                    }, this);
+                    m++;
+                }
+
                  
                 // Bouton upgrade
-                this.upgrade = this.add.image(35, 90, "upgrade").setScale(0.1).setInteractive();
+                this.upgrade = this.add.image(50, 120, "upgrade").setScale(0.1).setInteractive();
                 this.upgrade.on('pointerdown', function(){
                     if((this.batOverlap.type == 'animal' || this.batOverlap.type == 'struct') && this.batOverlap.level < this.batOverlap.ref.lvlMax && this.batOverlap.level != 0) {
                         this.europeScene.upgradeBat(this.batOverlap);
@@ -506,7 +526,7 @@ include("config/configbdd.php");
 
                 
                 // Bouton construction
-                this.build = this.add.image(100, 90, "builder").setScale(0.1).setInteractive();
+                this.build = this.add.image(115, 120, "builder").setScale(0.1).setInteractive();
                 this.build.on('pointerdown', function(){
                     if((this.batOverlap.type == 'animal' || this.batOverlap.type == 'struct' || this.batOverlap.type == 'field') && this.batOverlap.level == 0 && this.batOverlap.tag == 'build') {
                         if(this.batOverlap.type == 'animal') {
@@ -519,12 +539,17 @@ include("config/configbdd.php");
                                 this.fields[i.tag].setVisible(true);
                             }
                         }
+                        if(this.batOverlap.type == 'struct') {
+                            for(let i of getByType('struct')) {
+                                this.structs[i.tag].setVisible(true);
+                            }
+                        }
                     }
                     
                 }, this);
 
                 // Bouton planter
-                this.planter = this.add.image(165, 90, "planter").setScale(0.1).setInteractive();
+                this.planter = this.add.image(180, 120, "planter").setScale(0.1).setInteractive();
                 this.planter.on('pointerdown', function(){
                     if(this.batOverlap.type == 'field' && !this.batOverlap.plant && this.batOverlap.level == 1 && this.batOverlap.tag == 'labor') {
                         for(let i of getByType('plant')) {
@@ -533,17 +558,44 @@ include("config/configbdd.php");
                     }
                     
                 }, this);
+
+                // Bouton recolter
+                this.recolter = this.add.image(245, 120, "recolter").setScale(0.1).setInteractive();
+                this.recolter.on('pointerdown', function(){
+                    if(this.batOverlap.type == 'field' && this.batOverlap.plant && this.batOverlap.level == 1 && this.batOverlap.tag != 'labor' && this.batOverlap.grow == this.batOverlap.seed.maxGrow) {
+                        /*for(let i of getByType('plant')) {
+                            this.plants[i.tag].setVisible(true);
+                        }*/
+                    }
+                    
+                }, this);
+
+
+
+                // Bouton Nourrir
+                this.feed = this.add.image(50, 185, "recolter").setScale(0.1).setInteractive();
+                this.feed.on('pointerdown', function(){
+                    if(this.batOverlap.type == 'animal' && this.batOverlap.level > 0) {
+                        /*for(let i of getByType('plant')) {
+                            this.plants[i.tag].setVisible(true);
+                        }*/
+                    }
+                    
+                }, this);
                 
 
                 
-                this.circleUpgrade = this.add.image(35,90, "circle").setScale(0.1).setVisible(false);
-                this.circleBuild = this.add.image(100,90, "circle").setScale(0.1).setVisible(false);
-                this.circlePlanter = this.add.image(165,90, "circle").setScale(0.1).setVisible(false);
+                this.circleUpgrade = this.add.image(50,120, "circle").setScale(0.1).setVisible(false);
+                this.circleBuild = this.add.image(115,120, "circle").setScale(0.1).setVisible(false);
+                this.circlePlanter = this.add.image(180,120, "circle").setScale(0.1).setVisible(false);
+                this.circleRecolte = this.add.image(245,120, "circle").setScale(0.1).setVisible(false);
+                this.circleFeed = this.add.image(50,185, "circle").setScale(0.1).setVisible(false);
 
                 this.text = this.add.text(5, 300, '', { lineSpacing:5 });
             }
 
             update() {
+                //Upgrade
                 if((this.batOverlap.type == 'animal' || this.batOverlap.type == 'struct') && this.batOverlap.level < this.batOverlap.ref.lvlMax && this.batOverlap.level != 0) {
                     this.circleUpgrade.setVisible(true);
                 }
@@ -551,6 +603,7 @@ include("config/configbdd.php");
                     this.circleUpgrade.setVisible(false);
                 }
 
+                //Build
                 if((this.batOverlap.type == 'animal' || this.batOverlap.type == 'struct' || this.batOverlap.type == 'field') && this.batOverlap.level == 0 && this.batOverlap.tag == 'build') {
                     this.circleBuild.setVisible(true);
                 }
@@ -558,11 +611,28 @@ include("config/configbdd.php");
                     this.circleBuild.setVisible(false);
                 }
 
+                //Planter
                 if(this.batOverlap.type == 'field' && !this.batOverlap.plant && this.batOverlap.level == 1 && this.batOverlap.tag == 'labor') {
                     this.circlePlanter.setVisible(true);
                 }
                 else {
                     this.circlePlanter.setVisible(false);
+                }
+
+                //Recolter
+                if(this.batOverlap.type == 'field' && this.batOverlap.plant && this.batOverlap.level == 1 && this.batOverlap.tag != 'labor' && this.batOverlap.grow == this.batOverlap.seed.maxGrow) {
+                    this.circleRecolte.setVisible(true);
+                }
+                else {
+                    this.circleRecolte.setVisible(false);
+                }
+
+                //Nourrir
+                if(this.batOverlap.type == 'animal' && this.batOverlap.level > 0) {
+                    this.circleFeed.setVisible(true);
+                }
+                else {
+                    this.circleFeed.setVisible(false);
                 }
 
 
