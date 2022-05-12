@@ -79,7 +79,6 @@ include("config/configbdd.php");
                 this.load.image("planter", "assets/menu/planter.png");
                 this.load.image("recolter", "assets/menu/recolter.png");
                 this.load.image("feed", "assets/menu/pet-food.png");
-                this.load.image("gestion", "assets/menu/gestion.png"); 
                 this.load.image("upgrade", "assets/menu/upgrade.png"); 
                 
                 this.load.image("cow-button", "assets/menu/cow.png"); 
@@ -204,6 +203,8 @@ include("config/configbdd.php");
                 Phaser.Display.Align.In.Center(txt, this.add.zone(window.innerWidth / 2, window.innerHeight / 2, window.innerWidth, window.innerHeight));
 
                 this.input.once('pointerdown', this.start, this);
+
+                console.log('Scale width', this.width, 'Scale height', this.height, 'Window height', window.innerHeight, 'Window width', window.innerWidth);
             }
 
             start() {
@@ -375,9 +376,9 @@ include("config/configbdd.php");
                     }
                 }, this);
 
-                this.moneyText = this.add.text(5, 20, 'Monitoring Registry');
-                this.moneyPerTickText = this.add.text(80, 20, 'Monitoring Registry');
-                this.batOverlap = this.add.text(200, 20, 'Checking overlap');
+                this.moneyText = this.add.text(310, 20, 'Monitoring Registry');
+                this.moneyPerTickText = this.add.text(400, 20, 'Monitoring Registry');
+                this.batOverlap = this.add.text(500, 20, 'Checking overlap');
 
                 //  Check the Registry and hit our callback every time the 'money' value is updated
                 this.registry.events.on('changedata', function(){
@@ -447,15 +448,16 @@ include("config/configbdd.php");
                 //this.scene.setVisible(false);
                 this.europeScene = this.scene.get('europeScene');
 
-                this.add.image(144, 1548, 'menu');
+                this.add.image(144, 1474, 'menu');
 
                 // Bouton (512x512) en scale 0.1 (51.2x51.2) + 65 a chaque fois
 
-
+                let compt = 0;
                 // Création des boutons Animaux
                 let j = 0;
                 for(let i of getByType('animal')) {
-                    this.animals[i.tag] = this.add.image(50 +(j%4)*65, 250, i.tag+"-button").setScale(0.1).setInteractive().setVisible(false)/*.setVisible(false)*/;
+                    if(j%4==0)compt++;
+                    this.animals[i.tag] = this.add.image(50 +(j%4)*65, 250 + 65*compt, i.tag+"-button").setScale(0.1).setInteractive().setVisible(false)/*.setVisible(false)*/;
                     this.animals[i.tag].on('pointerdown', function(){
                         if(this.batOverlap.type == 'animal' && this.batOverlap.level == 0 && this.batOverlap.tag == 'build') {
                             this.europeScene.buildBat(this.batOverlap, i);
@@ -469,9 +471,11 @@ include("config/configbdd.php");
 
 
                 // Création des boutons Plantes
+                compt=0;
                 let k = 0;
                 for(let i of getByType('plant')) {
-                    this.plants[i.tag] = this.add.image(50 +(k%4)*65, 250, i.tag+"-button").setScale(0.1).setInteractive().setVisible(false)/*.setVisible(false)*/;
+                    if(j%4==0)compt++;
+                    this.plants[i.tag] = this.add.image(50 +(k%4)*65, 250 + 65*compt, i.tag+"-button").setScale(0.1).setInteractive().setVisible(false)/*.setVisible(false)*/;
                     this.plants[i.tag].on('pointerdown', function(){
                         if(this.batOverlap.type == 'field' && !this.batOverlap.plant && this.batOverlap.level == 1 && this.batOverlap.tag == 'labor') {
                             this.europeScene.plant(this.batOverlap, i);
@@ -485,9 +489,11 @@ include("config/configbdd.php");
 
 
                 // Création du bouton Labourer
+                compt=0;
                 let l = 0;
                 for(let i of getByType('field')) {
-                    this.fields[i.tag] = this.add.image(50 +(l%4)*65, 250, i.tag+"-button").setScale(0.1).setInteractive().setVisible(false)/*.setVisible(false)*/;
+                    if(j%4==0)compt++;
+                    this.fields[i.tag] = this.add.image(50 +(l%4)*65, 250 + 65*compt, i.tag+"-button").setScale(0.1).setInteractive().setVisible(false)/*.setVisible(false)*/;
                     this.fields[i.tag].on('pointerdown', function(){
                         if(this.batOverlap.type == 'field' && !this.batOverlap.plant && this.batOverlap.level == 0 && this.batOverlap.tag == 'build') {
                             this.europeScene.buildBat(this.batOverlap, i);
@@ -501,9 +507,11 @@ include("config/configbdd.php");
 
 
                 // Création des boutons Structures
+                compt=0;
                 let m = 0;
                 for(let i of getByType('struct')) {
-                    this.structs[i.tag] = this.add.image(50 +(m%4)*65, 250, i.tag+"-button").setScale(0.1).setInteractive().setVisible(false)/*.setVisible(false)*/;
+                    if(j%4==0)compt++;
+                    this.structs[i.tag] = this.add.image(50 +(m%4)*65, 250 + 65*compt, i.tag+"-button").setScale(0.1).setInteractive().setVisible(false)/*.setVisible(false)*/;
                     this.structs[i.tag].on('pointerdown', function(){
                         if(this.batOverlap.type == 'struct' && this.batOverlap.level == 0 && this.batOverlap.tag == 'build') {
                             this.europeScene.buildBat(this.batOverlap, i);
@@ -519,6 +527,11 @@ include("config/configbdd.php");
                 // Bouton upgrade
                 this.upgrade = this.add.image(50, 120, "upgrade").setScale(0.1).setInteractive();
                 this.upgrade.on('pointerdown', function(){
+                    if((this.batOverlap.type == 'animal' || this.batOverlap.type == 'struct' || this.batOverlap.type == 'house') && this.batOverlap.level < this.batOverlap.ref.lvlMax && this.batOverlap.level != 0) {
+                        this.europeScene.upgradeBat(this.batOverlap);
+                    }
+                }, this);
+                this.input.keyboard.on('keydown_A', function(){
                     if((this.batOverlap.type == 'animal' || this.batOverlap.type == 'struct' || this.batOverlap.type == 'house') && this.batOverlap.level < this.batOverlap.ref.lvlMax && this.batOverlap.level != 0) {
                         this.europeScene.upgradeBat(this.batOverlap);
                     }
@@ -566,6 +579,11 @@ include("config/configbdd.php");
                         this.europeScene.recolte(this.batOverlap);
                     }
                     
+                }, this);
+                this.input.keyboard.on('keydown_Z', function(){
+                    if(this.batOverlap.type == 'field' && this.batOverlap.plant && this.batOverlap.level == 1 && this.batOverlap.tag != 'labor' && this.batOverlap.grow == this.batOverlap.seed.maxGrow) {
+                        this.europeScene.recolte(this.batOverlap);
+                    }
                 }, this);
 
 
@@ -664,7 +682,7 @@ include("config/configbdd.php");
                     }
                     if(this.batOverlap.ref.money && this.batOverlap.type != 'field') {
                         let moneyPerSec = this.batOverlap.ref.money[this.batOverlap.level] * 100
-                        tmpText+='\n'+moneyPerSec+'/s';
+                        tmpText+='\nGain'+moneyPerSec+'/s';
                     }
                     if(this.batOverlap.type == 'field') {
                         if(this.batOverlap.plant) {

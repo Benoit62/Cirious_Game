@@ -242,9 +242,9 @@ class Europe extends Phaser.Scene {
             }
         });*/
         //polygone des hitboxs
-        var data = [-335, -530, -960, -530, -960, 540, -390, 540, -390, 470, -330, 470, -330, 400, -270, 400, -270, 140, -320, 125, -540, 125, -540, 300, -640, 390, -680, 390, -700, 430, -780, 430, -790, 460, -840, 460, -860, 490, -960, 490, -960, -80, -620, -80, -560, 5, -515, 20, -370, 20, -370, -50, -430, -100, -430, -385, -590, -385, -590, -210, -620, -210, -620, -80, -960, -80, -960, -530, -560, -530, -560, -490, -335, -490, -335, -530];
+        var dataRiv = [window.innerWidth, -530, -325, -530, -960, -530, -960, 540, -390, 540, -390, 470, -330, 470, -330, 400, -270, 400, -270, 140, -320, 125, -540, 125, -540, 300, -640, 390, -680, 390, -700, 430, -780, 430, -790, 460, -840, 460, -860, 490, -960, 490, -960, -80, -620, -80, -560, 5, -515, 20, -370, 20, -370, -50, -430, -100, -430, -385, -590, -385, -590, -210, -620, -210, -620, -80, -960, -80, -960, -540, -560, -540, -560, -490, -335, -490, -325, -540, window.innerWidth, -540, window.innerWidth, -530];
         // The boundary
-        this.Bounds = new Phaser.Geom.Polygon(data);
+        this.Bounds = new Phaser.Geom.Polygon(dataRiv);
 
         // Will represent the player body
         this.playerRect = new Phaser.Geom.Rectangle();
@@ -356,7 +356,7 @@ class Europe extends Phaser.Scene {
                 returnBat = bat;
             }
         }
-        this.registry.set('bat', 'x : '+returnBat.x+', y : '+returnBat.y+' Type : '+returnBat.type+' Tag : '+returnBat.tag+' Level : '+returnBat.level);
+        this.registry.set('bat', 'x : '+returnBat.x+', y : '+returnBat.y);
         
         this.menuScene.getBatOverlap(returnBat);
     }
