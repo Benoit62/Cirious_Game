@@ -454,6 +454,10 @@ include("config/configbdd.php");
 
                 this.add.image(144, 1474, 'menu');
 
+                this.textBat = this.add.text(8, 350, '', { lineSpacing:7, wordWrap: { width: 284 } });
+
+                this.textInfo = this.add.text(8, 260, '', { lineSpacing:7, wordWrap: { width: 284 }, fontSize:15 });
+
                 // Bouton (512x512) en scale 0.1 (51.2x51.2) + 55 a chaque fois
                 // Bouton (512x512) en scale 0.08 (40.96x40.96) + 45 a chaque fois
 
@@ -488,6 +492,12 @@ include("config/configbdd.php");
                                 this.plants[i.tag].setVisible(false);
                             }
                         }
+                    }, this);
+                    this.plants[i.tag].on('pointermove', function(){
+                        this.textInfo.setText('Culture : '+i.name+'\nPrix : '+i.buildPlant);
+                    }, this);
+                    this.plants[i.tag].on('pointerout', function(){
+                        this.textInfo.setText('');
                     }, this);
                     k++;
                     if(k%5==0)compt++;
@@ -608,13 +618,12 @@ include("config/configbdd.php");
                 
 
                 
-                this.circleUpgrade = this.add.image(50,40, "circle").setScale(0.1).setVisible(false);
-                this.circleBuild = this.add.image(115,40, "circle").setScale(0.1).setVisible(false);
-                this.circlePlanter = this.add.image(180,40, "circle").setScale(0.1).setVisible(false);
-                this.circleRecolte = this.add.image(245,40, "circle").setScale(0.1).setVisible(false);
-                this.circleFeed = this.add.image(50,100, "circle").setScale(0.1).setVisible(false);
+                this.circleUpgrade = this.add.image(this.upgrade.x, this.upgrade.y, "circle").setScale(0.1).setVisible(false);
+                this.circleBuild = this.add.image(this.build.x, this.build.y, "circle").setScale(0.1).setVisible(false);
+                this.circlePlanter = this.add.image(this.planter.x, this.planter.y, "circle").setScale(0.1).setVisible(false);
+                this.circleRecolte = this.add.image(this.recolter.x, this.recolter.y, "circle").setScale(0.1).setVisible(false);
+                this.circleFeed = this.add.image(this.feed.x, this.feed.y, "circle").setScale(0.1).setVisible(false);
 
-                this.text = this.add.text(8, 350, '', { lineSpacing:7, wordWrap: { width: 284 } });
             }
 
             update() {
@@ -706,7 +715,7 @@ include("config/configbdd.php");
                     if(this.batOverlap.tag != 'build') {
                         tmpText+='\nDescription : '+this.batOverlap.ref.desc;
                     }
-                    this.text.setText(tmpText);
+                    this.textBat.setText(tmpText);
                 }
                 
             }
@@ -721,7 +730,7 @@ include("config/configbdd.php");
             type: Phaser.AUTO,
             width: window.innerWidth,
             height: window.innerHeight,
-            backgroundColor: '#000000',
+            backgroundColor: '#70402a',
             parent: 'phaser-example',
             physics: {
                 default: 'arcade',

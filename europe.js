@@ -100,11 +100,11 @@ class Europe extends Phaser.Scene {
         });
         this.data.set('bat7', {
             key:7,
-            x:+720,
-            y:48,
+            x:+784,
+            y:112,
             type:'field',
-            level:0,
-            tag:'build',
+            level:1,
+            tag:'water',
             scale:0.8,
             ref:{},
             plant:false,
@@ -113,12 +113,12 @@ class Europe extends Phaser.Scene {
         });
         this.data.set('bat8', {
             key:8,
-            x:+690,
-            y:400,
+            x:+430,
+            y:+304,
             type:'field',
             level:0,
             tag:'build',
-            scale:0.6,
+            scale:0.8,
             ref:{},
             plant:false,
             seed:{},
@@ -303,26 +303,8 @@ class Europe extends Phaser.Scene {
         // Draw the polygons
         //debug
         /*
-        this.debug
-            .clear()
-            .strokePoints(this.Bounds.points)
-            .strokeRectShape(this.playerRect);*/
+        this.debug.clear().strokePoints(this.Bounds.points).strokeRectShape(this.playerRect);*/
 
-
-
-        // Calcul de l'argent
-        /*let moneyPerTick = 0;
-        for(let i in this.data.values) {
-            let bat = this.data.values[i];
-            if(bat.level > 0 && bat.tag != 'build' && bat.type != 'field') {
-                if(typeof bat.ref.money[bat.level] == "number") {
-                    moneyPerTick+=bat.ref.money[bat.level];
-                }
-            }
-        }
-        this.money+=moneyPerTick;
-        this.registry.set('money', this.money);
-        this.registry.set('moneyPerTick', moneyPerTick*100);*/
 
 
         this.timerGrowth++;
