@@ -61,6 +61,7 @@ include("config/configbdd.php");
 
 
                 this.load.image('build', 'assets/build.png');
+                this.load.image('error', 'assets/error.png');
                 
                 // Batiments ferme
                 this.load.spritesheet('pig', 'assets/pig_spritesheet.png', { frameWidth: 416, frameHeight: 416 });
@@ -557,7 +558,9 @@ include("config/configbdd.php");
                 };
 
 
-                this.text;
+                this.textBat;
+                this.textInfo;
+                this.cardInfo;
             }
 
             create ()
@@ -569,8 +572,9 @@ include("config/configbdd.php");
                 this.add.image(150, 1500, 'menu');
 
                 this.textBat = this.add.text(8, 350, '', { lineSpacing:7, wordWrap: { width: 284 } });
-
-                this.textInfo = this.add.text(8, 260, '', { lineSpacing:7, wordWrap: { width: 284 }, fontSize:15 });
+                
+                this.cardInfo = this.add.image(150, 290, 'card').setScale(0.35).setVisible(false);
+                this.textInfo = this.add.text(8, 260, '', { lineSpacing:7, wordWrap: { width: 284 }, fontSize:15, color:'#000000' });
 
                 // Bouton (512x512) en scale 0.1 (51.2x51.2) + 55 a chaque fois
                 // Bouton (512x512) en scale 0.08 (40.96x40.96) + 45 a chaque fois
@@ -589,9 +593,11 @@ include("config/configbdd.php");
                         }
                     }, this);
                     this.animals[i.tag].on('pointermove', function(){
+                        this.cardInfo.setVisible(true);
                         this.textInfo.setText('Animal : '+i.name+'\nPrix : '+i.buildCost);
                     }, this);
                     this.animals[i.tag].on('pointerout', function(){
+                        this.cardInfo.setVisible(false);
                         this.textInfo.setText('');
                     }, this);
                     j++;
@@ -614,9 +620,11 @@ include("config/configbdd.php");
                         }
                     }, this);
                     this.plants[i.tag].on('pointermove', function(){
+                        this.cardInfo.setVisible(true);
                         this.textInfo.setText('Culture : '+i.name+'\nPrix : '+i.costPlant);
                     }, this);
                     this.plants[i.tag].on('pointerout', function(){
+                        this.cardInfo.setVisible(false);
                         this.textInfo.setText('');
                     }, this);
                     k++;
@@ -639,9 +647,11 @@ include("config/configbdd.php");
                         }
                     }, this);
                     this.fields[i.tag].on('pointermove', function(){
+                        this.cardInfo.setVisible(true);
                         this.textInfo.setText('Sol : '+i.name+'\nPrix : '+i.buildCost);
                     }, this);
                     this.fields[i.tag].on('pointerout', function(){
+                        this.cardInfo.setVisible(false);
                         this.textInfo.setText('');
                     }, this);
                     l++;
@@ -663,9 +673,11 @@ include("config/configbdd.php");
                         }
                     }, this);
                     this.structs[i.tag].on('pointermove', function(){
+                        this.cardInfo.setVisible(true);
                         this.textInfo.setText('Batiment : '+i.name+'\nPrix : '+i.buildCost);
                     }, this);
                     this.structs[i.tag].on('pointerout', function(){
+                        this.cardInfo.setVisible(false);
                         this.textInfo.setText('');
                     }, this);
                     m++;
@@ -856,8 +868,17 @@ include("config/configbdd.php");
                 this.batOverlap = bat;
             }
 
-            errorText(text) {
-
+            errorText(errorTxt) {
+                let container = this.add.image(0, 0, 'error');
+                let text = this.add.text(602, 572, errorTxt, { fontFamily: 'Arial', fontSize: 20, color: '#000000', wordWrap: { width: 270 }, align: 'center' });
+                Phaser.Display.Align.In.Center(text, this.add.zone(window.innerWidth/2, window.innerHeight/2, window.innerWidth, window.innerHeight));
+                Phaser.Display.Align.In.Center(container, this.add.zone(window.innerWidth/2, window.innerHeight/2, window.innerWidth, window.innerHeight));
+                text.setY(text.y + 100)
+                setTimeout(() => {
+                    text.destroy();
+                    container.destroy();
+                }, 2000);
+                console.log('Not unlocked')
             }
 
         }
@@ -875,6 +896,13 @@ include("config/configbdd.php");
         };
 
         let game = new Phaser.Game(config);
+
+        
+        window.addEventListener('resize', ()=>{
+            game.config.width = window.innerWidth;
+            game.config.height = window.innerHeight;
+            console.log(game.config.width, game.config.height);
+        }, false)
     </script>
 </body>
 

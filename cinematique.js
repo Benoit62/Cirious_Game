@@ -13,6 +13,8 @@ class Cinematique1 extends Phaser.Scene {
 
     create() {
         this.background = this.add.image(window.innerWidth / 2, window.innerHeight / 2 + 100, 'bg')
+        
+        Phaser.Display.Align.In.Center(this.background, this.add.zone(window.innerWidth/2, window.innerHeight/2, window.innerWidth, window.innerHeight));
 
         this.background.displayWidth = this.sys.canvas.width;
         this.background.displayHeight = this.sys.canvas.height;
@@ -59,6 +61,7 @@ class Cinematique1 extends Phaser.Scene {
             this.walkE = false;
             var dialBox = this.add.graphics();
             dialBox.fillRect(0, 0, window.innerWidth, 100);
+            dialBox.fillStyle(0x70402a, 1);
             var content = [
                 "Salutation, je suis Qu Dongyu, directeur générale de de L'Organisation des Nations unies pour l’alimentation et l’agriculture",
                 "(ONUAA), et je suis à la recherche du meilleur agriculteur du milieu ",
@@ -243,6 +246,7 @@ class Cinematique2 extends Phaser.Scene {
             this.Mathieu = this.add.sprite(320, 500, 'sellier', 3);
             var dialBox = this.add.graphics();
             dialBox.fillRect(0, 0, window.innerWidth, 100);
+            dialBox.fillStyle(0x70402a, 1);
             var content = [
                 "Salutation, je suis Qu Dongyu, directeur générale de de L'Organisation des Nations unies pour l’alimentation et l’agriculture",
                 "(ONUAA), et je suis à la recherche du meilleur agriculteur du milieu ",

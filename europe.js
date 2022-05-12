@@ -369,6 +369,10 @@ class Europe extends Phaser.Scene {
                     console.log('Upgraded !', bat);
                     this.images[bat.key-1].setFrame(bat.level-1);
                 }
+                else {
+                    console.log('Not enought money')
+                    this.menuScene.errorText('Not enought money');
+                }
             }
         }
     }
@@ -386,6 +390,10 @@ class Europe extends Phaser.Scene {
                     this.images[bat.key-1].rotation = 3.141592/2;
                 }
             }
+            else {
+                console.log('Not enought money')
+                this.menuScene.errorText('Not enought money');
+            }
         }
     }
     plant(bat, seed) {
@@ -401,10 +409,12 @@ class Europe extends Phaser.Scene {
                 }
                 else {
                     console.log('Can\'t plant riz on dirt or others on water');
+                    this.menuScene.errorText('Can\'t plant riz on dirt or others on water');
                 }
             }
             else {
                 console.log('Not enought money')
+                this.menuScene.errorText('Not enought money');
             }
         }
     }
