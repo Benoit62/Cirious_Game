@@ -63,9 +63,11 @@ include("config/configbdd.php");
 
                 // Champs et cultures
                 this.load.spritesheet('labor', 'assets/labor.png', { frameWidth: 288, frameHeight: 416 });
+                this.load.spritesheet('water', 'assets/water.png', { frameWidth: 288, frameHeight: 416 });
                 this.load.spritesheet('carrot', 'assets/carrot.png', { frameWidth: 288, frameHeight: 416 });
                 this.load.spritesheet('mais', 'assets/mais.png', { frameWidth: 288, frameHeight: 416 });
                 this.load.spritesheet('ble', 'assets/ble.png', { frameWidth: 288, frameHeight: 416 });
+                this.load.spritesheet('riz', 'assets/riz.png', { frameWidth: 288, frameHeight: 416 });
                 
 
                 //Player
@@ -89,6 +91,7 @@ include("config/configbdd.php");
                 this.load.image("renne-button", "assets/menu/rennes.png"); 
 
                 this.load.image("labor-button", "assets/menu/labourer.png"); 
+                this.load.image("water-button", "assets/menu/water.png"); 
                 this.load.image("tank-button", "assets/menu/tank.png"); 
                 this.load.image("solaire-button", "assets/menu/solaire.png"); 
                 
@@ -104,6 +107,7 @@ include("config/configbdd.php");
                 this.load.image("saxaoul-button", "assets/menu/saxaoul.png"); 
                 this.load.image("soja-button", "assets/menu/soja.png"); 
                 this.load.image("tamaris-button", "assets/menu/tamaris.png"); 
+                this.load.image("riz-button", "assets/menu/riz.png"); 
                 // Chargement des autres assets du menu
                 this.load.image("circle", "assets/menu/circle.png"); 
                 this.load.image("menu", "assets/menu/menu.png"); 
@@ -450,14 +454,14 @@ include("config/configbdd.php");
 
                 this.add.image(144, 1474, 'menu');
 
-                // Bouton (512x512) en scale 0.1 (51.2x51.2) + 65 a chaque fois
+                // Bouton (512x512) en scale 0.1 (51.2x51.2) + 55 a chaque fois
+                // Bouton (512x512) en scale 0.08 (40.96x40.96) + 45 a chaque fois
 
                 let compt = 0;
                 // Création des boutons Animaux
                 let j = 0;
                 for(let i of getByType('animal')) {
-                    if(j%4==0)compt++;
-                    this.animals[i.tag] = this.add.image(50 +(j%4)*65, 250 + 65*compt, i.tag+"-button").setScale(0.1).setInteractive().setVisible(false)/*.setVisible(false)*/;
+                    this.animals[i.tag] = this.add.image(35 +(j%5)*60, 140 + 45*compt, i.tag+"-button").setScale(0.08).setInteractive().setVisible(false)/*.setVisible(false)*/;
                     this.animals[i.tag].on('pointerdown', function(){
                         if(this.batOverlap.type == 'animal' && this.batOverlap.level == 0 && this.batOverlap.tag == 'build') {
                             this.europeScene.buildBat(this.batOverlap, i);
@@ -467,6 +471,7 @@ include("config/configbdd.php");
                         }
                     }, this);
                     j++;
+                    if(j%5==0)compt++;
                 }
 
 
@@ -474,10 +479,10 @@ include("config/configbdd.php");
                 compt=0;
                 let k = 0;
                 for(let i of getByType('plant')) {
-                    if(j%4==0)compt++;
-                    this.plants[i.tag] = this.add.image(50 +(k%4)*65, 250 + 65*compt, i.tag+"-button").setScale(0.1).setInteractive().setVisible(false)/*.setVisible(false)*/;
+                    console.log(i);
+                    this.plants[i.tag] = this.add.image(32 +(k%5)*55, 140 + 45*compt, i.tag+"-button").setScale(0.08).setInteractive().setVisible(false)/*.setVisible(false)*/;
                     this.plants[i.tag].on('pointerdown', function(){
-                        if(this.batOverlap.type == 'field' && !this.batOverlap.plant && this.batOverlap.level == 1 && this.batOverlap.tag == 'labor') {
+                        if(this.batOverlap.type == 'field' && !this.batOverlap.plant && this.batOverlap.level == 1 && (this.batOverlap.tag == 'labor' || this.batOverlap.tag == 'water')) {
                             this.europeScene.plant(this.batOverlap, i);
                             for(let i of getByType('plant')) {
                                 this.plants[i.tag].setVisible(false);
@@ -485,15 +490,16 @@ include("config/configbdd.php");
                         }
                     }, this);
                     k++;
+                    if(k%5==0)compt++;
                 }
+                console.log(this.plants);
 
 
-                // Création du bouton Labourer
+                // Création des boutons Construction champ
                 compt=0;
                 let l = 0;
                 for(let i of getByType('field')) {
-                    if(j%4==0)compt++;
-                    this.fields[i.tag] = this.add.image(50 +(l%4)*65, 250 + 65*compt, i.tag+"-button").setScale(0.1).setInteractive().setVisible(false)/*.setVisible(false)*/;
+                    this.fields[i.tag] = this.add.image(40 +(l%5)*60, 140 + 45*compt, i.tag+"-button").setScale(0.08).setInteractive().setVisible(false)/*.setVisible(false)*/;
                     this.fields[i.tag].on('pointerdown', function(){
                         if(this.batOverlap.type == 'field' && !this.batOverlap.plant && this.batOverlap.level == 0 && this.batOverlap.tag == 'build') {
                             this.europeScene.buildBat(this.batOverlap, i);
@@ -503,6 +509,7 @@ include("config/configbdd.php");
                         }
                     }, this);
                     l++;
+                    if(l%5==0)compt++;
                 }
 
 
@@ -510,8 +517,7 @@ include("config/configbdd.php");
                 compt=0;
                 let m = 0;
                 for(let i of getByType('struct')) {
-                    if(j%4==0)compt++;
-                    this.structs[i.tag] = this.add.image(50 +(m%4)*65, 250 + 65*compt, i.tag+"-button").setScale(0.1).setInteractive().setVisible(false)/*.setVisible(false)*/;
+                    this.structs[i.tag] = this.add.image(40 +(m%5)*60, 140 + 45*compt, i.tag+"-button").setScale(0.08).setInteractive().setVisible(false)/*.setVisible(false)*/;
                     this.structs[i.tag].on('pointerdown', function(){
                         if(this.batOverlap.type == 'struct' && this.batOverlap.level == 0 && this.batOverlap.tag == 'build') {
                             this.europeScene.buildBat(this.batOverlap, i);
@@ -521,11 +527,12 @@ include("config/configbdd.php");
                         }
                     }, this);
                     m++;
+                    if(m%5==0)compt++;
                 }
 
                  
                 // Bouton upgrade
-                this.upgrade = this.add.image(50, 120, "upgrade").setScale(0.1).setInteractive();
+                this.upgrade = this.add.image(50, 35, "upgrade").setScale(0.1).setInteractive();
                 this.upgrade.on('pointerdown', function(){
                     if((this.batOverlap.type == 'animal' || this.batOverlap.type == 'struct' || this.batOverlap.type == 'house') && this.batOverlap.level < this.batOverlap.ref.lvlMax && this.batOverlap.level != 0) {
                         this.europeScene.upgradeBat(this.batOverlap);
@@ -539,7 +546,7 @@ include("config/configbdd.php");
 
                 
                 // Bouton construction
-                this.build = this.add.image(115, 120, "builder").setScale(0.1).setInteractive();
+                this.build = this.add.image(115, 35, "builder").setScale(0.1).setInteractive();
                 this.build.on('pointerdown', function(){
                     if((this.batOverlap.type == 'animal' || this.batOverlap.type == 'struct' || this.batOverlap.type == 'field') && this.batOverlap.level == 0 && this.batOverlap.tag == 'build') {
                         if(this.batOverlap.type == 'animal') {
@@ -562,9 +569,9 @@ include("config/configbdd.php");
                 }, this);
 
                 // Bouton planter
-                this.planter = this.add.image(180, 120, "planter").setScale(0.1).setInteractive();
+                this.planter = this.add.image(180, 35, "planter").setScale(0.1).setInteractive();
                 this.planter.on('pointerdown', function(){
-                    if(this.batOverlap.type == 'field' && !this.batOverlap.plant && this.batOverlap.level == 1 && this.batOverlap.tag == 'labor') {
+                    if(this.batOverlap.type == 'field' && !this.batOverlap.plant && this.batOverlap.level == 1 && (this.batOverlap.tag == 'labor' || this.batOverlap.tag == 'water')) {
                         for(let i of getByType('plant')) {
                             this.plants[i.tag].setVisible(true);
                         }
@@ -573,7 +580,7 @@ include("config/configbdd.php");
                 }, this);
 
                 // Bouton recolter
-                this.recolter = this.add.image(245, 120, "recolter").setScale(0.1).setInteractive();
+                this.recolter = this.add.image(245, 35, "recolter").setScale(0.1).setInteractive();
                 this.recolter.on('pointerdown', function(){
                     if(this.batOverlap.type == 'field' && this.batOverlap.plant && this.batOverlap.level == 1 && this.batOverlap.tag != 'labor' && this.batOverlap.grow == this.batOverlap.seed.maxGrow) {
                         this.europeScene.recolte(this.batOverlap);
@@ -589,7 +596,7 @@ include("config/configbdd.php");
 
 
                 // Bouton Nourrir
-                this.feed = this.add.image(50, 185, "feed").setScale(0.1).setInteractive();
+                this.feed = this.add.image(50, 90, "feed").setScale(0.1).setInteractive();
                 this.feed.on('pointerdown', function(){
                     if(this.batOverlap.type == 'animal' && this.batOverlap.level > 0) {
                         /*for(let i of getByType('plant')) {
@@ -601,13 +608,13 @@ include("config/configbdd.php");
                 
 
                 
-                this.circleUpgrade = this.add.image(50,120, "circle").setScale(0.1).setVisible(false);
-                this.circleBuild = this.add.image(115,120, "circle").setScale(0.1).setVisible(false);
-                this.circlePlanter = this.add.image(180,120, "circle").setScale(0.1).setVisible(false);
-                this.circleRecolte = this.add.image(245,120, "circle").setScale(0.1).setVisible(false);
-                this.circleFeed = this.add.image(50,185, "circle").setScale(0.1).setVisible(false);
+                this.circleUpgrade = this.add.image(50,40, "circle").setScale(0.1).setVisible(false);
+                this.circleBuild = this.add.image(115,40, "circle").setScale(0.1).setVisible(false);
+                this.circlePlanter = this.add.image(180,40, "circle").setScale(0.1).setVisible(false);
+                this.circleRecolte = this.add.image(245,40, "circle").setScale(0.1).setVisible(false);
+                this.circleFeed = this.add.image(50,100, "circle").setScale(0.1).setVisible(false);
 
-                this.text = this.add.text(8, 300, '', { lineSpacing:5, wordWrap: { width: 284 } });
+                this.text = this.add.text(8, 350, '', { lineSpacing:7, wordWrap: { width: 284 } });
             }
 
             update() {
@@ -643,7 +650,7 @@ include("config/configbdd.php");
                 }
 
                 //Planter
-                if(this.batOverlap.type == 'field' && !this.batOverlap.plant && this.batOverlap.level == 1 && this.batOverlap.tag == 'labor') {
+                if(this.batOverlap.type == 'field' && !this.batOverlap.plant && this.batOverlap.level == 1 && (this.batOverlap.tag == 'labor' || this.batOverlap.tag == 'water')) {
                     this.circlePlanter.setVisible(true);
                 }
                 else {
@@ -681,8 +688,8 @@ include("config/configbdd.php");
                         tmpText+='\nNiveau : '+this.batOverlap.level;
                     }
                     if(this.batOverlap.ref.money && this.batOverlap.type != 'field') {
-                        let moneyPerSec = this.batOverlap.ref.money[this.batOverlap.level] * 100
-                        tmpText+='\nGain'+moneyPerSec+'/s';
+                        let moneyPerSec = this.batOverlap.ref.money[this.batOverlap.level];
+                        tmpText+='\nGain : '+moneyPerSec+'/s';
                     }
                     if(this.batOverlap.type == 'field') {
                         if(this.batOverlap.plant) {

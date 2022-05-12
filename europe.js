@@ -22,6 +22,7 @@ class Europe extends Phaser.Scene {
 
         this.timedEvent;
 
+        this.timerGrowth = 0;
         this.timer = 0;
     }
 
@@ -122,7 +123,6 @@ class Europe extends Phaser.Scene {
             plant:false,
             seed:{},
             grow:0,
-            rotate:true
         });
 
 
@@ -242,7 +242,7 @@ class Europe extends Phaser.Scene {
             }
         });*/
         //polygone des hitboxs
-        var dataRiv = [window.innerWidth, -530, -325, -530, -960, -530, -960, 540, -390, 540, -390, 470, -330, 470, -330, 400, -270, 400, -270, 140, -320, 125, -540, 125, -540, 300, -640, 390, -680, 390, -700, 430, -780, 430, -790, 460, -840, 460, -860, 490, -960, 490, -960, -80, -620, -80, -560, 5, -515, 20, -370, 20, -370, -50, -430, -100, -430, -385, -590, -385, -590, -210, -620, -210, -620, -80, -960, -80, -960, -540, -560, -540, -560, -490, -335, -490, -325, -540, window.innerWidth, -540, window.innerWidth, -530];
+        var dataRiv = [window.innerWidth, -540, -325, -540, -960, -540, -960, 540, -390, 540, -390, 470, -330, 470, -330, 400, -270, 400, -270, 140, -320, 125, -540, 125, -540, 300, -640, 390, -680, 390, -700, 430, -780, 430, -790, 460, -840, 460, -860, 490, -960, 490, -960, -80, -620, -80, -560, 5, -515, 10, -370, 10, -370, -50, -430, -100, -430, -385, -590, -385, -590, -210, -620, -210, -620, -80, -960, -80, -960, -536, -570, -536, -570, -503, -335, -503, -320, -536, window.innerWidth, -536, window.innerWidth, -540];
         // The boundary
         this.Bounds = new Phaser.Geom.Polygon(dataRiv);
 
@@ -311,7 +311,7 @@ class Europe extends Phaser.Scene {
 
 
         // Calcul de l'argent
-        let moneyPerTick = 0;
+        /*let moneyPerTick = 0;
         for(let i in this.data.values) {
             let bat = this.data.values[i];
             if(bat.level > 0 && bat.tag != 'build' && bat.type != 'field') {
@@ -322,14 +322,30 @@ class Europe extends Phaser.Scene {
         }
         this.money+=moneyPerTick;
         this.registry.set('money', this.money);
-        this.registry.set('moneyPerTick', moneyPerTick*100);
+        this.registry.set('moneyPerTick', moneyPerTick*100);*/
 
 
-        this.timer++;
-        if(this.timer == 500){
+        this.timerGrowth++;
+        if(this.timerGrowth == 500){
             this.grow();
-            this.timer = 0 - Phaser.Math.Between(0, 500);
+            this.timerGrowth = 0 - Phaser.Math.Between(0, 200);
         }
+
+        if(this.timer%60 == 0){
+            let moneyPerSec = 0;
+            for(let i in this.data.values) {
+                let bat = this.data.values[i];
+                if(bat.level > 0 && bat.tag != 'build' && bat.type != 'field') {
+                    if(typeof bat.ref.money[bat.level] == "number") {
+                        moneyPerSec+=bat.ref.money[bat.level];
+                    }
+                }
+            }
+            this.money+=moneyPerSec;
+            this.registry.set('money', this.money);
+            this.registry.set('moneyPerTick', moneyPerSec);
+        }
+        this.timer++;
     }
 
     // Calcul de l'argent
@@ -393,13 +409,21 @@ class Europe extends Phaser.Scene {
     }
     plant(bat, seed) {
         console.log('Plantation : ', bat);
-        if(bat.type == 'field' && !bat.plant && bat.level == 1 && bat.tag == 'labor') {
+        if(bat.type == 'field' && !bat.plant && bat.level == 1 && (bat.tag == 'labor' || bat.tag == 'water')) {
             if(this.money >= seed.buildPlant) {
-                bat.plant = true;
-                bat.tag = seed.tag;
-                bat.seed = seed;
-                console.log('Planted !', bat);
-                this.images[bat.key-1] = this.physics.add.image(bat.x, bat.y, seed.tag, bat.grow);
+                if(bat.tag == seed.ground) {
+                    bat.plant = true;
+                    bat.tag = seed.tag;
+                    bat.seed = seed;
+                    console.log('Planted !', bat);
+                    this.images[bat.key-1] = this.physics.add.image(bat.x, bat.y, seed.tag, bat.grow);
+                }
+                else {
+                    console.log('Can\'t plant riz on dirt or others on water');
+                }
+            }
+            else {
+                console.log('Not enought money')
             }
         }
     }
@@ -408,17 +432,19 @@ class Europe extends Phaser.Scene {
             let bat = this.data.values[i];
             if(bat.level == 1 && bat.type == 'field' && bat.tag != 'labor' && bat.plant) {
                 if(bat.grow < bat.seed.maxGrow) {
-                    bat.grow++;
-                    this.images[bat.key-1].setFrame(bat.grow);
+                    if(Phaser.Math.Between(1, 3) < 5) {
+                        bat.grow++;
+                        this.images[bat.key-1].setFrame(bat.grow);
+                    }
                 }
             }
         }
     }
     recolte(bat) {
         console.log('Recolte : ', bat);
-        if(bat.type == 'field' && bat.plant && bat.level == 1 && bat.tag != 'labor' && bat.grow == bat.seed.maxGrow) {
+        if(bat.type == 'field' && bat.plant && bat.level == 1 && (bat.tag != 'labor' || bat.tag != 'water') && bat.grow == bat.seed.maxGrow) {
             bat.plant = false;
-            bat.tag = 'labor';
+            bat.tag = bat.seed.ground;
             bat.grow = 0;
             this.money += bat.seed.money;
             bat.seed = {};

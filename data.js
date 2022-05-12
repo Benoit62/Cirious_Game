@@ -59,6 +59,15 @@ let data = [
         desc:'Savez-vous plantez des choux, à la mode, à la mode. Savez-voud planter des choux, à la mode de chez-nous'
     },
     {
+        tag:'water',
+        type:'field',
+        lvlMax:1,
+        buildCost:15000,
+        upgrade:[0,0,0,0],
+        name:'Champs',
+        desc:'Savez-vous plantez du riz, à la mode, à la mode. Savez-voud planter du riz, à la mode de chez-nous'
+    },
+    {
         tag:'house',
         type:'house',
         lvlMax:2,
@@ -71,6 +80,7 @@ let data = [
     {
         tag:'ble',
         type:'plant',
+        ground:'labor',
         buildPlant:5000,
         money:10000,
         maxGrow:3,
@@ -81,6 +91,7 @@ let data = [
     {
         tag:'carrot',
         type:'plant',
+        ground:'labor',
         buildPlant:5000,
         money:10000,
         maxGrow:3,
@@ -91,10 +102,111 @@ let data = [
     {
         tag:'mais',
         type:'plant',
+        ground:'labor',
         buildPlant:5000,
         money:10000,
         maxGrow:3,
         name:'Maïs',
+        desc:'Miam'
+    },
+    {
+        tag:'avoine',
+        type:'plant',
+        ground:'labor',
+        buildPlant:5000,
+        money:10000,
+        maxGrow:3,
+        name:'Avoine',
+        desc:'Miam'
+    },
+    {
+        tag:'colza',
+        type:'plant',
+        ground:'labor',
+        buildPlant:5000,
+        money:10000,
+        maxGrow:3,
+        name:'Colza',
+        desc:'Miam'
+    },
+    {
+        tag:'herbe',
+        type:'plant',
+        ground:'labor',
+        buildPlant:5000,
+        money:10000,
+        maxGrow:3,
+        name:'Herbe',
+        desc:'Miam'
+    },
+    {
+        tag:'pdt',
+        type:'plant',
+        ground:'labor',
+        buildPlant:5000,
+        money:10000,
+        maxGrow:3,
+        name:'Pommes de Terre',
+        desc:'Miam'
+    },
+    {
+        tag:'riz',
+        type:'plant',
+        ground:'water',
+        buildPlant:5000,
+        money:10000,
+        maxGrow:2,
+        name:'Riz',
+        desc:'Miam'
+    },
+    {
+        tag:'soja',
+        type:'plant',
+        ground:'labor',
+        buildPlant:5000,
+        money:10000,
+        maxGrow:3,
+        name:'Soja',
+        desc:'Miam'
+    },
+    {
+        tag:'champi',
+        type:'plant',
+        ground:'labor',
+        buildPlant:5000,
+        money:10000,
+        maxGrow:3,
+        name:'Champignons',
+        desc:'Miam'
+    },
+    {
+        tag:'lichen',
+        type:'plant',
+        ground:'labor',
+        buildPlant:5000,
+        money:10000,
+        maxGrow:3,
+        name:'Lichens',
+        desc:'Miam'
+    },
+    {
+        tag:'saxaoul',
+        type:'plant',
+        ground:'labor',
+        buildPlant:5000,
+        money:10000,
+        maxGrow:3,
+        name:'Saxaoul',
+        desc:'Miam'
+    },
+    {
+        tag:'tamaris',
+        type:'plant',
+        ground:'labor',
+        buildPlant:5000,
+        money:10000,
+        maxGrow:3,
+        name:'Tamaris',
         desc:'Miam'
     },
     
