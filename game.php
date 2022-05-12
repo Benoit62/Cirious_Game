@@ -380,8 +380,8 @@ include("config/configbdd.php");
                     }
                 }, this);
 
-                this.moneyText = this.add.text(310, 20, 'Monitoring Registry');
-                this.moneyPerTickText = this.add.text(400, 20, 'Monitoring Registry');
+                this.moneyText = this.add.text(310, 20, '0');
+                this.moneyPerTickText = this.add.text(400, 20, '0');
                 this.batOverlap = this.add.text(500, 20, 'Checking overlap');
 
                 //  Check the Registry and hit our callback every time the 'money' value is updated
@@ -452,7 +452,7 @@ include("config/configbdd.php");
                 //this.scene.setVisible(false);
                 this.europeScene = this.scene.get('europeScene');
 
-                this.add.image(144, 1474, 'menu');
+                this.add.image(150, 1470, 'menu');
 
                 this.textBat = this.add.text(8, 350, '', { lineSpacing:7, wordWrap: { width: 284 } });
 
@@ -473,6 +473,12 @@ include("config/configbdd.php");
                                 this.animals[i.tag].setVisible(false);
                             }
                         }
+                    }, this);
+                    this.animals[i.tag].on('pointermove', function(){
+                        this.textInfo.setText('Animal : '+i.name+'\nPrix : '+i.buildCost);
+                    }, this);
+                    this.animals[i.tag].on('pointerout', function(){
+                        this.textInfo.setText('');
                     }, this);
                     j++;
                     if(j%5==0)compt++;
@@ -518,6 +524,12 @@ include("config/configbdd.php");
                             }
                         }
                     }, this);
+                    this.fields[i.tag].on('pointermove', function(){
+                        this.textInfo.setText('Sol : '+i.name+'\nPrix : '+i.buildCost);
+                    }, this);
+                    this.fields[i.tag].on('pointerout', function(){
+                        this.textInfo.setText('');
+                    }, this);
                     l++;
                     if(l%5==0)compt++;
                 }
@@ -535,6 +547,12 @@ include("config/configbdd.php");
                                 this.structs[i.tag].setVisible(false);
                             }
                         }
+                    }, this);
+                    this.structs[i.tag].on('pointermove', function(){
+                        this.textInfo.setText('Batiment : '+i.name+'\nPrix : '+i.buildCost);
+                    }, this);
+                    this.structs[i.tag].on('pointerout', function(){
+                        this.textInfo.setText('');
                     }, this);
                     m++;
                     if(m%5==0)compt++;

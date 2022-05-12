@@ -113,7 +113,7 @@ class Europe extends Phaser.Scene {
         });
         this.data.set('bat8', {
             key:8,
-            x:+430,
+            x:+432,
             y:+304,
             type:'field',
             level:0,
@@ -257,8 +257,7 @@ class Europe extends Phaser.Scene {
         this.menuScene = this.scene.get('menuScene');
 
 
-        // Fonction de timer pour calcul toutes les 5 secondes
-        //this.timedEvent = this.time.addEvent(100, this.calcul, [], this, true);
+        this.registry.set('money', this.money);
     }
 
     update() {
