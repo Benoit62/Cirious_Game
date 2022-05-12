@@ -391,7 +391,7 @@ class Europe extends Phaser.Scene {
     plant(bat, seed) {
         console.log('Plantation : ', bat);
         if(bat.type == 'field' && !bat.plant && bat.level == 1 && (bat.tag == 'labor' || bat.tag == 'water')) {
-            if(this.money >= seed.buildPlant) {
+            if(this.money >= seed.costPlant) {
                 if(bat.tag == seed.ground) {
                     bat.plant = true;
                     bat.tag = seed.tag;
