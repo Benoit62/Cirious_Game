@@ -528,6 +528,9 @@ include("config/configbdd.php");
                 this.textBat;
                 this.textInfo;
                 this.cardInfo;
+
+                this.plus;
+                this.backGroundPopup;
             }
 
             create ()
@@ -542,6 +545,16 @@ include("config/configbdd.php");
                 
                 this.cardInfo = this.add.image(148, 290, 'card').setScale(0.35).setVisible(false);
                 this.textInfo = this.add.text(14, 260, '', { lineSpacing:7, wordWrap: { width: 284 }, fontSize:15, color:'#000000' });
+
+                this.plus = this.add.text(20, innerHeight - 20, 'En savoir plus').setInteractive().setVisible(false);
+                this.plus.on('pointerdown', this.savoirPlus, this);
+
+                this.backGroundPopup = this.add.graphics();
+                this.backGroundPopup.fillStyle(0x70402a, 1);
+                this.backGroundPopup.fillRoundedRect(window.innerWidth/2 - 300, window.innerHeight/2 - 200, 600, 400, 20);
+                //this.backGroundPopup.setVisible(false);
+                //Phaser.Display.Align.In.Center(this.backGroundPopup, this.add.zone(window.innerWidth/2, window.innerHeight/2, window.innerWidth, window.innerHeight));
+
 
                 // Bouton (512x512) en scale 0.1 (51.2x51.2) + 55 a chaque fois
                 // Bouton (512x512) en scale 0.08 (40.96x40.96) + 45 a chaque fois
@@ -588,7 +601,7 @@ include("config/configbdd.php");
                     }, this);
                     this.plants[i.tag].on('pointermove', function(){
                         this.cardInfo.setVisible(true);
-                        this.textInfo.setText('Culture : '+i.name+'\nPrix : '+i.costPlant);
+                        this.textInfo.setText('Culture : '+i.name+'\nPrix : '+i.costPlant+'\nDescription : '+i.desc);
                     }, this);
                     this.plants[i.tag].on('pointerout', function(){
                         this.cardInfo.setVisible(false);
@@ -667,10 +680,8 @@ include("config/configbdd.php");
                     }
                 }, this);
                 this.upgrade.on('pointerout', function(){
-                    if((this.batOverlap.type == 'animal' || this.batOverlap.type == 'struct' || this.batOverlap.type == 'house') && this.batOverlap.level < this.batOverlap.ref.lvlMax && this.batOverlap.level != 0) {
-                        this.cardInfo.setVisible(false);
-                        this.textInfo.setText('');
-                    }
+                    this.cardInfo.setVisible(false);
+                    this.textInfo.setText('');
                 }, this);
                 
                 
@@ -818,7 +829,7 @@ include("config/configbdd.php");
                     if(this.batOverlap.ref.name) {
                         tmpText+='Nom : '+this.batOverlap.ref.name;
                     }
-                    tmpText+='\nType : '+this.batOverlap.type;
+                    tmpText+='\nType : '+this.batOverlap.typeName;
                     if(this.batOverlap.type != 'field') {
                         tmpText+='\nNiveau : '+this.batOverlap.level;
                     }
@@ -841,6 +852,7 @@ include("config/configbdd.php");
                     if(this.batOverlap.tag != 'build') {
                         tmpText+='\nDescription : '+this.batOverlap.ref.desc;
                     }
+                    this.plus.setVisible(true);
                     this.textBat.setText(tmpText);
                 }
                 
@@ -861,6 +873,13 @@ include("config/configbdd.php");
                     container.destroy();
                 }, 2000);
                 console.log('Not unlocked')
+            }
+
+            savoirPlus(){
+                this.backGroundPopup.setVisible(true);
+                this.input.on('pointerdown', function(){
+                    this.backGroundPopup.setVisible(false);
+                }, this);
             }
 
         }
