@@ -125,7 +125,7 @@ let data = [
         ground:'labor',
         costPlant:5000,
         money:10000,
-        maxGrow:3,
+        maxGrow:4,
         name:'Colza',
         desc:'Miam'
     },
