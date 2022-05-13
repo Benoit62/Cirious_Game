@@ -405,7 +405,6 @@ include("config/configbdd.php");
                 }, this);
 
 
-
                 // Barre de progressions
                 var progressBox1 = this.add.graphics();
                 var progressBar1 = this.add.graphics();
@@ -420,29 +419,30 @@ include("config/configbdd.php");
 
                 //width of bar
                 var widthBar = 150;
+                var heightBar = 30;
                 //coords of bars
                 var w1 = 500;
                 var h1 = 10;
-                var w2 = w1 + widthBar + 20;
+                var w2 = w1 + widthBar + 40;
                 var h2 = 10;
-                var w3 = w2 + widthBar + 20;
+                var w3 = w2 + widthBar + 40;
                 var h3 = 10;
-                progressBox1.fillRoundedRect(w1, h1, widthBar, 30, 15);
-                progressBox2.fillRoundedRect(w2, h2, widthBar, 30, 15);
-                progressBox3.fillRoundedRect(w3, h3, widthBar, 30, 15);
+                progressBox1.fillRect(w1, h1, widthBar, heightBar);
+                progressBox2.fillRect(w2, h2, widthBar, heightBar);
+                progressBox3.fillRect(w3, h3, widthBar, heightBar);
 
 
-                progressBar1.fillRoundedRect(w1, h1, 0, 0, 0);
                 progressBar1.fillStyle(0x0080ff, 1);
-                progressBar2.fillRoundedRect(w2, h2, 0, 0, 0);
+                progressBar1.fillRect(w1, h1, widthBar*0.1, heightBar);
                 progressBar2.fillStyle(0x01D758, 1);
-                progressBar3.fillRoundedRect(w3, h3, 0, 0, 0);
+                progressBar2.fillRect(w2, h2, widthBar*0.1, heightBar);
                 progressBar3.fillStyle(0xffc0cb, 1);
+                progressBar3.fillRect(w3, h3, widthBar*0.1, heightBar);
 
                 var percentText1 = this.make.text({
-                    x: w1,
-                    y: h1,
-                    text: '0%',
+                    x: w1 + widthBar/2,
+                    y: h1 + 15,
+                    text: '10%',
                     style: {
                         font: '18px monospace',
                         fill: '#ffffff'
@@ -451,9 +451,9 @@ include("config/configbdd.php");
                 percentText1.setOrigin(0.5, 0.5);
 
                 var percentText2 = this.make.text({
-                    x: w2,
-                    y: h2,
-                    text: '0%',
+                    x: w2 + widthBar/2,
+                    y: h2 + 15,
+                    text: '10%',
                     style: {
                         font: '18px monospace',
                         fill: '#ffffff'
@@ -462,9 +462,9 @@ include("config/configbdd.php");
                 percentText2.setOrigin(0.5, 0.5);
 
                 var percentText3 = this.make.text({
-                    x: w3,
-                    y: h3,
-                    text: '0%',
+                    x: w3 + widthBar/2,
+                    y: h3 + 15,
+                    text: '10%',
                     style: {
                         font: '18px monospace',
                         fill: '#ffffff'
@@ -472,39 +472,6 @@ include("config/configbdd.php");
                 });
                 percentText3.setOrigin(0.5, 0.5);
 
-
-                /*function progress(value) {
-                    percentText1.setText(parseInt(value) + '%');
-                    progressBar1.clear();
-                    progressBar1.fillStyle(0x0080ff, 1);
-                    progressBar1.fillRoundedRect(w1, h1, widthBar / 100 * value, 30, 15);
-                    percentText2.setText(parseInt(value) + '%');
-                    progressBar2.clear();
-                    progressBar2.fillStyle(0x01D758, 1);
-                    progressBar2.fillRoundedRect(w2, h2, widthBar / 100 * value, 30, 15);
-                    percentText3.setText(parseInt(value) + '%');
-                    progressBar3.clear();
-                    progressBar3.fillStyle(0xffc0cb, 1);
-                    progressBar3.fillRoundedRect(w3, h3, widthBar / 100 * value, 30, 15);
-                };
-                //event loop pour l'update
-                var i = 0;
-                var timedEvent = this.time.addEvent({
-                    delay: 25,
-                    callback: onEvent,
-                    callbackScope: this,
-                    loop: true
-                });
-                //callBack
-                function onEvent() {
-                    //si la bar est full
-                    if (i == 101) {
-                        
-                    } else {
-                        progress(i);
-                        i += 1;
-                    }
-                }*/
             }
 
             update() {
