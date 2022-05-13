@@ -541,7 +541,7 @@ include("config/configbdd.php");
                 this.textBat = this.add.text(8, 350, '', { lineSpacing:7, wordWrap: { width: 284 } });
                 
                 this.cardInfo = this.add.image(148, 290, 'card').setScale(0.35).setVisible(false);
-                this.textInfo = this.add.text(10, 260, '', { lineSpacing:7, wordWrap: { width: 284 }, fontSize:15, color:'#000000' });
+                this.textInfo = this.add.text(12, 260, '', { lineSpacing:7, wordWrap: { width: 284 }, fontSize:15, color:'#000000' });
 
                 // Bouton (512x512) en scale 0.1 (51.2x51.2) + 55 a chaque fois
                 // Bouton (512x512) en scale 0.08 (40.96x40.96) + 45 a chaque fois
@@ -659,6 +659,21 @@ include("config/configbdd.php");
                         this.europeScene.upgradeBat(this.batOverlap);
                     }
                 }, this);
+                
+                this.upgrade.on('pointermove', function(){
+                    if((this.batOverlap.type == 'animal' || this.batOverlap.type == 'struct' || this.batOverlap.type == 'house') && this.batOverlap.level < this.batOverlap.ref.lvlMax && this.batOverlap.level != 0) {
+                        this.cardInfo.setVisible(true);
+                        this.textInfo.setText('Prix : '+this.batOverlap.ref.upgrade[this.batOverlap.level+1]);
+                    }
+                }, this);
+                this.upgrade.on('pointerout', function(){
+                    if((this.batOverlap.type == 'animal' || this.batOverlap.type == 'struct' || this.batOverlap.type == 'house') && this.batOverlap.level < this.batOverlap.ref.lvlMax && this.batOverlap.level != 0) {
+                        this.cardInfo.setVisible(false);
+                        this.textInfo.setText('');
+                    }
+                }, this);
+                
+                
                 this.input.keyboard.on('keydown_A', function(){
                     if((this.batOverlap.type == 'animal' || this.batOverlap.type == 'struct' || this.batOverlap.type == 'house') && this.batOverlap.level < this.batOverlap.ref.lvlMax && this.batOverlap.level != 0) {
                         this.europeScene.upgradeBat(this.batOverlap);
