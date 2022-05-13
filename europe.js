@@ -24,6 +24,9 @@ class Europe extends Phaser.Scene {
 
         this.timerGrowth = 0;
         this.timer = 0;
+
+
+        this.ecologie;
     }
 
     create() {

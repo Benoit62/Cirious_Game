@@ -81,7 +81,7 @@ include("config/configbdd.php");
                 this.load.spritesheet('mais', 'assets/mais.png', { frameWidth: 288, frameHeight: 416 });
                 this.load.spritesheet('ble', 'assets/ble.png', { frameWidth: 288, frameHeight: 416 });
                 this.load.spritesheet('riz', 'assets/riz.png', { frameWidth: 288, frameHeight: 416 });
-                this.load.spritesheet('riz', 'assets/colza.png', { frameWidth: 288, frameHeight: 416 });
+                this.load.spritesheet('colza', 'assets/colza.png', { frameWidth: 288, frameHeight: 416 });
                 
 
                 //Player
