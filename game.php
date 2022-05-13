@@ -588,7 +588,7 @@ include("config/configbdd.php");
                     }, this);
                     this.plants[i.tag].on('pointermove', function(){
                         this.cardInfo.setVisible(true);
-                        this.textInfo.setText('Culture : '+i.name+'\nPrix : '+i.costPlant);
+                        this.textInfo.setText('Culture : '+i.name+'\nPrix : '+i.costPlant+'\nDescription : '+i.desc);
                     }, this);
                     this.plants[i.tag].on('pointerout', function(){
                         this.cardInfo.setVisible(false);
@@ -667,10 +667,8 @@ include("config/configbdd.php");
                     }
                 }, this);
                 this.upgrade.on('pointerout', function(){
-                    if((this.batOverlap.type == 'animal' || this.batOverlap.type == 'struct' || this.batOverlap.type == 'house') && this.batOverlap.level < this.batOverlap.ref.lvlMax && this.batOverlap.level != 0) {
-                        this.cardInfo.setVisible(false);
-                        this.textInfo.setText('');
-                    }
+                    this.cardInfo.setVisible(false);
+                    this.textInfo.setText('');
                 }, this);
                 
                 
@@ -818,7 +816,7 @@ include("config/configbdd.php");
                     if(this.batOverlap.ref.name) {
                         tmpText+='Nom : '+this.batOverlap.ref.name;
                     }
-                    tmpText+='\nType : '+this.batOverlap.type;
+                    tmpText+='\nType : '+this.batOverlap.typeName;
                     if(this.batOverlap.type != 'field') {
                         tmpText+='\nNiveau : '+this.batOverlap.level;
                     }
