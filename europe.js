@@ -35,7 +35,7 @@ class Europe extends Phaser.Scene {
             type: 'animal',
             level: 0,
             tag: 'build',
-            scale: 0.7,
+            scale: 0.5,
             ref: {}
         });
         this.data.set('bat2', {
@@ -45,7 +45,7 @@ class Europe extends Phaser.Scene {
             type: 'animal',
             level: 2,
             tag: 'cow',
-            scale: 0.7,
+            scale: 0.5,
             ref: {}
         });
 
@@ -57,7 +57,7 @@ class Europe extends Phaser.Scene {
             type: 'struct',
             level: 1,
             tag: 'tank',
-            scale: 0.5,
+            scale: 0.3,
             ref: {}
         });
         this.data.set('bat4', {
@@ -67,7 +67,7 @@ class Europe extends Phaser.Scene {
             type: 'struct',
             level: 0,
             tag: 'build',
-            scale: 0.5,
+            scale: 0.3,
             ref: {}
         });
 
@@ -79,7 +79,7 @@ class Europe extends Phaser.Scene {
             type: 'field',
             level: 1,
             tag: 'labor',
-            scale: 0.8,
+            scale: 0.5,
             ref: {},
             plant: false,
             seed: {},
@@ -92,7 +92,7 @@ class Europe extends Phaser.Scene {
             type: 'field',
             level: 0,
             tag: 'build',
-            scale: 0.8,
+            scale: 0.5,
             ref: {},
             plant: false,
             seed: {},
@@ -105,7 +105,7 @@ class Europe extends Phaser.Scene {
             type: 'field',
             level: 1,
             tag: 'water',
-            scale: 0.8,
+            scale: 0.5,
             ref: {},
             plant: false,
             seed: {},
@@ -118,7 +118,7 @@ class Europe extends Phaser.Scene {
             type: 'field',
             level: 0,
             tag: 'build',
-            scale: 0.8,
+            scale: 0.5,
             ref: {},
             plant: false,
             seed: {},
@@ -134,7 +134,7 @@ class Europe extends Phaser.Scene {
             type: 'house',
             level: 1,
             tag: 'house',
-            scale: 0.5,
+            scale: 0.3,
             ref: {}
         });
 
@@ -401,6 +401,7 @@ class Europe extends Phaser.Scene {
         if (bat.type == 'field' && !bat.plant && bat.level == 1 && (bat.tag == 'labor' || bat.tag == 'water')) {
             if (this.money >= seed.costPlant) {
                 if (bat.tag == seed.ground) {
+                    this.money -= seed.costPlant;
                     bat.plant = true;
                     bat.tag = seed.tag;
                     bat.seed = seed;
