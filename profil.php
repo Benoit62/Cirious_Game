@@ -28,7 +28,7 @@ $query->closeCursor();
 </head>
 
 <body>
-  <div class="navigation">
+  <div id="P" class="navigation">
     <div class="menu_toggle"></div>
     <div class="profile">
       <div class="imgBx">
@@ -201,14 +201,29 @@ $query->closeCursor();
         document.getElementById('pass2').value = "";
         document.getElementById('pass3').value = "";
         document.getElementById('popup').style.display = 'block';
+        cP.removeEventListener('click', () => {
+          openForm();
+        });
+        cP.addEventListener('click', () => {
+          closeForm();
+        });
+        document.getElementById('P').style.display = 'none';
       }
     }
 
     function closeForm() {
       document.getElementById('popup').style.display = 'none';
+      cP.removeEventListener('click', () => {
+        closeForm();
+      });
+      cP.addEventListener('click', () => {
+        openForm();
+      });
+      document.getElementById('P').style.display = 'block';
     }
 
     function done() {
+      document.getElementById('P').style.display = 'block';
       let pass1 = document.getElementById('pass1').value;
       let pass2 = document.getElementById('pass2').value;
       let pass3 = document.getElementById('pass3').value;
@@ -238,7 +253,7 @@ $query->closeCursor();
     let cP = document.getElementById('changeP');
     cP.addEventListener('click', () => {
       openForm();
-    })
+    });
     //par défaut off
     closeForm();
   </script>
