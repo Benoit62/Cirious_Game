@@ -24,9 +24,14 @@ class Europe extends Phaser.Scene {
 
         this.timerGrowth = 0;
         this.timer = 0;
+        this.timerDead = 0;
 
 
-        this.ecologie;
+        this.ecology = 10;
+        this.animalCare = 10;
+        this.hunger = 10;
+
+        this.climat = 'europe';
     }
 
     create() {
@@ -91,7 +96,8 @@ class Europe extends Phaser.Scene {
             ref: {},
             plant: false,
             seed: {},
-            grow: 0
+            grow: 0,
+            dead:false
         });
         this.data.set('bat6', {
             key: 6,
@@ -105,7 +111,8 @@ class Europe extends Phaser.Scene {
             ref: {},
             plant: false,
             seed: {},
-            grow: 0
+            grow: 0,
+            dead:false
         });
         this.data.set('bat7', {
             key: 7,
@@ -119,7 +126,8 @@ class Europe extends Phaser.Scene {
             ref: {},
             plant: false,
             seed: {},
-            grow: 0
+            grow: 0,
+            dead:false
         });
         this.data.set('bat8', {
             key: 8,
@@ -134,6 +142,7 @@ class Europe extends Phaser.Scene {
             plant: false,
             seed: {},
             grow: 0,
+            dead:false
         });
 
 
@@ -281,6 +290,10 @@ class Europe extends Phaser.Scene {
 
 
         this.registry.set('money', this.money);
+        this.registry.set('moneyPerTick', 0);
+        this.registry.set('ecology', this.ecology);
+        this.registry.set('animalCare', this.animalCare);
+        this.registry.set('hunger', this.hunger);
     }
 
     update() {
@@ -337,6 +350,12 @@ class Europe extends Phaser.Scene {
         if (this.timerGrowth == 500) {
             this.grow();
             this.timerGrowth = 0 - Phaser.Math.Between(0, 200);
+        }
+
+        this.timerDead++;
+        if (this.timerDead == 300) {
+            this.rotten();
+            this.timerDead = 0;
         }
 
         if (this.timer % 60 == 0) {
@@ -450,7 +469,7 @@ class Europe extends Phaser.Scene {
         for (let i in this.data.values) {
             let bat = this.data.values[i];
             if (bat.level == 1 && bat.type == 'field' && bat.tag != 'labor' && bat.plant) {
-                if (bat.grow < bat.seed.maxGrow) {
+                if (bat.grow < bat.seed.maxGrow && !bat.dead) {
                     if (Phaser.Math.Between(1, 3) < 5) {
                         bat.grow++;
                         this.images[bat.key - 1].setFrame(bat.grow);
@@ -459,9 +478,21 @@ class Europe extends Phaser.Scene {
             }
         }
     }
+    rotten(){
+        for (let i in this.data.values) {
+            let bat = this.data.values[i];
+            if (bat.level == 1 && bat.type == 'field' && bat.tag != 'labor' && bat.plant) {
+                if (!bat.seed.climat.includes(this.climat)) {
+                    bat.dead = true;
+                    console.log('Dead plant !', bat);
+                    this.images[bat.key - 1].setFrame(bat.seed.maxGrow + 1);
+                }
+            }
+        }
+    }
     recolte(bat) {
         console.log('Recolte : ', bat);
-        if (bat.type == 'field' && bat.plant && bat.level == 1 && (bat.tag != 'labor' || bat.tag != 'water') && bat.grow == bat.seed.maxGrow) {
+        if (bat.type == 'field' && bat.plant && bat.level == 1 && (bat.tag != 'labor' || bat.tag != 'water') && bat.grow == bat.seed.maxGrow && !bat.dead) {
             bat.plant = false;
             bat.tag = bat.seed.ground;
             bat.grow = 0;

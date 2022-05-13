@@ -95,7 +95,7 @@ let data = [
         name:'Blé',
         desc:'Miam',
         info:'',
-        climat:['europe']
+        climat:['tropic']
     },
 
     {
