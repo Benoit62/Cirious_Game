@@ -28,7 +28,7 @@ class Europe extends Phaser.Scene {
 
 
         this.ecology = 10;
-        this.animalCare = 10;
+        this.animalCare = 60;
         this.hunger = 10;
 
         this.climat = 'europe';
@@ -96,6 +96,7 @@ class Europe extends Phaser.Scene {
             ref: {},
             plant: false,
             seed: {},
+            oldseed: {},
             grow: 0,
             dead:false
         });
@@ -111,6 +112,7 @@ class Europe extends Phaser.Scene {
             ref: {},
             plant: false,
             seed: {},
+            oldseed: {},
             grow: 0,
             dead:false
         });
@@ -126,6 +128,7 @@ class Europe extends Phaser.Scene {
             ref: {},
             plant: false,
             seed: {},
+            oldseed: {},
             grow: 0,
             dead:false
         });
@@ -141,6 +144,7 @@ class Europe extends Phaser.Scene {
             ref: {},
             plant: false,
             seed: {},
+            oldseed: {},
             grow: 0,
             dead:false
         });
@@ -414,6 +418,10 @@ class Europe extends Phaser.Scene {
                     bat.level += 1;
                     console.log('Upgraded !', bat);
                     this.images[bat.key - 1].setFrame(bat.level - 1);
+                    if(bat.type == 'animal') {
+                        this.animalCare += 10 * bat.level;
+                        this.registry.set('animalCare', this.animalCare);
+                    }
                 }
                 else {
                     console.log('Not enought money')
@@ -434,6 +442,10 @@ class Europe extends Phaser.Scene {
                 this.images[bat.key - 1] = this.physics.add.image(bat.x, bat.y, bat.tag, bat.level - 1);
                 if (bat.rotate) {
                     this.images[bat.key - 1].rotation = 3.141592 / 2;
+                }
+                if(bat.type == 'animal') {
+                    this.animalCare -= 40;
+                    this.registry.set('animalCare', this.animalCare);
                 }
             }
             else {
@@ -465,12 +477,19 @@ class Europe extends Phaser.Scene {
             }
         }
     }
+    replant(bat) {
+        console.log('Replantation : ', bat);
+        if (bat.oldseed.name) {
+            console.log(bat.oldseed);
+            this.plant(bat, bat.oldseed);
+        }
+    }
     grow() {
         for (let i in this.data.values) {
             let bat = this.data.values[i];
             if (bat.level == 1 && bat.type == 'field' && bat.tag != 'labor' && bat.plant) {
                 if (bat.grow < bat.seed.maxGrow && !bat.dead) {
-                    if (Phaser.Math.Between(1, 3) < 5) {
+                    if (Phaser.Math.Between(1, 5) <= 3) {
                         bat.grow++;
                         this.images[bat.key - 1].setFrame(bat.grow);
                     }
@@ -495,6 +514,7 @@ class Europe extends Phaser.Scene {
         if (bat.type == 'field' && bat.plant && bat.level == 1 && (bat.tag != 'labor' || bat.tag != 'water') && (bat.grow == bat.seed.maxGrow || bat.dead)) {
             if(!bat.dead) {
                 bat.plant = false;
+                bat.oldseed = bat.seed;
                 bat.tag = bat.seed.ground;
                 bat.grow = 0;
                 this.money += bat.seed.money;
@@ -506,6 +526,7 @@ class Europe extends Phaser.Scene {
             }
             else {
                 bat.plant = false;
+                bat.oldseed = bat.seed;
                 bat.tag = bat.seed.ground;
                 bat.grow = 0;
                 //this.money += bat.seed.money;

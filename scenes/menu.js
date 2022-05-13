@@ -243,6 +243,12 @@ class Menu extends Phaser.Scene {
             }
             
         }, this);
+        //Replanter automatiquement
+        this.input.keyboard.on('keydown_E', function(){
+            if(this.batOverlap.type == 'field' && !this.batOverlap.plant && this.batOverlap.level == 1 && (this.batOverlap.tag == 'labor' || this.batOverlap.tag == 'water') && this.batOverlap.oldseed.name) {
+                this.europeScene.replant(this.batOverlap);
+            }
+        }, this);
 
         // Bouton recolter
         this.recolter = this.add.image(245, 35, "recolter").setScale(0.1).setInteractive();
@@ -397,7 +403,7 @@ class Menu extends Phaser.Scene {
             text.destroy();
             container.destroy();
         }, 2000);
-        console.log('Not unlocked')
+        console.log('Error : ', errorTxt);
     }
 
     savoirPlus(){
