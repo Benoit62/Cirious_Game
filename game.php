@@ -18,7 +18,7 @@ include("config/configbdd.php");
     <link rel="stylesheet" href="game.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <title>ISEED</title>
-    <script src="http://cdn.jsdelivr.net/npm/phaser@3.11.0/dist/phaser.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.11.0/dist/phaser.js"></script>
     <link rel="shortcut icon" href="images/logo.png" type="image/x-icon">
     <link rel="icon" href="images/logo.png" type="image/x-icon">
 </head>
@@ -175,6 +175,17 @@ include("config/configbdd.php");
                         this.lockText();
                     }
                 }, this);
+
+                var music = this.sound.add('farming', {
+                    mute: false,
+                    volume: 0.3,
+                    rate: 1,
+                    detune: 0,
+                    seek: 0,
+                    loop: true,
+                    delay: 0
+                });
+                music.play();
             }
 
             lockText() {
@@ -343,6 +354,9 @@ include("config/configbdd.php");
             parent: 'phaser-example',
             physics: {
                 default: 'arcade',
+            },
+            audio: {
+                disableWebAudio: false
             },
             scene: [Loading, Play, Cinematique1, Cinematique2, Map, Europe, Desert, Glace, Header, Menu]
         };

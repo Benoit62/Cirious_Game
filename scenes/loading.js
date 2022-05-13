@@ -16,6 +16,9 @@ class Loading extends Phaser.Scene {
         this.load.spritesheet('scient', 'assets/cinematique/eddisonsheet.png', { frameWidth: 32, frameHeight: 48 });
 
 
+        // Musique
+        this.load.audio('farming', 'assets/musique/farming.mp3');
+
         // Maps et icones
         this.load.image('map', 'assets/map/map.png');
         this.load.image('europeile', 'assets/map/europeile.png');
@@ -68,6 +71,7 @@ class Loading extends Phaser.Scene {
         this.load.image("recolter", "assets/menu/recolter.png");
         this.load.image("feed", "assets/menu/pet-food.png");
         this.load.image("upgrade", "assets/menu/upgrade.png"); 
+        this.load.image("fertility", "assets/menu/desherber.png"); 
         
         this.load.image("cow-button", "assets/menu/cow.png"); 
         this.load.image("pig-button", "assets/menu/pig.png"); 

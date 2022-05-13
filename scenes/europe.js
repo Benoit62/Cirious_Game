@@ -98,7 +98,8 @@ class Europe extends Phaser.Scene {
             seed: {},
             oldseed: {},
             grow: 0,
-            dead:false
+            dead:false,
+            fertility:100
         });
         this.data.set('bat6', {
             key: 6,
@@ -114,7 +115,8 @@ class Europe extends Phaser.Scene {
             seed: {},
             oldseed: {},
             grow: 0,
-            dead:false
+            dead:false,
+            fertility:100
         });
         this.data.set('bat7', {
             key: 7,
@@ -130,7 +132,8 @@ class Europe extends Phaser.Scene {
             seed: {},
             oldseed: {},
             grow: 0,
-            dead:false
+            dead:false,
+            fertility:100
         });
         this.data.set('bat8', {
             key: 8,
@@ -146,7 +149,8 @@ class Europe extends Phaser.Scene {
             seed: {},
             oldseed: {},
             grow: 0,
-            dead:false
+            dead:false,
+            fertility:100
         });
 
 
@@ -512,17 +516,30 @@ class Europe extends Phaser.Scene {
     recolte(bat) {
         console.log('Recolte : ', bat);
         if (bat.type == 'field' && bat.plant && bat.level == 1 && (bat.tag != 'labor' || bat.tag != 'water') && (bat.grow == bat.seed.maxGrow || bat.dead)) {
+            let percent = bat.fertility/100;
+            let moneyWin = bat.seed.money*percent;
+            let hungerWin = 5*percent;
+            if(bat.seed == bat.oldseed) {
+                bat.fertility -= 10;
+            }
+            else {
+                bat.fertility -= 5;
+            }
             if(!bat.dead) {
                 bat.plant = false;
                 bat.oldseed = bat.seed;
                 bat.tag = bat.seed.ground;
                 bat.grow = 0;
-                this.money += bat.seed.money;
+                this.money += moneyWin;
                 bat.seed = {};
-                this.hunger += 5;
+                this.hunger += hungerWin;
                 this.registry.set('hunger', this.hunger);
                 console.log('Recolté !', bat);
                 this.images[bat.key - 1].destroy();
+                let textWin = this.add.text(bat.x, bat.y, '+'+moneyWin+'$\n+'+hungerWin, { lineSpacing:10, fontSize:40, color:'#ffffff', align:'center' }).setOrigin(0.5, 0.5);
+                setTimeout(() => {
+                    textWin.destroy();
+                }, 2000);
             }
             else {
                 bat.plant = false;
@@ -539,6 +556,18 @@ class Europe extends Phaser.Scene {
             }
         }
     }
+    fertility(bat) {
+        console.log('Fertilisation : ', bat);
+        if (bat.type == 'field' && !bat.plant && bat.level == 1 && (bat.tag == 'labor' || bat.tag == 'water') && bat.fertility < 100) {
+            bat.fertility += 20;
+            if(bat.fertility > 100) bat.fertility = 100;
+            console.log('Fertilised !', bat);
+            this.images[bat.key - 1] = this.physics.add.image(bat.x, bat.y, seed.tag, bat.grow);
+        }
+    }
+
+
+
     projectRect(rect, body, time) {
         this.tempVelocity.copy(body.velocity).scale(time);
         Phaser.Geom.Rectangle.CopyFrom(this.body, rect);

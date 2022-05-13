@@ -51,7 +51,7 @@ class Menu extends Phaser.Scene {
 
         this.add.image(150, 1500, 'menu');
 
-        this.textBat = this.add.text(8, 350, '', { lineSpacing:7, wordWrap: { width: 284 } });
+        this.textBat = this.add.text(8, 340, '', { lineSpacing:7, wordWrap: { width: 284 } });
         
         this.cardInfo = this.add.image(148, 290, 'card').setScale(0.35).setVisible(false);
         this.textInfo = this.add.text(14, 260, '', { lineSpacing:7, wordWrap: { width: 284 }, fontSize:15, color:'#000000' });
@@ -59,7 +59,7 @@ class Menu extends Phaser.Scene {
 
         //En savoir plus
         //Bouton de largeur 146, hauteur 96
-        this.plus = this.add.image(150, innerHeight - 50, 'savoirPlus').setInteractive().setVisible(false);
+        this.plus = this.add.image(150, innerHeight - 30, 'savoirPlus').setInteractive().setVisible(false).setScale(0.7);
         this.plus.on('pointerdown', this.savoirPlus, this);
 
         this.backGroundPopup = this.add.graphics();
@@ -276,6 +276,16 @@ class Menu extends Phaser.Scene {
             }
             
         }, this);
+
+
+        // Bouton Fertiliser
+        this.fertility = this.add.image(116, 90, "fertility").setScale(0.1).setInteractive();
+        this.fertility.on('pointerdown', function(){
+            if(this.batOverlap.type == 'field' && !this.batOverlap.plant && this.batOverlap.level == 1 && (this.batOverlap.tag == 'labor' || this.batOverlap.tag == 'water') && this.batOverlap.fertility < 100) {
+                this.europeScene.fertility(this.batOverlap);
+            }
+            
+        }, this);
         
 
         
@@ -284,6 +294,7 @@ class Menu extends Phaser.Scene {
         this.circlePlanter = this.add.image(this.planter.x, this.planter.y, "circle").setScale(0.1).setVisible(false);
         this.circleRecolte = this.add.image(this.recolter.x, this.recolter.y, "circle").setScale(0.1).setVisible(false);
         this.circleFeed = this.add.image(this.feed.x, this.feed.y, "circle").setScale(0.1).setVisible(false);
+        this.circleFertility = this.add.image(this.fertility.x, this.fertility.y, "circle").setScale(0.1).setVisible(false);
 
     }
 
@@ -347,6 +358,15 @@ class Menu extends Phaser.Scene {
         }
 
 
+        //Fertiliser
+        if(this.batOverlap.type == 'field' && !this.batOverlap.plant && this.batOverlap.level == 1 && (this.batOverlap.tag == 'labor' || this.batOverlap.tag == 'water') && this.batOverlap.fertility < 100) {
+            this.circleFertility.setVisible(true);
+        }
+        else {
+            this.circleFertility.setVisible(false);
+        }
+
+
         
         if(this.batOverlap.key != 0) {
             let tmpText = '';
@@ -381,6 +401,7 @@ class Menu extends Phaser.Scene {
                         tmpText+='\nCroissance : pourri';
                     }
                 }
+                tmpText+='\nFertilité : '+this.batOverlap.fertility;
             }
             this.plus.setVisible(true);
             this.textBat.setText(tmpText);
