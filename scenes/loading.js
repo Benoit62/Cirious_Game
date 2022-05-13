@@ -17,35 +17,33 @@ class Loading extends Phaser.Scene {
 
 
         // Maps et icones
-        this.load.image('map', 'assets/map.png');
-        this.load.image('europeile', 'assets/europeile.png');
-        this.load.image('desertile', 'assets/desertile.png');
-        this.load.image('foretile', 'assets/foretile.png');
-        this.load.image('glaceile', 'assets/glaceile.png');
-        this.load.image('europe', 'assets/europe.png');
-        this.load.image('header', 'assets/header.png');
+        this.load.image('map', 'assets/map/map.png');
+        this.load.image('europeile', 'assets/map/europeile.png');
+        this.load.image('desertile', 'assets/map/desertile.png');
+        this.load.image('foretile', 'assets/map/foretile.png');
+        this.load.image('glaceile', 'assets/map/glaceile.png');
+        this.load.image('europe', 'assets/map/europe.png');
 
-
-        this.load.image('build', 'assets/build.png');
-        this.load.image('error', 'assets/error.png');
         
         // Batiments ferme
-        this.load.spritesheet('pig', 'assets/pig_spritesheet.png', { frameWidth: 416, frameHeight: 416 });
-        this.load.spritesheet('cow', 'assets/cow_spritesheet.png', { frameWidth: 416, frameHeight: 416 });
-        this.load.spritesheet('sheep', 'assets/sheep_spritesheet.png', { frameWidth: 416, frameHeight: 416 });
-        this.load.spritesheet('tank', 'assets/tank.png', { frameWidth: 192, frameHeight: 192 });
-        this.load.spritesheet('solaire', 'assets/solaire.png', { frameWidth: 192, frameHeight: 192 });
-        this.load.spritesheet('house', 'assets/house.png', { frameWidth: 384, frameHeight: 256 });
+        this.load.spritesheet('labor', 'assets/build/labor.png', { frameWidth: 288, frameHeight: 416 });
+        this.load.spritesheet('water', 'assets/build/culture/water.png', { frameWidth: 288, frameHeight: 416 });
+        this.load.spritesheet('pig', 'assets/build/pig_spritesheet.png', { frameWidth: 416, frameHeight: 416 });
+        this.load.spritesheet('cow', 'assets/build/cow_spritesheet.png', { frameWidth: 416, frameHeight: 416 });
+        this.load.spritesheet('sheep', 'assets/build/sheep_spritesheet.png', { frameWidth: 416, frameHeight: 416 });
+        this.load.spritesheet('tank', 'assets/build/tank.png', { frameWidth: 192, frameHeight: 192 });
+        this.load.spritesheet('solaire', 'assets/build/solaire.png', { frameWidth: 192, frameHeight: 192 });
+        this.load.spritesheet('house', 'assets/build/house.png', { frameWidth: 384, frameHeight: 256 });
+        this.load.spritesheet('river', 'assets/build/river.png', { frameWidth: 384, frameHeight: 256 });
+        this.load.image('build', 'assets/build/build.png');
         
 
         // Champs et cultures
-        this.load.spritesheet('labor', 'assets/labor.png', { frameWidth: 288, frameHeight: 416 });
-        this.load.spritesheet('water', 'assets/water.png', { frameWidth: 288, frameHeight: 416 });
-        this.load.spritesheet('carrot', 'assets/carrot.png', { frameWidth: 288, frameHeight: 416 });
-        this.load.spritesheet('mais', 'assets/mais.png', { frameWidth: 288, frameHeight: 416 });
-        this.load.spritesheet('ble', 'assets/ble.png', { frameWidth: 288, frameHeight: 416 });
-        this.load.spritesheet('riz', 'assets/riz.png', { frameWidth: 288, frameHeight: 416 });
-        this.load.spritesheet('colza', 'assets/colza.png', { frameWidth: 288, frameHeight: 416 });
+        this.load.spritesheet('carrot', 'assets/culture/carrot.png', { frameWidth: 288, frameHeight: 416 });
+        this.load.spritesheet('mais', 'assets/culture/mais.png', { frameWidth: 288, frameHeight: 416 });
+        this.load.spritesheet('ble', 'assets/culture/ble.png', { frameWidth: 288, frameHeight: 416 });
+        this.load.spritesheet('riz', 'assets/culture/riz.png', { frameWidth: 288, frameHeight: 416 });
+        this.load.spritesheet('colza', 'assets/culture/colza.png', { frameWidth: 288, frameHeight: 416 });
         
 
         //Player
@@ -54,6 +52,7 @@ class Loading extends Phaser.Scene {
 
 
         // Chargement des assets du header
+        this.load.image('header', 'assets/header/header.png');
         this.load.image("animal-care", "assets/header/animal.png");
         this.load.image("ecology-care", "assets/header/ecology.png");
         this.load.image("hunger-care", "assets/header/hunger.png");
@@ -100,6 +99,7 @@ class Loading extends Phaser.Scene {
         this.load.image("menu", "assets/menu/menu.png"); 
         this.load.image("card", "assets/menu/card.png"); 
         this.load.image("savoirPlus", "assets/menu/savoirPlus.png"); 
+        this.load.image('error', 'assets/menu/error.png');
     }
     create() {
         var progressBar = this.add.graphics();
