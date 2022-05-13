@@ -528,6 +528,8 @@ include("config/configbdd.php");
                 this.textBat;
                 this.textInfo;
                 this.cardInfo;
+
+                this.plus;
             }
 
             create ()
@@ -542,6 +544,11 @@ include("config/configbdd.php");
                 
                 this.cardInfo = this.add.image(148, 290, 'card').setScale(0.35).setVisible(false);
                 this.textInfo = this.add.text(14, 260, '', { lineSpacing:7, wordWrap: { width: 284 }, fontSize:15, color:'#000000' });
+
+                this.plus = this.add.text(20, innerHeight - 20, 'En savoir plus').setInteractive().setVisible(false);
+                this.plus.on('pointerdown', function(){
+                    console.log('savoir plus');
+                }, this);
 
                 // Bouton (512x512) en scale 0.1 (51.2x51.2) + 55 a chaque fois
                 // Bouton (512x512) en scale 0.08 (40.96x40.96) + 45 a chaque fois
@@ -839,6 +846,7 @@ include("config/configbdd.php");
                     if(this.batOverlap.tag != 'build') {
                         tmpText+='\nDescription : '+this.batOverlap.ref.desc;
                     }
+                    this.plus.setVisible(true);
                     this.textBat.setText(tmpText);
                 }
                 
@@ -859,6 +867,10 @@ include("config/configbdd.php");
                     container.destroy();
                 }, 2000);
                 console.log('Not unlocked')
+            }
+
+            savoirPlus(){
+                
             }
 
         }
