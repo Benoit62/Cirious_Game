@@ -24,14 +24,14 @@ include("config/configbdd.php");
 </head>
 
 <body>
-    <script type="text/javascript" src="loading.js"></script>
-    <script type="text/javascript" src="cinematique.js"></script>
-    <script type="text/javascript" src="menu.js"></script>
-    <script type="text/javascript" src="data.js"></script>
-    <script type="text/javascript" src="desert.js"></script>
-    <script type="text/javascript" src="foret.js"></script>
-    <script type="text/javascript" src="glace.js"></script>
-    <script type="text/javascript" src="europe.js"></script>
+    <script type="text/javascript" src="scene/loading.js"></script>
+    <script type="text/javascript" src="scene/cinematique.js"></script>
+    <script type="text/javascript" src="scene/menu.js"></script>
+    <script type="text/javascript" src="scene/data.js"></script>
+    <script type="text/javascript" src="scene/desert.js"></script>
+    <script type="text/javascript" src="scene/foret.js"></script>
+    <script type="text/javascript" src="scene/glace.js"></script>
+    <script type="text/javascript" src="scene/europe.js"></script>
     <script type="text/javascript">
 
         
