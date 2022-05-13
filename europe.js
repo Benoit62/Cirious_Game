@@ -271,9 +271,11 @@ class Europe extends Phaser.Scene {
     update() {
         if (this.cursors.up.isDown) {
             this.player.setVelocityY(-550);
+            this.menuScene.closeSavoirPlus();
             //player.anims.play('up', true);
         } else if (this.cursors.down.isDown) {
             this.player.setVelocityY(550);
+            this.menuScene.closeSavoirPlus();
 
             //player.anims.play('down', true);
         } else {
@@ -282,10 +284,12 @@ class Europe extends Phaser.Scene {
 
         if (this.cursors.left.isDown) {
             this.player.setVelocityX(-550);
+            this.menuScene.closeSavoirPlus();
 
             this.player.anims.play('left', true);
         } else if (this.cursors.right.isDown) {
             this.player.setVelocityX(550);
+            this.menuScene.closeSavoirPlus();
 
             this.player.anims.play('right', true);
         } else {

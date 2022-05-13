@@ -19,6 +19,8 @@ include("config/configbdd.php");
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <title>ISEED</title>
     <script src="http://cdn.jsdelivr.net/npm/phaser@3.11.0/dist/phaser.js"></script>
+    <link rel="shortcut icon" href="images/logo.png" type="image/x-icon">
+    <link rel="icon" href="images/logo.png" type="image/x-icon">
 </head>
 
 <body>
@@ -557,7 +559,7 @@ include("config/configbdd.php");
                 this.backGroundPopup.fillRoundedRect(window.innerWidth/2 - 350 + 150, window.innerHeight/2 - 200 + 25, 700, 400, 20);
                 this.backGroundPopup.lineStyle(3, 0x000000, 1);
                 this.backGroundPopup.strokeRoundedRect(window.innerWidth/2 - 350 + 150, window.innerHeight/2 - 200 + 25, 700, 400, 20);
-                this.plusText = this.add.text(window.innerWidth/2 - 350 + 150 + 20,  window.innerHeight/2 - 200 + 25 + 30, '', { lineSpacing:7, wordWrap: { width: this.backGroundPopup.width }, fontSize:20, color:'#ffffff' });
+                this.plusText = this.add.text(window.innerWidth/2 - 350 + 150 + 20,  window.innerHeight/2 - 200 + 25 + 30, '', { lineSpacing:9, wordWrap: { width: 700 - 40 }, fontSize:17, color:'#ffffff' });
                 this.backGroundPopup.setVisible(false);
                 this.plusText.setVisible(false);
 
@@ -850,11 +852,7 @@ include("config/configbdd.php");
                             else {
                                 tmpText+='\nCroissance : Max';
                             }
-                            tmpText+='\nDescription : '+this.batOverlap.seed.desc;
                         }
-                    }
-                    if(this.batOverlap.tag != 'build') {
-                        tmpText+='\nDescription : '+this.batOverlap.ref.desc;
                     }
                     this.plus.setVisible(true);
                     this.textBat.setText(tmpText);
@@ -880,12 +878,49 @@ include("config/configbdd.php");
             }
 
             savoirPlus(){
+                let tmpText = '';
+                if(this.batOverlap.key != 0) {
+                    if(this.batOverlap.ref.name) {
+                        tmpText+='Nom : '+this.batOverlap.ref.name;
+                    }
+                    tmpText+='\nType : '+this.batOverlap.typeName;
+                    if(this.batOverlap.type != 'field') {
+                        tmpText+='\nNiveau : '+this.batOverlap.level;
+                    }
+                    if(this.batOverlap.ref.money && this.batOverlap.type != 'field') {
+                        let moneyPerSec = this.batOverlap.ref.money[this.batOverlap.level];
+                        tmpText+='\nGain : '+moneyPerSec+'/s';
+                    }
+                    if(this.batOverlap.type == 'field') {
+                        if(this.batOverlap.plant) {
+                            tmpText+='\nCulture : '+this.batOverlap.seed.name;
+                            if(this.batOverlap.grow < this.batOverlap.seed.maxGrow){
+                                tmpText+='\nCroissance : '+this.batOverlap.grow;
+                            }
+                            else {
+                                tmpText+='\nCroissance : Max';
+                            }
+                            tmpText+='\nDescription culture : '+this.batOverlap.seed.desc;
+                        }
+                    }
+                    if(this.batOverlap.tag != 'build') {
+                        tmpText+='\nDescription : '+this.batOverlap.ref.desc;
+                    }
+                }
                 this.backGroundPopup.setVisible(true);
                 this.plusText.setVisible(true);
-                this.plusText.setText('Nom : '+this.batOverlap.name);
-                this.input.on('pointerdown', function(){
+                this.plusText.setText(tmpText);
+                this.input.on('pointerdown', function() {
                     this.backGroundPopup.setVisible(false);
+                    this.plusText.setVisible(false);
+                    this.plusText.setText('');
                 }, this);
+            }
+
+            closeSavoirPlus() {
+                this.backGroundPopup.setVisible(false);
+                this.plusText.setVisible(false);
+                this.plusText.setText('');
             }
 
         }
