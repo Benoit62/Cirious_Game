@@ -123,6 +123,7 @@ include("config/configbdd.php");
                 this.load.image("circle", "assets/menu/circle.png"); 
                 this.load.image("menu", "assets/menu/menu.png"); 
                 this.load.image("card", "assets/menu/card.png"); 
+                this.load.image("savoirPlus", "assets/menu/savoirPlus.png"); 
             }
             create() {
                 var progressBar = this.add.graphics();
@@ -219,8 +220,6 @@ include("config/configbdd.php");
                 Phaser.Display.Align.In.Center(txt, this.add.zone(window.innerWidth / 2, window.innerHeight / 2, window.innerWidth, window.innerHeight));
 
                 this.input.once('pointerdown', this.start, this);
-
-                console.log('Scale width', this.width, 'Scale height', this.height, 'Window height', window.innerHeight, 'Window width', window.innerWidth);
             }
 
             start() {
@@ -531,6 +530,7 @@ include("config/configbdd.php");
 
                 this.plus;
                 this.backGroundPopup;
+                this.plusText;
             }
 
             create ()
@@ -546,14 +546,20 @@ include("config/configbdd.php");
                 this.cardInfo = this.add.image(148, 290, 'card').setScale(0.35).setVisible(false);
                 this.textInfo = this.add.text(14, 260, '', { lineSpacing:7, wordWrap: { width: 284 }, fontSize:15, color:'#000000' });
 
-                this.plus = this.add.text(20, innerHeight - 20, 'En savoir plus').setInteractive().setVisible(false);
+
+                //En savoir plus
+                //Bouton de largeur 146, hauteur 57
+                this.plus = this.add.image(150, innerHeight - 30, 'savoirPlus').setInteractive().setVisible(false);
                 this.plus.on('pointerdown', this.savoirPlus, this);
 
                 this.backGroundPopup = this.add.graphics();
                 this.backGroundPopup.fillStyle(0x70402a, 1);
-                this.backGroundPopup.fillRoundedRect(window.innerWidth/2 - 300, window.innerHeight/2 - 200, 600, 400, 20);
-                //this.backGroundPopup.setVisible(false);
-                //Phaser.Display.Align.In.Center(this.backGroundPopup, this.add.zone(window.innerWidth/2, window.innerHeight/2, window.innerWidth, window.innerHeight));
+                this.backGroundPopup.fillRoundedRect(window.innerWidth/2 - 350 + 150, window.innerHeight/2 - 200 + 25, 700, 400, 20);
+                this.backGroundPopup.lineStyle(3, 0x000000, 1);
+                this.backGroundPopup.strokeRoundedRect(window.innerWidth/2 - 350 + 150, window.innerHeight/2 - 200 + 25, 700, 400, 20);
+                this.plusText = this.add.text(window.innerWidth/2 - 350 + 150 + 20,  window.innerHeight/2 - 200 + 25 + 30, '', { lineSpacing:7, wordWrap: { width: this.backGroundPopup.width }, fontSize:20, color:'#ffffff' });
+                this.backGroundPopup.setVisible(false);
+                this.plusText.setVisible(false);
 
 
                 // Bouton (512x512) en scale 0.1 (51.2x51.2) + 55 a chaque fois
@@ -589,7 +595,6 @@ include("config/configbdd.php");
                 compt=0;
                 let k = 0;
                 for(let i of getByType('plant')) {
-                    console.log(i);
                     this.plants[i.tag] = this.add.image(32 +(k%5)*55, 140 + 45*compt, i.tag+"-button").setScale(0.08).setInteractive().setVisible(false)/*.setVisible(false)*/;
                     this.plants[i.tag].on('pointerdown', function(){
                         if(this.batOverlap.type == 'field' && !this.batOverlap.plant && this.batOverlap.level == 1 && (this.batOverlap.tag == 'labor' || this.batOverlap.tag == 'water')) {
@@ -610,7 +615,6 @@ include("config/configbdd.php");
                     k++;
                     if(k%5==0)compt++;
                 }
-                console.log(this.plants);
 
 
                 // Création des boutons Construction champ
@@ -877,6 +881,8 @@ include("config/configbdd.php");
 
             savoirPlus(){
                 this.backGroundPopup.setVisible(true);
+                this.plusText.setVisible(true);
+                this.plusText.setText('Nom : '+this.batOverlap.name);
                 this.input.on('pointerdown', function(){
                     this.backGroundPopup.setVisible(false);
                 }, this);

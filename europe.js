@@ -241,7 +241,6 @@ class Europe extends Phaser.Scene {
             this.physics.add.overlap(this.player, this.images[j], this.overlapBat, null, this);
             j++;
         }
-        console.log(this.data.values);
 
 
         //debug
