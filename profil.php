@@ -24,9 +24,9 @@ $query->closeCursor();
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="profil.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-  <title>profile</title>
   <link rel="shortcut icon" href="images/logo.png" type="image/x-icon">
   <link rel="icon" href="images/logo.png" type="image/x-icon">
+  <title>profile</title>
 </head>
 
 <body>
@@ -127,10 +127,25 @@ $query->closeCursor();
     </div>
 
   </form>
-  <div class="container">
-    <a href="game.php"><span>Play</span></a>
 
+  <div class="disp">
+    <img src="./images/background_profil.jpg">
+    <div class="container">
+      <a href="game.php"><span>Continue</span></a>
+      <a><span>New game</span></a>
+    </div>
+    <div class="info">
+      <ul>
+        <li>Niveau :</li>
+        <li>Argent :</li>
+      </ul>
+      <ul>
+        <li></li>
+      </ul>
+    </div>
   </div>
+
+
 
 
 
@@ -142,6 +157,9 @@ $query->closeCursor();
     const navigation = document.querySelector('.navigation');
     menu_toggle.addEventListener('click', () => {
       navigation.classList.toggle('active');
+      if(document.getElementsByClassName('disp')[0].children[0].style.height!="130%")
+      document.getElementsByClassName('disp')[0].children[0].style.height="130%";
+      else document.getElementsByClassName('disp')[0].children[0].style.height="105%";
     })
   </script>
 
