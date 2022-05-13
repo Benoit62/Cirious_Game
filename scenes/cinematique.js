@@ -248,8 +248,6 @@ class Cinematique2 extends Phaser.Scene {
             dialBox.fillRect(0, 0, window.innerWidth, 100);
             dialBox.fillStyle(0x70402a, 1);
             var content = [
-                "",
-                "Seedy :",
                 "Salut ! Je m’appelle Seedy, celle qui détient toutes les connaissances nécessaires à la création de la ferme du futur. Je serais donc ta guide !",
                 "",
                 "Mosbert :",
@@ -262,7 +260,7 @@ class Cinematique2 extends Phaser.Scene {
             var text0 = this.make.text({
                 x: 0,
                 y: 0,
-                text: 'Qu Dongyu :'
+                text: 'Seedy :'
             });
             text0.setTint(0xff0000);
             var text1 = this.make.text({
