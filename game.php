@@ -178,7 +178,7 @@ include("config/configbdd.php");
 
                 var music = this.sound.add('farming', {
                     mute: false,
-                    volume: 0.3,
+                    volume: 0.1,
                     rate: 1,
                     detune: 0,
                     seek: 0,
@@ -367,7 +367,7 @@ include("config/configbdd.php");
         window.addEventListener('resize', ()=>{
             game.config.width = window.innerWidth;
             game.config.height = window.innerHeight;
-        }, false)
+        }, false);       
     </script>
 </body>
 

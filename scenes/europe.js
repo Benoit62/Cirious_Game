@@ -562,7 +562,6 @@ class Europe extends Phaser.Scene {
             bat.fertility += 20;
             if(bat.fertility > 100) bat.fertility = 100;
             console.log('Fertilised !', bat);
-            this.images[bat.key - 1] = this.physics.add.image(bat.x, bat.y, seed.tag, bat.grow);
         }
     }
 
