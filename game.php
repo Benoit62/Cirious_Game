@@ -530,6 +530,7 @@ include("config/configbdd.php");
                 this.cardInfo;
 
                 this.plus;
+                this.backGroundPopup;
             }
 
             create ()
@@ -546,9 +547,14 @@ include("config/configbdd.php");
                 this.textInfo = this.add.text(14, 260, '', { lineSpacing:7, wordWrap: { width: 284 }, fontSize:15, color:'#000000' });
 
                 this.plus = this.add.text(20, innerHeight - 20, 'En savoir plus').setInteractive().setVisible(false);
-                this.plus.on('pointerdown', function(){
-                    console.log('savoir plus');
-                }, this);
+                this.plus.on('pointerdown', this.savoirPlus, this);
+
+                this.backGroundPopup = this.add.graphics();
+                this.backGroundPopup.fillStyle(0x70402a, 1);
+                this.backGroundPopup.fillRoundedRect(window.innerWidth/2 - 300, window.innerHeight/2 - 200, 600, 400, 20);
+                //this.backGroundPopup.setVisible(false);
+                //Phaser.Display.Align.In.Center(this.backGroundPopup, this.add.zone(window.innerWidth/2, window.innerHeight/2, window.innerWidth, window.innerHeight));
+
 
                 // Bouton (512x512) en scale 0.1 (51.2x51.2) + 55 a chaque fois
                 // Bouton (512x512) en scale 0.08 (40.96x40.96) + 45 a chaque fois
@@ -870,7 +876,10 @@ include("config/configbdd.php");
             }
 
             savoirPlus(){
-                
+                this.backGroundPopup.setVisible(true);
+                this.input.on('pointerdown', function(){
+                    this.backGroundPopup.setVisible(false);
+                }, this);
             }
 
         }
