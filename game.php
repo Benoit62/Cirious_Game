@@ -24,14 +24,14 @@ include("config/configbdd.php");
 </head>
 
 <body>
-    <script type="text/javascript" src="scene/loading.js"></script>
-    <script type="text/javascript" src="scene/cinematique.js"></script>
-    <script type="text/javascript" src="scene/menu.js"></script>
-    <script type="text/javascript" src="scene/data.js"></script>
-    <script type="text/javascript" src="scene/desert.js"></script>
-    <script type="text/javascript" src="scene/foret.js"></script>
-    <script type="text/javascript" src="scene/glace.js"></script>
-    <script type="text/javascript" src="scene/europe.js"></script>
+    <script type="text/javascript" src="scenes/loading.js"></script>
+    <script type="text/javascript" src="scenes/menu.js"></script>
+    <script type="text/javascript" src="scenes/cinematique.js"></script>
+    <script type="text/javascript" src="scenes/data.js"></script>
+    <script type="text/javascript" src="scenes/desert.js"></script>
+    <script type="text/javascript" src="scenes/foret.js"></script>
+    <script type="text/javascript" src="scenes/glace.js"></script>
+    <script type="text/javascript" src="scenes/europe.js"></script>
     <script type="text/javascript">
 
         
@@ -234,12 +234,6 @@ include("config/configbdd.php");
                 this.moneyText = this.add.text(330, 25, '0').setOrigin(0,0.5);
                 this.moneyPerTickText = this.add.text(410, 25, '0').setOrigin(0,0.5);
 
-                //  Check the Registry and hit our callback every time the 'money' value is updated
-                this.registry.events.on('changedata', function(){
-                    this.moneyText.setText(this.registry.get('money')+'$');
-                    this.moneyPerTickText.setText(this.registry.get('moneyPerTick')+'/s');
-                }, this);
-
 
                 // Barre de progressions
                 var progressBox1 = this.add.graphics();
@@ -267,18 +261,10 @@ include("config/configbdd.php");
                 progressBox2.fillRect(w2, h2, widthBar, heightBar);
                 progressBox3.fillRect(w3, h3, widthBar, heightBar);
 
-
-                progressBar1.fillStyle(0x0080ff, 1);
-                progressBar1.fillRect(w1, h1, widthBar*0.1, heightBar);
-                progressBar2.fillStyle(0x01D758, 1);
-                progressBar2.fillRect(w2, h2, widthBar*0.1, heightBar);
-                progressBar3.fillStyle(0xffc0cb, 1);
-                progressBar3.fillRect(w3, h3, widthBar*0.1, heightBar);
-
                 var percentText1 = this.make.text({
                     x: w1 + widthBar/2,
                     y: h1 + 15,
-                    text: '10%',
+                    text: '',
                     style: {
                         font: '18px monospace',
                         fill: '#ffffff'
@@ -289,7 +275,7 @@ include("config/configbdd.php");
                 var percentText2 = this.make.text({
                     x: w2 + widthBar/2,
                     y: h2 + 15,
-                    text: '10%',
+                    text: '',
                     style: {
                         font: '18px monospace',
                         fill: '#ffffff'
@@ -300,7 +286,7 @@ include("config/configbdd.php");
                 var percentText3 = this.make.text({
                     x: w3 + widthBar/2,
                     y: h3 + 15,
-                    text: '10%',
+                    text: '',
                     style: {
                         font: '18px monospace',
                         fill: '#ffffff'
@@ -312,6 +298,22 @@ include("config/configbdd.php");
                 this.add.image(w1 - 25, 25, 'animal-care').setScale(0.08);
                 this.add.image(w2 - 25, 25, 'ecology-care').setScale(0.08);
                 this.add.image(w3 - 25, 25, 'hunger-care').setScale(0.08);
+
+
+                //  Check the Registry and hit our callback every time the 'money' value is updated
+                this.registry.events.on('changedata', function(){
+                    this.moneyText.setText(this.registry.get('money')+'$');
+                    this.moneyPerTickText.setText(this.registry.get('moneyPerTick')+'/s');
+                    percentText1.setText(this.registry.get('animalCare')+'%');
+                    percentText2.setText(this.registry.get('ecology')+'%');
+                    percentText3.setText(this.registry.get('hunger')+'%');
+                    progressBar1.fillStyle(0x0080ff, 1);
+                    progressBar1.fillRect(w1, h1, widthBar*(this.registry.get('animalCare')/100), heightBar);
+                    progressBar2.fillStyle(0x01D758, 1);
+                    progressBar2.fillRect(w2, h2, widthBar*(this.registry.get('ecology')/100), heightBar);
+                    progressBar3.fillStyle(0xffc0cb, 1);
+                    progressBar3.fillRect(w3, h3, widthBar*(this.registry.get('hunger')/100), heightBar);
+                }, this);
 
             }
 

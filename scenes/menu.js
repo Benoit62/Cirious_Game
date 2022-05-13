@@ -247,13 +247,13 @@ class Menu extends Phaser.Scene {
         // Bouton recolter
         this.recolter = this.add.image(245, 35, "recolter").setScale(0.1).setInteractive();
         this.recolter.on('pointerdown', function(){
-            if(this.batOverlap.type == 'field' && this.batOverlap.plant && this.batOverlap.level == 1 && this.batOverlap.tag != 'labor' && this.batOverlap.grow == this.batOverlap.seed.maxGrow) {
+            if(this.batOverlap.type == 'field' && this.batOverlap.plant && this.batOverlap.level == 1 && this.batOverlap.tag != 'labor' && (this.batOverlap.grow == this.batOverlap.seed.maxGrow || this.batOverlap.dead)) {
                 this.europeScene.recolte(this.batOverlap);
             }
             
         }, this);
         this.input.keyboard.on('keydown_Z', function(){
-            if(this.batOverlap.type == 'field' && this.batOverlap.plant && this.batOverlap.level == 1 && this.batOverlap.tag != 'labor' && this.batOverlap.grow == this.batOverlap.seed.maxGrow) {
+            if(this.batOverlap.type == 'field' && this.batOverlap.plant && this.batOverlap.level == 1 && this.batOverlap.tag != 'labor' && (this.batOverlap.grow == this.batOverlap.seed.maxGrow || this.batOverlap.dead)) {
                 this.europeScene.recolte(this.batOverlap);
             }
         }, this);
@@ -325,7 +325,7 @@ class Menu extends Phaser.Scene {
         }
 
         //Recolter
-        if(this.batOverlap.type == 'field' && this.batOverlap.plant && this.batOverlap.level == 1 && this.batOverlap.tag != 'labor' && this.batOverlap.grow == this.batOverlap.seed.maxGrow) {
+        if(this.batOverlap.type == 'field' && this.batOverlap.plant && this.batOverlap.level == 1 && this.batOverlap.tag != 'labor' && (this.batOverlap.grow == this.batOverlap.seed.maxGrow || this.batOverlap.dead)) {
             this.circleRecolte.setVisible(true);
         }
         else {

@@ -27,7 +27,7 @@ class Loading extends Phaser.Scene {
         
         // Batiments ferme
         this.load.spritesheet('labor', 'assets/build/labor.png', { frameWidth: 288, frameHeight: 416 });
-        this.load.spritesheet('water', 'assets/build/culture/water.png', { frameWidth: 288, frameHeight: 416 });
+        this.load.spritesheet('water', 'assets/build/water.png', { frameWidth: 288, frameHeight: 416 });
         this.load.spritesheet('pig', 'assets/build/pig_spritesheet.png', { frameWidth: 416, frameHeight: 416 });
         this.load.spritesheet('cow', 'assets/build/cow_spritesheet.png', { frameWidth: 416, frameHeight: 416 });
         this.load.spritesheet('sheep', 'assets/build/sheep_spritesheet.png', { frameWidth: 416, frameHeight: 416 });

@@ -135,8 +135,8 @@ class Europe extends Phaser.Scene {
             y: +304,
             type: 'field',
             typeName:'Culture',
-            level: 0,
-            tag: 'build',
+            level: 1,
+            tag: 'labor',
             scale: 0.5,
             ref: {},
             plant: false,
@@ -481,7 +481,7 @@ class Europe extends Phaser.Scene {
     rotten(){
         for (let i in this.data.values) {
             let bat = this.data.values[i];
-            if (bat.level == 1 && bat.type == 'field' && bat.tag != 'labor' && bat.plant) {
+            if (bat.level == 1 && bat.type == 'field' && bat.tag != 'labor' && bat.plant && !bat.dead) {
                 if (!bat.seed.climat.includes(this.climat)) {
                     bat.dead = true;
                     console.log('Dead plant !', bat);
@@ -492,14 +492,30 @@ class Europe extends Phaser.Scene {
     }
     recolte(bat) {
         console.log('Recolte : ', bat);
-        if (bat.type == 'field' && bat.plant && bat.level == 1 && (bat.tag != 'labor' || bat.tag != 'water') && bat.grow == bat.seed.maxGrow && !bat.dead) {
-            bat.plant = false;
-            bat.tag = bat.seed.ground;
-            bat.grow = 0;
-            this.money += bat.seed.money;
-            bat.seed = {};
-            console.log('Recolté !', bat);
-            this.images[bat.key - 1].destroy();
+        if (bat.type == 'field' && bat.plant && bat.level == 1 && (bat.tag != 'labor' || bat.tag != 'water') && (bat.grow == bat.seed.maxGrow || bat.dead)) {
+            if(!bat.dead) {
+                bat.plant = false;
+                bat.tag = bat.seed.ground;
+                bat.grow = 0;
+                this.money += bat.seed.money;
+                bat.seed = {};
+                this.hunger += 5;
+                this.registry.set('hunger', this.hunger);
+                console.log('Recolté !', bat);
+                this.images[bat.key - 1].destroy();
+            }
+            else {
+                bat.plant = false;
+                bat.tag = bat.seed.ground;
+                bat.grow = 0;
+                //this.money += bat.seed.money;
+                bat.seed = {};
+                bat.dead = false;
+                this.hunger -= 10;
+                this.registry.set('hunger', this.hunger);
+                console.log('Nettoyé !', bat);
+                this.images[bat.key - 1].destroy();
+            }
         }
     }
     projectRect(rect, body, time) {
