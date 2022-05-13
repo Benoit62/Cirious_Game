@@ -191,7 +191,7 @@ include("config/configbdd.php");
                         progressBox.destroy();
                         loadingText.destroy();
                         percentText.destroy();
-                        this.scene.start('playScene');
+                        this.scene.start('mapScene');
                     } else {
                         progress(i);
                         i+=10;
@@ -540,8 +540,8 @@ include("config/configbdd.php");
 
                 this.textBat = this.add.text(8, 350, '', { lineSpacing:7, wordWrap: { width: 284 } });
                 
-                this.cardInfo = this.add.image(150, 290, 'card').setScale(0.35).setVisible(false);
-                this.textInfo = this.add.text(8, 260, '', { lineSpacing:7, wordWrap: { width: 284 }, fontSize:15, color:'#000000' });
+                this.cardInfo = this.add.image(148, 290, 'card').setScale(0.35).setVisible(false);
+                this.textInfo = this.add.text(10, 260, '', { lineSpacing:7, wordWrap: { width: 284 }, fontSize:15, color:'#000000' });
 
                 // Bouton (512x512) en scale 0.1 (51.2x51.2) + 55 a chaque fois
                 // Bouton (512x512) en scale 0.08 (40.96x40.96) + 45 a chaque fois
