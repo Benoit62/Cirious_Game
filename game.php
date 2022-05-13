@@ -58,8 +58,6 @@ include("config/configbdd.php");
                 this.load.image('glaceile', 'assets/glaceile.png');
                 this.load.image('europe', 'assets/europe.png');
                 this.load.image('header', 'assets/header.png');
-                this.load.image('off', 'assets/off.png');
-                this.load.image('globe', 'assets/globe.png');
 
 
                 this.load.image('build', 'assets/build.png');
@@ -93,6 +91,9 @@ include("config/configbdd.php");
                 this.load.image("animal-care", "assets/header/animal.png");
                 this.load.image("ecology-care", "assets/header/ecology.png");
                 this.load.image("hunger-care", "assets/header/hunger.png");
+                this.load.image("dollar", "assets/header/dollar.png");
+                this.load.image('off', 'assets/header/off.png');
+                this.load.image('globe', 'assets/header/globe.png');
 
 
                 // Chargement des icons du Menu
@@ -403,8 +404,11 @@ include("config/configbdd.php");
                     }
                 }, this);
 
-                this.moneyText = this.add.text(310, 20, '0');
-                this.moneyPerTickText = this.add.text(400, 20, '0');
+                // Money 
+                //521px *0.05 => 25px
+                this.add.image(315, 25, 'dollar').setScale(0.05);
+                this.moneyText = this.add.text(330, 25, '0').setOrigin(0,0.5);
+                this.moneyPerTickText = this.add.text(410, 25, '0').setOrigin(0,0.5);
 
                 //  Check the Registry and hit our callback every time the 'money' value is updated
                 this.registry.events.on('changedata', function(){
@@ -620,7 +624,11 @@ include("config/configbdd.php");
                     }, this);
                     this.plants[i.tag].on('pointermove', function(){
                         this.cardInfo.setVisible(true);
-                        this.textInfo.setText('Culture : '+i.name+'\nPrix : '+i.costPlant+'\nDescription : '+i.desc);
+                        let climats = '';
+                        for(let clm in i.climat) {
+                            climats+=getByTag(i.climat[clm])[0].name+' ';
+                        }
+                        this.textInfo.setText('Culture : '+i.name+'\nPrix : '+i.costPlant+'\nClimats : '+climats);
                     }, this);
                     this.plants[i.tag].on('pointerout', function(){
                         this.cardInfo.setVisible(false);
@@ -914,6 +922,9 @@ include("config/configbdd.php");
                         let moneyPerSec = this.batOverlap.ref.money[this.batOverlap.level];
                         tmpText+='\nGain : '+moneyPerSec+'/s';
                     }
+                    if(this.batOverlap.tag != 'build') {
+                        tmpText+='\nDescription : '+this.batOverlap.ref.desc;
+                    }
                     if(this.batOverlap.type == 'field') {
                         if(this.batOverlap.plant) {
                             tmpText+='\nCulture : '+this.batOverlap.seed.name;
@@ -923,11 +934,13 @@ include("config/configbdd.php");
                             else {
                                 tmpText+='\nCroissance : Max';
                             }
+                            let climats = '';
+                            for(let clm in this.batOverlap.seed.climat) {
+                                climats+=getByTag(this.batOverlap.seed.climat[clm])[0].name+' ';
+                            }
+                            tmpText+='\nClimats : '+climats;
                             tmpText+='\nDescription culture : '+this.batOverlap.seed.desc;
                         }
-                    }
-                    if(this.batOverlap.tag != 'build') {
-                        tmpText+='\nDescription : '+this.batOverlap.ref.desc;
                     }
                 }
                 this.backGroundPopup.setVisible(true);
@@ -966,7 +979,6 @@ include("config/configbdd.php");
         window.addEventListener('resize', ()=>{
             game.config.width = window.innerWidth;
             game.config.height = window.innerHeight;
-            console.log(game.config.width, game.config.height);
         }, false)
     </script>
 </body>
