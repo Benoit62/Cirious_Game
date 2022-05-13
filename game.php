@@ -89,6 +89,12 @@ include("config/configbdd.php");
                 this.load.spritesheet('farmer', 'assets/farmer.png', { frameWidth: 41.3, frameHeight: 86 });
 
 
+                // Chargement des assets du header
+                this.load.image("animal-care", "assets/header/animal.png");
+                this.load.image("ecology-care", "assets/header/ecology.png");
+                this.load.image("hunger-care", "assets/header/hunger.png");
+
+
                 // Chargement des icons du Menu
                 this.load.image("search", "assets/menu/search.png");
                 this.load.image("builder", "assets/menu/build.png");
@@ -423,11 +429,11 @@ include("config/configbdd.php");
                 var widthBar = 150;
                 var heightBar = 30;
                 //coords of bars
-                var w1 = 500;
+                var w1 = 540;
                 var h1 = 10;
-                var w2 = w1 + widthBar + 40;
+                var w2 = w1 + widthBar + 80;
                 var h2 = 10;
-                var w3 = w2 + widthBar + 40;
+                var w3 = w2 + widthBar + 80;
                 var h3 = 10;
                 progressBox1.fillRect(w1, h1, widthBar, heightBar);
                 progressBox2.fillRect(w2, h2, widthBar, heightBar);
@@ -473,6 +479,11 @@ include("config/configbdd.php");
                     }
                 });
                 percentText3.setOrigin(0.5, 0.5);
+
+                //Icones des jauges Images de 512x512 à 0.08 => 41x41
+                this.add.image(w1 - 25, 25, 'animal-care').setScale(0.08);
+                this.add.image(w2 - 25, 25, 'ecology-care').setScale(0.08);
+                this.add.image(w3 - 25, 25, 'hunger-care').setScale(0.08);
 
             }
 
@@ -551,14 +562,14 @@ include("config/configbdd.php");
 
 
                 //En savoir plus
-                //Bouton de largeur 146, hauteur 57
-                this.plus = this.add.image(150, innerHeight - 30, 'savoirPlus').setInteractive().setVisible(false);
+                //Bouton de largeur 146, hauteur 96
+                this.plus = this.add.image(150, innerHeight - 50, 'savoirPlus').setInteractive().setVisible(false);
                 this.plus.on('pointerdown', this.savoirPlus, this);
 
                 this.backGroundPopup = this.add.graphics();
                 this.backGroundPopup.fillStyle(0x70402a, 1);
                 this.backGroundPopup.fillRoundedRect(window.innerWidth/2 - 350 + 150, window.innerHeight/2 - 200 + 25, 700, 400, 20);
-                this.backGroundPopup.lineStyle(3, 0x000000, 1);
+                this.backGroundPopup.lineStyle(3, 0xffffff, 1);
                 this.backGroundPopup.strokeRoundedRect(window.innerWidth/2 - 350 + 150, window.innerHeight/2 - 200 + 25, 700, 400, 20);
                 this.plusText = this.add.text(window.innerWidth/2 - 350 + 150 + 20,  window.innerHeight/2 - 200 + 25 + 30, '', { lineSpacing:9, wordWrap: { width: 700 - 40 }, fontSize:17, color:'#ffffff' });
                 this.backGroundPopup.setVisible(false);
@@ -838,7 +849,12 @@ include("config/configbdd.php");
                     }
                     tmpText+='\nType : '+this.batOverlap.typeName;
                     if(this.batOverlap.type != 'field') {
-                        tmpText+='\nNiveau : '+this.batOverlap.level;
+                        if(this.batOverlap.level < this.batOverlap.ref.lvlMax){
+                            tmpText+='\nNiveau : '+this.batOverlap.level+' / '+this.batOverlap.ref.lvlMax;
+                        }
+                        else {
+                            tmpText+='\nNiveau : Max';
+                        }
                     }
                     if(this.batOverlap.ref.money && this.batOverlap.type != 'field') {
                         let moneyPerSec = this.batOverlap.ref.money[this.batOverlap.level];
@@ -848,7 +864,7 @@ include("config/configbdd.php");
                         if(this.batOverlap.plant) {
                             tmpText+='\nCulture : '+this.batOverlap.seed.name;
                             if(this.batOverlap.grow < this.batOverlap.seed.maxGrow){
-                                tmpText+='\nCroissance : '+this.batOverlap.grow;
+                                tmpText+='\nCroissance : '+this.batOverlap.grow+' / '+this.batOverlap.seed.maxGrow;
                             }
                             else {
                                 tmpText+='\nCroissance : Max';
@@ -866,11 +882,12 @@ include("config/configbdd.php");
             }
 
             errorText(errorTxt) {
-                let container = this.add.image(0, 0, 'error');
-                let text = this.add.text(602, 572, errorTxt, { fontFamily: 'Arial', fontSize: 20, color: '#000000', wordWrap: { width: 270 }, align: 'center' });
-                Phaser.Display.Align.In.Center(text, this.add.zone(window.innerWidth/2, window.innerHeight/2, window.innerWidth, window.innerHeight));
+                //Width 1000px à 0.8 => 800  Height 350px à 0.8 => 280
+                let container = this.add.image(0, 0, 'error').setScale(0.8);
+                let text = this.add.text(602, 572, errorTxt, { fontFamily: 'Arial', fontSize: 23, color: '#000000', wordWrap: { width: 600 }, align: 'center' });
                 Phaser.Display.Align.In.Center(container, this.add.zone(window.innerWidth/2, window.innerHeight/2, window.innerWidth, window.innerHeight));
-                text.setY(text.y + 100)
+                Phaser.Display.Align.In.Center(text, this.add.zone(container.x, container.y, container.width*0.8, container.height*0.8));
+                text.setX(text.x+100);
                 setTimeout(() => {
                     text.destroy();
                     container.destroy();
@@ -886,7 +903,12 @@ include("config/configbdd.php");
                     }
                     tmpText+='\nType : '+this.batOverlap.typeName;
                     if(this.batOverlap.type != 'field') {
-                        tmpText+='\nNiveau : '+this.batOverlap.level;
+                        if(this.batOverlap.level < this.batOverlap.ref.lvlMax){
+                            tmpText+='\nNiveau : '+this.batOverlap.level+' / '+this.batOverlap.ref.lvlMax;
+                        }
+                        else {
+                            tmpText+='\nNiveau : Max';
+                        }
                     }
                     if(this.batOverlap.ref.money && this.batOverlap.type != 'field') {
                         let moneyPerSec = this.batOverlap.ref.money[this.batOverlap.level];
@@ -896,7 +918,7 @@ include("config/configbdd.php");
                         if(this.batOverlap.plant) {
                             tmpText+='\nCulture : '+this.batOverlap.seed.name;
                             if(this.batOverlap.grow < this.batOverlap.seed.maxGrow){
-                                tmpText+='\nCroissance : '+this.batOverlap.grow;
+                                tmpText+='\nCroissance : '+this.batOverlap.grow+' / '+this.batOverlap.seed.maxGrow;
                             }
                             else {
                                 tmpText+='\nCroissance : Max';

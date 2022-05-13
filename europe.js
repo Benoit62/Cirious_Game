@@ -151,6 +151,18 @@ class Europe extends Phaser.Scene {
         });
 
 
+        this.data.set('bat10', {
+            key: 9,
+            x: 0,
+            y: 0,
+            type: 'river',
+            typeName:'Rivière',
+            pollution: 0,
+            tag: 'river',
+            desc:''
+        })
+
+
 
 
         const farm = this.physics.add.image(0, 0, 'europe');
@@ -231,14 +243,14 @@ class Europe extends Phaser.Scene {
         let j = 0;
         for (let i in this.data.values) {
             let bat = this.data.values[i];
-            if (bat.level > 0 && bat.tag != 'build') {
+            if (bat.level > 0 && bat.tag != 'build' && bat.tag != 'river') {
                 this.images.push(this.physics.add.image(bat.x, bat.y, bat.tag, bat.level - 1));
                 bat.ref = getByTag(bat.tag)[0];
                 if (bat.rotate) {
                     this.images[j].rotation = 3.141592 / 2;
                 }
             }
-            else {
+            else if(bat.tag != 'river') {
                 this.images.push(this.physics.add.image(bat.x, bat.y, 'build').setScale(bat.scale));
             }
             this.physics.add.overlap(this.player, this.images[j], this.overlapBat, null, this);
