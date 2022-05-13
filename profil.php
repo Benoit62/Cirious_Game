@@ -25,6 +25,8 @@ $query->closeCursor();
   <link rel="stylesheet" href="profil.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
   <title>profile</title>
+  <link rel="shortcut icon" href="images/logo.png" type="image/x-icon">
+  <link rel="icon" href="images/logo.png" type="image/x-icon">
 </head>
 
 <body>

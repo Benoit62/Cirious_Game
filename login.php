@@ -16,6 +16,8 @@ $bdd=NULL;
 		<title>Sign in & Sign Up Form | Vanilla Javascript</title>
 		<link rel="stylesheet" type="text/css" href="login.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <link rel="shortcut icon" href="images/logo.png" type="image/x-icon">
+        <link rel="icon" href="images/logo.png" type="image/x-icon">
 	</head>
 	<body>
         <section>
