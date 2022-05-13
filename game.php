@@ -22,6 +22,7 @@ include("config/configbdd.php");
 </head>
 
 <body>
+    <script type="text/javascript" src="cinematique.js"></script>
     <script type="text/javascript" src="data.js"></script>
     <script type="text/javascript" src="desert.js"></script>
     <script type="text/javascript" src="foret.js"></script>
@@ -38,6 +39,15 @@ include("config/configbdd.php");
                 });
             }
             preload() {
+                //Cinematique
+                this.load.image('bg', 'assets/cinematique/clouds.png');
+                this.load.image('seedySlt', 'assets/cinematique/seedy_salut.png');
+                this.load.image('seedySaut', 'assets/cinematique/seedy_saut.png');
+                this.load.spritesheet('tiles', 'assets/cinematique/fantasy-tiles.png', { frameWidth: 64, frameHeight: 64 });
+                this.load.spritesheet('sellier', 'assets/cinematique/selliersheet.png', { frameWidth: 67.6, frameHeight: 105 });
+                this.load.spritesheet('scient', 'assets/cinematique/eddisonsheet.png', { frameWidth: 32, frameHeight: 48 });
+
+
                 // Maps et icones
                 this.load.image('map', 'assets/map.png');
                 this.load.image('europeile', 'assets/europeile.png');
@@ -51,6 +61,7 @@ include("config/configbdd.php");
 
 
                 this.load.image('build', 'assets/build.png');
+                this.load.image('error', 'assets/error.png');
                 
                 // Batiments ferme
                 this.load.spritesheet('pig', 'assets/pig_spritesheet.png', { frameWidth: 416, frameHeight: 416 });
@@ -111,6 +122,7 @@ include("config/configbdd.php");
                 // Chargement des autres assets du menu
                 this.load.image("circle", "assets/menu/circle.png"); 
                 this.load.image("menu", "assets/menu/menu.png"); 
+                this.load.image("card", "assets/menu/card.png"); 
             }
             create() {
                 var progressBar = this.add.graphics();
@@ -179,7 +191,7 @@ include("config/configbdd.php");
                         progressBox.destroy();
                         loadingText.destroy();
                         percentText.destroy();
-                        this.scene.start('sceneA');
+                        this.scene.start('playScene');
                     } else {
                         progress(i);
                         i+=10;
@@ -190,11 +202,11 @@ include("config/configbdd.php");
         }
 
         //scenes par Benoit
-        class SceneA extends Phaser.Scene {
+        class Play extends Phaser.Scene {
 
             constructor() {
                 super({
-                    key: 'sceneA'
+                    key: 'playScene'
                 });
             }
 
@@ -212,10 +224,13 @@ include("config/configbdd.php");
             }
 
             start() {
-                this.scene.start('mapScene');
+                this.scene.start('cinematiqueScene1');
             }
 
         }
+
+
+        
 
         class Map extends Phaser.Scene {
 
@@ -382,14 +397,114 @@ include("config/configbdd.php");
 
                 this.moneyText = this.add.text(310, 20, '0');
                 this.moneyPerTickText = this.add.text(400, 20, '0');
-                this.batOverlap = this.add.text(500, 20, 'Checking overlap');
 
                 //  Check the Registry and hit our callback every time the 'money' value is updated
                 this.registry.events.on('changedata', function(){
-                    this.moneyText.setText(this.registry.get('money'));
+                    this.moneyText.setText(this.registry.get('money')+'$');
                     this.moneyPerTickText.setText(this.registry.get('moneyPerTick')+'/s');
-                    this.batOverlap.setText(this.registry.get('bat'));
                 }, this);
+
+
+
+                // Barre de progressions
+                var progressBox1 = this.add.graphics();
+                var progressBar1 = this.add.graphics();
+                var progressBox2 = this.add.graphics();
+                var progressBar2 = this.add.graphics();
+                var progressBox3 = this.add.graphics();
+                var progressBar3 = this.add.graphics();
+                progressBox1.fillStyle(0xffffff, 0.2);
+                progressBox2.fillStyle(0xffffff, 0.2);
+                progressBox3.fillStyle(0xffffff, 0.2);
+
+
+                //width of bar
+                var widthBar = 150;
+                //coords of bars
+                var w1 = 500;
+                var h1 = 10;
+                var w2 = w1 + widthBar + 20;
+                var h2 = 10;
+                var w3 = w2 + widthBar + 20;
+                var h3 = 10;
+                progressBox1.fillRoundedRect(w1, h1, widthBar, 30, 15);
+                progressBox2.fillRoundedRect(w2, h2, widthBar, 30, 15);
+                progressBox3.fillRoundedRect(w3, h3, widthBar, 30, 15);
+
+
+                progressBar1.fillRoundedRect(w1, h1, 10, 30, 15);
+                progressBar1.fillStyle(0x0080ff, 1);
+                progressBar2.fillRoundedRect(w2, h2, 10, 30, 15);
+                progressBar2.fillStyle(0x01D758, 1);
+                progressBar3.fillRoundedRect(w3, h3, 10, 30, 15);
+                progressBar3.fillStyle(0xffc0cb, 1);
+
+                var percentText1 = this.make.text({
+                    x: w1,
+                    y: h1,
+                    text: '0%',
+                    style: {
+                        font: '18px monospace',
+                        fill: '#ffffff'
+                    }
+                });
+                percentText1.setOrigin(0.5, 0.5);
+
+                var percentText2 = this.make.text({
+                    x: w2,
+                    y: h2,
+                    text: '0%',
+                    style: {
+                        font: '18px monospace',
+                        fill: '#ffffff'
+                    }
+                });
+                percentText2.setOrigin(0.5, 0.5);
+
+                var percentText3 = this.make.text({
+                    x: w3,
+                    y: h3,
+                    text: '0%',
+                    style: {
+                        font: '18px monospace',
+                        fill: '#ffffff'
+                    }
+                });
+                percentText3.setOrigin(0.5, 0.5);
+
+
+                /*function progress(value) {
+                    percentText1.setText(parseInt(value) + '%');
+                    progressBar1.clear();
+                    progressBar1.fillStyle(0x0080ff, 1);
+                    progressBar1.fillRoundedRect(w1, h1, widthBar / 100 * value, 30, 15);
+                    percentText2.setText(parseInt(value) + '%');
+                    progressBar2.clear();
+                    progressBar2.fillStyle(0x01D758, 1);
+                    progressBar2.fillRoundedRect(w2, h2, widthBar / 100 * value, 30, 15);
+                    percentText3.setText(parseInt(value) + '%');
+                    progressBar3.clear();
+                    progressBar3.fillStyle(0xffc0cb, 1);
+                    progressBar3.fillRoundedRect(w3, h3, widthBar / 100 * value, 30, 15);
+                };
+                //event loop pour l'update
+                var i = 0;
+                var timedEvent = this.time.addEvent({
+                    delay: 25,
+                    callback: onEvent,
+                    callbackScope: this,
+                    loop: true
+                });
+                //callBack
+                function onEvent() {
+                    //si la bar est full
+                    if (i == 101) {
+                        
+                    } else {
+                        progress(i);
+                        i += 1;
+                    }
+                }*/
             }
 
             update() {
@@ -443,7 +558,9 @@ include("config/configbdd.php");
                 };
 
 
-                this.text;
+                this.textBat;
+                this.textInfo;
+                this.cardInfo;
             }
 
             create ()
@@ -452,11 +569,12 @@ include("config/configbdd.php");
                 //this.scene.setVisible(false);
                 this.europeScene = this.scene.get('europeScene');
 
-                this.add.image(150, 1470, 'menu');
+                this.add.image(150, 1500, 'menu');
 
                 this.textBat = this.add.text(8, 350, '', { lineSpacing:7, wordWrap: { width: 284 } });
-
-                this.textInfo = this.add.text(8, 260, '', { lineSpacing:7, wordWrap: { width: 284 }, fontSize:15 });
+                
+                this.cardInfo = this.add.image(150, 290, 'card').setScale(0.35).setVisible(false);
+                this.textInfo = this.add.text(8, 260, '', { lineSpacing:7, wordWrap: { width: 284 }, fontSize:15, color:'#000000' });
 
                 // Bouton (512x512) en scale 0.1 (51.2x51.2) + 55 a chaque fois
                 // Bouton (512x512) en scale 0.08 (40.96x40.96) + 45 a chaque fois
@@ -475,9 +593,11 @@ include("config/configbdd.php");
                         }
                     }, this);
                     this.animals[i.tag].on('pointermove', function(){
+                        this.cardInfo.setVisible(true);
                         this.textInfo.setText('Animal : '+i.name+'\nPrix : '+i.buildCost);
                     }, this);
                     this.animals[i.tag].on('pointerout', function(){
+                        this.cardInfo.setVisible(false);
                         this.textInfo.setText('');
                     }, this);
                     j++;
@@ -500,9 +620,11 @@ include("config/configbdd.php");
                         }
                     }, this);
                     this.plants[i.tag].on('pointermove', function(){
-                        this.textInfo.setText('Culture : '+i.name+'\nPrix : '+i.buildPlant);
+                        this.cardInfo.setVisible(true);
+                        this.textInfo.setText('Culture : '+i.name+'\nPrix : '+i.costPlant);
                     }, this);
                     this.plants[i.tag].on('pointerout', function(){
+                        this.cardInfo.setVisible(false);
                         this.textInfo.setText('');
                     }, this);
                     k++;
@@ -525,9 +647,11 @@ include("config/configbdd.php");
                         }
                     }, this);
                     this.fields[i.tag].on('pointermove', function(){
+                        this.cardInfo.setVisible(true);
                         this.textInfo.setText('Sol : '+i.name+'\nPrix : '+i.buildCost);
                     }, this);
                     this.fields[i.tag].on('pointerout', function(){
+                        this.cardInfo.setVisible(false);
                         this.textInfo.setText('');
                     }, this);
                     l++;
@@ -549,9 +673,11 @@ include("config/configbdd.php");
                         }
                     }, this);
                     this.structs[i.tag].on('pointermove', function(){
+                        this.cardInfo.setVisible(true);
                         this.textInfo.setText('Batiment : '+i.name+'\nPrix : '+i.buildCost);
                     }, this);
                     this.structs[i.tag].on('pointerout', function(){
+                        this.cardInfo.setVisible(false);
                         this.textInfo.setText('');
                     }, this);
                     m++;
@@ -708,7 +834,7 @@ include("config/configbdd.php");
                 if(this.batOverlap.key != 0) {
                     let tmpText = '';
                     if(this.batOverlap.ref.name) {
-                        tmpText+='Name : '+this.batOverlap.ref.name;
+                        tmpText+='Nom : '+this.batOverlap.ref.name;
                     }
                     tmpText+='\nType : '+this.batOverlap.type;
                     if(this.batOverlap.type != 'field') {
@@ -742,6 +868,19 @@ include("config/configbdd.php");
                 this.batOverlap = bat;
             }
 
+            errorText(errorTxt) {
+                let container = this.add.image(0, 0, 'error');
+                let text = this.add.text(602, 572, errorTxt, { fontFamily: 'Arial', fontSize: 20, color: '#000000', wordWrap: { width: 270 }, align: 'center' });
+                Phaser.Display.Align.In.Center(text, this.add.zone(window.innerWidth/2, window.innerHeight/2, window.innerWidth, window.innerHeight));
+                Phaser.Display.Align.In.Center(container, this.add.zone(window.innerWidth/2, window.innerHeight/2, window.innerWidth, window.innerHeight));
+                text.setY(text.y + 100)
+                setTimeout(() => {
+                    text.destroy();
+                    container.destroy();
+                }, 2000);
+                console.log('Not unlocked')
+            }
+
         }
 
         var config = {
@@ -753,10 +892,17 @@ include("config/configbdd.php");
             physics: {
                 default: 'arcade',
             },
-            scene: [Loading, SceneA, Map, Europe, Desert, Glace, Header, Menu]
+            scene: [Loading, Play, Cinematique1, Cinematique2, Map, Europe, Desert, Glace, Header, Menu]
         };
 
-        var game = new Phaser.Game(config);
+        let game = new Phaser.Game(config);
+
+        
+        window.addEventListener('resize', ()=>{
+            game.config.width = window.innerWidth;
+            game.config.height = window.innerHeight;
+            console.log(game.config.width, game.config.height);
+        }, false)
     </script>
 </body>
 
