@@ -29,127 +29,127 @@ class Europe extends Phaser.Scene {
     create() {
         // Animaux
         this.data.set('bat1', {
-            key:1,
-            x:-16,
-            y:304,
-            type:'animal',
-            level:0,
-            tag:'build',
-            scale:0.7,
-            ref:{}
+            key: 1,
+            x: -16,
+            y: 304,
+            type: 'animal',
+            level: 0,
+            tag: 'build',
+            scale: 0.7,
+            ref: {}
         });
         this.data.set('bat2', {
-            key:2,
-            x:-16,
-            y:-304,
-            type:'animal',
-            level:2,
-            tag:'cow',
-            scale:0.7,
-            ref:{}
+            key: 2,
+            x: -16,
+            y: -304,
+            type: 'animal',
+            level: 2,
+            tag: 'cow',
+            scale: 0.7,
+            ref: {}
         });
 
         // Structures
         this.data.set('bat3', {
-            key:3,
-            x:352,
-            y:-192,
-            type:'struct',
-            level:1,
-            tag:'tank',
-            scale:0.5,
-            ref:{}
+            key: 3,
+            x: 352,
+            y: -192,
+            type: 'struct',
+            level: 1,
+            tag: 'tank',
+            scale: 0.5,
+            ref: {}
         });
         this.data.set('bat4', {
-            key:4,
-            x:352,
-            y:-448,
-            type:'struct',
-            level:0,
-            tag:'build',
-            scale:0.5,
-            ref:{}
+            key: 4,
+            x: 352,
+            y: -448,
+            type: 'struct',
+            level: 0,
+            tag: 'build',
+            scale: 0.5,
+            ref: {}
         });
 
         //Champs
         this.data.set('bat5', {
-            key:5,
-            x:-784,
-            y:-303,
-            type:'field',
-            level:1,
-            tag:'labor',
-            scale:0.8,
-            ref:{},
-            plant:false,
-            seed:{},
-            grow:0
+            key: 5,
+            x: -784,
+            y: -303,
+            type: 'field',
+            level: 1,
+            tag: 'labor',
+            scale: 0.8,
+            ref: {},
+            plant: false,
+            seed: {},
+            grow: 0
         });
         this.data.set('bat6', {
-            key:6,
-            x:-784,
-            y:175,
-            type:'field',
-            level:0,
-            tag:'build',
-            scale:0.8,
-            ref:{},
-            plant:false,
-            seed:{},
-            grow:0
+            key: 6,
+            x: -784,
+            y: 175,
+            type: 'field',
+            level: 0,
+            tag: 'build',
+            scale: 0.8,
+            ref: {},
+            plant: false,
+            seed: {},
+            grow: 0
         });
         this.data.set('bat7', {
-            key:7,
-            x:+784,
-            y:112,
-            type:'field',
-            level:1,
-            tag:'water',
-            scale:0.8,
-            ref:{},
-            plant:false,
-            seed:{},
-            grow:0
+            key: 7,
+            x: +784,
+            y: 112,
+            type: 'field',
+            level: 1,
+            tag: 'water',
+            scale: 0.8,
+            ref: {},
+            plant: false,
+            seed: {},
+            grow: 0
         });
         this.data.set('bat8', {
-            key:8,
-            x:+432,
-            y:+304,
-            type:'field',
-            level:0,
-            tag:'build',
-            scale:0.8,
-            ref:{},
-            plant:false,
-            seed:{},
-            grow:0,
+            key: 8,
+            x: +432,
+            y: +304,
+            type: 'field',
+            level: 0,
+            tag: 'build',
+            scale: 0.8,
+            ref: {},
+            plant: false,
+            seed: {},
+            grow: 0,
         });
 
 
         // Maison/labo
         this.data.set('bat9', {
-            key:9,
-            x:768,
-            y:-416,
-            type:'house',
-            level:1,
-            tag:'house',
-            scale:0.5,
-            ref:{}
+            key: 9,
+            x: 768,
+            y: -416,
+            type: 'house',
+            level: 1,
+            tag: 'house',
+            scale: 0.5,
+            ref: {}
         });
 
-       
+
 
 
         const farm = this.physics.add.image(0, 0, 'europe');
-        
+
         this.cameras.main.zoom = 0.8;
 
         // Player
         this.player = this.physics.add.sprite(800, -250, 'farmer').setDepth(2000).setScale(0.7);
 
-        
-        this.physics.add.overlap(this.player, farm, this.closeOverLap, function(){ return true; }, this);
+
+        this.physics.add.overlap(this.player, farm, this.closeOverLap, function () { return true; }, this);
 
 
         //  Our player animations, turning, walking left and walking right.
@@ -217,13 +217,13 @@ class Europe extends Phaser.Scene {
 
         // Affiche tous les batiments prédéfinis dans la data
         let j = 0;
-        for(let i in this.data.values) {
+        for (let i in this.data.values) {
             let bat = this.data.values[i];
-            if(bat.level > 0 && bat.tag != 'build') {
-                this.images.push(this.physics.add.image(bat.x, bat.y, bat.tag, bat.level-1));
+            if (bat.level > 0 && bat.tag != 'build') {
+                this.images.push(this.physics.add.image(bat.x, bat.y, bat.tag, bat.level - 1));
                 bat.ref = getByTag(bat.tag)[0];
-                if(bat.rotate) {
-                    this.images[j].rotation = 3.141592/2;
+                if (bat.rotate) {
+                    this.images[j].rotation = 3.141592 / 2;
                 }
             }
             else {
@@ -307,22 +307,22 @@ class Europe extends Phaser.Scene {
 
 
         this.timerGrowth++;
-        if(this.timerGrowth == 500){
+        if (this.timerGrowth == 500) {
             this.grow();
             this.timerGrowth = 0 - Phaser.Math.Between(0, 200);
         }
 
-        if(this.timer%60 == 0){
+        if (this.timer % 60 == 0) {
             let moneyPerSec = 0;
-            for(let i in this.data.values) {
+            for (let i in this.data.values) {
                 let bat = this.data.values[i];
-                if(bat.level > 0 && bat.tag != 'build' && bat.type != 'field') {
-                    if(typeof bat.ref.money[bat.level] == "number") {
-                        moneyPerSec+=bat.ref.money[bat.level];
+                if (bat.level > 0 && bat.tag != 'build' && bat.type != 'field') {
+                    if (typeof bat.ref.money[bat.level] == "number") {
+                        moneyPerSec += bat.ref.money[bat.level];
                     }
                 }
             }
-            this.money+=moneyPerSec;
+            this.money += moneyPerSec;
             this.registry.set('money', this.money);
             this.registry.set('moneyPerTick', moneyPerSec);
         }
@@ -332,42 +332,42 @@ class Europe extends Phaser.Scene {
     // Calcul de l'argent
     calcul() {
         let moneyPerTick = 0;
-        for(let i in this.data.values) {
+        for (let i in this.data.values) {
             let bat = this.data.values[i];
-            if(bat.level > 0 && bat.tag != 'build' && bat.type != 'labor') {
-                if(typeof bat.ref.money[bat.level] == "number") {
-                    moneyPerTick+=bat.ref.money[bat.level];
+            if (bat.level > 0 && bat.tag != 'build' && bat.type != 'labor') {
+                if (typeof bat.ref.money[bat.level] == "number") {
+                    moneyPerTick += bat.ref.money[bat.level];
                 }
             }
         }
-        this.money+=moneyPerTick;
+        this.money += moneyPerTick;
         this.registry.set('money', this.money);
-        this.registry.set('moneyPerTick', moneyPerTick*100);
+        this.registry.set('moneyPerTick', moneyPerTick * 100);
     }
 
     overlapBat(player, obj) {
         let returnBat;
-        for(let i in this.data.values) {
+        for (let i in this.data.values) {
             let bat = this.data.values[i];
-            if(obj.x == bat.x && obj.y == bat.y) {
+            if (obj.x == bat.x && obj.y == bat.y) {
                 returnBat = bat;
             }
         }
-        this.registry.set('bat', 'x : '+returnBat.x+', y : '+returnBat.y);
-        
+        this.registry.set('bat', 'x : ' + returnBat.x + ', y : ' + returnBat.y);
+
         this.menuScene.getBatOverlap(returnBat);
     }
 
 
     upgradeBat(bat) {
         console.log('Upgrade batiment : ', bat)
-        if(bat.type == 'animal' || bat.type == 'struct' || bat.type == 'house') {
-            if(bat.level < bat.ref.lvlMax && bat.level != 0) {
-                if(this.money >= bat.ref.upgrade[bat.level]) {
-                    this.money-=bat.ref.upgrade[bat.level];
-                    bat.level+=1;
+        if (bat.type == 'animal' || bat.type == 'struct' || bat.type == 'house') {
+            if (bat.level < bat.ref.lvlMax && bat.level != 0) {
+                if (this.money >= bat.ref.upgrade[bat.level]) {
+                    this.money -= bat.ref.upgrade[bat.level];
+                    bat.level += 1;
                     console.log('Upgraded !', bat);
-                    this.images[bat.key-1].setFrame(bat.level-1);
+                    this.images[bat.key - 1].setFrame(bat.level - 1);
                 }
                 else {
                     console.log('Not enought money')
@@ -378,16 +378,16 @@ class Europe extends Phaser.Scene {
     }
     buildBat(bat, ref) {
         console.log('Construction batiment : ', bat);
-        if(bat.level == 0 && bat.tag == "build") {
-            if(this.money >= ref.buildCost) {
-                bat.level+=1;
+        if (bat.level == 0 && bat.tag == "build") {
+            if (this.money >= ref.buildCost) {
+                bat.level += 1;
                 bat.tag = ref.tag;
                 bat.ref = ref;
                 this.money -= ref.buildCost;
                 console.log('Builded !', bat);
-                this.images[bat.key-1] = this.physics.add.image(bat.x, bat.y, bat.tag, bat.level-1);
-                if(bat.rotate) {
-                    this.images[bat.key-1].rotation = 3.141592/2;
+                this.images[bat.key - 1] = this.physics.add.image(bat.x, bat.y, bat.tag, bat.level - 1);
+                if (bat.rotate) {
+                    this.images[bat.key - 1].rotation = 3.141592 / 2;
                 }
             }
             else {
@@ -398,14 +398,14 @@ class Europe extends Phaser.Scene {
     }
     plant(bat, seed) {
         console.log('Plantation : ', bat);
-        if(bat.type == 'field' && !bat.plant && bat.level == 1 && (bat.tag == 'labor' || bat.tag == 'water')) {
-            if(this.money >= seed.costPlant) {
-                if(bat.tag == seed.ground) {
+        if (bat.type == 'field' && !bat.plant && bat.level == 1 && (bat.tag == 'labor' || bat.tag == 'water')) {
+            if (this.money >= seed.costPlant) {
+                if (bat.tag == seed.ground) {
                     bat.plant = true;
                     bat.tag = seed.tag;
                     bat.seed = seed;
                     console.log('Planted !', bat);
-                    this.images[bat.key-1] = this.physics.add.image(bat.x, bat.y, seed.tag, bat.grow);
+                    this.images[bat.key - 1] = this.physics.add.image(bat.x, bat.y, seed.tag, bat.grow);
                 }
                 else {
                     console.log('Can\'t plant riz on dirt or others on water');
@@ -419,13 +419,13 @@ class Europe extends Phaser.Scene {
         }
     }
     grow() {
-        for(let i in this.data.values) {
+        for (let i in this.data.values) {
             let bat = this.data.values[i];
-            if(bat.level == 1 && bat.type == 'field' && bat.tag != 'labor' && bat.plant) {
-                if(bat.grow < bat.seed.maxGrow) {
-                    if(Phaser.Math.Between(1, 3) < 5) {
+            if (bat.level == 1 && bat.type == 'field' && bat.tag != 'labor' && bat.plant) {
+                if (bat.grow < bat.seed.maxGrow) {
+                    if (Phaser.Math.Between(1, 3) < 5) {
                         bat.grow++;
-                        this.images[bat.key-1].setFrame(bat.grow);
+                        this.images[bat.key - 1].setFrame(bat.grow);
                     }
                 }
             }
@@ -433,30 +433,27 @@ class Europe extends Phaser.Scene {
     }
     recolte(bat) {
         console.log('Recolte : ', bat);
-        if(bat.type == 'field' && bat.plant && bat.level == 1 && (bat.tag != 'labor' || bat.tag != 'water') && bat.grow == bat.seed.maxGrow) {
+        if (bat.type == 'field' && bat.plant && bat.level == 1 && (bat.tag != 'labor' || bat.tag != 'water') && bat.grow == bat.seed.maxGrow) {
             bat.plant = false;
             bat.tag = bat.seed.ground;
             bat.grow = 0;
             this.money += bat.seed.money;
             bat.seed = {};
             console.log('Recolté !', bat);
-            this.images[bat.key-1].destroy();
+            this.images[bat.key - 1].destroy();
         }
     }
-
     projectRect(rect, body, time) {
         this.tempVelocity.copy(body.velocity).scale(time);
         Phaser.Geom.Rectangle.CopyFrom(this.body, rect);
         Phaser.Geom.Rectangle.OffsetPoint(rect, this.tempVelocity);
     }
-
     clampVelocity(velocity, blocked) {
         if (blocked.left) velocity.x = Phaser.Math.Clamp(velocity.x, 0, Infinity);
         if (blocked.right) velocity.x = Phaser.Math.Clamp(velocity.x, -Infinity, 0);
         if (blocked.up) velocity.y = Phaser.Math.Clamp(velocity.y, 0, Infinity);
         if (blocked.down) velocity.y = Phaser.Math.Clamp(velocity.y, -Infinity, 0);
     }
-
     setBlocked(blocked, rect, bounds) {
         if (bounds.contains(rect.left, rect.top)) {
             blocked.left = true;
@@ -474,8 +471,6 @@ class Europe extends Phaser.Scene {
             blocked.right = true;
             blocked.down = true;
         }
-
         blocked.none = !blocked.left && !blocked.right && !blocked.up && !blocked.down;
     }
-
 }

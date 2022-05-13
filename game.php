@@ -83,7 +83,7 @@ include("config/configbdd.php");
 
                 //Player
                 //this.load.spritesheet('dude', 'assets/dude.png', { frameWidth: 32, frameHeight: 48 });
-                this.load.spritesheet('farmer', 'assets/farmer.png', { frameWidth: 41.66, frameHeight: 86 });
+                this.load.spritesheet('farmer', 'assets/farmer.png', { frameWidth: 41.3, frameHeight: 86 });
 
 
                 // Chargement des icons du Menu
@@ -432,11 +432,11 @@ include("config/configbdd.php");
                 progressBox3.fillRoundedRect(w3, h3, widthBar, 30, 15);
 
 
-                progressBar1.fillRoundedRect(w1, h1, 10, 30, 15);
+                progressBar1.fillRoundedRect(w1, h1, 0, 0, 0);
                 progressBar1.fillStyle(0x0080ff, 1);
-                progressBar2.fillRoundedRect(w2, h2, 10, 30, 15);
+                progressBar2.fillRoundedRect(w2, h2, 0, 0, 0);
                 progressBar2.fillStyle(0x01D758, 1);
-                progressBar3.fillRoundedRect(w3, h3, 10, 30, 15);
+                progressBar3.fillRoundedRect(w3, h3, 0, 0, 0);
                 progressBar3.fillStyle(0xffc0cb, 1);
 
                 var percentText1 = this.make.text({
