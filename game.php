@@ -531,6 +531,7 @@ include("config/configbdd.php");
 
                 this.plus;
                 this.backGroundPopup;
+                this.plusText;
             }
 
             create ()
@@ -551,7 +552,10 @@ include("config/configbdd.php");
 
                 this.backGroundPopup = this.add.graphics();
                 this.backGroundPopup.fillStyle(0x70402a, 1);
-                this.backGroundPopup.fillRoundedRect(window.innerWidth/2 - 300, window.innerHeight/2 - 200, 600, 400, 20);
+                this.backGroundPopup.fillRoundedRect(window.innerWidth/2 - 350 + 150, window.innerHeight/2 - 200 + 25, 700, 400, 20);
+                this.backGroundPopup.lineStyle(3, 0x000000, 1);
+                this.backGroundPopup.strokeRoundedRect(window.innerWidth/2 - 350 + 150, window.innerHeight/2 - 200 + 25, 700, 400, 20);
+                this.plusText
                 //this.backGroundPopup.setVisible(false);
                 //Phaser.Display.Align.In.Center(this.backGroundPopup, this.add.zone(window.innerWidth/2, window.innerHeight/2, window.innerWidth, window.innerHeight));
 
