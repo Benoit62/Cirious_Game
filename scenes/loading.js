@@ -98,6 +98,14 @@ class Loading extends Phaser.Scene {
         this.load.image("soja-button", "assets/menu/soja.png"); 
         this.load.image("tamaris-button", "assets/menu/tamaris.png"); 
         this.load.image("riz-button", "assets/menu/riz.png"); 
+
+
+        this.load.image('fumier-button', 'assets/menu/fumier.png');
+        this.load.image('compost-button', 'assets/menu/compost.png');
+        this.load.image('vert-button', 'assets/menu/vert.png');
+        this.load.image('chimique-button', 'assets/menu/chimique.png');
+
+
         // Chargement des autres assets du menu
         this.load.image("circle", "assets/menu/circle.png"); 
         this.load.image("menu", "assets/menu/menu.png"); 
@@ -109,6 +117,10 @@ class Loading extends Phaser.Scene {
 
         //Chargement ds icones de recherche
         this.load.image('fertility-search', 'assets/search/fertility.png');
+        this.load.image('fumier-search', 'assets/search/fumier.png');
+        this.load.image('compost-search', 'assets/search/compost.png');
+        this.load.image('vert-search', 'assets/search/vert.png');
+        this.load.image('chimique-search', 'assets/search/chimique.png');
 
     }
     create() {
@@ -184,6 +196,16 @@ class Loading extends Phaser.Scene {
                 i+=10;
             }
         }
+
+
+
+        // Création des donnée globales du jeu
+        this.registry.set('search1', {
+            type:'search',
+            tag:'fertility',
+            name:'Engrais',
+            children:getByType('fertility')
+        });
     }
 
 }

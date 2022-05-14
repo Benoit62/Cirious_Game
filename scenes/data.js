@@ -305,12 +305,24 @@ let data = [
         type:'fertility',
         typeName:'Engrais',
         name:'Fumier',
-        desc:'Un engrais vert est une culture destinée à être enfouie, à l\'état vert sur place par un labour1, pour améliorer la structure du sol et sa fertilité2. Elle peut comporter une ou plusieurs espèces de plantes.',
+        desc:'Le fumier ou fumure est un matériau semi-solide composé de différents déchets de matière organique, issus de lisier (mélange d\'excréments solides et d\'urines d\'animaux) associé à de la litière absorbante et structurante de composition plutôt carbonée de type pailles de céréales, fougères, granulés de bois, etc. Le fumier frais ou après homogénéisation et transformation par compostage est épandu puis enfoui comme fertilisant en agriculture. ',
         info:'',
         unlock:false,
         fertility:15,
         ecology:5
     },
+    {
+        tag:'compost',
+        type:'fertility',
+        typeName:'Engrais',
+        name:'Compost',
+        desc:'Le compostage est un processus biologique aérobie (contrairement à la méthanisation qui est une réaction anaérobie) de conversion et de valorisation des matières organiques (sous-produits de l\'élevage, biomasse, déchets organiques d\'origine ménagère, etc.) en un produit naturel, stabilisé, hygiénique, semblable à un terreau, riche en composés humiques et minéraux appelé compost.',
+        info:'',
+        unlock:false,
+        fertility:15,
+        ecology:5
+    },
+    
 
 
     //Desherbage

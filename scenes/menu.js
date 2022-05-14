@@ -191,8 +191,8 @@ class Menu extends Phaser.Scene {
         compt=0;
         let n = 0;
         for(let i of getByType('fertility')) {
-            //this.engrais[i.tag] = this.add.image(40 +(n%5)*60, 140 + 45*compt, i.tag+"-button").setScale(0.08).setInteractive().setVisible(false)/*.setVisible(false)*/;
-            this.engrais[i.tag] = this.add.text(40 +(n%5)*60, 140 + 45*compt, i.name+' => '+i.unlock, { fontSize:10, color:'#ffffff' }).setOrigin(0.5,0.5).setInteractive().setVisible(false);
+            this.engrais[i.tag] = this.add.image(40 +(n%5)*60, 140 + 45*compt, i.tag+"-button").setScale(0.08).setInteractive().setVisible(false);
+            if(!i.unlock) this.engrais[i.tag].setAlpha(0.4);
             this.engrais[i.tag].on('pointerdown', function(){
                 if(i.unlock) {
                     this.europeScene.fertility(this.batOverlap, i);
@@ -202,8 +202,10 @@ class Menu extends Phaser.Scene {
                 }
             }, this);
             this.engrais[i.tag].on('pointermove', function(){
-                this.cardInfo.setVisible(true);
-                this.textInfo.setText('Engrais : '+i.name+'\nApport : '+i.fertility+'\nEcologie : '+i.ecology);
+                if(i.unlock) {
+                    this.cardInfo.setVisible(true);
+                    this.textInfo.setText('Engrais : '+i.name+'\nApport : '+i.fertility+'\nEcologie : '+i.ecology);
+                }
             }, this);
             this.engrais[i.tag].on('pointerout', function(){
                 this.cardInfo.setVisible(false);

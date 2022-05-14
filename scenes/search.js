@@ -10,13 +10,6 @@ class Search extends Phaser.Scene {
     create ()
     {
 
-        this.registry.set('search1', {
-            type:'search',
-            tag:'fertility',
-            name:'Engrais',
-            children:getByType('fertility')
-        });
-
         for(let i in this.registry.list) {
             console.log(this.registry.list[i]);
             let obj = this.registry.list[i];
@@ -25,34 +18,41 @@ class Search extends Phaser.Scene {
             }
         }
 
-        console.log(this.search);
 
-        this.input.on('pointerdown', function(){
+        let nbCategori = this.search.length +1;
+        let compt1 = 0;
+        this.search.forEach(function(value){
+            let catIcone = this.add.image((innerWidth/nbCategori)*(compt1+1), innerHeight/4, value.tag+'-search').setScale(0.2).setInteractive();
+            let compt2 = 0;
+            let nbUnderCat = value.children.length+1;
+            let arraySearchIcone = [];
+            value.children.forEach(function(value) {
+                let searchIcone = this.add.image((innerWidth/nbUnderCat)*(compt2+1), 3*(innerHeight/4), value.tag+'-search').setScale(0.15).setInteractive().setVisible(false);
+                if(!value.unlock) {
+                    searchIcone.setAlpha(0.3);
+                }
+                searchIcone.on('pointerdown', function(){
+                    value.unlock = true;
+                    searchIcone.setAlpha(1);
+                }, this);
+                compt2++;
+                arraySearchIcone.push(searchIcone);
+            }, this);
+
+            catIcone.on('pointerdown', function(){
+                arraySearchIcone.forEach(img => img.visible = !img.visible);
+            }, this);
+            compt1++;
+        }, this);
+
+
+        let close = this.add.text(innerWidth - 50, innerHeight - 50, 'X', { fontSize: 70, fontColor:'#ffffff'}).setOrigin(0.5,0.5).setInteractive();
+        close.on('pointerdown', function(){
             this.scene.stop('searchScene');
             this.scene.setVisible(true, this.registry.get('climat')+'Scene');            
             this.scene.launch('headerScene');
             this.scene.launch('menuScene');
-        }, this);
-
-
-        this.search.forEach(function(value){
-            this.add.image(100, 100, value.tag+'-search').setScale(0.1);
-            let compt = 1;
-            value.children.forEach(function(value) {
-                let text = value.name;
-                if(value.unlock){
-                    text+=' => unlock';
-                }
-                else {
-                    text+=' => lock';
-                }
-                let searchIcone = this.add.text(100, 100 + 30 * compt, text, { lineSpacing:9, fontSize:17, color:'#ffffff' }).setOrigin(0.5,0.5).setInteractive();
-                searchIcone.on('pointerdown', function(){
-                    value.unlock = true;
-                    searchIcone.setText(value.name+' => unlock');
-                }, this);
-                compt++;
-            }, this);
+            this.search = [];
         }, this);
 
     }
