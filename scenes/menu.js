@@ -17,6 +17,8 @@ class Menu extends Phaser.Scene {
         this.fields = [];
         this.structs = [];
 
+        this.engrais = [];
+
         this.circleBuild;
         this.circlePlanter;
         this.circleUpgrade;
@@ -182,7 +184,37 @@ class Menu extends Phaser.Scene {
             if(m%5==0)compt++;
         }
 
+
+
+
+        // Création des boutons Engrais
+        compt=0;
+        let n = 0;
+        for(let i of getByType('fertility')) {
+            //this.engrais[i.tag] = this.add.image(40 +(n%5)*60, 140 + 45*compt, i.tag+"-button").setScale(0.08).setInteractive().setVisible(false)/*.setVisible(false)*/;
+            this.engrais[i.tag] = this.add.text(40 +(n%5)*60, 140 + 45*compt, i.name+' => '+i.unlock, { fontSize:10, color:'#ffffff' }).setOrigin(0.5,0.5).setInteractive().setVisible(false);
+            this.engrais[i.tag].on('pointerdown', function(){
+                if(i.unlock) {
+                    this.europeScene.fertility(this.batOverlap, i);
+                    for(let i of getByType('fertility')) {
+                        this.engrais[i.tag].setVisible(false);
+                    }
+                }
+            }, this);
+            this.engrais[i.tag].on('pointermove', function(){
+                this.cardInfo.setVisible(true);
+                this.textInfo.setText('Engrais : '+i.name+'\nApport : '+i.fertility+'\nEcologie : '+i.ecology);
+            }, this);
+            this.engrais[i.tag].on('pointerout', function(){
+                this.cardInfo.setVisible(false);
+                this.textInfo.setText('');
+            }, this);
+            n++;
+            if(n%5==0)compt++;
+        }
+
          
+
         // Bouton upgrade
         this.upgrade = this.add.image(50, 35, "upgrade").setScale(0.1).setInteractive();
         this.upgrade.on('pointerdown', function(){
@@ -282,7 +314,9 @@ class Menu extends Phaser.Scene {
         this.fertility = this.add.image(116, 90, "fertility").setScale(0.1).setInteractive();
         this.fertility.on('pointerdown', function(){
             if(this.batOverlap.type == 'field' && !this.batOverlap.plant && this.batOverlap.level == 1 && (this.batOverlap.tag == 'labor' || this.batOverlap.tag == 'water') && this.batOverlap.fertility < 100) {
-                this.europeScene.fertility(this.batOverlap);
+                for(let i of getByType('fertility')) {
+                    this.engrais[i.tag].setVisible(true);
+                }
             }
             
         }, this);

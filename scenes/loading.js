@@ -17,7 +17,7 @@ class Loading extends Phaser.Scene {
 
 
         // Musique
-        this.load.audio('farming', 'assets/musique/farming.mp3');
+        //this.load.audio('farming', 'assets/musique/farming.mp3');
 
         // Maps et icones
         this.load.image('map', 'assets/map/map.png');
@@ -62,16 +62,16 @@ class Loading extends Phaser.Scene {
         this.load.image("dollar", "assets/header/dollar.png");
         this.load.image('off', 'assets/header/off.png');
         this.load.image('globe', 'assets/header/globe.png');
+        this.load.image('search', 'assets/header/search.png');
 
 
         // Chargement des icons du Menu
-        this.load.image("search", "assets/menu/search.png");
         this.load.image("builder", "assets/menu/build.png");
         this.load.image("planter", "assets/menu/planter.png");
         this.load.image("recolter", "assets/menu/recolter.png");
         this.load.image("feed", "assets/menu/pet-food.png");
         this.load.image("upgrade", "assets/menu/upgrade.png"); 
-        this.load.image("fertility", "assets/menu/desherber.png"); 
+        this.load.image("fertility", "assets/menu/fertility.png"); 
         
         this.load.image("cow-button", "assets/menu/cow.png"); 
         this.load.image("pig-button", "assets/menu/pig.png"); 
@@ -104,6 +104,12 @@ class Loading extends Phaser.Scene {
         this.load.image("card", "assets/menu/card.png"); 
         this.load.image("savoirPlus", "assets/menu/savoirPlus.png"); 
         this.load.image('error', 'assets/menu/error.png');
+
+
+
+        //Chargement ds icones de recherche
+        this.load.image('fertility-search', 'assets/search/fertility.png');
+
     }
     create() {
         var progressBar = this.add.graphics();

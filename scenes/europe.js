@@ -26,20 +26,19 @@ class Europe extends Phaser.Scene {
         this.timer = 0;
         this.timerDead = 0;
 
-
-        this.ecology = 10;
-        this.animalCare = 60;
-        this.hunger = 10;
-
         this.climat = 'europe';
     }
 
     create() {
+        this.registry.set('climat', 'europe');
+
+
         // Animaux
         this.data.set('bat1', {
             key: 1,
             x: -16,
             y: 304,
+            dataType:'bat',
             type: 'animal',
             typeName:'Elevage',
             level: 0,
@@ -51,6 +50,7 @@ class Europe extends Phaser.Scene {
             key: 2,
             x: -16,
             y: -304,
+            dataType:'bat',
             type: 'animal',
             typeName:'Elevage',
             level: 2,
@@ -64,6 +64,7 @@ class Europe extends Phaser.Scene {
             key: 3,
             x: 352,
             y: -192,
+            dataType:'bat',
             type: 'struct',
             typeName:'Infrastructure',
             level: 1,
@@ -75,6 +76,7 @@ class Europe extends Phaser.Scene {
             key: 4,
             x: 352,
             y: -448,
+            dataType:'bat',
             type: 'struct',
             typeName:'Infrastructure',
             level: 0,
@@ -88,6 +90,7 @@ class Europe extends Phaser.Scene {
             key: 5,
             x: -784,
             y: -303,
+            dataType:'bat',
             type: 'field',
             typeName:'Culture',
             level: 1,
@@ -105,6 +108,7 @@ class Europe extends Phaser.Scene {
             key: 6,
             x: -784,
             y: 175,
+            dataType:'bat',
             type: 'field',
             typeName:'Culture',
             level: 0,
@@ -122,6 +126,7 @@ class Europe extends Phaser.Scene {
             key: 7,
             x: +784,
             y: 112,
+            dataType:'bat',
             type: 'field',
             typeName:'Culture',
             level: 1,
@@ -139,6 +144,7 @@ class Europe extends Phaser.Scene {
             key: 8,
             x: +432,
             y: +304,
+            dataType:'bat',
             type: 'field',
             typeName:'Culture',
             level: 1,
@@ -150,7 +156,7 @@ class Europe extends Phaser.Scene {
             oldseed: {},
             grow: 0,
             dead:false,
-            fertility:100
+            fertility:90
         });
 
 
@@ -159,6 +165,7 @@ class Europe extends Phaser.Scene {
             key: 9,
             x: 768,
             y: -416,
+            dataType:'bat',
             type: 'house',
             typeName:'Laboratoire',
             level: 1,
@@ -260,18 +267,20 @@ class Europe extends Phaser.Scene {
         let j = 0;
         for (let i in this.data.values) {
             let bat = this.data.values[i];
-            if (bat.level > 0 && bat.tag != 'build' && bat.tag != 'river') {
-                this.images.push(this.physics.add.image(bat.x, bat.y, bat.tag, bat.level - 1));
-                bat.ref = getByTag(bat.tag)[0];
-                if (bat.rotate) {
-                    this.images[j].rotation = 3.141592 / 2;
+            if(bat.dataType == 'bat'){
+                if (bat.level > 0 && bat.tag != 'build') {
+                    this.images.push(this.physics.add.image(bat.x, bat.y, bat.tag, bat.level - 1));
+                    bat.ref = getByTag(bat.tag)[0];
+                    if (bat.rotate) {
+                        this.images[j].rotation = 3.141592 / 2;
+                    }
                 }
+                else if(bat.tag != 'river') {
+                    this.images.push(this.physics.add.image(bat.x, bat.y, 'build').setScale(bat.scale));
+                }
+                this.physics.add.overlap(this.player, this.images[j], this.overlapBat, null, this);
+                j++;
             }
-            else if(bat.tag != 'river') {
-                this.images.push(this.physics.add.image(bat.x, bat.y, 'build').setScale(bat.scale));
-            }
-            this.physics.add.overlap(this.player, this.images[j], this.overlapBat, null, this);
-            j++;
         }
 
 
@@ -299,9 +308,9 @@ class Europe extends Phaser.Scene {
 
         this.registry.set('money', this.money);
         this.registry.set('moneyPerTick', 0);
-        this.registry.set('ecology', this.ecology);
-        this.registry.set('animalCare', this.animalCare);
-        this.registry.set('hunger', this.hunger);
+        this.registry.set('ecology', 10);
+        this.registry.set('animalCare', 60);
+        this.registry.set('hunger', 10);
     }
 
     update() {
@@ -423,8 +432,7 @@ class Europe extends Phaser.Scene {
                     console.log('Upgraded !', bat);
                     this.images[bat.key - 1].setFrame(bat.level - 1);
                     if(bat.type == 'animal') {
-                        this.animalCare += 10 * bat.level;
-                        this.registry.set('animalCare', this.animalCare);
+                        this.updateJauge('animalCare', 10 * bat.level)
                     }
                 }
                 else {
@@ -448,8 +456,7 @@ class Europe extends Phaser.Scene {
                     this.images[bat.key - 1].rotation = 3.141592 / 2;
                 }
                 if(bat.type == 'animal') {
-                    this.animalCare -= 40;
-                    this.registry.set('animalCare', this.animalCare);
+                    this.updateJauge('animalCare', -40);
                 }
             }
             else {
@@ -556,13 +563,21 @@ class Europe extends Phaser.Scene {
             }
         }
     }
-    fertility(bat) {
+    fertility(bat, engrais) {
         console.log('Fertilisation : ', bat);
         if (bat.type == 'field' && !bat.plant && bat.level == 1 && (bat.tag == 'labor' || bat.tag == 'water') && bat.fertility < 100) {
-            bat.fertility += 20;
+            bat.fertility += engrais.fertility;
             if(bat.fertility > 100) bat.fertility = 100;
             console.log('Fertilised !', bat);
+            this.updateJauge('ecology', engrais.ecology);
         }
+    }
+
+    updateJauge(jauge, value){
+        let result = this.registry.get(jauge) + value;
+        if(result > 100) result = 100;
+        if(result < 0) result = 0;
+        this.registry.set(jauge, result);
     }
 
 

@@ -26,6 +26,7 @@ include("config/configbdd.php");
 <body>
     <script type="text/javascript" src="scenes/loading.js"></script>
     <script type="text/javascript" src="scenes/menu.js"></script>
+    <script type="text/javascript" src="scenes/search.js"></script>
     <script type="text/javascript" src="scenes/cinematique.js"></script>
     <script type="text/javascript" src="scenes/data.js"></script>
     <script type="text/javascript" src="scenes/desert.js"></script>
@@ -175,17 +176,6 @@ include("config/configbdd.php");
                         this.lockText();
                     }
                 }, this);
-
-                var music = this.sound.add('farming', {
-                    mute: false,
-                    volume: 0.1,
-                    rate: 1,
-                    detune: 0,
-                    seek: 0,
-                    loop: true,
-                    delay: 0
-                });
-                music.play();
             }
 
             lockText() {
@@ -211,32 +201,40 @@ include("config/configbdd.php");
                 this.moneyText;
                 this.batOverlap;
 
-                this.europeScene;
+                this.gameScene;
             }
 
             create ()
             {
-                this.europeScene = this.scene.get('europeScene');
+                this.gameScene = this.scene.get(this.registry.get('climat')+'Scene');
 
                 this.add.image(0, 0, 'header');
                 
                 this.turnOff = this.add.image(window.innerWidth-25, 25, 'off').setInteractive().setScale(0.08);
                 this.globe = this.add.image(window.innerWidth-75, 25, 'globe').setInteractive().setScale(0.08);
+                this.search = this.add.image(window.innerWidth-125, 25, 'search').setInteractive().setScale(0.08);
 
                 this.turnOff.on('pointerup', function() {
                     window.location.href = 'profil.php';
                 }, this);
 
                 this.globe.on('pointerup', function() {
-                    this.scene.sleep('europeScene');
-                    this.scene.sleep('headerScene');
-                    this.scene.sleep('menuScene');
+                    this.scene.sleep(this.registry.get('climat')+'Scene');
+                    this.scene.stop('headerScene');
+                    this.scene.stop('menuScene');
                     if(this.scene.isSleeping('mapScene')) {
                         this.scene.wake('mapScene');
                     }
                     else {
                         this.scene.start('mapScene');
                     }
+                }, this);
+
+                this.search.on('pointerup', function() {
+                    this.scene.sleep(this.registry.get('climat')+'Scene');
+                    this.scene.sleep('headerScene');
+                    this.scene.sleep('menuScene');
+                    this.scene.start('searchScene');
                 }, this);
 
                 // Money 
@@ -259,14 +257,14 @@ include("config/configbdd.php");
 
 
                 //width of bar
-                var widthBar = 150;
+                var widthBar = 140;
                 var heightBar = 30;
                 //coords of bars
-                var w1 = 540;
+                var w1 = 530;
                 var h1 = 10;
-                var w2 = w1 + widthBar + 80;
+                var w2 = w1 + widthBar + 70;
                 var h2 = 10;
-                var w3 = w2 + widthBar + 80;
+                var w3 = w2 + widthBar + 70;
                 var h3 = 10;
                 progressBox1.fillRect(w1, h1, widthBar, heightBar);
                 progressBox2.fillRect(w2, h2, widthBar, heightBar);
@@ -339,7 +337,7 @@ include("config/configbdd.php");
             /*displayButton(bat){
                 let button = this.add.image(500, 20, 'off').setInteractive();
                 button.on('pointerdown', function(){
-                    this.europeScene.upgradeBat(bat);
+                    this.gameScene.upgradeBat(bat);
                 }, this)
             }*/
 
@@ -358,7 +356,7 @@ include("config/configbdd.php");
             audio: {
                 disableWebAudio: false
             },
-            scene: [Loading, Play, Cinematique1, Cinematique2, Map, Europe, Desert, Glace, Header, Menu]
+            scene: [Loading, Play, Cinematique1, Cinematique2, Map, Europe, Desert, Glace, Header, Menu, Search]
         };
 
         let game = new Phaser.Game(config);

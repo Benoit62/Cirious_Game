@@ -275,6 +275,45 @@ let data = [
         desc:'Le climat polaire est un type de climat caractérisé par des températures froides toute l\'année, sans chaleur estivale et avec des hivers glaciaux. Les températures moyennes du mois le plus chaud ne sont jamais supérieures à 10 °C, ce qui correspond à la limite des arbres. Il entraîne l\'existence d\'un pergélisol et ne permet aucune agriculture. Ce climat est caractéristique des côtes nord de l\'Amérique du Nord, de l\'Europe et de l\'Asie, ainsi que du Groenland, de l\'Arctique et de l\'Antarctique. ',
         info:''
     },
+
+
+    //Engrais
+    {
+        tag:'chimique',
+        type:'fertility',
+        typeName:'Engrais',
+        name:'Engrais chimique',
+        desc:'Les engrais sont des substances organiques ou minérales, souvent utilisées en mélanges, destinées à apporter aux plantes des compléments d\'éléments nutritifs, de façon à améliorer leur croissance, et à augmenter le rendement et la qualité des cultures. L\'action consistant à apporter un engrais s\'appelle la fertilisation.',
+        info:'Les engrais présentent un risque de pollution de l\'eau potable. Par ailleurs, ils contribuent à l\'eutrophisation des eaux, lorsque les engrais, organiques ou minéraux, répandus en trop grande quantité par rapport aux besoins des plantes et à la capacité de rétention des sols, qui dépend notamment de sa texture, sont entraînés vers la nappe phréatique par infiltration, ou vers les cours d\'eau par ruissellement. ',
+        unlock:false,
+        fertility:20,
+        ecology:-20
+    },
+    {
+        tag:'vert',
+        type:'fertility',
+        typeName:'Engrais',
+        name:'Engrais vert',
+        desc:'Un engrais vert est une culture destinée à être enfouie, à l\'état vert sur place par un labour1, pour améliorer la structure du sol et sa fertilité2. Elle peut comporter une ou plusieurs espèces de plantes.',
+        info:'',
+        unlock:false,
+        fertility:10,
+        ecology:20
+    },
+    {
+        tag:'fumier',
+        type:'fertility',
+        typeName:'Engrais',
+        name:'Fumier',
+        desc:'Un engrais vert est une culture destinée à être enfouie, à l\'état vert sur place par un labour1, pour améliorer la structure du sol et sa fertilité2. Elle peut comporter une ou plusieurs espèces de plantes.',
+        info:'',
+        unlock:false,
+        fertility:15,
+        ecology:5
+    },
+
+
+    //Desherbage
 ];
 
 

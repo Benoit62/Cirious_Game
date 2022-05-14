@@ -224,6 +224,16 @@ class Cinematique2 extends Phaser.Scene {
         this.walk = true;
 
         this.input.keyboard.on('keydown_ESC', function(){
+            var music = this.sound.add('farming', {
+                mute: false,
+                volume: 0.1,
+                rate: 1,
+                detune: 0,
+                seek: 0,
+                loop: true,
+                delay: 0
+            });
+            music.play();
             this.scene.stop('cinematiqueScene2')
             this.scene.start('mapScene');
         }, this);
@@ -334,6 +344,16 @@ class Cinematique2 extends Phaser.Scene {
         }
 
         if (this.nextS && !this.walk) {
+            var music = this.sound.add('farming', {
+                mute: false,
+                volume: 0.1,
+                rate: 1,
+                detune: 0,
+                seek: 0,
+                loop: true,
+                delay: 0
+            });
+            music.play();
             this.scene.stop('cinematiqueScene2')
             this.scene.start('mapScene');
         }
