@@ -231,7 +231,8 @@ include("config/configbdd.php");
                 }, this);
 
                 this.search.on('pointerup', function() {
-                    this.scene.sleep(this.registry.get('climat')+'Scene');
+                    //Update game same but no render
+                    this.scene.setVisible(false, this.registry.get('climat')+'Scene');
                     this.scene.sleep('headerScene');
                     this.scene.sleep('menuScene');
                     this.scene.start('searchScene');

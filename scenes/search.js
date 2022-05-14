@@ -29,7 +29,7 @@ class Search extends Phaser.Scene {
 
         this.input.on('pointerdown', function(){
             this.scene.stop('searchScene');
-            this.scene.wake(this.registry.get('climat')+'Scene');
+            this.scene.setVisible(true, this.registry.get('climat')+'Scene');            
             this.scene.launch('headerScene');
             this.scene.launch('menuScene');
         }, this);

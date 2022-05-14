@@ -277,7 +277,7 @@ class Menu extends Phaser.Scene {
         }, this);
         //Replanter automatiquement
         this.input.keyboard.on('keydown_E', function(){
-            if(this.batOverlap.type == 'field' && !this.batOverlap.plant && this.batOverlap.level == 1 && (this.batOverlap.tag == 'labor' || this.batOverlap.tag == 'water') && this.batOverlap.oldseed.name) {
+            if(this.batOverlap.type == 'field' && !this.batOverlap.plant && this.batOverlap.level == 1 && (this.batOverlap.tag == 'labor' || this.batOverlap.tag == 'water') && this.batOverlap.oldseed[0].name) {
                 this.europeScene.replant(this.batOverlap);
             }
         }, this);
@@ -398,6 +398,9 @@ class Menu extends Phaser.Scene {
         }
         else {
             this.circleFertility.setVisible(false);
+            for(let i of getByType('fertility')) {
+                this.engrais[i.tag].setVisible(false);
+            }
         }
 
 
@@ -436,6 +439,9 @@ class Menu extends Phaser.Scene {
                     }
                 }
                 tmpText+='\nFertilité : '+this.batOverlap.fertility;
+                if(this.batOverlap.oldseed[0]){
+                    tmpText+='\nHistorique : '+this.batOverlap.oldseed[0].name;
+                }
             }
             this.plus.setVisible(true);
             this.textBat.setText(tmpText);
@@ -499,6 +505,10 @@ class Menu extends Phaser.Scene {
                     tmpText+='\nClimats : '+climats;
                     tmpText+='\nDescription culture : '+this.batOverlap.seed.desc;
                 }
+                tmpText+='\nHistorique : ';
+                this.batOverlap.oldseed.forEach(value => {
+                    tmpText+=value.name+' ';
+                });
             }
         }
         this.backGroundPopup.setVisible(true);
