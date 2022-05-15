@@ -25,9 +25,10 @@ include("config/configbdd.php");
 
 <body>
     <script type="text/javascript" src="scenes/loading.js"></script>
+    <script type="text/javascript" src="scenes/cinematique.js"></script>
+    <script type="text/javascript" src="scenes/disclaimer.js"></script>
     <script type="text/javascript" src="scenes/menu.js"></script>
     <script type="text/javascript" src="scenes/search.js"></script>
-    <script type="text/javascript" src="scenes/cinematique.js"></script>
     <script type="text/javascript" src="scenes/data.js"></script>
     <script type="text/javascript" src="scenes/desert.js"></script>
     <script type="text/javascript" src="scenes/foret.js"></script>
@@ -365,7 +366,7 @@ include("config/configbdd.php");
             audio: {
                 disableWebAudio: false
             },
-            scene: [Loading, Play, Cinematique1, Cinematique2, Map, Europe, Desert, Glace, Header, Menu, Search]
+            scene: [Loading, Play, Cinematique1, Cinematique2, Map, Europe, Desert, Glace, Header, Menu, Search, Disclaimer]
         };
 
         let game = new Phaser.Game(config);

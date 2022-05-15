@@ -315,6 +315,7 @@ class Europe extends Phaser.Scene {
                             arrayField['ground'] = this.physics.add.image(bat.x, bat.y, seed.ground, bat.level - 1);
                             arrayField['weeds'] = this.add.image(bat.x, bat.y, 'weeds', bat.weeds);
                             arrayField['plant'] = this.add.image(bat.x, bat.y, bat.tag, bat.grow);
+                            bat.tag = seed.tag;
                             bat.ref = getByTag(bat.tag)[0];
                             bat.seed = seed;
                             this.images.push(arrayField);
