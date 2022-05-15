@@ -12,7 +12,7 @@ class Cinematique1 extends Phaser.Scene {
     }
 
     create() {
-        this.background = this.add.image(window.innerWidth / 2, window.innerHeight / 2 + 100, 'bg')
+        /*this.background = this.add.image(window.innerWidth / 2, window.innerHeight / 2 + 100, 'bg')
         
         Phaser.Display.Align.In.Center(this.background, this.add.zone(window.innerWidth/2, window.innerHeight/2, window.innerWidth, window.innerHeight));
 
@@ -20,7 +20,11 @@ class Cinematique1 extends Phaser.Scene {
         this.background.displayHeight = this.sys.canvas.height;
         for (var i = 0; i < 20; i++) {
             this.add.image(64 * i, 536, 'tiles', 1).setOrigin(0);
-        }
+        }*/
+
+        this.background = this.add.image(0, 0, 'mapmonde').setScale(1.5);
+        Phaser.Display.Align.In.Center(this.background, this.add.zone(window.innerWidth/2, window.innerHeight/2, window.innerWidth, window.innerHeight));
+
 
         this.Mathieu = this.add.sprite(window.innerWidth / 4, 490, 'sellier', 9);
 
@@ -50,7 +54,15 @@ class Cinematique1 extends Phaser.Scene {
         }, this);
     }
 
-    update() {
+    update(time, delta) {
+        this.background.x -= 0.02 * delta;
+        this.background.y += 0.015 * delta;
+
+        if (this.background.y >= 630)
+        {
+            this.background.setPosition(1150, -190);
+        }
+
         var This = this;
 
         if (this.walkE) this.eddison.x -= 5;
@@ -60,8 +72,8 @@ class Cinematique1 extends Phaser.Scene {
             this.eddison = this.add.sprite(480, 502, 'scient', 4).setScale(2);
             this.walkE = false;
             var dialBox = this.add.graphics();
-            dialBox.fillRect(0, 0, window.innerWidth, 100);
             dialBox.fillStyle(0x70402a, 1);
+            dialBox.fillRect(0, 0, window.innerWidth, 100);
             var content = [
                 "Salutation, je suis Qu Dongyu, directeur générale de de L'Organisation des Nations unies pour l’alimentation et l’agriculture",
                 "(ONUAA), et je suis à la recherche du meilleur agriculteur du milieu ",
@@ -94,20 +106,32 @@ class Cinematique1 extends Phaser.Scene {
                 "",
             ];
             var text0 = this.make.text({
-                x: 0,
-                y: 0,
-                text: 'Qu Dongyu :'
+                x: 5,
+                y: 5,
+                text: 'Qu Dongyu :',
+                style: {
+                    font: '18px monospace',
+                    fill: '#ffffff'
+                }
             });
             text0.setTint(0xff0000);
             var text1 = this.make.text({
-                x: 0,
-                y: 30,
-                text: ''
+                x: 5,
+                y: 35,
+                text: '',
+                style: {
+                    font: '18px monospace',
+                    fill: '#ffffff'
+                }
             });
             var text2 = this.make.text({
-                x: 0,
-                y: 60,
-                text: ''
+                x: 5,
+                y: 65,
+                text: '',
+                style: {
+                    font: '18px monospace',
+                    fill: '#ffffff'
+                }
             });
             var txt = 0;
             var tmp = '';
@@ -204,12 +228,17 @@ class Cinematique2 extends Phaser.Scene {
     }
 
     create() {
-        this.background = this.add.image(window.innerWidth / 2, window.innerHeight / 2 + 100, 'bg')
+        /*this.background = this.add.image(window.innerWidth / 2, window.innerHeight / 2 + 100, 'bg')
         this.background.displayWidth = this.sys.canvas.width;
         this.background.displayHeight = this.sys.canvas.height;
         for (var i = 0; i < 20; i++) {
             this.add.image(64 * i, 536, 'tiles', 1).setOrigin(0);
-        }
+        }*/
+        this.background = this.add.image(0, 0, 'mapmonde').setScale(1.5);
+        Phaser.Display.Align.In.Center(this.background, this.add.zone(window.innerWidth/2, window.innerHeight/2, window.innerWidth, window.innerHeight));
+
+
+
         this.seedi = this.add.sprite(200, 480, 'seedySlt', 2).setScale(0.4);//assigner a la variable differentes 
         this.anims.create({
             key: 'walkL',
@@ -224,22 +253,22 @@ class Cinematique2 extends Phaser.Scene {
         this.walk = true;
 
         this.input.keyboard.on('keydown_ESC', function(){
-            var music = this.sound.add('farming', {
-                mute: false,
-                volume: 0.1,
-                rate: 1,
-                detune: 0,
-                seek: 0,
-                loop: true,
-                delay: 0
-            });
-            music.play();
             this.scene.stop('cinematiqueScene2')
             this.scene.start('mapScene');
         }, this);
     }
 
-    update() {
+    update(time, delta) {
+        this.background.x -= 0.02 * delta;
+        this.background.y += 0.015 * delta;
+
+        if (this.background.y >= 630)
+        {
+            this.background.setPosition(1150, -190);
+        }
+
+
+
         var This = this;
         if (this.Mathieu.frame.name == 5 && this.bool == true) {
             this.Mathieu.x -= 30;
@@ -255,8 +284,8 @@ class Cinematique2 extends Phaser.Scene {
             this.Mathieu.destroy();
             this.Mathieu = this.add.sprite(320, 500, 'sellier', 3);
             var dialBox = this.add.graphics();
-            dialBox.fillRect(0, 0, window.innerWidth, 100);
             dialBox.fillStyle(0x70402a, 1);
+            dialBox.fillRect(0, 0, window.innerWidth, 100);
             var content = [
                 "Salut ! Je m’appelle Seedy, celle qui détient toutes les connaissances nécessaires à la création de la ferme du futur. Je serais donc ta guide !",
                 "",
@@ -344,16 +373,6 @@ class Cinematique2 extends Phaser.Scene {
         }
 
         if (this.nextS && !this.walk) {
-            var music = this.sound.add('farming', {
-                mute: false,
-                volume: 0.1,
-                rate: 1,
-                detune: 0,
-                seek: 0,
-                loop: true,
-                delay: 0
-            });
-            music.play();
             this.scene.stop('cinematiqueScene2')
             this.scene.start('mapScene');
         }

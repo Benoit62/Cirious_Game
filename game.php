@@ -79,6 +79,17 @@ include("config/configbdd.php");
 
             create ()
             {
+                var music = this.sound.add('map_musique', {
+                    mute: false,
+                    volume: 0.1,
+                    rate: 1,
+                    detune: 0,
+                    seek: 0,
+                    loop: true,
+                    delay: 0
+                });
+                music.play();
+
                 // Data
                 this.data.set('unlock', ['europe']);
                 this.data.set('lock', ['desert', 'foret', 'glace']);
@@ -91,7 +102,6 @@ include("config/configbdd.php");
                 let zoom = 1;
                 while(1632*zoom > window.innerHeight) zoom -= 0.01;
                 this.cameras.main.zoom = zoom;
-
 
 
 
@@ -124,14 +134,15 @@ include("config/configbdd.php");
                     if(this.data.get('unlock').includes('europe')) {
                         if(this.scene.isSleeping('europeScene')) {                        
                             this.scene.wake('europeScene');
-
-                            this.scene.sleep('mapScene');
+                            this.scene.get('europeScene').musique.play();
                         }
                         else {
                             this.scene.start('europeScene');
                         }
+                        this.scene.stop('mapScene');
                         this.scene.launch('menuScene');
                         this.scene.launch('headerScene');
+                        music.stop();
                     }
                 }, this);
 
@@ -176,6 +187,7 @@ include("config/configbdd.php");
                         this.lockText();
                     }
                 }, this);
+
             }
 
             lockText() {
@@ -222,12 +234,8 @@ include("config/configbdd.php");
                     this.scene.sleep(this.registry.get('climat')+'Scene');
                     this.scene.stop('headerScene');
                     this.scene.stop('menuScene');
-                    if(this.scene.isSleeping('mapScene')) {
-                        this.scene.wake('mapScene');
-                    }
-                    else {
-                        this.scene.start('mapScene');
-                    }
+                    this.scene.start('mapScene');
+                    this.gameScene.musique.stop();
                 }, this);
 
                 this.search.on('pointerup', function() {

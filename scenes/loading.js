@@ -8,6 +8,7 @@ class Loading extends Phaser.Scene {
     }
     preload() {
         //Cinematique
+        this.load.image('mapmonde', 'assets/cinematique/map.png');
         this.load.image('bg', 'assets/cinematique/clouds.png');
         this.load.image('seedySlt', 'assets/cinematique/seedy_salut.png');
         this.load.image('seedySaut', 'assets/cinematique/seedy_saut.png');
@@ -17,7 +18,9 @@ class Loading extends Phaser.Scene {
 
 
         // Musique
-        //this.load.audio('farming', 'assets/musique/farming.mp3');
+        this.load.audio('game_musique', 'assets/musique/game_musique.mp3');
+        this.load.audio('map_musique', 'assets/musique/map_musique.mp3');
+        //this.load.audio('cinematiq_musique', 'assets/musique/cinematiq_musique.mp3');
 
         // Maps et icones
         this.load.image('map', 'assets/map/map.png');
@@ -42,6 +45,7 @@ class Loading extends Phaser.Scene {
         
 
         // Champs et cultures
+        this.load.spritesheet('weeds', 'assets/culture/weeds.png', { frameWidth: 486, frameHeight: 695 });
         this.load.spritesheet('carrot', 'assets/culture/carrot.png', { frameWidth: 288, frameHeight: 416 });
         this.load.spritesheet('mais', 'assets/culture/mais.png', { frameWidth: 288, frameHeight: 416 });
         this.load.spritesheet('ble', 'assets/culture/ble.png', { frameWidth: 288, frameHeight: 416 });
@@ -190,7 +194,7 @@ class Loading extends Phaser.Scene {
                 progressBox.destroy();
                 loadingText.destroy();
                 percentText.destroy();
-                this.scene.start('mapScene');
+                this.scene.start('playScene');
             } else {
                 progress(i);
                 i+=10;

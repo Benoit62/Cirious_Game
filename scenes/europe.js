@@ -27,9 +27,23 @@ class Europe extends Phaser.Scene {
         this.timerDead = 0;
 
         this.climat = 'europe';
+
+        this.musique;
     }
 
     create() {
+        this.musique = this.sound.add('game_musique', {
+            mute: false,
+            volume: 0.1,
+            rate: 1,
+            detune: 0,
+            seek: 0,
+            loop: true,
+            delay: 0
+        });
+        this.musique.play();
+
+
         this.registry.set('climat', 'europe');
 
 
