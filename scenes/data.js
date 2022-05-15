@@ -326,6 +326,72 @@ let data = [
 
 
     //Desherbage
+    {
+        tag:'chimique',
+        type:'health',
+        typeName:'Protection des cultures',
+        name:'Lutte chimique',
+        desc:'Herbicides, insecticides, fongicides, acaricides',
+        info:'Ca pollue fort',
+        unlock:false,
+        health:20,
+        ecology:-30
+    },
+    {
+        tag:'physique',
+        type:'health',
+        typeName:'Protection des cultures',
+        name:'Lutte physique',
+        desc:'Mecanique, pneumatique, chaleur',
+        info:'Ca pollue bof',
+        unlock:false,
+        health:10,
+        ecology:5
+    },
+    {
+        tag:'drone',
+        type:'health',
+        typeName:'Protection des cultures',
+        name:'Lutte par drone',
+        desc:'Ca vole',
+        info:'Ca pollue moins bof',
+        unlock:false,
+        health:25,
+        ecology:-5
+    },
+    {
+        tag:'humain',
+        type:'health',
+        typeName:'Protection des cultures',
+        name:'Lutte humain',
+        desc:'Désherbage, surveillance, expertise',
+        info:'Ca pollue moins bof',
+        unlock:false,
+        health:5,
+        ecology:10
+    },
+    {
+        tag:'biologic',
+        type:'health',
+        typeName:'Protection des cultures',
+        name:'Lutte biologique',
+        desc:'Parasites, prédateurs, plantes transgéniques (OGM)',
+        info:'Attention aux OGM',
+        unlock:false,
+        health:10,
+        ecology:0
+    },
+    {
+        tag:'biopesticid',
+        type:'health',
+        typeName:'Protection des cultures',
+        name:'Biopesticides',
+        desc:'extraits de plantes, bactéries et virus pathogènes, nématodes',
+        info:'Je sais pas',
+        unlock:false,
+        health:15,
+        ecology:5
+    },
 ];
 
 

@@ -25,6 +25,7 @@ class Europe extends Phaser.Scene {
         this.timerGrowth = 0;
         this.timer = 0;
         this.timerDead = 0;
+        this.timerWeeds = 0;
 
         this.climat = 'europe';
 
@@ -116,7 +117,9 @@ class Europe extends Phaser.Scene {
             oldseed: [],
             grow: 0,
             dead:false,
-            fertility:100
+            fertility:100,
+            weeds:0,
+            maxWeeds:3
         });
         this.data.set('bat6', {
             key: 6,
@@ -134,7 +137,9 @@ class Europe extends Phaser.Scene {
             oldseed: [],
             grow: 0,
             dead:false,
-            fertility:100
+            fertility:100,
+            weeds:0,
+            maxWeeds:3
         });
         this.data.set('bat7', {
             key: 7,
@@ -152,7 +157,9 @@ class Europe extends Phaser.Scene {
             oldseed: [],
             grow: 0,
             dead:false,
-            fertility:100
+            fertility:100,
+            weeds:0,
+            maxWeeds:3
         });
         this.data.set('bat8', {
             key: 8,
@@ -170,7 +177,9 @@ class Europe extends Phaser.Scene {
             oldseed: [getByTag('carrot')[0]],
             grow: 0,
             dead:false,
-            fertility:90
+            fertility:90,
+            weeds:0,
+            maxWeeds:3
         });
 
 
@@ -283,19 +292,49 @@ class Europe extends Phaser.Scene {
             let bat = this.data.values[i];
             if(bat.dataType == 'bat'){
                 if (bat.level > 0 && bat.tag != 'build') {
-                    this.images.push(this.physics.add.image(bat.x, bat.y, bat.tag, bat.level - 1));
-                    bat.ref = getByTag(bat.tag)[0];
-                    if (bat.rotate) {
-                        this.images[j].rotation = 3.141592 / 2;
+                    if(bat.type != 'field') {
+                        this.images.push(this.physics.add.image(bat.x, bat.y, bat.tag, bat.level - 1));
+                        bat.ref = getByTag(bat.tag)[0];
+                        if (bat.rotate) {
+                            this.images[j].rotation = 3.141592 / 2;
+                        }
+                    }
+                    else {
+                        if(!bat.plant) {
+                            let arrayField = [];
+                            arrayField['ground'] = this.physics.add.image(bat.x, bat.y, bat.tag, bat.level - 1);
+                            arrayField['weeds'] = this.add.image(bat.x, bat.y, 'weeds', bat.weeds);
+                            arrayField['plant'] = null;
+                            bat.ref = getByTag(bat.tag)[0];
+                            this.images.push(arrayField);
+                        }
+                        else {
+                            let seed = getByTag(bat.tag)[0];
+                            bat.seed = seed;
+                            let arrayField = [];
+                            arrayField['ground'] = this.physics.add.image(bat.x, bat.y, seed.ground, bat.level - 1);
+                            arrayField['weeds'] = this.add.image(bat.x, bat.y, 'weeds', bat.weeds);
+                            arrayField['plant'] = this.add.image(bat.x, bat.y, bat.tag, bat.grow);
+                            bat.ref = getByTag(bat.tag)[0];
+                            bat.seed = seed;
+                            this.images.push(arrayField);
+                        }
                     }
                 }
                 else if(bat.tag != 'river') {
                     this.images.push(this.physics.add.image(bat.x, bat.y, 'build').setScale(bat.scale));
                 }
-                this.physics.add.overlap(this.player, this.images[j], this.overlapBat, null, this);
+                if(bat.type == 'field' && bat.level > 0 && bat.tag != 'build') {
+                    this.physics.add.overlap(this.player, this.images[j]['ground'], this.overlapBat, null, this);
+                }
+                else {
+                    this.physics.add.overlap(this.player, this.images[j], this.overlapBat, null, this);
+                }
                 j++;
             }
         }
+        console.log(this.images);
+        console.log(this.data.values);
 
 
         //debug
@@ -376,6 +415,13 @@ class Europe extends Phaser.Scene {
         this.debug.clear().strokePoints(this.Bounds.points).strokeRectShape(this.playerRect);*/
 
 
+
+        this.timerWeeds++;
+        if (this.timerWeeds == 1500) {
+            console.log('Check weeds');
+            this.weeds();
+            this.timerWeeds = 0 - Phaser.Math.Between(0, 300);
+        }
 
         this.timerGrowth++;
         if (this.timerGrowth == 500) {
@@ -464,13 +510,21 @@ class Europe extends Phaser.Scene {
                 bat.tag = ref.tag;
                 bat.ref = ref;
                 this.money -= ref.buildCost;
-                console.log('Builded !', bat);
-                this.images[bat.key - 1] = this.physics.add.image(bat.x, bat.y, bat.tag, bat.level - 1);
-                if (bat.rotate) {
-                    this.images[bat.key - 1].rotation = 3.141592 / 2;
+                if(bat.type != 'field') {
+                    console.log('Builded !', bat);
+                    this.images[bat.key - 1] = this.physics.add.image(bat.x, bat.y, bat.tag, bat.level - 1);
+                    if (bat.rotate) {
+                        this.images[bat.key - 1].rotation = 3.141592 / 2;
+                    }
+                    if(bat.type == 'animal') {
+                        this.updateJauge('animalCare', -40);
+                    }
                 }
-                if(bat.type == 'animal') {
-                    this.updateJauge('animalCare', -40);
+                else {
+                    this.images[bat.key - 1]['ground'] = this.physics.add.image(bat.x, bat.y, ref.tag, bat.level - 1);
+                    this.images[bat.key - 1]['weeds'] = this.add.image(bat.x, bat.y, 'weeds', bat.weeds);
+                    this.images[bat.key - 1]['plant'];
+                    bat.ref = getByTag(bat.tag)[0];
                 }
             }
             else {
@@ -489,7 +543,7 @@ class Europe extends Phaser.Scene {
                     bat.tag = seed.tag;
                     bat.seed = seed;
                     console.log('Planted !', bat);
-                    this.images[bat.key - 1] = this.physics.add.image(bat.x, bat.y, seed.tag, bat.grow);
+                    this.images[bat.key - 1]['plant'] = this.physics.add.image(bat.x, bat.y, seed.tag, bat.grow);
                 }
                 else {
                     console.log('Can\'t plant riz on dirt or others on water');
@@ -504,7 +558,7 @@ class Europe extends Phaser.Scene {
     }
     replant(bat) {
         console.log('Replantation : ', bat);
-        if (bat.oldseed[0].name) {
+        if (bat.oldseed[0]) {
             console.log(bat.oldseed[0]);
             this.plant(bat, bat.oldseed[0]);
         }
@@ -516,7 +570,7 @@ class Europe extends Phaser.Scene {
                 if (bat.grow < bat.seed.maxGrow && !bat.dead) {
                     if (Phaser.Math.Between(1, 5) <= 3) {
                         bat.grow++;
-                        this.images[bat.key - 1].setFrame(bat.grow);
+                        this.images[bat.key - 1]['plant'].setFrame(bat.grow);
                     }
                 }
             }
@@ -525,11 +579,24 @@ class Europe extends Phaser.Scene {
     rotten(){
         for (let i in this.data.values) {
             let bat = this.data.values[i];
-            if (bat.level == 1 && bat.type == 'field' && bat.tag != 'labor' && bat.plant && !bat.dead) {
+            if (bat.level == 1 && bat.type == 'field' && (bat.tag != 'labor' || bat.tag != 'water') && bat.plant && !bat.dead) {
                 if (!bat.seed.climat.includes(this.climat)) {
                     bat.dead = true;
                     console.log('Dead plant !', bat);
-                    this.images[bat.key - 1].setFrame(bat.seed.maxGrow + 1);
+                    this.images[bat.key - 1]['plant'].setFrame(bat.seed.maxGrow + 1);
+                }
+            }
+        }
+    }
+    weeds(){
+        for (let i in this.data.values) {
+            let bat = this.data.values[i];
+            if (bat.level == 1 && bat.type == 'field') {
+                if (Phaser.Math.Between(1, 5) <= 2) {
+                    bat.weeds++;
+                    if(bat.weeds > bat.maxWeeds) bat.weeds = bat.maxWeeds;
+                    console.log('Weeds !', bat);
+                    this.images[bat.key - 1]['weeds'].setFrame(bat.weeds);
                 }
             }
         }
@@ -561,7 +628,7 @@ class Europe extends Phaser.Scene {
                 bat.seed = {};
                 this.updateJauge('hunger', hungerWin);
                 console.log('Recolté !', bat);
-                this.images[bat.key - 1].destroy();
+                this.images[bat.key - 1]['plant'].destroy();
                 let textWin = this.add.text(bat.x, bat.y, '+'+moneyWin+'$\n+'+hungerWin, { lineSpacing:10, fontSize:40, color:'#ffffff', align:'center' }).setOrigin(0.5, 0.5);
                 setTimeout(() => {
                     textWin.destroy();
@@ -577,7 +644,7 @@ class Europe extends Phaser.Scene {
                 bat.dead = false;
                 this.updateJauge('hunger', -10);
                 console.log('Nettoyé !', bat);
-                this.images[bat.key - 1].destroy();
+                this.images[bat.key - 1]['plant'].destroy();
             }
         }
     }

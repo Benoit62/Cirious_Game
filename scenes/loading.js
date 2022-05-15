@@ -194,7 +194,7 @@ class Loading extends Phaser.Scene {
                 progressBox.destroy();
                 loadingText.destroy();
                 percentText.destroy();
-                this.scene.start('playScene');
+                this.scene.start('mapScene');
             } else {
                 progress(i);
                 i+=10;
@@ -209,6 +209,12 @@ class Loading extends Phaser.Scene {
             tag:'fertility',
             name:'Engrais',
             children:getByType('fertility')
+        });
+        this.registry.set('search2', {
+            type:'search',
+            tag:'health',
+            name:'Protection des plantes',
+            children:getByType('health')
         });
     }
 

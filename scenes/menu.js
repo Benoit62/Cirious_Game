@@ -270,6 +270,8 @@ class Menu extends Phaser.Scene {
         // Bouton planter
         this.planter = this.add.image(180, 35, "planter").setScale(0.1).setInteractive();
         this.planter.on('pointerdown', function(){
+            console.log('OverLap : ');
+            console.log(this.batOverlap);
             if(this.batOverlap.type == 'field' && !this.batOverlap.plant && this.batOverlap.level == 1 && (this.batOverlap.tag == 'labor' || this.batOverlap.tag == 'water')) {
                 for(let i of getByType('plant')) {
                     this.plants[i.tag].setVisible(true);
@@ -279,7 +281,7 @@ class Menu extends Phaser.Scene {
         }, this);
         //Replanter automatiquement
         this.input.keyboard.on('keydown_E', function(){
-            if(this.batOverlap.type == 'field' && !this.batOverlap.plant && this.batOverlap.level == 1 && (this.batOverlap.tag == 'labor' || this.batOverlap.tag == 'water') && this.batOverlap.oldseed[0].name) {
+            if(this.batOverlap.type == 'field' && !this.batOverlap.plant && this.batOverlap.level == 1 && (this.batOverlap.tag == 'labor' || this.batOverlap.tag == 'water') && this.batOverlap.oldseed[0]) {
                 this.europeScene.replant(this.batOverlap);
             }
         }, this);
@@ -441,6 +443,8 @@ class Menu extends Phaser.Scene {
                     }
                 }
                 tmpText+='\nFertilité : '+this.batOverlap.fertility;
+                let sante = this.batOverlap.maxWeeds - this.batOverlap.weeds
+                tmpText+='\nSanté : '+sante+' / '+this.batOverlap.maxWeeds;
                 if(this.batOverlap.oldseed[0]){
                     tmpText+='\nHistorique : '+this.batOverlap.oldseed[0].name;
                 }
@@ -504,6 +508,9 @@ class Menu extends Phaser.Scene {
                     for(let clm in this.batOverlap.seed.climat) {
                         climats+=getByTag(this.batOverlap.seed.climat[clm])[0].name+' ';
                     }
+                    tmpText+='\nFertilité : '+this.batOverlap.fertility;
+                    let sante = this.batOverlap.maxWeeds - this.batOverlap.weeds
+                    tmpText+='\nSanté : '+sante+' / '+this.batOverlap.maxWeeds;
                     tmpText+='\nClimats : '+climats;
                     tmpText+='\nDescription culture : '+this.batOverlap.seed.desc;
                 }
