@@ -45,7 +45,7 @@ class Loading extends Phaser.Scene {
         
 
         // Champs et cultures
-        this.load.spritesheet('weeds', 'assets/culture/weeds.png', { frameWidth: 486, frameHeight: 695 });
+        this.load.spritesheet('weeds', 'assets/culture/weeds.png', { frameWidth: 288, frameHeight: 416 });
         this.load.spritesheet('carrot', 'assets/culture/carrot.png', { frameWidth: 288, frameHeight: 416 });
         this.load.spritesheet('mais', 'assets/culture/mais.png', { frameWidth: 288, frameHeight: 416 });
         this.load.spritesheet('ble', 'assets/culture/ble.png', { frameWidth: 288, frameHeight: 416 });
