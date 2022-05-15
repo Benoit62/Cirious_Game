@@ -5,6 +5,8 @@ class Search extends Phaser.Scene {
         super({ key: 'searchScene' });
         
         this.search = [];
+
+        this.icones = [];
     }
 
     create ()
@@ -37,9 +39,13 @@ class Search extends Phaser.Scene {
                 }, this);
                 compt2++;
                 arraySearchIcone.push(searchIcone);
+                this.icones.push(searchIcone);
             }, this);
 
             catIcone.on('pointerdown', function(){
+                this.icones.forEach(function(img){
+                    img.visible = false;
+                }, this);
                 arraySearchIcone.forEach(img => img.visible = !img.visible);
             }, this);
             compt1++;

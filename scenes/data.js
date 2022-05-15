@@ -327,58 +327,58 @@ let data = [
 
     //Desherbage
     {
-        tag:'chimique',
+        tag:'lutte_chimique',
         type:'health',
         typeName:'Protection des cultures',
-        name:'Lutte chimique',
+        name:' chimique',
         desc:'Herbicides, insecticides, fongicides, acaricides',
         info:'Ca pollue fort',
         unlock:false,
-        health:20,
+        health:2,
         ecology:-30
     },
     {
         tag:'physique',
         type:'health',
         typeName:'Protection des cultures',
-        name:'Lutte physique',
+        name:' physique',
         desc:'Mecanique, pneumatique, chaleur',
         info:'Ca pollue bof',
         unlock:false,
-        health:10,
+        health:1,
         ecology:5
     },
     {
         tag:'drone',
         type:'health',
         typeName:'Protection des cultures',
-        name:'Lutte par drone',
+        name:' par drone',
         desc:'Ca vole',
         info:'Ca pollue moins bof',
         unlock:false,
-        health:25,
+        health:2.5,
         ecology:-5
     },
     {
         tag:'humain',
         type:'health',
         typeName:'Protection des cultures',
-        name:'Lutte humain',
+        name:' humaine',
         desc:'Désherbage, surveillance, expertise',
         info:'Ca pollue moins bof',
         unlock:false,
-        health:5,
+        health:0.5,
         ecology:10
     },
     {
         tag:'biologic',
         type:'health',
         typeName:'Protection des cultures',
-        name:'Lutte biologique',
+        name:'biologique',
         desc:'Parasites, prédateurs, plantes transgéniques (OGM)',
         info:'Attention aux OGM',
         unlock:false,
-        health:10,
+        health:1,
         ecology:0
     },
     {
@@ -389,7 +389,7 @@ let data = [
         desc:'extraits de plantes, bactéries et virus pathogènes, nématodes',
         info:'Je sais pas',
         unlock:false,
-        health:15,
+        health:1.5,
         ecology:5
     },
 ];

@@ -76,6 +76,7 @@ class Loading extends Phaser.Scene {
         this.load.image("feed", "assets/menu/pet-food.png");
         this.load.image("upgrade", "assets/menu/upgrade.png"); 
         this.load.image("fertility", "assets/menu/fertility.png"); 
+        this.load.image('health', 'assets/search/health.png');
         
         this.load.image("cow-button", "assets/menu/cow.png"); 
         this.load.image("pig-button", "assets/menu/pig.png"); 
@@ -109,6 +110,13 @@ class Loading extends Phaser.Scene {
         this.load.image('vert-button', 'assets/menu/vert.png');
         this.load.image('chimique-button', 'assets/menu/chimique.png');
 
+        this.load.image('lutte_chimique-button', 'assets/menu/lutte_chimique.png');
+        this.load.image('physique-button', 'assets/menu/lutte_physique.png');
+        this.load.image('drone-button', 'assets/menu/drone.png');
+        this.load.image('humain-button', 'assets/menu/humain.png');
+        this.load.image('biologic-button', 'assets/menu/lutte_bio.png');
+        this.load.image('biopesticid-button', 'assets/menu/biopesticides.png');
+
 
         // Chargement des autres assets du menu
         this.load.image("circle", "assets/menu/circle.png"); 
@@ -125,6 +133,15 @@ class Loading extends Phaser.Scene {
         this.load.image('compost-search', 'assets/search/compost.png');
         this.load.image('vert-search', 'assets/search/vert.png');
         this.load.image('chimique-search', 'assets/search/chimique.png');
+
+        this.load.image('health-search', 'assets/search/health.png');
+        this.load.image('lutte_chimique-search', 'assets/search/lutte_chimique.png');
+        this.load.image('physique-search', 'assets/search/lutte_physique.png');
+        this.load.image('drone-search', 'assets/search/drone.png');
+        this.load.image('humain-search', 'assets/search/humain.png');
+        this.load.image('biologic-search', 'assets/search/lutte_bio.png');
+        this.load.image('biopesticid-search', 'assets/search/biopesticides.png');
+
 
     }
     create() {

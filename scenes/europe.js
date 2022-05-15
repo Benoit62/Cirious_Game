@@ -601,6 +601,16 @@ class Europe extends Phaser.Scene {
             }
         }
     }
+    clean(bat, lutte){
+        console.log('Nettoyage : ', bat);
+        if (bat.type == 'field' && bat.level == 1 && bat.fertility < 100) {
+            bat.weeds -= lutte.health;
+            if(bat.weeds < 0) bat.weeds = 0;
+            console.log('Fertilised !', bat);
+            this.images[bat.key - 1]['weeds'].setFrame(bat.weeds);
+            this.updateJauge('ecology', lutte.ecology);
+        }
+    }
     recolte(bat) {
         console.log('Recolte : ', bat);
         if (bat.type == 'field' && bat.plant && bat.level == 1 && (bat.tag != 'labor' || bat.tag != 'water') && (bat.grow == bat.seed.maxGrow || bat.dead)) {

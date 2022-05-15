@@ -11,6 +11,7 @@ class Menu extends Phaser.Scene {
         this.recolter;
         this.feed;
         this.search;
+        this.health;
 
         this.animals = [];
         this.plants = [];
@@ -18,6 +19,7 @@ class Menu extends Phaser.Scene {
         this.structs = [];
 
         this.engrais = [];
+        this.luttes = [];
 
         this.circleBuild;
         this.circlePlanter;
@@ -215,6 +217,35 @@ class Menu extends Phaser.Scene {
             if(n%5==0)compt++;
         }
 
+
+        // Création des boutons Luttes
+        compt=0;
+        let o = 0;
+        for(let i of getByType('health')) {
+            this.luttes[i.tag] = this.add.image(40 +(o%5)*60, 140 + 45*compt, i.tag+"-button").setScale(0.08).setInteractive().setVisible(false);
+            if(!i.unlock) this.luttes[i.tag].setAlpha(0.4);
+            this.luttes[i.tag].on('pointerdown', function(){
+                if(i.unlock && this.batOverlap.level == 1 && this.batOverlap.type == 'field' && this.batOverlap.weeds > 0) {
+                    this.europeScene.clean(this.batOverlap, i);
+                    for(let i of getByType('health')) {
+                        this.luttes[i.tag].setVisible(false);
+                    }
+                }
+            }, this);
+            this.luttes[i.tag].on('pointermove', function(){
+                if(i.unlock) {
+                    this.cardInfo.setVisible(true);
+                    this.textInfo.setText('Lutte '+i.name+'\nApport : '+i.health+'\nEcologie : '+i.ecology);
+                }
+            }, this);
+            this.luttes[i.tag].on('pointerout', function(){
+                this.cardInfo.setVisible(false);
+                this.textInfo.setText('');
+            }, this);
+            o++;
+            if(o%5==0)compt++;
+        }
+
          
 
         // Bouton upgrade
@@ -315,11 +346,23 @@ class Menu extends Phaser.Scene {
 
 
         // Bouton Fertiliser
-        this.fertility = this.add.image(116, 90, "fertility").setScale(0.1).setInteractive();
+        this.fertility = this.add.image(115, 90, "fertility").setScale(0.1).setInteractive();
         this.fertility.on('pointerdown', function(){
             if(this.batOverlap.type == 'field' && !this.batOverlap.plant && this.batOverlap.level == 1 && (this.batOverlap.tag == 'labor' || this.batOverlap.tag == 'water') && this.batOverlap.fertility < 100) {
                 for(let i of getByType('fertility')) {
                     this.engrais[i.tag].setVisible(true);
+                }
+            }
+            
+        }, this);
+
+
+        // Bouton Nettoyer
+        this.health = this.add.image(180, 90, "health").setScale(0.1).setInteractive();
+        this.health.on('pointerdown', function(){
+            if(this.batOverlap.level == 1 && this.batOverlap.type == 'field' && this.batOverlap.weeds > 0) {
+                for(let i of getByType('health')) {
+                    this.luttes[i.tag].setVisible(true);
                 }
             }
             
@@ -333,6 +376,7 @@ class Menu extends Phaser.Scene {
         this.circleRecolte = this.add.image(this.recolter.x, this.recolter.y, "circle").setScale(0.1).setVisible(false);
         this.circleFeed = this.add.image(this.feed.x, this.feed.y, "circle").setScale(0.1).setVisible(false);
         this.circleFertility = this.add.image(this.fertility.x, this.fertility.y, "circle").setScale(0.1).setVisible(false);
+        this.circleHealth = this.add.image(this.health.x, this.health.y, "circle").setScale(0.1).setVisible(false);
 
     }
 
@@ -404,6 +448,18 @@ class Menu extends Phaser.Scene {
             this.circleFertility.setVisible(false);
             for(let i of getByType('fertility')) {
                 this.engrais[i.tag].setVisible(false);
+            }
+        }
+
+
+        //Nettoyer
+        if(this.batOverlap.level == 1 && this.batOverlap.type == 'field' && this.batOverlap.weeds > 0) {
+            this.circleHealth.setVisible(true);
+        }
+        else {
+            this.circleHealth.setVisible(false);
+            for(let i of getByType('health')) {
+                this.luttes[i.tag].setVisible(false);
             }
         }
 
