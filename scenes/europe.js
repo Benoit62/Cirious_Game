@@ -603,7 +603,7 @@ class Europe extends Phaser.Scene {
     }
     clean(bat, lutte){
         console.log('Nettoyage : ', bat);
-        if (bat.type == 'field' && bat.level == 1 && bat.fertility < 100) {
+        if (bat.type == 'field' && bat.level == 1 && bat.weeds > 0) {
             bat.weeds -= lutte.health;
             if(bat.weeds < 0) bat.weeds = 0;
             console.log('Fertilised !', bat);

@@ -345,7 +345,7 @@ let data = [
         desc:'Mecanique, pneumatique, chaleur',
         info:'Ca pollue bof',
         unlock:false,
-        health:1,
+        health:3,
         ecology:5
     },
     {
@@ -356,7 +356,7 @@ let data = [
         desc:'Ca vole',
         info:'Ca pollue moins bof',
         unlock:false,
-        health:2.5,
+        health:3,
         ecology:-5
     },
     {
@@ -367,7 +367,7 @@ let data = [
         desc:'Désherbage, surveillance, expertise',
         info:'Ca pollue moins bof',
         unlock:false,
-        health:0.5,
+        health:1,
         ecology:10
     },
     {
@@ -378,7 +378,7 @@ let data = [
         desc:'Parasites, prédateurs, plantes transgéniques (OGM)',
         info:'Attention aux OGM',
         unlock:false,
-        health:1,
+        health:2,
         ecology:0
     },
     {
@@ -389,7 +389,7 @@ let data = [
         desc:'extraits de plantes, bactéries et virus pathogènes, nématodes',
         info:'Je sais pas',
         unlock:false,
-        health:1.5,
+        health:3,
         ecology:5
     },
 ];

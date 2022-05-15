@@ -235,14 +235,14 @@ include("config/configbdd.php");
                     this.scene.stop('headerScene');
                     this.scene.stop('menuScene');
                     this.scene.start('mapScene');
-                    this.gameScene.musique.stop();
+                    //this.gameScene.musique.stop();
                 }, this);
 
                 this.search.on('pointerup', function() {
                     //Update game same but no render
                     this.scene.setVisible(false, this.registry.get('climat')+'Scene');
-                    this.scene.sleep('headerScene');
-                    this.scene.sleep('menuScene');
+                    this.scene.stop('headerScene');
+                    this.scene.stop('menuScene');
                     this.scene.start('searchScene');
                 }, this);
 
