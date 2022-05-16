@@ -422,7 +422,7 @@ class Europe extends Phaser.Scene {
 
 
         this.timerWeeds++;
-        if (this.timerWeeds == 3000) {
+        if (this.timerWeeds == 2500) {
             console.log('Check weeds');
             this.weeds();
             this.timerWeeds = 0 - Phaser.Math.Between(0, 500);

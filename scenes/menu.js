@@ -55,11 +55,11 @@ class Menu extends Phaser.Scene {
 
         this.add.image(150, 1500, 'menu');
 
-        this.textBat = this.add.text(8, 370, '', { lineSpacing:7, wordWrap: { width: 284 } });
+        this.textBat = this.add.text(8, 350, '', { lineSpacing:7, wordWrap: { width: 284 } });
         
         // Card 2 140 de haut
         this.cardInfo = this.add.image(148, 300, 'card3').setScale(0.35).setVisible(false);
-        this.textInfo = this.add.text(14, 250, '', { lineSpacing:7, wordWrap: { width: 284 }, fontSize:15, color:'#000000' });
+        this.textInfo = this.add.text(14, 260, '', { lineSpacing:7, wordWrap: { width: 284 }, fontSize:15, color:'#000000' });
 
 
         //En savoir plus
@@ -466,42 +466,54 @@ class Menu extends Phaser.Scene {
         
         if(this.batOverlap.key != 0) {
             let tmpText = '';
-            if(this.batOverlap.ref.name) {
-                tmpText+='Nom : '+this.batOverlap.ref.name;
+            if(this.batOverlap.type != 'field') {
+                if(this.batOverlap.ref.name) {
+                    tmpText+='Nom : '+this.batOverlap.ref.name+'\n';
+                }
+                tmpText+='Type : '+this.batOverlap.typeName+'\n';
             }
-            tmpText+='\nType : '+this.batOverlap.typeName;
+            else {
+                if(!this.batOverlap.plant) {
+                    if(this.batOverlap.ref.name) {
+                        tmpText+='Nom : '+this.batOverlap.ref.name+'\n';
+                    }
+                    tmpText+='Type : '+this.batOverlap.typeName+'\n';
+                }
+            }
             if(this.batOverlap.type != 'field') {
                 if(this.batOverlap.level < this.batOverlap.ref.lvlMax){
-                    tmpText+='\nNiveau : '+this.batOverlap.level+' / '+this.batOverlap.ref.lvlMax;
+                    tmpText+='Niveau : '+this.batOverlap.level+' / '+this.batOverlap.ref.lvlMax+'\n';
                 }
                 else {
-                    tmpText+='\nNiveau : Max';
+                    tmpText+='Niveau : Max'+'\n';
                 }
             }
             if(this.batOverlap.ref.money && this.batOverlap.type != 'field') {
                 let moneyPerSec = this.batOverlap.ref.money[this.batOverlap.level];
-                tmpText+='\nGain : '+moneyPerSec+'/s';
+                tmpText+='Gain : '+moneyPerSec+'/s'+'\n';
             }
             if(this.batOverlap.type == 'field') {
                 if(this.batOverlap.plant) {
-                    tmpText+='\nCulture : '+this.batOverlap.seed.name;
+                    tmpText+='Culture : '+this.batOverlap.seed.name+'\n';
                     if(!this.batOverlap.dead) {
                         if(this.batOverlap.grow < this.batOverlap.seed.maxGrow){
-                            tmpText+='\nCroissance : '+this.batOverlap.grow+' / '+this.batOverlap.seed.maxGrow;
+                            tmpText+='Croissance : '+this.batOverlap.grow+' / '+this.batOverlap.seed.maxGrow+'\n';
                         }
                         else {
-                            tmpText+='\nCroissance : Max';
+                            tmpText+='Croissance : Max'+'\n';
                         }
+                        let win = this.batOverlap.seed.money * this.batOverlap.fertility/100 * (this.batOverlap.maxWeeds - this.batOverlap.weeds)/10;
+                        tmpText += 'Gain : '+win+' / '+this.batOverlap.seed.money+'\n';
                     }
                     else {
-                        tmpText+='\nCroissance : pourri';
+                        tmpText+='Croissance : pourri'+'\n';
                     }
                 }
-                tmpText+='\nFertilité : '+this.batOverlap.fertility;
+                tmpText+='Fertilité : '+this.batOverlap.fertility+'\n';
                 let sante = this.batOverlap.maxWeeds - this.batOverlap.weeds
-                tmpText+='\nSanté : '+sante+' / '+this.batOverlap.maxWeeds;
+                tmpText+='Santé : '+sante+' / '+this.batOverlap.maxWeeds+'\n';
                 if(this.batOverlap.oldseed[0]){
-                    tmpText+='\nHistorique : '+this.batOverlap.oldseed[0].name;
+                    tmpText+='Historique : '+this.batOverlap.oldseed[0].name+'\n';
                 }
             }
             this.plus.setVisible(true);
