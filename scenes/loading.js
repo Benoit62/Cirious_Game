@@ -225,7 +225,7 @@ class Loading extends Phaser.Scene {
                 progressBox.destroy();
                 loadingText.destroy();
                 percentText.destroy();
-                this.scene.start('playScene');
+                this.scene.start('mapScene');
             } else {
                 progress(i);
                 i+=10;
