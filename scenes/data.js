@@ -287,7 +287,8 @@ let data = [
         info:'Les engrais présentent un risque de pollution de l\'eau potable. Par ailleurs, ils contribuent à l\'eutrophisation des eaux, lorsque les engrais, organiques ou minéraux, répandus en trop grande quantité par rapport aux besoins des plantes et à la capacité de rétention des sols, qui dépend notamment de sa texture, sont entraînés vers la nappe phréatique par infiltration, ou vers les cours d\'eau par ruissellement. ',
         unlock:false,
         fertility:20,
-        ecology:-20
+        ecology:-20,
+        prix:10000
     },
     {
         tag:'vert',
@@ -298,7 +299,8 @@ let data = [
         info:'',
         unlock:false,
         fertility:10,
-        ecology:20
+        ecology:20,
+        prix:10000
     },
     {
         tag:'fumier',
@@ -309,7 +311,8 @@ let data = [
         info:'',
         unlock:false,
         fertility:15,
-        ecology:5
+        ecology:5,
+        prix:10000
     },
     {
         tag:'compost',
@@ -320,7 +323,8 @@ let data = [
         info:'',
         unlock:false,
         fertility:15,
-        ecology:5
+        ecology:5,
+        prix:10000
     },
     
 
@@ -335,7 +339,8 @@ let data = [
         info:'Ca pollue fort',
         unlock:false,
         health:2,
-        ecology:-30
+        ecology:-30,
+        prix:10000
     },
     {
         tag:'physique',
@@ -346,7 +351,8 @@ let data = [
         info:'Ca pollue bof',
         unlock:false,
         health:3,
-        ecology:5
+        ecology:5,
+        prix:10000
     },
     {
         tag:'drone',
@@ -357,7 +363,8 @@ let data = [
         info:'Ca pollue moins bof',
         unlock:false,
         health:3,
-        ecology:-5
+        ecology:-5,
+        prix:10000
     },
     {
         tag:'humain',
@@ -368,7 +375,8 @@ let data = [
         info:'Ca pollue moins bof',
         unlock:false,
         health:1,
-        ecology:10
+        ecology:10,
+        prix:10000
     },
     {
         tag:'biologic',
@@ -379,7 +387,8 @@ let data = [
         info:'Attention aux OGM',
         unlock:false,
         health:2,
-        ecology:0
+        ecology:0,
+        prix:10000
     },
     {
         tag:'biopesticid',
@@ -390,7 +399,8 @@ let data = [
         info:'Je sais pas',
         unlock:false,
         health:3,
-        ecology:5
+        ecology:5,
+        prix:10000
     },
 ];
 

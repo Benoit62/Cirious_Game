@@ -141,7 +141,7 @@ class Cinematique1 extends Phaser.Scene {
             var bool = false;
             function loop() {
                 setTimeout(function () {
-                    wait = 40;
+                    wait = 30;
                     if (bool) {
                         text0.setText(content[i]);
                         text1.setText('');
@@ -290,6 +290,7 @@ class Cinematique2 extends Phaser.Scene {
             dialBox.fillStyle(0x70402a, 1);
             dialBox.fillRect(0, 0, window.innerWidth, 130);
             var content = [
+                "Seedy :",
                 "Salut ! Je m’appelle Seedy, je serai ta guide dans cette nouvelle aventure",
                 "",
                 "Mosbert :",
@@ -323,7 +324,7 @@ class Cinematique2 extends Phaser.Scene {
             var bool = false;
             function loop() {
                 setTimeout(function () {
-                    wait = 40;
+                    wait = 30;
                     if (bool) {
                         text0.setText(content[i]);
                         text1.setText('');

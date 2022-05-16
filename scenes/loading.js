@@ -225,13 +225,17 @@ class Loading extends Phaser.Scene {
             type:'search',
             tag:'fertility',
             name:'Engrais',
-            children:getByType('fertility')
+            children:getByType('fertility'),
+            desc:'La fertilité des sols est une notion importante dans les domaines de l\'agriculture et de l\'agronomie, désignant l\'aptitude d\'un sol à produire dans les conditions actuelles de culture. Elle est une des composantes de la qualité des sols.',
+            info:''
         });
         this.registry.set('search2', {
             type:'search',
             tag:'health',
             name:'Protection des plantes',
-            children:getByType('health')
+            children:getByType('health'),
+            desc:'Veiller à la santé des végétaux et des terres, c’est contribuer à la production agricole et à la sécurité alimentaire, favoriser le développement économique (emplois, production, export) et protéger l’environnement. La protection des plantes constitue un enjeu crucial.',
+            info:''
         });
     }
 
