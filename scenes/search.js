@@ -34,17 +34,17 @@ class Search extends Phaser.Scene {
                     searchIcone.setAlpha(0.3);
                 }
                 searchIcone.on('pointerdown', function(){
-                    if(this.registry.get('money') > value.prix) {
+                    if(this.registry.get('money') > value.unlockPrice) {
                         value.unlock = true;
                         searchIcone.setAlpha(1);
-                        this.registry.set('money', this.registry.get('money') - value.prix);
+                        this.registry.set('money', this.registry.get('money') - value.unlockPrice);
                     }
                     else {
                         this.errorText('Vous n\'avez pas assez d\'argent');
                     }
                 }, this);
                 searchIcone.on('pointermove', function(){
-                    this.displayText(value.name, value.prix, value.health || value.fertility, value.ecology, value.desc, value.info)
+                    this.displayText(value.name, value.unlockPrice, value.health || value.fertility, value.ecology, value.desc, value.info)
                 }, this);
                 compt2++;
                 arraySearchIcone.push(searchIcone);

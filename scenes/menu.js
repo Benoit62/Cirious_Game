@@ -289,7 +289,7 @@ class Menu extends Phaser.Scene {
                 if(i.unlock && this.batOverlap.type == 'animal' && this.batOverlap.level > 0 && !this.batOverlap.dead && this.batOverlap.feed < 100) {
                     this.europeScene.feed(this.batOverlap, i);
                     for(let i of getByType('meal')) {
-                        this.luttes[i.tag].setVisible(false);
+                        this.meals[i.tag].setVisible(false);
                     }
                 }
             }, this);
@@ -542,7 +542,7 @@ class Menu extends Phaser.Scene {
         else {
             this.circleFeed.setVisible(false);
             for(let i of getByType('meal')) {
-                this.luttes[i.tag].setVisible(false);
+                this.meals[i.tag].setVisible(false);
             }
         }
 
@@ -596,9 +596,15 @@ class Menu extends Phaser.Scene {
                     tmpText+='Niveau : Max'+'\n';
                 }
             }
-            if(this.batOverlap.ref.money && this.batOverlap.type != 'field') {
+            if(this.batOverlap.ref.money && this.batOverlap.type != 'field' /*&& this.batOverlap.type != 'animal'*/) {
                 let moneyPerSec = this.batOverlap.ref.money[this.batOverlap.level];
                 tmpText+='Gain : '+moneyPerSec+'/s'+'\n';
+            }
+            if(this.batOverlap.type == 'animal') {
+                tmpText+='Nourriture : '+this.batOverlap.feed+'%\n';
+                if(this.batOverlap.dead) {
+                    tmpText+='MORT !\n';
+                }
             }
             if(this.batOverlap.type == 'field') {
                 if(this.batOverlap.plant) {
@@ -651,10 +657,10 @@ class Menu extends Phaser.Scene {
     savoirPlus(){
         let tmpText = '';
         if(this.batOverlap.key != 0) {
+            tmpText+='\nType : '+this.batOverlap.typeName;
             if(this.batOverlap.ref.name) {
                 tmpText+='Nom : '+this.batOverlap.ref.name;
             }
-            tmpText+='\nType : '+this.batOverlap.typeName;
             if(this.batOverlap.type != 'field') {
                 if(this.batOverlap.level < this.batOverlap.ref.lvlMax){
                     tmpText+='\nNiveau : '+this.batOverlap.level+' / '+this.batOverlap.ref.lvlMax;
@@ -663,12 +669,18 @@ class Menu extends Phaser.Scene {
                     tmpText+='\nNiveau : Max';
                 }
             }
-            if(this.batOverlap.ref.money && this.batOverlap.type != 'field') {
+            if(this.batOverlap.ref.money && this.batOverlap.type != 'field' /*&& this.batOverlap.type != 'field'*/) {
                 let moneyPerSec = this.batOverlap.ref.money[this.batOverlap.level];
                 tmpText+='\nGain : '+moneyPerSec+'/s';
             }
             if(this.batOverlap.tag != 'build') {
                 tmpText+='\nDescription : '+this.batOverlap.ref.desc;
+            }
+            if(this.batOverlap.type == 'animal') {
+                tmpText+='Nourriture : '+this.batOverlap.feed+'%\n';
+                if(this.batOverlap.dead) {
+                    tmpText+='MORT !\n';
+                }
             }
             if(this.batOverlap.type == 'field') {
                 if(this.batOverlap.plant) {

@@ -76,6 +76,8 @@ class Loading extends Phaser.Scene {
         this.load.image('off', 'assets/header/off.png');
         this.load.image('globe', 'assets/header/globe.png');
         this.load.image('search', 'assets/header/search.png');
+        this.load.image('mute', 'assets/header/mute.png');
+        this.load.image('sound', 'assets/header/sound.png');
 
 
 
@@ -123,7 +125,7 @@ class Loading extends Phaser.Scene {
         this.load.image('fumier-button', 'assets/menu/fumier.png');
         this.load.image('compost-button', 'assets/menu/compost.png');
         this.load.image('vert-button', 'assets/menu/vert.png');
-        this.load.image('chimique-button', 'assets/menu/chimique.png');
+        this.load.image('engrais-button', 'assets/menu/engrais.png');
 
         this.load.image('lutte_chimique-button', 'assets/menu/lutte_chimique.png');
         this.load.image('physique-button', 'assets/menu/lutte_physique.png');
@@ -132,6 +134,11 @@ class Loading extends Phaser.Scene {
         this.load.image('humain-button', 'assets/menu/humain.png');
         this.load.image('biologic-button', 'assets/menu/lutte_bio.png');
         this.load.image('biopesticid-button', 'assets/menu/biopesticides.png');
+
+        this.load.image('fourrages-button', 'assets/menu/fourrages.png');
+        this.load.image('grains-button', 'assets/menu/grains.png');
+        this.load.image('ration-button', 'assets/menu/ration.png');
+        this.load.image('indus-button', 'assets/menu/indus.png');
 
 
         // Chargement des autres assets du menu
@@ -150,7 +157,7 @@ class Loading extends Phaser.Scene {
         this.load.image('fumier-search', 'assets/search/fumier.png');
         this.load.image('compost-search', 'assets/search/compost.png');
         this.load.image('vert-search', 'assets/search/vert.png');
-        this.load.image('chimique-search', 'assets/search/chimique.png');
+        this.load.image('engrais-search', 'assets/search/engrais.png');
 
         this.load.image('health-search', 'assets/search/health.png');
         this.load.image('lutte_chimique-search', 'assets/search/lutte_chimique.png');
@@ -160,6 +167,11 @@ class Loading extends Phaser.Scene {
         this.load.image('humain-search', 'assets/search/humain.png');
         this.load.image('biologic-search', 'assets/search/lutte_bio.png');
         this.load.image('biopesticid-search', 'assets/search/biopesticides.png');
+
+        this.load.image('fourrages-search', 'assets/search/fourrages.png');
+        this.load.image('grains-search', 'assets/search/grains.png');
+        this.load.image('ration-search', 'assets/search/ration.png');
+        this.load.image('indus-search', 'assets/search/indus.png');
 
 
     }

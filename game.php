@@ -223,8 +223,10 @@ include("config/configbdd.php");
                 super({ key: 'headerScene' });
                 this.turnOff;
                 this.globe;
+                this.search;
                 this.moneyText;
                 this.batOverlap;
+                this.mute;
 
                 this.gameScene;
             }
@@ -349,6 +351,12 @@ include("config/configbdd.php");
                     progressBar3.fillRect(w3, h3, widthBar*(this.registry.get('hunger')/100), heightBar);
                 }, this);
 
+
+                this.mute = this.add.image(window.innerWidth-25, 75, 'mute').setInteractive().setScale(0.08);
+                this.mute.on('pointerdown', function(){
+                    //this.mute.setFrame((this.mute.frame + 1)%2);
+                    this.gameScene.musique.mute = !this.gameScene.musique.mute;
+                }, this);
             }
 
             update() {

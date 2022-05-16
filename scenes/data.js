@@ -356,13 +356,14 @@ let data = [
 
     //Engrais
     {
-        tag:'chimique',
+        tag:'engrais',
         type:'fertility',
         typeName:'Engrais',
         name:'Engrais chimique',
         desc:'Les engrais sont des substances organiques ou minérales destinées à apporter aux plantes des compléments d\'éléments nutritifs, de façon à améliorer leur croissance, et à augmenter le rendement et la qualité des cultures.',
         info:'Les engrais présentent un risque de pollution de l\'eau potable.',
         unlock:true,
+        unlockPrice:10000,
         fertility:20,
         ecology:-20,
         prix:10000
@@ -375,6 +376,7 @@ let data = [
         desc:'Un engrais vert est une culture destinée à être enfouie, à l\'état vert sur place, pour améliorer la structure du sol et sa fertilité. Elle peut comporter une ou plusieurs espèces de plantes.',
         info:'Les engrais vert fissurent le sol et améliorent sa perméabilité à l\'air et à l\'eau et étouffent les "mauvaises herbes"',
         unlock:false,
+        unlockPrice:10000,
         fertility:10,
         ecology:20,
         prix:10000
@@ -387,6 +389,7 @@ let data = [
         desc:'Le fumier est un matériau semi-solide composé de différents déchets de matière organique (pailles de céréales, fougères, granulés de bois, etc).',
         info:'L\'apport du fumier tend à améliorer l\'environnement biologique, chimique et les propriétés chimiques du sol',
         unlock:false,
+        unlockPrice:10000,
         fertility:15,
         ecology:5,
         prix:10000
@@ -399,6 +402,7 @@ let data = [
         desc:'Le compostage est un processus biologique de conversion et de valorisation des matières organiques en un produit naturel, stabilisé, hygiénique riche en composés humiques et minéraux appelé compost.',
         info:'Il permet aussi de se débarrasser des carcasses et déjections d\'animaux, et traite les mauvaises odeurs liées aux déjections animales et au fumier',
         unlock:false,
+        unlockPrice:10000,
         fertility:15,
         ecology:5,
         prix:10000
@@ -415,6 +419,7 @@ let data = [
         desc:'Herbicides, insecticides, fongicides, acaricides',
         info:'Ca pollue fort',
         unlock:true,
+        unlockPrice:10000,
         health:2,
         ecology:-30,
         prix:10000
@@ -427,6 +432,7 @@ let data = [
         desc:'Mecanique, pneumatique, chaleur',
         info:'Ca pollue bof',
         unlock:false,
+        unlockPrice:10000,
         health:3,
         ecology:5,
         prix:10000
@@ -439,6 +445,7 @@ let data = [
         desc:'Ca vole',
         info:'Ca pollue moins bof',
         unlock:false,
+        unlockPrice:10000,
         health:3,
         ecology:-5,
         prix:10000
@@ -451,6 +458,7 @@ let data = [
         desc:'Ca roule',
         info:'Ca pollue pas',
         unlock:false,
+        unlockPrice:10000,
         health:3,
         ecology:-5,
         prix:10000
@@ -463,6 +471,7 @@ let data = [
         desc:'Désherbage, surveillance, expertise',
         info:'Ca pollue moins bof',
         unlock:false,
+        unlockPrice:10000,
         health:1,
         ecology:10,
         prix:10000
@@ -475,6 +484,7 @@ let data = [
         desc:'Parasites, prédateurs, plantes transgéniques (OGM)',
         info:'Attention aux OGM',
         unlock:false,
+        unlockPrice:10000,
         health:2,
         ecology:0,
         prix:10000
@@ -487,8 +497,64 @@ let data = [
         desc:'extraits de plantes, bactéries et virus pathogènes, nématodes',
         info:'Je sais pas',
         unlock:false,
+        unlockPrice:10000,
         health:3,
         ecology:5,
+        prix:10000
+    },
+
+
+    //Nourriture
+    {
+        tag:'fourrages',
+        type:'meal',
+        typeName:'Nourriture pour animaux',
+        name:'Fourrages',
+        desc:'Miam la bonne herbe',
+        info:'Ca pollue fort',
+        unlock:true,
+        unlockPrice:10000,
+        feed:20,
+        care:10,
+        prix:10000
+    },
+    {
+        tag:'grains',
+        type:'meal',
+        typeName:'Nourriture pour animaux',
+        name:'Grains',
+        desc:'Les grains peuvent être moissonnés secs ou au stade « grain immature (ou humide) ». Au lieu de récolter maïs, sorgho ou céréales plantes entières avec une récolteuse-hacheuse qui produit un broyat que l\'on compacte pour faire de l\'ensilage, on récolte seulement le grain à la moissonneuse avant maturité complète (30-35 % d\'humidité pour le maïs) et on le broie pour le stocker à l\'abri de l\'air en silo hermétique (ensilage de grains). Le grain se conserve ainsi durant les mois nécessaires à sa consommation . On donne dans ce cas à l\'animal un supplément de foin pour assurer la digestion. Un bœuf de 300 kg aura besoin par jour de 6 kg de ce grain et de 10 kg de foin pour assurer sa ration alimentaire de croissance, avec un gain de 700 gr de poids vif par jour. Ce procédé, courant aujourd\'hui, ne nécessite qu\'une ensileuse à poste fixe, en plus du matériel de moisson. De plus, il permet de récolter le grain à un taux élevé d\'humidité, ce qui est important quand la récolte se fait par temps pluvieux. ',
+        info:'Ca pollue fort',
+        unlock:false,
+        unlockPrice:10000,
+        feed:20,
+        care:5,
+        prix:10000
+    },
+    {
+        tag:'ration',
+        type:'meal',
+        typeName:'Nourriture pour animaux',
+        name:'Aliments constitutifs de la ration',
+        desc:'Miam la bonne herbe',
+        info:'Ca pollue fort',
+        unlock:false,
+        unlockPrice:10000,
+        feed:30,
+        care:-10,
+        prix:10000
+    },
+    {
+        tag:'indus',
+        type:'meal',
+        typeName:'Nourriture pour animaux',
+        name:'Aliments industriels complets ou semi-complets',
+        desc:'L\'industrie peut fournir la ration complète des animaux d\'élevage, adaptée à chaque situation. C\'est généralement le cas en élevage avicole et cunicole et c\'est très fréquent en élevage porcin. Les rations semi-complètes apportent le complément à un ou plusieurs aliments de base produits ou non sur la ferme. Elles sont de plus en plus proposées pour les ruminants : rations sèches ou rations mash complétées par du foin.',
+        info:'Ca pollue fort',
+        unlock:false,
+        unlockPrice:10000,
+        feed:2,
+        care:-30,
         prix:10000
     },
 ];

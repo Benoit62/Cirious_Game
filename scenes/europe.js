@@ -25,6 +25,7 @@ class Europe extends Phaser.Scene {
         this.timerDead = 0;
         this.timerWeeds = 0;
         this.timerDeadanimal = 0;
+        this.timerMeal = 0;
 
         this.climat = 'europe';
 
@@ -74,7 +75,7 @@ class Europe extends Phaser.Scene {
             scale: 0.5,
             ref: {},
             dead:false,
-            feed:100
+            feed:80
         });
 
         // Structures
@@ -445,12 +446,14 @@ class Europe extends Phaser.Scene {
 
         this.timerGrowth++;
         if (this.timerGrowth == 500) {
+            console.log('Check Pousse');
             this.grow();
             this.timerGrowth = 0 - Phaser.Math.Between(0, 200);
         }
 
         this.timerDead++;
         if (this.timerDead == 500) {
+            console.log('Check rotten');
             this.rotten();
             this.timerDead = 0;
         }
@@ -458,8 +461,16 @@ class Europe extends Phaser.Scene {
 
         this.timerDeadanimal++;
         if (this.timerDeadanimal == 1500) {
+            console.log('Check dead');
             this.dead();
             this.timerDeadanimal = 0 - Phaser.Math.Between(0, 500);
+        }
+
+        this.timerMeal++;
+        if (this.timerMeal == 1000) {
+            console.log('Check eat');
+            this.eat();
+            this.timerMeal = 0 - Phaser.Math.Between(0, 400);
         }
 
         if (this.timer % 60 == 0) {
@@ -839,6 +850,38 @@ class Europe extends Phaser.Scene {
                 textAnimal.destroy();
                 animalButton.destroy();
             }, 2000);
+        }
+    }
+
+    eat() {
+        for (let i in this.data.values) {
+            let bat = this.data.values[i];
+            if (bat.level > 0 && bat.type == 'animal' && !bat.dead) {
+                if (bat.feed > 0) {
+                    if (Phaser.Math.Between(1, 5) <= 4) {
+                        bat.feed -= 5;
+                        console.log('Eat animal !', bat);
+
+                        if(bat.feed <= 0) {
+                            bat.feed = 0;
+                            setTimeout(() => {
+                                bat.dead = true;
+                                console.log('Dead animal !', bat);
+                                this.images[bat.key - 1].setFrame((bat.level - 1) + bat.ref.lvlMax);
+
+                                this.updateJauge('animalCare', -40);
+
+                                let textAnimal = this.add.text(bat.x, bat.y, '-40', { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
+                                let animalButton = this.add.image(textAnimal.x + textAnimal.width / 1.5, textAnimal.y, 'animal-care').setScale(0.08).setOrigin(0,0.5);
+                                setTimeout(() => {
+                                    textAnimal.destroy();
+                                    animalButton.destroy();
+                                }, 2000);
+                            }, 5000);
+                        }
+                    }
+                }
+            }
         }
     }
 
