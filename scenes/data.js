@@ -93,6 +93,18 @@ let data = [
         info:'',
         climat:['tropic']
     },
+    {
+        tag:'chamel',
+        type:'animal',
+        lvlMax:3,
+        buildCost:30000,
+        upgrade:[0,20000,35000,60000],
+        money:[0,3,8,20],
+        name:'Chameau',
+        desc:'Tout est bon dans le chameau',
+        info:'',
+        climat:['aride']
+    },
 
 
 

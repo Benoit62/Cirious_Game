@@ -24,7 +24,7 @@ class Europe extends Phaser.Scene {
         this.timer = 0;
         this.timerDead = 0;
         this.timerWeeds = 0;
-        timerDeadanimal = 0;
+        this.timerDeadanimal = 0;
 
         this.climat = 'europe';
 
@@ -536,9 +536,9 @@ class Europe extends Phaser.Scene {
                         this.images[bat.key - 1].rotation = 3.141592 / 2;
                     }
                     if(bat.type == 'animal') {
-                        this.updateJauge('animalCare', -40);
+                        this.updateJauge('animalCare', -30);
 
-                        let textAnimal = this.add.text(bat.x, bat.y, '-40', { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
+                        let textAnimal = this.add.text(bat.x, bat.y, '-30', { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
                         let animalButton = this.add.image(textAnimal.x + textAnimal.width / 1.5, textAnimal.y, 'animal-care').setScale(0.08).setOrigin(0,0.5);
                         console.log(textAnimal);
                         setTimeout(() => {
@@ -735,16 +735,15 @@ class Europe extends Phaser.Scene {
                 if (!bat.ref.climat.includes(this.climat)) {
                     bat.dead = true;
                     console.log('Dead animal !', bat);
-                    this.images[bat.key - 1].setFrame(bat.level + bat.lvlMax);
+                    this.images[bat.key - 1].setFrame((bat.level - 1) + bat.ref.lvlMax);
 
-                    this.updateJauge('animalCare', );
+                    this.updateJauge('animalCare', -40);
 
-                    let textEcology = this.add.text(bat.x, bat.y, engrais.ecology.toString(), { lineSpacing:10, fontSize:40, color:'#ffffff' }).setOrigin(0.5, 0.5);
-                    let ecologyButton = this.add.image(textEcology.x + textEcology.width / 1.5, textEcology.y, 'ecology-care').setScale(0.08).setOrigin(0,0.5);
-                    console.log(textEcology);
+                    let textAnimal = this.add.text(bat.x, bat.y, '-40', { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
+                    let animalButton = this.add.image(textAnimal.x + textAnimal.width / 1.5, textAnimal.y, 'animal-care').setScale(0.08).setOrigin(0,0.5);
                     setTimeout(() => {
-                        textEcology.destroy();
-                        ecologyButton.destroy();
+                        textAnimal.destroy();
+                        animalButton.destroy();
                     }, 2000);
                 }
             }
