@@ -6,11 +6,19 @@ class Disclaimer extends Phaser.Scene {
         });
     }
 
+    init(data){
+        this.esc = data.esc;
+    }
+
     preload() {
 
     }
 
     create() {
+        if(this.esc) {
+            this.scene.start('mapScene');
+            this.scene.stop('disclaimerScene');
+        }
         const txt = this.make.text({
             x: 0,
             y: 0,
@@ -33,6 +41,7 @@ class Disclaimer extends Phaser.Scene {
 
     start() {
         this.scene.start('mapScene');
+        this.scene.stop('disclaimerScene');
     }
 
 }

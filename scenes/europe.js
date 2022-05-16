@@ -119,7 +119,7 @@ class Europe extends Phaser.Scene {
             dead:false,
             fertility:100,
             weeds:0,
-            maxWeeds:3
+            maxWeeds:10
         });
         this.data.set('bat6', {
             key: 6,
@@ -139,7 +139,7 @@ class Europe extends Phaser.Scene {
             dead:false,
             fertility:100,
             weeds:0,
-            maxWeeds:3
+            maxWeeds:10
         });
         this.data.set('bat7', {
             key: 7,
@@ -159,7 +159,7 @@ class Europe extends Phaser.Scene {
             dead:false,
             fertility:100,
             weeds:0,
-            maxWeeds:3
+            maxWeeds:10
         });
         this.data.set('bat8', {
             key: 8,
@@ -179,7 +179,7 @@ class Europe extends Phaser.Scene {
             dead:false,
             fertility:90,
             weeds:0,
-            maxWeeds:3
+            maxWeeds:10
         });
 
 
@@ -418,10 +418,10 @@ class Europe extends Phaser.Scene {
 
 
         this.timerWeeds++;
-        if (this.timerWeeds == 1500) {
+        if (this.timerWeeds == 3000) {
             console.log('Check weeds');
             this.weeds();
-            this.timerWeeds = 0 - Phaser.Math.Between(0, 300);
+            this.timerWeeds = 0 - Phaser.Math.Between(0, 500);
         }
 
         this.timerGrowth++;
@@ -616,8 +616,9 @@ class Europe extends Phaser.Scene {
         console.log('Recolte : ', bat);
         if (bat.type == 'field' && bat.plant && bat.level == 1 && (bat.tag != 'labor' || bat.tag != 'water') && (bat.grow == bat.seed.maxGrow || bat.dead)) {
             let percent = bat.fertility/100;
-            let moneyWin = bat.seed.money*percent;
-            let hungerWin = 5*percent;
+            let percent2 = (bat.maxWeeds - bat.weeds)/10;
+            let moneyWin = bat.seed.money*percent*percent2;
+            let hungerWin = 5*percent*percent2;
 
             // Compte l'echainement des graines
             let nbOldSeed = 0;
@@ -640,7 +641,7 @@ class Europe extends Phaser.Scene {
                 this.updateJauge('hunger', hungerWin);
                 console.log('Recolté !', bat);
                 this.images[bat.key - 1]['plant'].destroy();
-                let textWin = this.add.text(bat.x, bat.y, '+'+moneyWin+'$\n+'+hungerWin, { lineSpacing:10, fontSize:40, color:'#ffffff', align:'center' }).setOrigin(0.5, 0.5);
+                let textWin = this.add.text(bat.x, bat.y, '+'+moneyWin+'$\n+'+hungerWin+' Nourriture', { lineSpacing:10, fontSize:40, color:'#ffffff', align:'center' }).setOrigin(0.5, 0.5);
                 setTimeout(() => {
                     textWin.destroy();
                 }, 2000);

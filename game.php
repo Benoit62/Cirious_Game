@@ -244,7 +244,7 @@ include("config/configbdd.php");
                     this.scene.setVisible(false, this.registry.get('climat')+'Scene');
                     this.scene.stop('headerScene');
                     this.scene.stop('menuScene');
-                    this.scene.start('searchScene');
+                    this.scene.start('searchScene', {money:this.registry.get('money')});
                 }, this);
 
                 // Money 

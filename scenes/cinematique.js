@@ -234,7 +234,7 @@ class Cinematique2 extends Phaser.Scene {
     create() {
         if(this.esc) {
             this.scene.stop('cinematiqueScene2')
-            this.scene.start('disclaimerScene');
+            this.scene.start('disclaimerScene', { esc:true });
         }
 
         this.background = this.add.image(0, 0, 'mapmonde').setScale(1.5);
@@ -257,7 +257,7 @@ class Cinematique2 extends Phaser.Scene {
 
         this.input.keyboard.on('keydown_ESC', function(){
             this.scene.stop('cinematiqueScene2')
-            this.scene.start('disclaimerScene');
+            this.scene.start('disclaimerScene', { esc:true });
         }, this);
     }
 
