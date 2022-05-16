@@ -72,7 +72,7 @@ class Menu extends Phaser.Scene {
         this.backGroundPopup.fillRoundedRect(window.innerWidth/2 - 350 + 150, window.innerHeight/2 - 200 + 25, 700, 400, 20);
         this.backGroundPopup.lineStyle(3, 0xffffff, 1);
         this.backGroundPopup.strokeRoundedRect(window.innerWidth/2 - 350 + 150, window.innerHeight/2 - 200 + 25, 700, 400, 20);
-        this.plusText = this.add.text(window.innerWidth/2 - 350 + 150 + 20,  window.innerHeight/2 - 200 + 25 + 30, '', { lineSpacing:9, wordWrap: { width: 700 - 40 }, fontSize:17, color:'#ffffff' });
+        this.plusText = this.add.text(window.innerWidth/2 - 350 + 150 + 20,  window.innerHeight/2 - 200 + 25 + 15, '', { lineSpacing:9, wordWrap: { width: 700 - 40 }, fontSize:17, color:'#ffffff' });
         this.backGroundPopup.setVisible(false);
         this.plusText.setVisible(false);
 
@@ -194,7 +194,7 @@ class Menu extends Phaser.Scene {
         compt=0;
         let n = 0;
         for(let i of getByType('fertility')) {
-            this.engrais[i.tag] = this.add.image(40 +(n%5)*60, 140 + 45*compt, i.tag+"-button").setScale(0.08).setInteractive().setVisible(false);
+            this.engrais[i.tag] = this.add.image(35 +(n%5)*60, 140 + 45*compt, i.tag+"-button").setScale(0.08).setInteractive().setVisible(false);
             if(!i.unlock) this.engrais[i.tag].setAlpha(0.4);
             this.engrais[i.tag].on('pointerdown', function(){
                 if(i.unlock) {
@@ -223,7 +223,7 @@ class Menu extends Phaser.Scene {
         compt=0;
         let o = 0;
         for(let i of getByType('health')) {
-            this.luttes[i.tag] = this.add.image(40 +(o%5)*60, 140 + 45*compt, i.tag+"-button").setScale(0.08).setInteractive().setVisible(false);
+            this.luttes[i.tag] = this.add.image(35 +(o%5)*60, 140 + 45*compt, i.tag+"-button").setScale(0.08).setInteractive().setVisible(false);
             if(!i.unlock) this.luttes[i.tag].setAlpha(0.4);
             this.luttes[i.tag].on('pointerdown', function(){
                 if(i.unlock && this.batOverlap.level == 1 && this.batOverlap.type == 'field' && this.batOverlap.weeds > 0) {

@@ -333,7 +333,7 @@ include("config/configbdd.php");
 
                 //  Check the Registry and hit our callback every time the 'money' value is updated
                 this.registry.events.on('changedata', function(){
-                    this.moneyText.setText(this.registry.get('money')+'$');
+                    this.moneyText.setText(this.registry.get('money'));
                     this.moneyPerTickText.setText(this.registry.get('moneyPerTick')+'/s');
                     percentText1.setText(this.registry.get('animalCare')+'%');
                     percentText2.setText(this.registry.get('ecology')+'%');

@@ -373,11 +373,11 @@ class Europe extends Phaser.Scene {
 
     update() {
         if (this.cursors.up.isDown) {
-            this.player.setVelocityY(-550);
+            this.player.setVelocityY(-650);
             this.menuScene.closeSavoirPlus();
             //player.anims.play('up', true);
         } else if (this.cursors.down.isDown) {
-            this.player.setVelocityY(550);
+            this.player.setVelocityY(650);
             this.menuScene.closeSavoirPlus();
 
             //player.anims.play('down', true);
@@ -386,12 +386,12 @@ class Europe extends Phaser.Scene {
         }
 
         if (this.cursors.left.isDown) {
-            this.player.setVelocityX(-550);
+            this.player.setVelocityX(-650);
             this.menuScene.closeSavoirPlus();
 
             this.player.anims.play('left', true);
         } else if (this.cursors.right.isDown) {
-            this.player.setVelocityX(550);
+            this.player.setVelocityX(650);
             this.menuScene.closeSavoirPlus();
 
             this.player.anims.play('right', true);
@@ -642,9 +642,15 @@ class Europe extends Phaser.Scene {
                 this.updateJauge('hunger', hungerWin);
                 console.log('Recolté !', bat);
                 this.images[bat.key - 1]['plant'].destroy();
-                let textWin = this.add.text(bat.x, bat.y, '+'+moneyWin+'$\n+'+hungerWin+' Nourriture', { lineSpacing:10, fontSize:40, color:'#ffffff', align:'center' }).setOrigin(0.5, 0.5);
+
+
+                let textMoney = this.add.text(bat.x, bat.y, '+'+moneyWin+'$', { lineSpacing:10, fontSize:40, color:'#ffffff' }).setOrigin(0.5, 0.5);
+                let textHunger = this.add.text(bat.x, textMoney.y + textMoney.height*0.8, hungerWin, { lineSpacing:10, fontSize:40, color:'#ffffff' }).setOrigin(0.5, 0.5);
+                let hungerButton = this.add.image(textHunger.x + textHunger.width / 1.5, textMoney.y + textMoney.height*0.5, 'hunger-care').setScale(0.08);
                 setTimeout(() => {
-                    textWin.destroy();
+                    textMoney.destroy();
+                    textHunger.destroy();
+                    hungerButton.destroy();
                 }, 2000);
             }
             else {
@@ -676,6 +682,14 @@ class Europe extends Phaser.Scene {
         if(result > 100) result = 100;
         if(result < 0) result = 0;
         this.registry.set(jauge, result);
+    }
+
+
+    textGain(text){
+        let textMoney = this.add.text(bat.x, bat.y, '+'+moneyWin+'$\n+'+hungerWin+' Nourriture', { lineSpacing:10, fontSize:40, color:'#ffffff' }).setOrigin(0.5, 0.5);
+        setTimeout(() => {
+            textWin.destroy();
+        }, 2000);
     }
 
 

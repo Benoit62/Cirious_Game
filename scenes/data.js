@@ -64,8 +64,20 @@ let data = [
         buildCost:30000,
         upgrade:[0,20000,35000,60000],
         money:[0,3,8,20],
-        name:'Mouton',
-        desc:'Tout est bon dans le mouton',
+        name:'Saumon',
+        desc:'Tout est bon dans le saumon',
+        info:'',
+        climat:['froid']
+    },
+    {
+        tag:'renne',
+        type:'animal',
+        lvlMax:3,
+        buildCost:30000,
+        upgrade:[0,20000,35000,60000],
+        money:[0,3,8,20],
+        name:'renne',
+        desc:'Tout est bon dans le renne',
         info:'',
         climat:['froid']
     },
