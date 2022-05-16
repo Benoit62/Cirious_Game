@@ -316,12 +316,12 @@ form a:hover {
 }
 
 .container a:nth-child(1) {
-    background: linear-gradient(to right, #4481eb, #04befe, #4481eb);
+    background: linear-gradient(to right, #BF3030, #FE1B00, #C60800);
     background-size: 200%;
 }
 
 .container a:nth-child(2) {
-    background: linear-gradient(to right, #43e97b, #38f9d7, #43e97b);
+    background: linear-gradient(to right, #EE82EE, #DA70D6, #FF00FF);
     background-size: 200%;
 }
 
