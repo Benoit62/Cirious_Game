@@ -76,10 +76,22 @@ let data = [
         buildCost:30000,
         upgrade:[0,20000,35000,60000],
         money:[0,3,8,20],
-        name:'renne',
+        name:'Renne',
         desc:'Tout est bon dans le renne',
         info:'',
         climat:['froid']
+    },
+    {
+        tag:'bison',
+        type:'animal',
+        lvlMax:3,
+        buildCost:30000,
+        upgrade:[0,20000,35000,60000],
+        money:[0,3,8,20],
+        name:'Bison',
+        desc:'Tout est bon dans le bison',
+        info:'',
+        climat:['tropic']
     },
 
 
@@ -273,6 +285,9 @@ let data = [
         info:'',
         climat:['europe']
     },
+
+
+    //Climat
     {
         tag:'europe',
         type:'climat',
@@ -315,7 +330,7 @@ let data = [
         name:'Engrais chimique',
         desc:'Les engrais sont des substances organiques ou minérales destinées à apporter aux plantes des compléments d\'éléments nutritifs, de façon à améliorer leur croissance, et à augmenter le rendement et la qualité des cultures.',
         info:'Les engrais présentent un risque de pollution de l\'eau potable.',
-        unlock:false,
+        unlock:true,
         fertility:20,
         ecology:-20,
         prix:10000
@@ -367,7 +382,7 @@ let data = [
         name:' chimique',
         desc:'Herbicides, insecticides, fongicides, acaricides',
         info:'Ca pollue fort',
-        unlock:false,
+        unlock:true,
         health:2,
         ecology:-30,
         prix:10000
