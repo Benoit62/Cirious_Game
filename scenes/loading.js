@@ -78,6 +78,8 @@ class Loading extends Phaser.Scene {
         this.load.image('search', 'assets/header/search.png');
 
 
+
+
         // Chargement des icons du Menu
         this.load.image("builder", "assets/menu/build.png");
         this.load.image("planter", "assets/menu/planter.png");
@@ -86,6 +88,9 @@ class Loading extends Phaser.Scene {
         this.load.image("upgrade", "assets/menu/upgrade.png"); 
         this.load.image("fertility", "assets/menu/fertility.png"); 
         this.load.image('health', 'assets/search/health.png');
+
+        
+        this.load.image('bull-button', 'assets/menu/bull.png');
         
         this.load.image("cow-button", "assets/menu/cow.png"); 
         this.load.image("pig-button", "assets/menu/pig.png"); 

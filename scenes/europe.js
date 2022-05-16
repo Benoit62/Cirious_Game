@@ -59,7 +59,8 @@ class Europe extends Phaser.Scene {
             tag: 'build',
             scale: 0.5,
             ref: {},
-            dead:false
+            dead:false,
+            feed:100
         });
         this.data.set('bat2', {
             key: 2,
@@ -72,7 +73,8 @@ class Europe extends Phaser.Scene {
             tag: 'cow',
             scale: 0.5,
             ref: {},
-            dead:false
+            dead:false,
+            feed:100
         });
 
         // Structures
@@ -293,14 +295,24 @@ class Europe extends Phaser.Scene {
             let bat = this.data.values[i];
             if(bat.dataType == 'bat'){
                 if (bat.level > 0 && bat.tag != 'build') {
-                    if(bat.type != 'field') {
+                    if(bat.type != 'field' && bat.type != 'animal') {
                         this.images.push(this.physics.add.image(bat.x, bat.y, bat.tag, bat.level - 1));
                         bat.ref = getByTag(bat.tag)[0];
                         if (bat.rotate) {
                             this.images[j].rotation = 3.141592 / 2;
                         }
                     }
-                    else {
+                    if(bat.type == 'animal') {
+                        this.images.push(this.physics.add.image(bat.x, bat.y, bat.tag, bat.level - 1));
+                        bat.ref = getByTag(bat.tag)[0];
+                        if(bat.dead) {
+                            this.images[j].setFrame((bat.level - 1) + bat.ref.lvlMax);
+                        }
+                        if (bat.rotate) {
+                            this.images[j].rotation = 3.141592 / 2;
+                        }
+                    }
+                    if(bat.type == 'field') {
                         if(!bat.plant) {
                             let arrayField = [];
                             arrayField['ground'] = this.physics.add.image(bat.x, bat.y, bat.tag, bat.level - 1);
@@ -498,10 +510,18 @@ class Europe extends Phaser.Scene {
         if (bat.type == 'animal' || bat.type == 'struct' || bat.type == 'house') {
             if (bat.level < bat.ref.lvlMax && bat.level != 0) {
                 if (this.money() >= bat.ref.upgrade[bat.level]) {
-                    this.registry.set('money', this.registry.get('money') - bat.ref.upgrade[bat.level]);
-                    bat.level += 1;
-                    console.log('Upgraded !', bat);
-                    this.images[bat.key - 1].setFrame(bat.level - 1);
+                    if(bat.type != 'animal') {
+                        this.registry.set('money', this.registry.get('money') - bat.ref.upgrade[bat.level]);
+                        bat.level += 1;
+                        console.log('Upgraded !', bat);
+                        this.images[bat.key - 1].setFrame(bat.level - 1);
+                    }
+                    else if(!bat.dead) {
+                        this.registry.set('money', this.registry.get('money') - bat.ref.upgrade[bat.level]);
+                        bat.level += 1;
+                        console.log('Upgraded !', bat);
+                        this.images[bat.key - 1].setFrame(bat.level - 1);
+                    }
                     if(bat.type == 'animal') {
                         this.updateJauge('animalCare', 10 * bat.level);
 
@@ -570,7 +590,7 @@ class Europe extends Phaser.Scene {
                     bat.tag = seed.tag;
                     bat.seed = seed;
                     console.log('Planted !', bat);
-                    this.images[bat.key - 1]['plant'] = this.physics.add.image(bat.x, bat.y, seed.tag, bat.grow);
+                    this.images[bat.key - 1]['plant'] = this.add.image(bat.x, bat.y, seed.tag, bat.grow);
                 }
                 else {
                     console.log('Can\'t plant riz on dirt or others on water');
@@ -750,7 +770,77 @@ class Europe extends Phaser.Scene {
         }
     }
 
+    destroyBat(bat, destroyRef) {
+        console.log('Destruction batiment : ', bat);
+        if (bat.level > 0 && bat.tag != "build" && bat.type == 'animal' || bat.type == 'struct' || bat.type == 'field') {
+            if (this.money() >= destroyRef.cost) {
+                if(bat.type == 'animal') {
+                    this.images[bat.key - 1].destroy();
+                    this.images[bat.key - 1] = this.physics.add.image(bat.x, bat.y, 'build').setScale(bat.scale);
+                    if(!bat.dead) {
+                        //Si il vend le batiment des animaux pas mort il gagne un bonus bien-être
+                        this.updateJauge('animalCare', 20);
 
+                        let textAnimal = this.add.text(bat.x, bat.y, '+20', { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
+                        let animalButton = this.add.image(textAnimal.x + textAnimal.width / 1.5, textAnimal.y, 'animal-care').setScale(0.08).setOrigin(0,0.5);
+                        setTimeout(() => {
+                            textAnimal.destroy();
+                            animalButton.destroy();
+                        }, 2000);
+                    }
+                    bat.dead = false;
+                }
+                bat.level = 0;
+                bat.tag = 'build';
+                bat.ref = {};
+                this.registry.set('money', this.registry.get('money') - destroyRef.cost);
+                if(bat.type == 'field') {
+                    console.log('Destroy field !', bat);
+                    this.images[bat.key - 1]['ground'].destroy();
+                    this.images[bat.key - 1]['weeds'].destroy();
+                    if(bat.plant) {
+                        this.images[bat.key - 1]['plant'].destroy();
+                    }
+                    this.images[bat.key - 1] = this.physics.add.image(bat.x, bat.y, 'build').setScale(bat.scale);
+                    bat.seed = {};
+                    bat.oldseed = [];
+                    bat.dead = false;
+                    bat.grow = 0;
+                    bat.weeds = 0;
+                    bat.plant = false;
+                    bat.fertility = 100;
+                }
+                if(bat.type == 'struct') {
+                    this.images[bat.key - 1].destroy();
+                    this.images[bat.key - 1] = this.physics.add.image(bat.x, bat.y, 'build').setScale(bat.scale);
+                }
+
+                this.physics.add.overlap(this.player, this.images[bat.key - 1], this.overlapBat, null, this);
+            }
+            else {
+                console.log('Not enought money')
+                this.menuScene.errorText('Not enought money');
+            }
+        }
+    }
+
+    feed(bat, meal) {
+        console.log('Feed : ', bat);
+        if (bat.type == 'animal' && !bat.dead && bat.level > 0 && bat.feed < 100) {
+            bat.feed += meal.feed;
+            if(bat.feed > 100) bat.feed = 100;
+            console.log('Feeded !', bat);
+            this.updateJauge('animalCare', meal.care);
+
+            let textAnimal = this.add.text(bat.x, bat.y, meal.care.toString(), { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
+            let animalButton = this.add.image(textAnimal.x + textAnimal.width / 1.5, textAnimal.y, 'animal-care').setScale(0.08).setOrigin(0,0.5);
+            console.log(textAnimal);
+            setTimeout(() => {
+                textAnimal.destroy();
+                animalButton.destroy();
+            }, 2000);
+        }
+    }
 
 
     updateJauge(jauge, value){

@@ -1,5 +1,14 @@
 let data = [
     {
+        tag:'bull',
+        type:'destroy',
+        cost:5000,
+        name:'Destruction',
+        desc:'Destruction du bâtiment',
+    },
+
+
+    {
         tag:'tank',
         type:'struct',
         lvlMax:3,
@@ -139,6 +148,8 @@ let data = [
         info:''
     },
 
+
+    //Plantes
     {
         tag:'ble',
         type:'plant',
@@ -147,9 +158,9 @@ let data = [
         money:10000,
         maxGrow:3,
         name:'Blé',
-        desc:'Miam',
-        info:'',
-        climat:['tropic']
+        desc:'Céréales',
+        info:'Chaque année, 650 à 685 millions de tonnes de blé sont produites, 654 à 660 millions de tonnes sont consommées',
+        climat:['europe', 'polaire', 'desert']
     },
 
     {
@@ -160,9 +171,9 @@ let data = [
         money:10000,
         maxGrow:3,
         name:'Carrotes',
-        desc:'La Carotte est une plante bisannuelle de la famille des Apiacées, largement cultivée pour sa racine charnue, comestible, généralement orangée, consommée comme légume. La carotte représente, après la pomme de terre, le principal légume-racine cultivé dans le monde.',
-        info:'',
-        climat:['europe']
+        desc:'Légumes',
+        info:'La carotte est cultivée pratiquement partout sur la planète, et elle fait partie des légumes les plus consommés sur la planète . Aujourd’hui, on dénombre pas moins de 500 variétés de carottes dans le monde',
+        climat:['europe', 'polaire' , 'desert']
     },
 
     {
@@ -173,10 +184,11 @@ let data = [
         money:10000,
         maxGrow:3,
         name:'Maïs',
-        desc:'Miam',
-        info:'',
-        climat:['europe', 'tropic']
+        desc:'Céréale',
+        info:'Annuellement, le maïs est la céréale la plus produite dans le monde avec environ 850 millions de tonnes produites sur approximativement 162 millions d’hectares, soit un rendement moyen de 5.2 t/ha. ',
+        climat:['europe', 'tropic', 'polaire', 'desert']
     },
+
     {
         tag:'avoine',
         type:'plant',
@@ -185,9 +197,113 @@ let data = [
         money:10000,
         maxGrow:3,
         name:'Avoine',
-        desc:'Miam',
-        info:'',
-        climat:['europe']
+        desc:'Céréale',
+        info:'La production mondiale d\'avoine représente près de 800 kilos par seconde, soit 25 millions de tonnes par an. L\'Union européenne est le 1er production d\'avoine',
+        climat:['europe', 'tropic', 'polaire', 'desert']
+    },
+   
+    {
+        tag:'pdt',
+        type:'plant',
+        ground:'labor',
+        costPlant:5000,
+        money:10000,
+        maxGrow:3,
+        name:'Pommes de Terre',
+        desc:'Tubercules/Féculent',
+        info:'En 2011, la production de pommes de terre s\'est élevée à près de 12 000 kilos chaque seconde (compteur), soit 374 millions de tonnes. La Chine est le premier producteur mondial de pommes de terre',
+        climat:['europe', 'tropic','desert']
+    },
+
+    {
+        tag:'riz',
+        type:'plant',
+        ground:'water',
+        costPlant:5000,
+        money:10000,
+        maxGrow:3,
+        name:'Riz',
+        desc:'Céréale',
+        info:'La production mondiale de riz en 2016 est évaluée à 471 MT (base usiné). Les principaux pays producteurs sont la Chine, et l’Inde ',
+        climat:['tropic', 'europe']
+    },
+
+    {
+        tag:'soja',
+        type:'plant',
+        ground:'labor',
+        costPlant:5000,
+        money:10000,
+        maxGrow:3,
+        name:'Soja',
+        desc:'Légumineuse',
+        info:'La production de soja a plus que doublé au cours des 20 dernières années, atteignant 336 millions de tonnes pour la campagne 2016-17 contre 30 Mt. seulement au milieu des années 60. ',
+        climat:['europe', 'tropic']
+    },
+
+    {
+        tag:'tomato',
+        type:'plant',
+        ground:'labor',
+        costPlant:5000,
+        money:10000,
+        maxGrow:3,
+        name:'Tomate',
+        desc:'Légume-fruits',
+        info:'La production de soja a plus que doublé au cours des 20 dernières années, atteignant 336 millions de tonnes pour la campagne 2016-17 contre 30 Mt. seulement au milieu des années 60. ',
+        climat:['europe', 'polaire']
+    }, 
+    
+    {
+        tag:'chou',
+        type:'plant',
+        ground:'labor',
+        costPlant:5000,
+        money:10000,
+        maxGrow:3,
+        name:'Chou',
+        desc:'Légume',
+        info:'Environ 70 millions de tonnes de choux sont produites chaque année, sur une surface de 3,8 millions d\'hectares, dans près de 150 pays. ',
+        climat:['europe', 'tropic', 'polaire']
+    }, 
+    
+    {
+        tag:'lettuce',
+        type:'plant',
+        ground:'labor',
+        costPlant:5000,
+        money:10000,
+        maxGrow:3,
+        name:'Laitue',
+        desc:'Légume',
+        info:' La production mondiale de laitue est d\'environ 22 millions de tonnes ',
+        climat:['polaire','tropic']
+    }, 
+    
+    {
+        tag:'oignon',
+        type:'plant',
+        ground:'labor',
+        costPlant:5000,
+        money:10000,
+        maxGrow:3,
+        name:'Oignon',
+        desc:'Plante potagère',
+        info:'La production mondiale d\'oignons représente 85 millions de tonnes. Les principaux producteurs d\'oignons sont la Chine, l\'Inde et les États-Unis. ',
+        climat:['europe', 'tropic', 'polaire', 'desert']
+    },
+    
+    {
+        tag:'betterave',
+        type:'plant',
+        ground:'labor',
+        costPlant:5000,
+        money:10000,
+        maxGrow:3,
+        name:'Betterave',
+        desc:'Plante fourragère',
+        info:'En 2011, 5 069 362 d\'hectares de betteraves à sucre ont été cultivés dans le monde, la Russie étant la première zone de production.  ',
+        climat:['europe', 'polaire', 'desert']
     },
     {
         tag:'colza',
@@ -197,102 +313,6 @@ let data = [
         money:10000,
         maxGrow:4,
         name:'Colza',
-        desc:'Miam',
-        info:'',
-        climat:['europe']
-    },
-    {
-        tag:'herbe',
-        type:'plant',
-        ground:'labor',
-        costPlant:5000,
-        money:10000,
-        maxGrow:3,
-        name:'Herbe',
-        desc:'Miam',
-        info:'',
-        climat:['europe']
-    },
-    {
-        tag:'pdt',
-        type:'plant',
-        ground:'labor',
-        costPlant:5000,
-        money:10000,
-        maxGrow:3,
-        name:'Pommes de Terre',
-        desc:'Miam',
-        info:'',
-        climat:['europe']
-    },
-    {
-        tag:'riz',
-        type:'plant',
-        ground:'water',
-        costPlant:5000,
-        money:10000,
-        maxGrow:3,
-        name:'Riz',
-        desc:'Miam',
-        info:'',
-        climat:['tropic']
-    },
-    {
-        tag:'soja',
-        type:'plant',
-        ground:'labor',
-        costPlant:5000,
-        money:10000,
-        maxGrow:3,
-        name:'Soja',
-        desc:'Miam',
-        info:'',
-        climat:['europe', 'tropic']
-    },
-    {
-        tag:'champi',
-        type:'plant',
-        ground:'labor',
-        costPlant:5000,
-        money:10000,
-        maxGrow:3,
-        name:'Champignons',
-        desc:'Miam',
-        info:'',
-        climat:['europe', 'tropic']
-    },
-    {
-        tag:'lichen',
-        type:'plant',
-        ground:'labor',
-        costPlant:5000,
-        money:10000,
-        maxGrow:3,
-        name:'Lichens',
-        desc:'Miam',
-        info:'',
-        climat:['europe']
-    },
-    {
-        tag:'saxaoul',
-        type:'plant',
-        ground:'labor',
-        costPlant:5000,
-        money:10000,
-        maxGrow:3,
-        name:'Saxaoul',
-        desc:'Miam',
-        info:'',
-        climat:['europe']
-    },
-    {
-        tag:'tamaris',
-        type:'plant',
-        ground:'labor',
-        costPlant:5000,
-        money:10000,
-        maxGrow:3,
-        name:'Tamaris',
         desc:'Miam',
         info:'',
         climat:['europe']
