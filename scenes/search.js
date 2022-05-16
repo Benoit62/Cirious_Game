@@ -37,9 +37,7 @@ class Search extends Phaser.Scene {
                     if(this.registry.get('money') > value.prix) {
                         value.unlock = true;
                         searchIcone.setAlpha(1);
-                        let newMoney = this.registry.get('money') - value.prix;
-                        console.log(newMoney);
-                        this.registry.set('money', newMoney);
+                        this.registry.set('money', this.registry.get('money') - value.prix);
                     }
                     else {
                         this.errorText('Vous n\'avez pas assez d\'argent');

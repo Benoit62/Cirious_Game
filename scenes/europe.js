@@ -15,8 +15,6 @@ class Europe extends Phaser.Scene {
 
         this.images = [];
 
-        this.money = 50000;
-
         this.headerScene;
         this.menuScene;
 
@@ -360,7 +358,7 @@ class Europe extends Phaser.Scene {
         this.menuScene = this.scene.get('menuScene');
 
 
-        this.registry.set('money', this.money);
+        this.registry.set('money', 100000);
         this.registry.set('moneyPerTick', 0);
         this.registry.set('ecology', 10);
         this.registry.set('animalCare', 60);
@@ -446,8 +444,7 @@ class Europe extends Phaser.Scene {
                     }
                 }
             }
-            this.money += moneyPerSec;
-            this.registry.set('money', this.money);
+            this.registry.set('money', this.registry.get('money') + moneyPerSec);
             this.registry.set('moneyPerTick', moneyPerSec);
         }
         this.timer++;
@@ -488,7 +485,7 @@ class Europe extends Phaser.Scene {
         if (bat.type == 'animal' || bat.type == 'struct' || bat.type == 'house') {
             if (bat.level < bat.ref.lvlMax && bat.level != 0) {
                 if (this.money >= bat.ref.upgrade[bat.level]) {
-                    this.money -= bat.ref.upgrade[bat.level];
+                    this.registry.set('money', this.registry.get('money') - bat.ref.upgrade[bat.level]);
                     bat.level += 1;
                     console.log('Upgraded !', bat);
                     this.images[bat.key - 1].setFrame(bat.level - 1);
@@ -510,7 +507,7 @@ class Europe extends Phaser.Scene {
                 bat.level += 1;
                 bat.tag = ref.tag;
                 bat.ref = ref;
-                this.money -= ref.buildCost;
+                this.registry.set('money', this.registry.get('money') - ref.buildCost);
                 if(bat.type != 'field') {
                     console.log('Builded !', bat);
                     this.images[bat.key - 1] = this.physics.add.image(bat.x, bat.y, bat.tag, bat.level - 1);
@@ -539,7 +536,7 @@ class Europe extends Phaser.Scene {
         if (bat.type == 'field' && !bat.plant && bat.level == 1 && (bat.tag == 'labor' || bat.tag == 'water')) {
             if (this.money >= seed.costPlant) {
                 if (bat.tag == seed.ground) {
-                    this.money -= seed.costPlant;
+                    this.registry.set('money', this.registry.get('money') - seed.costPlant);
                     bat.plant = true;
                     bat.tag = seed.tag;
                     bat.seed = seed;
@@ -617,6 +614,7 @@ class Europe extends Phaser.Scene {
         if (bat.type == 'field' && bat.plant && bat.level == 1 && (bat.tag != 'labor' || bat.tag != 'water') && (bat.grow == bat.seed.maxGrow || bat.dead)) {
             let percent = bat.fertility/100;
             let percent2 = (bat.maxWeeds - bat.weeds)/10;
+            console.log(percent, percent2);
             let moneyWin = bat.seed.money*percent*percent2;
             let hungerWin = 5*percent*percent2;
 
@@ -636,7 +634,7 @@ class Europe extends Phaser.Scene {
                 bat.oldseed.unshift(bat.seed);
                 bat.tag = bat.seed.ground;
                 bat.grow = 0;
-                this.money += moneyWin;
+                this.registry.set('money', this.registry.get('money') + moneyWin);
                 bat.seed = {};
                 this.updateJauge('hunger', hungerWin);
                 console.log('Recolté !', bat);
@@ -676,7 +674,6 @@ class Europe extends Phaser.Scene {
         if(result < 0) result = 0;
         this.registry.set(jauge, result);
     }
-
 
 
     projectRect(rect, body, time) {
