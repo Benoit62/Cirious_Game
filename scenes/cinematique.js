@@ -23,10 +23,10 @@ class Cinematique1 extends Phaser.Scene {
         }*/
 
         this.background = this.add.image(0, 0, 'mapmonde').setScale(1.5);
-        Phaser.Display.Align.In.Center(this.background, this.add.zone(window.innerWidth/2, window.innerHeight/2, window.innerWidth, window.innerHeight));
+        Phaser.Display.Align.In.Center(this.background, this.add.zone(window.innerWidth / 2, window.innerHeight / 2, window.innerWidth, window.innerHeight));
 
 
-        this.Mathieu = this.add.sprite(window.innerWidth / 4, window.innerHeight/2, 'sellier', 9);
+        this.Mathieu = this.add.sprite(window.innerWidth / 4, window.innerHeight / 2, 'sellier', 9);
 
         this.anims.create({
             key: 'walkE',
@@ -41,16 +41,16 @@ class Cinematique1 extends Phaser.Scene {
             repeat: -1
         });
 
-        this.eddison = this.add.sprite(window.innerWidth + 64, window.innerHeight/2).setScale(2);
+        this.eddison = this.add.sprite(window.innerWidth + 64, window.innerHeight / 2).setScale(2);
         this.eddison.play('walkE');
         this.bool = false;
         this.nextS = false;
         this.walkE = true;
         this.walkS = false;
 
-        this.input.keyboard.on('keydown_ESC', function(){
+        this.input.keyboard.on('keydown_ESC', function () {
             this.scene.stop('cinematiqueScene1')
-            this.scene.start('cinematiqueScene2', { esc:true });
+            this.scene.start('cinematiqueScene2', { esc: true });
         }, this);
     }
 
@@ -58,8 +58,7 @@ class Cinematique1 extends Phaser.Scene {
         this.background.x -= 0.02 * delta;
         this.background.y += 0.015 * delta;
 
-        if (this.background.y >= 630)
-        {
+        if (this.background.y >= 630) {
             this.background.setPosition(1150, -190);
         }
 
@@ -69,7 +68,7 @@ class Cinematique1 extends Phaser.Scene {
 
         if (this.eddison.x <= 480 && this.walkE) {
             this.eddison.destroy();
-            this.eddison = this.add.sprite(480, window.innerHeight/2, 'scient', 4).setScale(2);
+            this.eddison = this.add.sprite(480, window.innerHeight / 2, 'scient', 4).setScale(2);
             this.walkE = false;
             var dialBox = this.add.graphics();
             dialBox.fillStyle(0x70402a, 1);
@@ -194,7 +193,7 @@ class Cinematique1 extends Phaser.Scene {
         //console.log(this.walkS)
 
         if (this.nextS && !this.walkS) {
-            this.eddison = this.add.sprite(480, window.innerHeight/2, 'scient', 0).setScale(2);
+            this.eddison = this.add.sprite(480, window.innerHeight / 2, 'scient', 0).setScale(2);
             this.Mathieu.play('walkL');
             this.Mathieu.y += 10;
             this.walkS = true;
@@ -211,7 +210,6 @@ class Cinematique1 extends Phaser.Scene {
             this.scene.start('cinematiqueScene2');
         }
     }
-
 }
 
 //Cinematique
@@ -232,32 +230,32 @@ class Cinematique2 extends Phaser.Scene {
     }
 
     create() {
-        if(this.esc) {
+        if (this.esc) {
             this.scene.stop('cinematiqueScene2')
-            this.scene.start('disclaimerScene', { esc:true });
+            this.scene.start('disclaimerScene');
         }
 
         this.background = this.add.image(0, 0, 'mapmonde').setScale(1.5);
-        Phaser.Display.Align.In.Center(this.background, this.add.zone(window.innerWidth/2, window.innerHeight/2, window.innerWidth, window.innerHeight));
+        Phaser.Display.Align.In.Center(this.background, this.add.zone(window.innerWidth / 2, window.innerHeight / 2, window.innerWidth, window.innerHeight));
 
 
 
-        this.seedi = this.add.sprite(200, window.innerHeight/2, 'seedySlt', 2).setScale(0.2);//assigner a la variable differentes 
+        this.seedi = this.add.sprite(200, window.innerHeight / 2, 'seedySlt', 2).setScale(0.2);//assigner a la variable differentes 
         this.anims.create({
             key: 'walkL',
             frames: this.anims.generateFrameNumbers('sellier', { frames: [5, 4] }),
             frameRate: 10,
             repeat: -1
         });
-        this.Mathieu = this.add.sprite(window.innerWidth + 60, window.innerHeight/2);
+        this.Mathieu = this.add.sprite(window.innerWidth + 60, window.innerHeight / 2);
         this.Mathieu.play('walkL');
         this.bool = false;
         this.nextS = false;
         this.walk = true;
 
-        this.input.keyboard.on('keydown_ESC', function(){
+        this.input.keyboard.on('keydown_ESC', function () {
             this.scene.stop('cinematiqueScene2')
-            this.scene.start('disclaimerScene', { esc:true });
+            this.scene.start('disclaimerScene');
         }, this);
     }
 
@@ -265,8 +263,7 @@ class Cinematique2 extends Phaser.Scene {
         this.background.x -= 0.02 * delta;
         this.background.y += 0.015 * delta;
 
-        if (this.background.y >= 630)
-        {
+        if (this.background.y >= 630) {
             this.background.setPosition(1150, -190);
         }
 
@@ -282,15 +279,14 @@ class Cinematique2 extends Phaser.Scene {
             this.bool = true;
         }
 
-        if (this.Mathieu.x <= 300 && !this.nextS) {
+        if (this.Mathieu.x <= 300 && !this.nextS && this.walk) {
             this.walk = false;
             this.Mathieu.destroy();
-            this.Mathieu = this.add.sprite(300, window.innerHeight/2, 'sellier', 3);
+            this.Mathieu = this.add.sprite(300, window.innerHeight / 2, 'sellier', 3);
             var dialBox = this.add.graphics();
             dialBox.fillStyle(0x70402a, 1);
             dialBox.fillRect(0, 0, window.innerWidth, 130);
             var content = [
-                "Seedy :",
                 "Salut ! Je m’appelle Seedy, je serai ta guide dans cette nouvelle aventure",
                 "",
                 "Mosbert :",
@@ -348,7 +344,6 @@ class Cinematique2 extends Phaser.Scene {
                         txt = txt % 2;
                         i++;
 
-
                         if (i < content.length && content[i].length == 0) {
                             i++;
                             wait = 1000;
@@ -356,30 +351,26 @@ class Cinematique2 extends Phaser.Scene {
                             bool = true;
                         }
                         tmp = '';
-
                     }
                     if (i < content.length) {
                         // console.log(wait)
                         loop();
                     }
                     else {
-                        dialBox.destroy();
-                        text0.destroy();
-                        text1.destroy();
-                        text2.destroy();
-                        This.nextS = true;
+                        setTimeout(function () {
+                            dialBox.destroy();
+                            text0.destroy();
+                            text1.destroy();
+                            text2.destroy();
+                            This.scene.start('disclaimerScene');
+                        }, 1000);
                     }
                 }, wait)
             }
             loop();
-
-
         }
 
-        if (this.nextS && !this.walk) {
-            this.scene.stop('cinematiqueScene2')
-            this.scene.start('disclaimerScene');
-        }
+       
 
     }
 
