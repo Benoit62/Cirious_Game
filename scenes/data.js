@@ -367,6 +367,18 @@ let data = [
         prix:10000
     },
     {
+        tag:'drone2',
+        type:'health',
+        typeName:'Protection des cultures',
+        name:' par drone',
+        desc:'Ca roule',
+        info:'Ca pollue pas',
+        unlock:false,
+        health:3,
+        ecology:-5,
+        prix:10000
+    },
+    {
         tag:'humain',
         type:'health',
         typeName:'Protection des cultures',

@@ -9,10 +9,6 @@ class Search extends Phaser.Scene {
         this.icones = [];
     }
 
-    init(data) {
-        this.money = data;
-    }
-
     create ()
     {
 
@@ -39,9 +35,10 @@ class Search extends Phaser.Scene {
                 }
                 searchIcone.on('pointerdown', function(){
                     console.log(this.money);
-                    if(this.money > value.prix) {
+                    if(this.registry.get('money') > value.prix) {
                         value.unlock = true;
                         searchIcone.setAlpha(1);
+                        this.registry.set('money', this.registry.get('money') - value.prix);
                     }
                     else {
                         this.errorText('Vous n\'avez pas assez d\'argent');

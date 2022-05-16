@@ -138,6 +138,7 @@ class Loading extends Phaser.Scene {
         this.load.image('lutte_chimique-search', 'assets/search/lutte_chimique.png');
         this.load.image('physique-search', 'assets/search/lutte_physique.png');
         this.load.image('drone-search', 'assets/search/drone.png');
+        this.load.image('drone2-search', 'assets/search/drone2.png');
         this.load.image('humain-search', 'assets/search/humain.png');
         this.load.image('biologic-search', 'assets/search/lutte_bio.png');
         this.load.image('biopesticid-search', 'assets/search/biopesticides.png');

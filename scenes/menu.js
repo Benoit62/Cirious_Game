@@ -63,7 +63,7 @@ class Menu extends Phaser.Scene {
 
         //En savoir plus
         //Bouton de largeur 146, hauteur 96
-        this.plus = this.add.image(150, innerHeight - 30, 'savoirPlus').setInteractive().setVisible(false).setScale(0.7);
+        this.plus = this.add.image(150, innerHeight - 25, 'savoirPlus').setInteractive().setVisible(false).setScale(0.6);
         this.plus.on('pointerdown', this.savoirPlus, this);
 
         this.backGroundPopup = this.add.graphics();
