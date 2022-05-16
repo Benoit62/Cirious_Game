@@ -731,11 +731,21 @@ class Europe extends Phaser.Scene {
     dead() {
         for (let i in this.data.values) {
             let bat = this.data.values[i];
-            if (bat.level == 1 && bat.type == 'field' && (bat.tag != 'labor' || bat.tag != 'water') && bat.plant && !bat.dead) {
-                if (!bat.seed.climat.includes(this.climat)) {
+            if (bat.level > 0 && bat.type == 'animal' && !bat.dead) {
+                if (!bat.ref.climat.includes(this.climat)) {
                     bat.dead = true;
-                    console.log('Dead plant !', bat);
-                    this.images[bat.key - 1]['plant'].setFrame(bat.seed.maxGrow + 1);
+                    console.log('Dead animal !', bat);
+                    this.images[bat.key - 1].setFrame(bat.level + bat.lvlMax);
+
+                    this.updateJauge('animalCare', );
+
+                    let textEcology = this.add.text(bat.x, bat.y, engrais.ecology.toString(), { lineSpacing:10, fontSize:40, color:'#ffffff' }).setOrigin(0.5, 0.5);
+                    let ecologyButton = this.add.image(textEcology.x + textEcology.width / 1.5, textEcology.y, 'ecology-care').setScale(0.08).setOrigin(0,0.5);
+                    console.log(textEcology);
+                    setTimeout(() => {
+                        textEcology.destroy();
+                        ecologyButton.destroy();
+                    }, 2000);
                 }
             }
         }
