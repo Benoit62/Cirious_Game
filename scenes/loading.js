@@ -34,14 +34,19 @@ class Loading extends Phaser.Scene {
         // Batiments ferme
         this.load.spritesheet('labor', 'assets/build/labor.png', { frameWidth: 288, frameHeight: 416 });
         this.load.spritesheet('water', 'assets/build/water.png', { frameWidth: 288, frameHeight: 416 });
-        this.load.spritesheet('pig', 'assets/build/pig_spritesheet.png', { frameWidth: 416, frameHeight: 416 });
-        this.load.spritesheet('cow', 'assets/build/cow_spritesheet.png', { frameWidth: 416, frameHeight: 416 });
-        this.load.spritesheet('sheep', 'assets/build/sheep_spritesheet.png', { frameWidth: 416, frameHeight: 416 });
         this.load.spritesheet('tank', 'assets/build/tank.png', { frameWidth: 192, frameHeight: 192 });
         this.load.spritesheet('solaire', 'assets/build/solaire.png', { frameWidth: 192, frameHeight: 192 });
         this.load.spritesheet('house', 'assets/build/house.png', { frameWidth: 384, frameHeight: 256 });
         this.load.spritesheet('river', 'assets/build/river.png', { frameWidth: 384, frameHeight: 256 });
         this.load.image('build', 'assets/build/build.png');
+
+
+
+        //Animaux
+        this.load.spritesheet('animaldead', 'assets/build/animaldead.png', { frameWidth: 416, frameHeight: 416 });
+        this.load.spritesheet('pig', 'assets/build/pig_spritesheet.png', { frameWidth: 416, frameHeight: 416 });
+        this.load.spritesheet('cow', 'assets/build/cow_spritesheet.png', { frameWidth: 416, frameHeight: 416 });
+        this.load.spritesheet('sheep', 'assets/build/sheep_spritesheet.png', { frameWidth: 416, frameHeight: 416 });
         
 
         // Champs et cultures
