@@ -646,9 +646,8 @@ class Europe extends Phaser.Scene {
 
                 let textMoney = this.add.text(bat.x, bat.y, '+'+moneyWin+'$', { lineSpacing:10, fontSize:40, color:'#ffffff' }).setOrigin(0.5, 0.5);
                 let textHunger = this.add.text(bat.x, textMoney.y + textMoney.height*0.8, hungerWin, { lineSpacing:10, fontSize:40, color:'#ffffff' }).setOrigin(0.5, 0.5);
-                let hungerButton = this.add.image(textHunger.x + textHunger.width / 1.5, textMoney.y + textMoney.height*0.5, 'hunger-care').setScale(0.08);
+                let hungerButton = this.add.image(textHunger.x + textHunger.width / 1.5, textHunger.y, 'hunger-care').setScale(0.08).setOrigin(0,0.5);
                 setTimeout(() => {
-                    textMoney.destroy();
                     textHunger.destroy();
                     hungerButton.destroy();
                 }, 2000);
@@ -664,6 +663,15 @@ class Europe extends Phaser.Scene {
                 this.updateJauge('hunger', -10);
                 console.log('Nettoyé !', bat);
                 this.images[bat.key - 1]['plant'].destroy();
+
+
+                let textHunger = this.add.text(bat.x, textMoney.y + textMoney.height*0.8, '-10', { lineSpacing:10, fontSize:40, color:'#ffffff' }).setOrigin(0.5, 0.5);
+                let hungerButton = this.add.image(textHunger.x + textHunger.width / 1.5, textHunger.y, 'hunger-care').setScale(0.08).setOrigin(0,0.5);
+                setTimeout(() => {
+                    textMoney.destroy();
+                    textHunger.destroy();
+                    hungerButton.destroy();
+                }, 2000);
             }
         }
     }
