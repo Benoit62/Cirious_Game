@@ -221,7 +221,7 @@ include("config/configbdd.php");
             {
                 this.gameScene = this.scene.get(this.registry.get('climat')+'Scene');
 
-                this.add.image(0, 0, 'header');
+                this.add.image(0, 0, 'header').setOrigin(0,0.5);
                 
                 this.turnOff = this.add.image(window.innerWidth-25, 25, 'off').setInteractive().setScale(0.08);
                 this.globe = this.add.image(window.innerWidth-75, 25, 'globe').setInteractive().setScale(0.08);
