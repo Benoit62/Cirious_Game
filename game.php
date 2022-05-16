@@ -110,6 +110,9 @@ include("config/configbdd.php");
                 Phaser.Display.Align.In.Center(this.foret, this.add.zone(window.innerWidth/2, window.innerHeight/2, window.innerWidth, window.innerHeight));
                 this.foret.setX(this.foret.x+780);
                 this.foret.setY(this.foret.y+218);
+                if(!this.data.get('unlock').includes('foret')) {
+                    this.add.image(this.foret.x, this.foret.y, 'cadenas').setScale(0.6);
+                }
                 this.foret.on('pointerdown', function(){
                     if(this.data.get('unlock').includes('foret')) {
                         if(this.scene.isSleeping('foretScene')) {                        
@@ -131,6 +134,9 @@ include("config/configbdd.php");
                 Phaser.Display.Align.In.Center(this.europe, this.add.zone(window.innerWidth/2, window.innerHeight/2, window.innerWidth, window.innerHeight));
                 this.europe.setX(this.europe.x-318);
                 this.europe.setY(this.europe.y-250);
+                if(!this.data.get('unlock').includes('europe')) {
+                    this.add.image(this.europe.x, this.europe.y, 'cadenas').setScale(0.6);
+                }
                 this.europe.on('pointerdown', function(){
                     if(this.data.get('unlock').includes('europe')) {
                         if(this.scene.isSleeping('europeScene')) {                        
@@ -154,6 +160,9 @@ include("config/configbdd.php");
                 Phaser.Display.Align.In.Center(this.desert, this.add.zone(window.innerWidth/2, window.innerHeight/2, window.innerWidth, window.innerHeight));
                 this.desert.setX(this.desert.x-702);
                 this.desert.setY(this.desert.y+446);
+                if(!this.data.get('unlock').includes('desert')) {
+                    this.add.image(this.desert.x, this.desert.y, 'cadenas').setScale(0.6);
+                }
                 this.desert.on('pointerdown', function(){
                     if(this.data.get('unlock').includes('desert')) {
                         if(this.scene.isSleeping('desertScene')) {                        
@@ -175,6 +184,9 @@ include("config/configbdd.php");
                 Phaser.Display.Align.In.Center(this.glace, this.add.zone(window.innerWidth/2, window.innerHeight/2, window.innerWidth, window.innerHeight));
                 this.glace.setX(this.glace.x+982);
                 this.glace.setY(this.glace.y-772);
+                if(!this.data.get('unlock').includes('glace')) {
+                    this.add.image(this.glace.x, this.glace.y, 'cadenas').setScale(0.6);
+                }
                 this.glace.on('pointerdown', function(){
                     if(this.data.get('unlock').includes('glace')) {
                         if(this.scene.isSleeping('glaceScene')) {                        

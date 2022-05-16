@@ -29,6 +29,7 @@ class Loading extends Phaser.Scene {
         this.load.image('foretile', 'assets/map/foretile.png');
         this.load.image('glaceile', 'assets/map/glaceile.png');
         this.load.image('europe', 'assets/map/europe.png');
+        this.load.image('cadenas', 'assets/map/cadenas.png');
 
         
         // Batiments ferme
@@ -47,6 +48,9 @@ class Loading extends Phaser.Scene {
         this.load.spritesheet('pig', 'assets/build/pig_spritesheet.png', { frameWidth: 416, frameHeight: 416 });
         this.load.spritesheet('cow', 'assets/build/cow_spritesheet.png', { frameWidth: 416, frameHeight: 416 });
         this.load.spritesheet('sheep', 'assets/build/sheep_spritesheet.png', { frameWidth: 416, frameHeight: 416 });
+        this.load.spritesheet('salmon', 'assets/build/salmon.png', { frameWidth: 416, frameHeight: 416 });
+        this.load.spritesheet('renne', 'assets/build/renne.png', { frameWidth: 416, frameHeight: 416 });
+        this.load.spritesheet('chamel', 'assets/build/chamel.png', { frameWidth: 416, frameHeight: 416 });
         
 
         // Champs et cultures
@@ -88,7 +92,8 @@ class Loading extends Phaser.Scene {
         this.load.image("sheep-button", "assets/menu/sheep.png"); 
         this.load.image("bison-button", "assets/menu/bison.png"); 
         this.load.image("chamel-button", "assets/menu/chameau.png"); 
-        this.load.image("renne-button", "assets/menu/rennes.png"); 
+        this.load.image("renne-button", "assets/menu/rennes.png");
+        this.load.image('salmon-button', 'assets/menu/salmon.png');
 
         this.load.image("labor-button", "assets/menu/labourer.png"); 
         this.load.image("water-button", "assets/menu/water.png"); 
@@ -126,7 +131,9 @@ class Loading extends Phaser.Scene {
         // Chargement des autres assets du menu
         this.load.image("circle", "assets/menu/circle.png"); 
         this.load.image("menu", "assets/menu/menu.png"); 
-        this.load.image("card", "assets/menu/card.png"); 
+        this.load.image("card", "assets/menu/card.png");
+        this.load.image("card2", "assets/menu/card2.png");
+        this.load.image("card3", "assets/menu/card3.png");
         this.load.image("savoirPlus", "assets/menu/savoirPlus.png"); 
         this.load.image('error', 'assets/menu/error.png');
 

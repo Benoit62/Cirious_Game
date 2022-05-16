@@ -30,7 +30,8 @@ let data = [
         money:[0,3,8,20],
         name:'Cochon',
         desc:'Tout est bon dans le cochon',
-        info:''
+        info:'',
+        climat:['europe']
     },
     {
         tag:'cow',
@@ -41,7 +42,8 @@ let data = [
         money:[0,3,8,20],
         name:'Vache',
         desc:'Tout est bon dans la vache',
-        info:''
+        info:'',
+        climat:['europe']
     },
     {
         tag:'sheep',
@@ -52,8 +54,24 @@ let data = [
         money:[0,3,8,20],
         name:'Mouton',
         desc:'Tout est bon dans le mouton',
-        info:''
+        info:'',
+        climat:['europe']
     },
+    {
+        tag:'salmon',
+        type:'animal',
+        lvlMax:3,
+        buildCost:30000,
+        upgrade:[0,20000,35000,60000],
+        money:[0,3,8,20],
+        name:'Mouton',
+        desc:'Tout est bon dans le mouton',
+        info:'',
+        climat:['froid']
+    },
+
+
+
     {
         tag:'labor',
         type:'field',

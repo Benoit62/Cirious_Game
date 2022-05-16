@@ -55,10 +55,11 @@ class Menu extends Phaser.Scene {
 
         this.add.image(150, 1500, 'menu');
 
-        this.textBat = this.add.text(8, 340, '', { lineSpacing:7, wordWrap: { width: 284 } });
+        this.textBat = this.add.text(8, 370, '', { lineSpacing:7, wordWrap: { width: 284 } });
         
-        this.cardInfo = this.add.image(148, 290, 'card').setScale(0.35).setVisible(false);
-        this.textInfo = this.add.text(14, 260, '', { lineSpacing:7, wordWrap: { width: 284 }, fontSize:15, color:'#000000' });
+        // Card 2 140 de haut
+        this.cardInfo = this.add.image(148, 300, 'card3').setScale(0.35).setVisible(false);
+        this.textInfo = this.add.text(14, 250, '', { lineSpacing:7, wordWrap: { width: 284 }, fontSize:15, color:'#000000' });
 
 
         //En savoir plus
@@ -301,8 +302,6 @@ class Menu extends Phaser.Scene {
         // Bouton planter
         this.planter = this.add.image(180, 35, "planter").setScale(0.1).setInteractive();
         this.planter.on('pointerdown', function(){
-            console.log('OverLap : ');
-            console.log(this.batOverlap);
             if(this.batOverlap.type == 'field' && !this.batOverlap.plant && this.batOverlap.level == 1 && (this.batOverlap.tag == 'labor' || this.batOverlap.tag == 'water')) {
                 for(let i of getByType('plant')) {
                     this.plants[i.tag].setVisible(true);
