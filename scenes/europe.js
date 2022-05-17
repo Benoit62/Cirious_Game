@@ -993,6 +993,10 @@ class Europe extends Phaser.Scene {
                         console.log('Birth animal !', bat);
 
                         if(bat.qt > 100) bat.qt = 100;
+                        if(bat.qt < 100) this.images[bat.key - 1].setFrame((bat.level - 1));
+                        if(bat.qt < 75) this.images[bat.key - 1].setFrame((bat.level - 1) + 4 * bat.ref.lvlMax);
+                        if(bat.qt < 50) this.images[bat.key - 1].setFrame((bat.level - 1) + 2 * bat.ref.lvlMax);
+                        if(bat.qt < 25) this.images[bat.key - 1].setFrame((bat.level - 1) + 3 * bat.ref.lvlMax);
                     }
                 }
             }
@@ -1001,9 +1005,14 @@ class Europe extends Phaser.Scene {
 
     sell(bat, sell) {
         console.log('Sell : ', bat);
-        if (bat.type == 'animal' && !bat.dead && bat.level > 0 && bat.qt > 50) {
+        if (bat.type == 'animal' && !bat.dead && bat.level > 0 && bat.qt > 40) {
             bat.qt -= 30;
             console.log('Selled !', bat);
+
+            if(bat.qt < 100) this.images[bat.key - 1].setFrame((bat.level - 1));
+            if(bat.qt < 75) this.images[bat.key - 1].setFrame((bat.level - 1) + 4 * bat.ref.lvlMax);
+            if(bat.qt < 50) this.images[bat.key - 1].setFrame((bat.level - 1) + 2 * bat.ref.lvlMax);
+            if(bat.qt < 25) this.images[bat.key - 1].setFrame((bat.level - 1) + 3 * bat.ref.lvlMax);
 
             let moneyWin = sell.money*30;
 
