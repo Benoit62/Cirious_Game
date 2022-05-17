@@ -57,7 +57,7 @@ class Menu extends Phaser.Scene {
     {
         this.scene.bringToTop('menuScene');
         //this.scene.setVisible(false);
-        this.gameScene = this.scene.get(this.registry.get('climat')+'Scene');
+        this.gameScene = this.scene.get(this.registry.get('gameScene')+'Scene');
 
         this.add.image(150, 1500, 'menu');
 
@@ -205,9 +205,9 @@ class Menu extends Phaser.Scene {
             this.engrais[i.tag].on('pointerdown', function(){
                 if(i.unlock) {
                     this.gameScene.fertility(this.batOverlap, i);
-                    for(let i of getByType('fertility')) {
+                    /*for(let i of getByType('fertility')) {
                         this.engrais[i.tag].setVisible(false);
-                    }
+                    }*/
                 }
             }, this);
             this.engrais[i.tag].on('pointermove', function(){
@@ -229,14 +229,14 @@ class Menu extends Phaser.Scene {
         compt=0;
         let o = 0;
         for(let i of getByType('health')) {
-            this.luttes[i.tag] = this.add.image(35 +(o%5)*60, 140 + 45*compt, i.tag+"-button").setScale(0.08).setInteractive().setVisible(false);
+            this.luttes[i.tag] = this.add.image(32 +(o%5)*55, 140 + 45*compt, i.tag+"-button").setScale(0.08).setInteractive().setVisible(false);
             if(!i.unlock) this.luttes[i.tag].setAlpha(0.4);
             this.luttes[i.tag].on('pointerdown', function(){
                 if(i.unlock && this.batOverlap.level == 1 && this.batOverlap.type == 'field' && this.batOverlap.weeds > 0) {
                     this.gameScene.clean(this.batOverlap, i);
-                    for(let i of getByType('health')) {
+                    /*for(let i of getByType('health')) {
                         this.luttes[i.tag].setVisible(false);
-                    }
+                    }*/
                 }
             }, this);
             this.luttes[i.tag].on('pointermove', function(){
@@ -290,9 +290,9 @@ class Menu extends Phaser.Scene {
             this.meals[i.tag].on('pointerdown', function(){
                 if(i.unlock && this.batOverlap.type == 'animal' && this.batOverlap.level > 0 && !this.batOverlap.dead && this.batOverlap.feed < 100) {
                     this.gameScene.feed(this.batOverlap, i);
-                    for(let i of getByType('meal')) {
+                    /*for(let i of getByType('meal')) {
                         this.meals[i.tag].setVisible(false);
-                    }
+                    }*/
                 }
             }, this);
             this.meals[i.tag].on('pointermove', function(){
@@ -319,9 +319,9 @@ class Menu extends Phaser.Scene {
             this.sells[i.tag].on('pointerdown', function(){
                 if(i.unlock && this.batOverlap.type == 'animal' && this.batOverlap.level > 0 && !this.batOverlap.dead && this.batOverlap.qt > 40) {
                     this.gameScene.sell(this.batOverlap, i);
-                    for(let i of getByType('sell')) {
+                    /*for(let i of getByType('sell')) {
                         this.sells[i.tag].setVisible(false);
-                    }
+                    }*/
                 }
             }, this);
             this.sells[i.tag].on('pointermove', function(){
@@ -826,8 +826,9 @@ class Menu extends Phaser.Scene {
     seedyAdvice(type, ref, ref2){
         this.scene.pause(this.registry.get('climat')+'Scene');
         // Seedy 727x660  scale 0.8 => 581.6x528
-        let seedy = this.add.image(window.innerWidth - 290.8 + 40, window.innerHeight - 264 + 40, 'seedyAdvice').setScrollFactor(0).setScale(0.8).setOrigin(0.5,0.5);
-        let text = this.add.text(seedy.x - (seedy.width*0.8)/2, seedy.y - (seedy.height*0.8)/2, '', { lineSpacing:7, wordWrap: { width: 284 }, fontSize:17, fontFamily:'monospace', color:'#000000' }).setScrollFactor(0).setOrigin(0,0);
+        let seedy = this.add.image(window.innerWidth - 290.8, window.innerHeight - 264, 'seedyAdvice').setScrollFactor(0).setScale(0.8).setOrigin(0.5,0.5);
+        let text = this.add.text(seedy.x - (seedy.width*0.8)/2 + 25, seedy.y - (seedy.height*0.8)/2 + 20, '', { lineSpacing:7, wordWrap: { width: 400 }, fontSize:19, fontFamily:'monospace', color:'#FFFFFF' }).setScrollFactor(0).setOrigin(0,0);
+        let tmpText = '';
         switch(type){
             case 'lowMeal':
                 text.setText('Certains de vos animaux manquent de nourritures, nourrissez les rapidement ou vous allez perdre du bien-être animal');
@@ -836,12 +837,67 @@ class Menu extends Phaser.Scene {
                 text.setText('Certains de vos animaux manquent cruellement de nourritures, nourrissez les au plus vite avant qu\'ils ne meurent');
                 break;
             case 'noMeal':
-                text.setText('Certains de vos animax n\'ont plus de nourriture, il ne vous reste que 10 secondes avant qu\'ils ne meurent');
+                text.setText('Certains de vos animaux n\'ont plus de nourriture, il ne vous reste que 10 secondes avant qu\'ils ne meurent');
                 break;
             case 'deadAnimalClimat':
-                let tmpText = 'Vos '+ref.name+' sont morte car elle ne sont pas dans le bon climat. Leur climat favorable est ';
-                ref.climat.forEach(value => tmpText += getByTag(value)[0].name+', ');
-                tmpText+='\nDétruisez le bâtiment our pouvoir reconstruire';
+                tmpText = 'Vos '+ref.name+' sont mort(e)s car ils/elles ne sont pas dans le bon climat. Leur climat favorable est ';
+                ref.climat.forEach(value => tmpText += getByTag(value)[0].name+' ');
+                tmpText+='\nDétruisez le bâtiment pour pouvoir reconstruire';
+                text.setText(tmpText);
+                break;
+            case 'notEnoughtMeal':
+                tmpText = 'Vos '+ref.name+' n\'ont plus assez de nourriture pour se reproduire, donnez leur à manger pour que le nombre augmente à nouveau ';
+                text.setText(tmpText);
+                break;
+
+
+            case 'deadPlantClimat':
+                tmpText = 'Vos '+ref.name+' sont mort(e)s car ils/elles ne sont pas dans le bon climat. Leur climat favorable est ';
+                ref.climat.forEach(value => tmpText += getByTag(value)[0].name+' ');
+                tmpText+='\n\nRécoltez les et planter de nouvelles cultures.';
+                text.setText(tmpText);
+                break;
+            case 'lowWinPlant':
+                tmpText = 'Vos revenus pour '+ref2.name+' sont inférieurs à 15% du revenu maximum. Vérifiez la santé du champ : ';
+                let sante = ref.maxWeeds - ref.weeds;
+                tmpText+=sante+' ainsi que sa fertilité : '+ref.fertility;
+                tmpText+='\n\nDébloquez des nouvelles méthodes de fertilisation et de protection des cultures et prenez soin de vos champs.';
+                text.setText(tmpText);
+                break;
+            case 'sameSeed':
+                tmpText = 'Attention, vous venez de planter deux fois de suite la même plante dans un de vos champs : '+ref.name+'\n\nPensez à la rotation des cultures pour laisser au sol le temps de se regénérer';
+                text.setText(tmpText);
+                break;
+            case 'sameSeed2':
+                tmpText = 'Attention, vous venez de planter trois fois de suite la même plante dans un de vos champs : '+ref.name+'\n\nSi vous ne variez pas les cultures votre sol va s\'appauvrir rapidement';
+                text.setText(tmpText);
+                break;
+            case 'toMuchSameSeed':
+                tmpText = 'Attention, vous venez de planter plus de 4 fois de suite la même plante dans un de vos champs : '+ref.name+'\n\nChangez de culture !!';
+                text.setText(tmpText);
+                break;
+
+            case 'weeds':
+                tmpText = 'Vérifiez vos champs, l\'un d\'eux est très sale et ne produit plus beaucoup : ';
+                let weeds = ref.maxWeeds - ref.weeds;
+                tmpText+=weeds;
+                text.setText(tmpText);
+                break;
+            case 'fullWeeds':
+                tmpText = 'Vérifiez vos champs, l\'un d\'eux est complètement sale et ne produira plus rien : ';
+                tmpText+=weeds;
+                text.setText(tmpText);
+                break;
+            case 'lowFertility':
+                tmpText = 'La fertilité d\'un de vos champs baisse fortement : '+ref+' / 100\n\nFertilisez le au plus vite !';
+                text.setText(tmpText);
+                break;
+            case 'veryLowFertility':
+                tmpText = 'La fertilité d\'un de vos champs est très faible : '+ref+' / 100\n\nFertilisez le au plus vite sinon vous ne recolterez bientôt plus rien !';
+                text.setText(tmpText);
+                break;
+            case 'noFertility':
+                tmpText = 'La fertilité d\'un de vos champs est nulle.\n\nFertilisez le au plus vite !';
                 text.setText(tmpText);
                 break;
             default:
@@ -859,7 +915,11 @@ class Menu extends Phaser.Scene {
         this.input.on('pointerdown', function() {
             seedy.destroy();
             text.destroy();
-            this.scene.resume(this.registry.get('climat')+'Scene');
+            this.scene.resume(this.registry.get('gameScene')+'Scene');
+            this.gameScene.cursors.up.isDown = false;
+            this.gameScene.cursors.down.isDown = false;
+            this.gameScene.cursors.left.isDown = false;
+            this.gameScene.cursors.right.isDown = false;
         }, this);
     }
 

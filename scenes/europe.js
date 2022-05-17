@@ -48,6 +48,7 @@ class Europe extends Phaser.Scene {
 
 
         this.registry.set('climat', 'europe');
+        this.registry.set('gameScene', 'europe');
 
 
         // Animaux
@@ -185,8 +186,8 @@ class Europe extends Phaser.Scene {
             oldseed: [getByTag('carrot')[0]],
             grow: 0,
             dead:false,
-            fertility:90,
-            weeds:0,
+            fertility:50,
+            weeds:7,
             maxWeeds:10
         });
 
@@ -448,10 +449,10 @@ class Europe extends Phaser.Scene {
         }
 
         this.timerWeeds++;
-        if (this.timerWeeds == 3000) {
+        if (this.timerWeeds == 2500) {
             console.log('Check weeds');
             this.weeds();
-            this.timerWeeds = 0 - Phaser.Math.Between(0, 700);
+            this.timerWeeds = 0 - Phaser.Math.Between(0, 600);
         }
 
         this.timerGrowth++;
@@ -539,14 +540,14 @@ class Europe extends Phaser.Scene {
             if (bat.level < bat.ref.lvlMax && bat.level != 0) {
                 if (this.money() >= bat.ref.upgrade[bat.level]) {
                     if(bat.type != 'animal') {
-                        this.registry.set('money', this.registry.get('money') - bat.ref.upgrade[bat.level]);
                         bat.level += 1;
+                        this.registry.set('money', this.registry.get('money') - bat.ref.upgrade[bat.level]);
                         console.log('Upgraded !', bat);
                         this.images[bat.key - 1].setFrame(bat.level - 1);
                     }
                     else if(!bat.dead) {
-                        this.registry.set('money', this.registry.get('money') - bat.ref.upgrade[bat.level]);
                         bat.level += 1;
+                        this.registry.set('money', this.registry.get('money') - bat.ref.upgrade[bat.level]);
                         console.log('Upgraded !', bat);
                         this.images[bat.key - 1].setFrame(bat.level - 1);
                     }
@@ -663,6 +664,22 @@ class Europe extends Phaser.Scene {
                         textMoney.destroy();
                         moneyButton.destroy();
                     }, 2000);
+
+                    setTimeout(() => {
+                        let nbOldSeed = 0;
+                        while(bat.seed == bat.oldseed[nbOldSeed]){
+                            nbOldSeed++;
+                        }
+                        if(nbOldSeed == 1) {
+                            this.menuScene.seedyAdvice('sameSeed', bat.seed);
+                        }
+                        if(nbOldSeed == 2) {
+                            this.menuScene.seedyAdvice('sameSeed2', bat.seed);
+                        }
+                        if(nbOldSeed > 3) {
+                            this.menuScene.seedyAdvice('toMuchSameSeed', bat.seed);
+                        }
+                    }, 4000);
                 }
                 else {
                     console.log('Can\'t plant riz on dirt or others on water');
@@ -703,6 +720,7 @@ class Europe extends Phaser.Scene {
                     bat.dead = true;
                     console.log('Dead plant !', bat);
                     this.images[bat.key - 1]['plant'].setFrame(bat.seed.maxGrow + 1);
+                    this.menuScene.seedyAdvice('deadPlantClimat', bat.seed);
                 }
             }
         }
@@ -716,26 +734,47 @@ class Europe extends Phaser.Scene {
                     if(bat.weeds > bat.maxWeeds) bat.weeds = bat.maxWeeds;
                     console.log('Weeds !', bat);
                     this.images[bat.key - 1]['weeds'].setFrame(bat.weeds);
+
+
+                    let textHealth = this.add.text(bat.x, bat.y, '-1', { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
+                    let healthButton = this.add.image(textHealth.x + textHealth.width / 1.5, textHealth.y, 'health').setScale(0.08).setOrigin(0,0.5);
+
+                    setTimeout(() => {
+                        textHealth.destroy();
+                        healthButton.destroy();
+                    }, 2000);
+                }
+                if(bat.weed == 8) {
+                    
+                    this.menuScene.seedyAdvice('weeds', bat.ref);
+                }
+                if(bat.weed == 10) {
+                    
+                    this.menuScene.seedyAdvice('fullWeeds', bat.ref);
                 }
             }
         }
     }
     clean(bat, lutte){
-        console.log('Nettoyage : ', bat);
+        console.log('Cleaning : ', bat);
         if (bat.type == 'field' && bat.level == 1 && bat.weeds > 0) {
             bat.weeds -= lutte.health;
             if(bat.weeds < 0) bat.weeds = 0;
-            console.log('Fertilised !', bat);
+            console.log('Cleaned !', bat);
             this.images[bat.key - 1]['weeds'].setFrame(bat.weeds);
 
             this.updateJauge('ecology', lutte.ecology);
 
             let textEcology = this.add.text(bat.x, bat.y, lutte.ecology.toString(), { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
             let ecologyButton = this.add.image(textEcology.x + textEcology.width / 1.5, textEcology.y, 'ecology-care').setScale(0.08).setOrigin(0,0.5);
+            let textHealth = this.add.text(bat.x, textEcology.y + textEcology.height*0.8, '+'+lutte.health, { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
+            let healthButton = this.add.image(textHealth.x + textHealth.width / 1.5, textHealth.y, 'health').setScale(0.08).setOrigin(0,0.5);
             console.log(textEcology);
             setTimeout(() => {
                 textEcology.destroy();
                 ecologyButton.destroy();
+                textHealth.destroy();
+                healthButton.destroy();
             }, 2000);
         }
     }
@@ -749,37 +788,65 @@ class Europe extends Phaser.Scene {
             let hungerWin = 5*percent*percent2;
 
             // Compte l'echainement des graines
+            let looseFertility = 0;
             let nbOldSeed = 0;
             while(bat.seed == bat.oldseed[nbOldSeed]){
                 nbOldSeed++;
-                bat.fertility -= 10*nbOldSeed;
-                if(bat.fertility < 0) bat.fertility = 0;
+                looseFertility += 10*nbOldSeed;
             }
             if(nbOldSeed == 0) {
-                bat.fertility -= 5;
-                if(bat.fertility < 0) bat.fertility = 0;
+                looseFertility += 5;
             }
+            bat.fertility -= looseFertility;
+            if(bat.fertility < 0) bat.fertility = 0;
+
             if(!bat.dead) {
                 bat.plant = false;
                 bat.oldseed.unshift(bat.seed);
                 bat.tag = bat.seed.ground;
                 bat.grow = 0;
                 this.registry.set('money', this.registry.get('money') + moneyWin);
-                bat.seed = {};
                 this.updateJauge('hunger', hungerWin);
                 console.log('Recolté !', bat);
                 this.images[bat.key - 1]['plant'].destroy();
 
+                
+
+                setTimeout(() => {
+                    if(moneyWin < bat.seed.money * 0.15) {
+                    
+                        this.menuScene.seedyAdvice('lowWinPlant', bat, bat.seed);
+                    }
+    
+                    if(bat.fertility < 25 && bat.fertility >= 20) {
+                        
+                        this.menuScene.seedyAdvice('lowFertility', bat.fertility);
+                    }
+                    if(bat.fertility < 10) {
+                        
+                        this.menuScene.seedyAdvice('veryLowFertility', bat.fertility);
+                    }
+                    if(bat.fertility == 0) {
+                        
+                        this.menuScene.seedyAdvice('noFertility', bat.fertility);
+                    }
+                }, 5000);
+
+                bat.seed = {};
 
                 let textMoney = this.add.text(bat.x, bat.y, '+'+moneyWin, { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
                 let moneyButton = this.add.image(textMoney.x + textMoney.width / 1.5, textMoney.y, 'dollar').setScale(0.08).setOrigin(0,0.5);
                 let textHunger = this.add.text(bat.x, textMoney.y + textMoney.height*0.8, hungerWin, { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
                 let hungerButton = this.add.image(textHunger.x + textHunger.width / 1.5, textHunger.y, 'hunger-care').setScale(0.08).setOrigin(0,0.5);
+                let textHealth = this.add.text(bat.x, textHunger.y + textHunger.height*0.8, '-'+looseFertility, { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
+                let healthButton = this.add.image(textHealth.x + textHealth.width / 1.5, textHealth.y, 'fertility').setScale(0.08).setOrigin(0,0.5);
                 setTimeout(() => {
                     textMoney.destroy();
                     moneyButton.destroy();
                     textHunger.destroy();
                     hungerButton.destroy();
+                    textHealth.destroy();
+                    healthButton.destroy();
                 }, 2000);
             }
             else {
@@ -814,10 +881,14 @@ class Europe extends Phaser.Scene {
 
             let textEcology = this.add.text(bat.x, bat.y, engrais.ecology.toString(), { lineSpacing:10, fontSize:40, color:'#ffffff' }).setOrigin(0.5, 0.5);
             let ecologyButton = this.add.image(textEcology.x + textEcology.width / 1.5, textEcology.y, 'ecology-care').setScale(0.08).setOrigin(0,0.5);
+            let textFertility = this.add.text(bat.x, textEcology.y + textEcology.height*0.8, '+'+engrais.fertility, { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
+            let fertilityButton = this.add.image(textFertility.x + textFertility.width / 1.5, textFertility.y, 'fertility').setScale(0.08).setOrigin(0,0.5);
             console.log(textEcology);
             setTimeout(() => {
                 textEcology.destroy();
                 ecologyButton.destroy();
+                textFertility.destroy();
+                fertilityButton.destroy();
             }, 2000);
         }
     }
@@ -870,8 +941,8 @@ class Europe extends Phaser.Scene {
                         }, 2000);
                     }
                     bat.dead = false;
-                    bat.feed = 80;
-                    bat.qt = 100;
+                    bat.feed = 90;
+                    bat.qt = 90;
                 }
                 bat.level = 0;
                 bat.tag = 'build';
@@ -997,8 +1068,8 @@ class Europe extends Phaser.Scene {
     birth() {
         for (let i in this.data.values) {
             let bat = this.data.values[i];
-            if (bat.level > 0 && bat.type == 'animal' && !bat.dead && bat.feed > 35) {
-                if (bat.feed > 0) {
+            if (bat.level > 0 && bat.type == 'animal' && !bat.dead && bat.qt < 100) {
+                if (bat.feed >= 35) {
                     if (Phaser.Math.Between(1, 10) <= 7) {
                         bat.qt += 5;
                         console.log('Birth animal !', bat);
@@ -1010,6 +1081,11 @@ class Europe extends Phaser.Scene {
                         if(bat.qt < 25) this.images[bat.key - 1].setFrame((bat.level - 1) + 3 * bat.ref.lvlMax);
                     }
                 }
+                if(bat.feed < 35 && bat.feed >= 30) {
+                    
+                    this.menuScene.seedyAdvice('notEnoughtMeal', bat.ref);
+                }
+
             }
         }
     }

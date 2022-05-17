@@ -233,7 +233,7 @@ include("config/configbdd.php");
 
             create ()
             {
-                this.gameScene = this.scene.get(this.registry.get('climat')+'Scene');
+                this.gameScene = this.scene.get(this.registry.get('gameScene')+'Scene');
 
                 this.add.image(0, 0, 'header').setOrigin(0,0.5);
                 
@@ -246,7 +246,7 @@ include("config/configbdd.php");
                 }, this);
 
                 this.globe.on('pointerup', function() {
-                    this.scene.sleep(this.registry.get('climat')+'Scene');
+                    this.scene.sleep(this.registry.get('gameScene')+'Scene');
                     this.scene.stop('headerScene');
                     this.scene.stop('menuScene');
                     this.scene.start('mapScene');
@@ -255,7 +255,7 @@ include("config/configbdd.php");
 
                 this.search.on('pointerup', function() {
                     //Update game same but no render
-                    this.scene.setVisible(false, this.registry.get('climat')+'Scene');
+                    this.scene.setVisible(false, this.registry.get('gameScene')+'Scene');
                     this.scene.stop('headerScene');
                     this.scene.stop('menuScene');
                     this.scene.start('searchScene');
@@ -340,6 +340,7 @@ include("config/configbdd.php");
                     percentText1.setText(this.registry.get('animalCare')+'%');
                     percentText2.setText(this.registry.get('ecology')+'%');
                     percentText3.setText(this.registry.get('hunger')+'%');
+                    console.log(this.registry.get('hunger'));
                     progressBar1.clear();
                     progressBar1.fillStyle(0x0080ff, 1);
                     progressBar1.fillRect(w1, h1, widthBar*(this.registry.get('animalCare')/100), heightBar);
