@@ -8,6 +8,7 @@ let data = [
     },
 
 
+    //Structures
     {
         tag:'tank',
         type:'struct',
@@ -30,6 +31,20 @@ let data = [
         desc:'Le panneau solaire permet de produire d\'électricité',
         info:''
     },
+    {
+        tag:'methane',
+        type:'struct',
+        lvlMax:3,
+        buildCost:100000,
+        upgrade:[0,15000,30000,50000],
+        money:[0,5,15,30],
+        name:'Usine de méthanisation',
+        desc:'Produit du méthane, grosse source d\'énergie',
+        info:''
+    },
+
+
+    // Animaux
     {
         tag:'pig',
         type:'animal',
@@ -72,7 +87,7 @@ let data = [
         name:'Saumon',
         desc:'Tout est bon dans le saumon',
         info:'',
-        climat:['froid']
+        climat:['polaire']
     },
     {
         tag:'renne',
@@ -83,7 +98,7 @@ let data = [
         name:'Renne',
         desc:'Tout est bon dans le renne',
         info:'',
-        climat:['froid']
+        climat:['polaire']
     },
     {
         tag:'bison',

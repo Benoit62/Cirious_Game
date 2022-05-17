@@ -3,7 +3,7 @@ class Menu extends Phaser.Scene {
     constructor ()
     {
         super({ key: 'menuScene' });
-        this.europeScene;
+        this.gameScene;
 
         this.upgrade;
         this.build;
@@ -57,7 +57,7 @@ class Menu extends Phaser.Scene {
     {
         this.scene.bringToTop('menuScene');
         //this.scene.setVisible(false);
-        this.europeScene = this.scene.get('europeScene');
+        this.gameScene = this.scene.get(this.registry.get('climat')+'Scene');
 
         this.add.image(150, 1500, 'menu');
 
@@ -93,7 +93,7 @@ class Menu extends Phaser.Scene {
             this.animals[i.tag] = this.add.image(32 +(j%5)*55, 140 + 45*compt, i.tag+"-button").setScale(0.08).setInteractive().setVisible(false)/*.setVisible(false)*/;
             this.animals[i.tag].on('pointerdown', function(){
                 if(this.batOverlap.type == 'animal' && this.batOverlap.level == 0 && this.batOverlap.tag == 'build') {
-                    this.europeScene.buildBat(this.batOverlap, i);
+                    this.gameScene.buildBat(this.batOverlap, i);
                     for(let i of getByType('animal')) {
                         this.animals[i.tag].setVisible(false);
                     }
@@ -119,7 +119,7 @@ class Menu extends Phaser.Scene {
             this.plants[i.tag] = this.add.image(32 +(k%5)*55, 140 + 45*compt, i.tag+"-button").setScale(0.08).setInteractive().setVisible(false)/*.setVisible(false)*/;
             this.plants[i.tag].on('pointerdown', function(){
                 if(this.batOverlap.type == 'field' && !this.batOverlap.plant && this.batOverlap.level == 1 && (this.batOverlap.tag == 'labor' || this.batOverlap.tag == 'water')) {
-                    this.europeScene.plant(this.batOverlap, i);
+                    this.gameScene.plant(this.batOverlap, i);
                     for(let i of getByType('plant')) {
                         this.plants[i.tag].setVisible(false);
                     }
@@ -149,7 +149,7 @@ class Menu extends Phaser.Scene {
             this.fields[i.tag] = this.add.image(32 +(l%5)*55, 140 + 45*compt, i.tag+"-button").setScale(0.08).setInteractive().setVisible(false)/*.setVisible(false)*/;
             this.fields[i.tag].on('pointerdown', function(){
                 if(this.batOverlap.type == 'field' && !this.batOverlap.plant && this.batOverlap.level == 0 && this.batOverlap.tag == 'build') {
-                    this.europeScene.buildBat(this.batOverlap, i);
+                    this.gameScene.buildBat(this.batOverlap, i);
                     for(let i of getByType('field')) {
                         this.fields[i.tag].setVisible(false);
                     }
@@ -175,7 +175,7 @@ class Menu extends Phaser.Scene {
             this.structs[i.tag] = this.add.image(32 +(m%5)*55, 140 + 45*compt, i.tag+"-button").setScale(0.08).setInteractive().setVisible(false)/*.setVisible(false)*/;
             this.structs[i.tag].on('pointerdown', function(){
                 if(this.batOverlap.type == 'struct' && this.batOverlap.level == 0 && this.batOverlap.tag == 'build') {
-                    this.europeScene.buildBat(this.batOverlap, i);
+                    this.gameScene.buildBat(this.batOverlap, i);
                     for(let i of getByType('struct')) {
                         this.structs[i.tag].setVisible(false);
                     }
@@ -204,7 +204,7 @@ class Menu extends Phaser.Scene {
             if(!i.unlock) this.engrais[i.tag].setAlpha(0.4);
             this.engrais[i.tag].on('pointerdown', function(){
                 if(i.unlock) {
-                    this.europeScene.fertility(this.batOverlap, i);
+                    this.gameScene.fertility(this.batOverlap, i);
                     for(let i of getByType('fertility')) {
                         this.engrais[i.tag].setVisible(false);
                     }
@@ -233,7 +233,7 @@ class Menu extends Phaser.Scene {
             if(!i.unlock) this.luttes[i.tag].setAlpha(0.4);
             this.luttes[i.tag].on('pointerdown', function(){
                 if(i.unlock && this.batOverlap.level == 1 && this.batOverlap.type == 'field' && this.batOverlap.weeds > 0) {
-                    this.europeScene.clean(this.batOverlap, i);
+                    this.gameScene.clean(this.batOverlap, i);
                     for(let i of getByType('health')) {
                         this.luttes[i.tag].setVisible(false);
                     }
@@ -262,7 +262,7 @@ class Menu extends Phaser.Scene {
             this.bull[i.tag] = this.add.image(32 +(p%5)*55, 140 + 45*compt, i.tag+"-button").setScale(0.08).setInteractive().setVisible(false)/*.setVisible(false)*/;
             this.bull[i.tag].on('pointerdown', function(){
                 if(this.batOverlap.level > 0 && this.batOverlap.tag != 'build') {
-                    this.europeScene.destroyBat(this.batOverlap, i);
+                    this.gameScene.destroyBat(this.batOverlap, i);
                     for(let i of getByType('destroy')) {
                         this.bull[i.tag].setVisible(false);
                     }
@@ -289,7 +289,7 @@ class Menu extends Phaser.Scene {
             if(!i.unlock) this.meals[i.tag].setAlpha(0.4);
             this.meals[i.tag].on('pointerdown', function(){
                 if(i.unlock && this.batOverlap.type == 'animal' && this.batOverlap.level > 0 && !this.batOverlap.dead && this.batOverlap.feed < 100) {
-                    this.europeScene.feed(this.batOverlap, i);
+                    this.gameScene.feed(this.batOverlap, i);
                     for(let i of getByType('meal')) {
                         this.meals[i.tag].setVisible(false);
                     }
@@ -318,7 +318,7 @@ class Menu extends Phaser.Scene {
             if(!i.unlock) this.sells[i.tag].setAlpha(0.4);
             this.sells[i.tag].on('pointerdown', function(){
                 if(i.unlock && this.batOverlap.type == 'animal' && this.batOverlap.level > 0 && !this.batOverlap.dead && this.batOverlap.qt > 40) {
-                    this.europeScene.sell(this.batOverlap, i);
+                    this.gameScene.sell(this.batOverlap, i);
                     for(let i of getByType('sell')) {
                         this.sells[i.tag].setVisible(false);
                     }
@@ -346,11 +346,11 @@ class Menu extends Phaser.Scene {
             if((this.batOverlap.type == 'animal' || this.batOverlap.type == 'struct' || this.batOverlap.type == 'house') && this.batOverlap.level < this.batOverlap.ref.lvlMax && this.batOverlap.level != 0) {
                 if(this.batOverlap.type != 'animal') {
                     console.log('try1');
-                    this.europeScene.upgradeBat(this.batOverlap);
+                    this.gameScene.upgradeBat(this.batOverlap);
                 }
                 else if(!this.batOverlap.dead) {
                     console.log('try2');
-                    this.europeScene.upgradeBat(this.batOverlap);
+                    this.gameScene.upgradeBat(this.batOverlap);
                 }
             }
         }, this);
@@ -376,10 +376,10 @@ class Menu extends Phaser.Scene {
         this.input.keyboard.on('keydown_A', function(){
             if((this.batOverlap.type == 'animal' || this.batOverlap.type == 'struct' || this.batOverlap.type == 'house') && this.batOverlap.level < this.batOverlap.ref.lvlMax && this.batOverlap.level != 0) {
                 if(this.batOverlap.type != 'animal') {
-                    this.europeScene.upgradeBat(this.batOverlap);
+                    this.gameScene.upgradeBat(this.batOverlap);
                 }
                 else if(!this.batOverlap.dead) {
-                    this.europeScene.upgradeBat(this.batOverlap);
+                    this.gameScene.upgradeBat(this.batOverlap);
                 }
             }
         }, this);
@@ -456,7 +456,7 @@ class Menu extends Phaser.Scene {
         //Replanter automatiquement
         this.input.keyboard.on('keydown_E', function(){
             if(this.batOverlap.type == 'field' && !this.batOverlap.plant && this.batOverlap.level == 1 && (this.batOverlap.tag == 'labor' || this.batOverlap.tag == 'water') && this.batOverlap.oldseed[0]) {
-                this.europeScene.replant(this.batOverlap);
+                this.gameScene.replant(this.batOverlap);
             }
         }, this);
 
@@ -465,13 +465,13 @@ class Menu extends Phaser.Scene {
         this.recolter = this.add.image(115, 90, "recolter").setScale(0.1).setInteractive();
         this.recolter.on('pointerdown', function(){
             if(this.batOverlap.type == 'field' && this.batOverlap.plant && this.batOverlap.level == 1 && this.batOverlap.tag != 'labor' && (this.batOverlap.grow == this.batOverlap.seed.maxGrow || this.batOverlap.dead)) {
-                this.europeScene.recolte(this.batOverlap);
+                this.gameScene.recolte(this.batOverlap);
             }
             
         }, this);
         this.input.keyboard.on('keydown_Z', function(){
             if(this.batOverlap.type == 'field' && this.batOverlap.plant && this.batOverlap.level == 1 && this.batOverlap.tag != 'labor' && (this.batOverlap.grow == this.batOverlap.seed.maxGrow || this.batOverlap.dead)) {
-                this.europeScene.recolte(this.batOverlap);
+                this.gameScene.recolte(this.batOverlap);
             }
         }, this);
 
@@ -823,9 +823,33 @@ class Menu extends Phaser.Scene {
 
 
 
-    seedyAdvice(type, ref, seed){
-        let seedy = this.add.image(0, 0, 'seedyAdvice').setScrollFactor(0).setScale(0.5);
-
+    seedyAdvice(type, ref, ref2){
+        this.scene.pause(this.registry.get('climat')+'Scene');
+        // Seedy 764x673  scale 0.8 => 611.2x538.4
+        let seedy = this.add.image(window.innerWidth - 305.6, window.innerHeight - 269.2, 'seedyAdvice').setScrollFactor(0).setScale(0.8).setOrigin(0.5,0.5);
+        let text = this.add.text(seedy.x - (seedy.width*0.8)/2, seedy.y - (seedy.height*0.8)/2, '', { lineSpacing:7, wordWrap: { width: 284 }, fontSize:17, fontFamily:'monospace', color:'#000000' }).setScrollFactor(0).setOrigin(0,0);
+        switch(type){
+            case 'lowMeal':
+                text.setText('Certains de vos animaux manquent de nourritures, nourrissez les rapidement ou vous allez perdre du bien-être animal');
+                break;
+            case 'veryLowMeal':
+                text.setText('Certains de vos animaux manquent cruellement de nourritures, nourrissez les au plus vite avant qu\'ils ne meurent');
+                break;
+            case 'noMeal':
+                text.setText('Certains de vos animax n\'ont plus de nourriture, il ne vous reste que 10 secondes avant qu\'ils ne meurent');
+                break;
+            case 'deadAnimalClimat':
+                let tmpText = 'Vos '+ref.name+' sont morte car elle ne sont pas dans le bon climat. Leur climat favorable est ';
+                ref.climat.forEach(value => tmpText += getByTag(value)[0].name+', ');
+                tmpText+='\nDétruisez le bâtiment our pouvoir reconstruire';
+                text.setText(tmpText);
+                break;
+            default:
+                seedy.destroy();
+                text.destroy();
+                this.scene.resume(this.registry.get('climat')+'Scene');
+                break;
+        }
 
 
 
@@ -834,6 +858,8 @@ class Menu extends Phaser.Scene {
 
         this.input.on('pointerdown', function() {
             seedy.destroy();
+            text.destroy();
+            this.scene.resume(this.registry.get('climat')+'Scene');
         }, this);
     }
 

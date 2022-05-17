@@ -78,7 +78,7 @@ class Europe extends Phaser.Scene {
             scale: 0.5,
             ref: {},
             dead:false,
-            feed:60,
+            feed:25,
             qt:100
         });
 
@@ -831,6 +831,8 @@ class Europe extends Phaser.Scene {
                     console.log('Dead animal !', bat);
                     this.images[bat.key - 1].setFrame((bat.level - 1) + bat.ref.lvlMax);
 
+                    this.menuScene.seedyAdvice('deadAnimalClimat', bat.ref);
+
                     this.updateJauge('animalCare', -40);
 
                     let textAnimal = this.add.text(bat.x, bat.y, '-40', { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
@@ -949,6 +951,7 @@ class Europe extends Phaser.Scene {
                         console.log('Eat animal !', bat);
 
                         if(bat.feed <= 0) {
+                            this.menuScene.seedyAdvice('noMeal');
                             bat.feed = 0;
                             setTimeout(() => {
                                 bat.dead = true;
@@ -963,7 +966,7 @@ class Europe extends Phaser.Scene {
                                     textAnimal.destroy();
                                     animalButton.destroy();
                                 }, 2000);
-                            }, 5000);
+                            }, 10000);
                         }
                         else if(bat.feed < 25) {
                             console.log('Hunger animal !', bat);
@@ -977,8 +980,12 @@ class Europe extends Phaser.Scene {
                                 animalButton.destroy();
                             }, 2000);
 
-                            if(bat.feed < 25) {
-                                this.menuScene.seedyAdvice();
+                            //Seedy Advice
+                            if(bat.feed >= 5 && bat.feed < 10) {
+                                this.menuScene.seedyAdvice('veryLowMeal');
+                            }
+                            if(bat.feed >= 20 && bat.feed < 25) {
+                                this.menuScene.seedyAdvice('lowMeal');
                             }
                         }
                     }
