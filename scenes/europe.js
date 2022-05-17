@@ -62,7 +62,8 @@ class Europe extends Phaser.Scene {
             scale: 0.5,
             ref: {},
             dead:false,
-            feed:100
+            feed:100,
+            qt:100
         });
         this.data.set('bat2', {
             key: 2,
@@ -76,7 +77,8 @@ class Europe extends Phaser.Scene {
             scale: 0.5,
             ref: {},
             dead:false,
-            feed:80
+            feed:80,
+            qt:100
         });
 
         // Structures
@@ -807,6 +809,8 @@ class Europe extends Phaser.Scene {
                         }, 2000);
                     }
                     bat.dead = false;
+                    bat.feed = 80;
+                    bat.qt = 100;
                 }
                 bat.level = 0;
                 bat.tag = 'build';

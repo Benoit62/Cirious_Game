@@ -23,6 +23,7 @@ class Menu extends Phaser.Scene {
         this.luttes = [];
 
         this.meals = [];
+        this.sells = [];
 
         this.bull = [];
 
@@ -308,6 +309,35 @@ class Menu extends Phaser.Scene {
             if(q%5==0)compt++;
         }
 
+
+        // Création des boutons Vendre
+        compt=0;
+        let r = 0;
+        for(let i of getByType('sell')) {
+            this.sells[i.tag] = this.add.image(35 +(r%5)*60, 140 + 45*compt, i.tag+"-button").setScale(0.08).setInteractive().setVisible(false);
+            if(!i.unlock) this.sells[i.tag].setAlpha(0.4);
+            this.sells[i.tag].on('pointerdown', function(){
+                if(i.unlock && this.batOverlap.type == 'animal' && this.batOverlap.level > 0 && !this.batOverlap.dead && this.batOverlap.qt > 50) {
+                    //this.europeScene.sell(this.batOverlap, i);
+                    for(let i of getByType('sell')) {
+                        this.sells[i.tag].setVisible(false);
+                    }
+                }
+            }, this);
+            this.sells[i.tag].on('pointermove', function(){
+                if(i.unlock) {
+                    this.cardInfo.setVisible(true);
+                    this.textInfo.setText(i.name+'\nGain : '+i.money+' $\nBien-être : '+i.care);
+                }
+            }, this);
+            this.sells[i.tag].on('pointerout', function(){
+                this.cardInfo.setVisible(false);
+                this.textInfo.setText('');
+            }, this);
+            r++;
+            if(r%5==0)compt++;
+        }
+
          
 
         // Bouton upgrade
@@ -400,11 +430,11 @@ class Menu extends Phaser.Scene {
         // Bouton Vendre
         this.sell = this.add.image(245, 35, "sellAnimal").setScale(0.1).setInteractive();
         this.sell.on('pointerdown', function(){
-            /*if(this.batOverlap.type == 'animal' && this.batOverlap.level > 0 && !this.batOverlap.dead && this.batOverlap.feed < 100) {
-                for(let i of getByType('meal')) {
-                    this.meals[i.tag].setVisible(true);
+            if(this.batOverlap.type == 'animal' && this.batOverlap.level > 0 && !this.batOverlap.dead && this.batOverlap.qt > 50) {
+                for(let i of getByType('sell')) {
+                    this.sells[i.tag].setVisible(true);
                 }
-            }*/
+            }
             
         }, this);
 
@@ -474,6 +504,7 @@ class Menu extends Phaser.Scene {
         this.circlePlanter = this.add.image(this.planter.x, this.planter.y, "circle").setScale(0.1).setVisible(false);
         this.circleRecolte = this.add.image(this.recolter.x, this.recolter.y, "circle").setScale(0.1).setVisible(false);
         this.circleFeed = this.add.image(this.feed.x, this.feed.y, "circle").setScale(0.1).setVisible(false);
+        this.circleSell = this.add.image(this.sell.x, this.sell.y, "circle").setScale(0.1).setVisible(false);
         this.circleFertility = this.add.image(this.fertility.x, this.fertility.y, "circle").setScale(0.1).setVisible(false);
         this.circleHealth = this.add.image(this.health.x, this.health.y, "circle").setScale(0.1).setVisible(false);
 
@@ -562,6 +593,17 @@ class Menu extends Phaser.Scene {
             }
         }
 
+        //Vendre
+        if(this.batOverlap.type == 'animal' && this.batOverlap.level > 0 && !this.batOverlap.dead && this.batOverlap.qt > 50) {
+            this.circleSell.setVisible(true);
+        }
+        else {
+            this.circleSell.setVisible(false);
+            for(let i of getByType('sell')) {
+                this.sells[i.tag].setVisible(false);
+            }
+        }
+
 
         //Fertiliser
         if(this.batOverlap.type == 'field' && !this.batOverlap.plant && this.batOverlap.level == 1 && (this.batOverlap.tag == 'labor' || this.batOverlap.tag == 'water') && this.batOverlap.fertility < 100) {
@@ -618,6 +660,7 @@ class Menu extends Phaser.Scene {
             }
             if(this.batOverlap.type == 'animal') {
                 tmpText+='Nourriture : '+this.batOverlap.feed+'%\n';
+                tmpText+='Quantité : '+this.batOverlap.qt+' / 100\n';
                 if(this.batOverlap.dead) {
                     tmpText+='MORT !\n';
                 }
@@ -738,5 +781,8 @@ class Menu extends Phaser.Scene {
         this.plusText.setVisible(false);
         this.plusText.setText('');
     }
+
+
+    close
 
 }
