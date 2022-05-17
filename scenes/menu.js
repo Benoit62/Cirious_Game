@@ -697,6 +697,30 @@ class Menu extends Phaser.Scene {
             }
             this.plus.setVisible(true);
             this.textBat.setText(tmpText);
+
+            //Jauges d'informations
+            let widthBar = 200;
+            let heightBar = 30;
+            if(this.batOverlap.type == 'animal') {
+                var progressBox1 = this.add.graphics();
+                progressBox1.fillStyle(0xffffff, 0.2);
+                progressBox1.fillRect(10, this.textBat.y + this.textBat.height, widthBar, heightBar);
+                
+                var progressBar1 = this.add.graphics();
+                progressBar1.fillStyle(0x0080ff, 1);
+                progressBar1.fillRect(progressBox1.x, progressBox1.y, this.batOverlap.feed, heightBar);
+
+                var percentText1 = this.make.text({
+                    x: this.textBat.x + widthBar/2,
+                    y: this.textBat.y + this.textBat.height,
+                    text: this.batOverlap.feed+'%',
+                    style: {
+                        font: '18px monospace',
+                        fill: '#ffffff'
+                    }
+                });
+                percentText1.setOrigin(0.5, 0.5);
+            }
         }
         
     }
@@ -865,7 +889,7 @@ class Menu extends Phaser.Scene {
                 text.setText(tmpText);
                 break;
             case 'sameSeed':
-                tmpText = 'Attention, vous venez de planter deux fois de suite la même plante dans un de vos champs : '+ref.name+'\n\nPensez à la rotation des cultures pour laisser au sol le temps de se regénérer';
+                tmpText = 'Attention, vous venez de planter deux fois de suite la même plante dans un de vos champs : '+ref.name+'\n\nPensez à la rotation des cultures pour laisser au sol le temps de se régénérer';
                 text.setText(tmpText);
                 break;
             case 'sameSeed2':

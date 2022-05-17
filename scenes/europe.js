@@ -377,6 +377,8 @@ class Europe extends Phaser.Scene {
         // On recupère les scenes annexes
         this.headerScene = this.scene.get('headerScene');
         this.menuScene = this.scene.get('menuScene');
+        this.scene.bringToTop('headerScene');
+        this.scene.bringToTop('menuScene');
 
 
         this.registry.set('money', 100000);
@@ -676,7 +678,7 @@ class Europe extends Phaser.Scene {
                         if(nbOldSeed == 2) {
                             this.menuScene.seedyAdvice('sameSeed2', bat.seed);
                         }
-                        if(nbOldSeed > 3) {
+                        if(nbOldSeed >= 3) {
                             this.menuScene.seedyAdvice('toMuchSameSeed', bat.seed);
                         }
                     }, 4000);

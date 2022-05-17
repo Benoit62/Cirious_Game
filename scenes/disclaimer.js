@@ -40,7 +40,7 @@ class Disclaimer extends Phaser.Scene {
     }
 
     start() {
-        this.scene.start('mapScene');
+        this.scene.start('tutoScene');
         this.scene.stop('disclaimerScene');
     }
 

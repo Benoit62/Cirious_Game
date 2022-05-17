@@ -75,7 +75,7 @@ class Cinematique1 extends Phaser.Scene {
             dialBox.fillRect(0, 0, window.innerWidth, 130);
             var content = [
                 "Salutation, je suis Qu Dongyu, directeur générale de L'Organisation des Nations unies pour l’alimentation et l’agriculture",
-                "(ONUAA), et je suis à la recherche du meilleur agriculteur du milieu ",
+                "(ONUAA), et je suis à la recherche d\'un agriculteur prêt à relever le défi !",
                 "",
                 "Mosbert :",
                 "Bonjour Qu Dongyu, vous l’avez sous vos yeux. Je suis Mosbert, le meilleur des agriculteurs, pourquoi me cherchez-vous ?",

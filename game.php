@@ -27,6 +27,7 @@ include("config/configbdd.php");
     <script type="text/javascript" src="scenes/loading.js"></script>
     <script type="text/javascript" src="scenes/cinematique.js"></script>
     <script type="text/javascript" src="scenes/disclaimer.js"></script>
+    <script type="text/javascript" src="scenes/tuto.js"></script>
     <script type="text/javascript" src="scenes/menu.js"></script>
     <script type="text/javascript" src="scenes/search.js"></script>
     <script type="text/javascript" src="scenes/data.js"></script>
@@ -340,7 +341,6 @@ include("config/configbdd.php");
                     percentText1.setText(this.registry.get('animalCare')+'%');
                     percentText2.setText(this.registry.get('ecology')+'%');
                     percentText3.setText(this.registry.get('hunger')+'%');
-                    console.log(this.registry.get('hunger'));
                     progressBar1.clear();
                     progressBar1.fillStyle(0x0080ff, 1);
                     progressBar1.fillRect(w1, h1, widthBar*(this.registry.get('animalCare')/100), heightBar);
@@ -396,7 +396,7 @@ include("config/configbdd.php");
             audio: {
                 disableWebAudio: false
             },
-            scene: [Loading, Play, Cinematique1, Cinematique2, Map, Europe, Desert, Glace, Header, Menu, Search, Disclaimer]
+            scene: [Loading, Play, Cinematique1, Cinematique2, Map, Europe, Desert, Glace, Header, Menu, Search, Disclaimer, Tuto]
         };
 
         let game = new Phaser.Game(config);

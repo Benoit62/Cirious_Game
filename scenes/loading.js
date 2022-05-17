@@ -28,6 +28,7 @@ class Loading extends Phaser.Scene {
         this.load.image('desertile', 'assets/map/desertile.png');
         this.load.image('foretile', 'assets/map/foretile.png');
         this.load.image('glaceile', 'assets/map/glaceile.png');
+        this.load.image('tuto', 'assets/map/tuto.png');
         this.load.image('europe', 'assets/map/europe.png');
         this.load.image('cadenas', 'assets/map/cadenas.png');
 
@@ -250,7 +251,9 @@ class Loading extends Phaser.Scene {
                 progressBox.destroy();
                 loadingText.destroy();
                 percentText.destroy();
-                this.scene.start('mapScene');
+                this.scene.start('tutoScene');
+                this.scene.launch('menuScene');
+                this.scene.launch('headerScene');
             } else {
                 progress(i);
                 i+=10;
