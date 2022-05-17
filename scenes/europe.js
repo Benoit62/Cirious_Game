@@ -26,6 +26,7 @@ class Europe extends Phaser.Scene {
         this.timerWeeds = 0;
         this.timerDeadanimal = 0;
         this.timerMeal = 0;
+        this.timerHunger = 0;
 
         this.climat = 'europe';
 
@@ -436,12 +437,18 @@ class Europe extends Phaser.Scene {
         this.debug.clear().strokePoints(this.Bounds.points).strokeRectShape(this.playerRect);*/
 
 
+        this.timerHunger++;
+        if (this.timerHunger == 800) {
+            console.log('Check weeds');
+            this.updateJauge('hunger', -1);
+            this.timerHunger = 0 - Phaser.Math.Between(0, 500);
+        }
 
         this.timerWeeds++;
-        if (this.timerWeeds == 2500) {
+        if (this.timerWeeds == 3000) {
             console.log('Check weeds');
             this.weeds();
-            this.timerWeeds = 0 - Phaser.Math.Between(0, 500);
+            this.timerWeeds = 0 - Phaser.Math.Between(0, 700);
         }
 
         this.timerGrowth++;

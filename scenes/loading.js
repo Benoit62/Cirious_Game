@@ -86,10 +86,11 @@ class Loading extends Phaser.Scene {
         this.load.image("builder", "assets/menu/build.png");
         this.load.image("planter", "assets/menu/planter.png");
         this.load.image("recolter", "assets/menu/recolter.png");
-        this.load.image("feed", "assets/menu/pet-food.png");
+        this.load.image("meal", "assets/menu/meal.png");
         this.load.image("upgrade", "assets/menu/upgrade.png"); 
         this.load.image("fertility", "assets/menu/fertility.png"); 
-        this.load.image('health', 'assets/search/health.png');
+        this.load.image('health', 'assets/menu/health.png');
+        this.load.image('sellAnimal', 'assets/menu/sellAnimal.png');
 
         
         this.load.image('bull-button', 'assets/menu/bull.png');
@@ -168,6 +169,7 @@ class Loading extends Phaser.Scene {
         this.load.image('biologic-search', 'assets/search/lutte_bio.png');
         this.load.image('biopesticid-search', 'assets/search/biopesticides.png');
 
+        this.load.image('meal-search', 'assets/search/meal.png');
         this.load.image('fourrages-search', 'assets/search/fourrages.png');
         this.load.image('grains-search', 'assets/search/grains.png');
         this.load.image('ration-search', 'assets/search/ration.png');
@@ -266,6 +268,14 @@ class Loading extends Phaser.Scene {
             name:'Protection des plantes',
             children:getByType('health'),
             desc:'Veiller à la santé des végétaux et des terres, c’est contribuer à la production agricole et à la sécurité alimentaire, favoriser le développement économique (emplois, production, export) et protéger l’environnement. La protection des plantes constitue un enjeu crucial.',
+            info:''
+        });
+        this.registry.set('search3', {
+            type:'search',
+            tag:'meal',
+            name:'Nourriture pour animaux',
+            children:getByType('health'),
+            desc:'Faut bien nourrir les vaches',
             info:''
         });
     }

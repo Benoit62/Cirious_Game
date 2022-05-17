@@ -10,6 +10,7 @@ class Menu extends Phaser.Scene {
         this.planter;
         this.recolter;
         this.feed;
+        this.sell;
         this.search;
         this.health;
 
@@ -383,8 +384,33 @@ class Menu extends Phaser.Scene {
             
         }, this);
 
+        
+        // Bouton Nourrir
+        this.feed = this.add.image(180, 35, "meal").setScale(0.1).setInteractive();
+        this.feed.on('pointerdown', function(){
+            if(this.batOverlap.type == 'animal' && this.batOverlap.level > 0 && !this.batOverlap.dead && this.batOverlap.feed < 100) {
+                for(let i of getByType('meal')) {
+                    this.meals[i.tag].setVisible(true);
+                }
+            }
+            
+        }, this);
+
+        
+        // Bouton Vendre
+        this.sell = this.add.image(245, 35, "sellAnimal").setScale(0.1).setInteractive();
+        this.sell.on('pointerdown', function(){
+            /*if(this.batOverlap.type == 'animal' && this.batOverlap.level > 0 && !this.batOverlap.dead && this.batOverlap.feed < 100) {
+                for(let i of getByType('meal')) {
+                    this.meals[i.tag].setVisible(true);
+                }
+            }*/
+            
+        }, this);
+
+
         // Bouton planter
-        this.planter = this.add.image(180, 35, "planter").setScale(0.1).setInteractive();
+        this.planter = this.add.image(50, 90, "planter").setScale(0.1).setInteractive();
         this.planter.on('pointerdown', function(){
             if(this.batOverlap.type == 'field' && !this.batOverlap.plant && this.batOverlap.level == 1 && (this.batOverlap.tag == 'labor' || this.batOverlap.tag == 'water')) {
                 for(let i of getByType('plant')) {
@@ -400,8 +426,9 @@ class Menu extends Phaser.Scene {
             }
         }, this);
 
+
         // Bouton recolter
-        this.recolter = this.add.image(245, 35, "recolter").setScale(0.1).setInteractive();
+        this.recolter = this.add.image(115, 90, "recolter").setScale(0.1).setInteractive();
         this.recolter.on('pointerdown', function(){
             if(this.batOverlap.type == 'field' && this.batOverlap.plant && this.batOverlap.level == 1 && this.batOverlap.tag != 'labor' && (this.batOverlap.grow == this.batOverlap.seed.maxGrow || this.batOverlap.dead)) {
                 this.europeScene.recolte(this.batOverlap);
@@ -414,30 +441,7 @@ class Menu extends Phaser.Scene {
             }
         }, this);
 
-
-
-        // Bouton Nourrir
-        this.feed = this.add.image(50, 90, "feed").setScale(0.1).setInteractive();
-        this.feed.on('pointerdown', function(){
-            if(this.batOverlap.type == 'animal' && this.batOverlap.level > 0 && !this.batOverlap.dead && this.batOverlap.feed < 100) {
-                for(let i of getByType('meal')) {
-                    this.meals[i.tag].setVisible(true);
-                }
-            }
-            
-        }, this);
-
-
-        // Bouton Fertiliser
-        this.fertility = this.add.image(115, 90, "fertility").setScale(0.1).setInteractive();
-        this.fertility.on('pointerdown', function(){
-            if(this.batOverlap.type == 'field' && !this.batOverlap.plant && this.batOverlap.level == 1 && (this.batOverlap.tag == 'labor' || this.batOverlap.tag == 'water') && this.batOverlap.fertility < 100) {
-                for(let i of getByType('fertility')) {
-                    this.engrais[i.tag].setVisible(true);
-                }
-            }
-            
-        }, this);
+        
 
 
         // Bouton Nettoyer
@@ -446,6 +450,18 @@ class Menu extends Phaser.Scene {
             if(this.batOverlap.level == 1 && this.batOverlap.type == 'field' && this.batOverlap.weeds > 0) {
                 for(let i of getByType('health')) {
                     this.luttes[i.tag].setVisible(true);
+                }
+            }
+            
+        }, this);
+
+
+        // Bouton Fertiliser
+        this.fertility = this.add.image(245, 90, "fertility").setScale(0.1).setInteractive();
+        this.fertility.on('pointerdown', function(){
+            if(this.batOverlap.type == 'field' && !this.batOverlap.plant && this.batOverlap.level == 1 && (this.batOverlap.tag == 'labor' || this.batOverlap.tag == 'water') && this.batOverlap.fertility < 100) {
+                for(let i of getByType('fertility')) {
+                    this.engrais[i.tag].setVisible(true);
                 }
             }
             

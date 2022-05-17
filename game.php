@@ -353,8 +353,17 @@ include("config/configbdd.php");
 
 
                 this.mute = this.add.image(window.innerWidth-25, 75, 'mute').setInteractive().setScale(0.08);
+                this.sound = this.add.image(window.innerWidth-25, 75, 'sound').setInteractive().setScale(0.08).setVisible(false);
                 this.mute.on('pointerdown', function(){
                     //this.mute.setFrame((this.mute.frame + 1)%2);
+                    this.mute.visible = !this.mute.visible;
+                    this.sound.visible = !this.sound.visible;
+                    this.gameScene.musique.mute = !this.gameScene.musique.mute;
+                }, this);
+                this.sound.on('pointerdown', function(){
+                    //this.mute.setFrame((this.mute.frame + 1)%2);
+                    this.mute.visible = !this.mute.visible;
+                    this.sound.visible = !this.sound.visible;
                     this.gameScene.musique.mute = !this.gameScene.musique.mute;
                 }, this);
             }

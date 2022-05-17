@@ -557,6 +557,48 @@ let data = [
         care:-30,
         prix:10000
     },
+
+
+    //Vendre
+    {
+        tag:'barbare',
+        type:'meal',
+        typeName:'Abbatoire',
+        name:'Abbattage avec peu de respect des normes',
+        desc:'Ca fait souffrir les vaches',
+        info:'Trop répandu aujourd\'hui',
+        unlock:true,
+        unlockPrice:10000,
+        money:100,
+        care:-10,
+        prix:10000
+    },
+    {
+        tag:'barbare',
+        type:'meal',
+        typeName:'Abbatoire',
+        name:'Abbattage avec peu de respect des normes',
+        desc:'Ca fait souffrir les vaches',
+        info:'Trop répandu aujourd\'hui',
+        unlock:true,
+        unlockPrice:10000,
+        money:100,
+        care:-10,
+        prix:10000
+    },
+    {
+        tag:'ration',
+        type:'meal',
+        typeName:'Nourriture pour animaux',
+        name:'Aliments constitutifs de la ration',
+        desc:'Miam la bonne herbe',
+        info:'Ca pollue fort',
+        unlock:false,
+        unlockPrice:10000,
+        feed:30,
+        care:-10,
+        prix:10000
+    },
 ];
 
 
