@@ -660,7 +660,7 @@ class Menu extends Phaser.Scene {
                     tmpText+='Niveau : Max'+'\n';
                 }
             }
-            if(this.batOverlap.ref.money && this.batOverlap.type != 'field' /*&& this.batOverlap.type != 'animal'*/) {
+            if(this.batOverlap.ref.money && this.batOverlap.type != 'field' && this.batOverlap.type != 'animal') {
                 let moneyPerSec = this.batOverlap.ref.money[this.batOverlap.level];
                 tmpText+='Gain : '+moneyPerSec+'/s'+'\n';
             }
@@ -722,51 +722,52 @@ class Menu extends Phaser.Scene {
     savoirPlus(){
         let tmpText = '';
         if(this.batOverlap.key != 0) {
-            tmpText+='\nType : '+this.batOverlap.typeName;
+            tmpText+='Type : '+this.batOverlap.typeName+'\n';
             if(this.batOverlap.ref.name) {
-                tmpText+='Nom : '+this.batOverlap.ref.name;
+                tmpText+='Nom : '+this.batOverlap.ref.name+'\n';
             }
             if(this.batOverlap.type != 'field') {
                 if(this.batOverlap.level < this.batOverlap.ref.lvlMax){
-                    tmpText+='\nNiveau : '+this.batOverlap.level+' / '+this.batOverlap.ref.lvlMax;
+                    tmpText+='Niveau : '+this.batOverlap.level+' / '+this.batOverlap.ref.lvlMax+'\n';
                 }
                 else {
-                    tmpText+='\nNiveau : Max';
+                    tmpText+='Niveau : Max'+'\n';
                 }
-            }
-            if(this.batOverlap.ref.money && this.batOverlap.type != 'field' /*&& this.batOverlap.type != 'field'*/) {
-                let moneyPerSec = this.batOverlap.ref.money[this.batOverlap.level];
-                tmpText+='\nGain : '+moneyPerSec+'/s';
-            }
-            if(this.batOverlap.tag != 'build') {
-                tmpText+='\nDescription : '+this.batOverlap.ref.desc;
             }
             if(this.batOverlap.type == 'animal') {
                 tmpText+='Nourriture : '+this.batOverlap.feed+'%\n';
+                tmpText+='Quantité : '+this.batOverlap.qt+' / 100\n';
                 if(this.batOverlap.dead) {
                     tmpText+='MORT !\n';
                 }
             }
+            if(this.batOverlap.ref.money && this.batOverlap.type != 'field' && this.batOverlap.type != 'animal') {
+                let moneyPerSec = this.batOverlap.ref.money[this.batOverlap.level];
+                tmpText+='Gain : '+moneyPerSec+'/s'+'\n';
+            }
+            if(this.batOverlap.tag != 'build') {
+                tmpText+='Description : '+this.batOverlap.ref.desc+'\n';
+            }
             if(this.batOverlap.type == 'field') {
                 if(this.batOverlap.plant) {
-                    tmpText+='\nCulture : '+this.batOverlap.seed.name;
+                    tmpText+='Culture : '+this.batOverlap.seed.name+'\n';
                     if(this.batOverlap.grow < this.batOverlap.seed.maxGrow){
-                        tmpText+='\nCroissance : '+this.batOverlap.grow+' / '+this.batOverlap.seed.maxGrow;
+                        tmpText+='Croissance : '+this.batOverlap.grow+' / '+this.batOverlap.seed.maxGrow+'\n';
                     }
                     else {
-                        tmpText+='\nCroissance : Max';
+                        tmpText+='Croissance : Max'+'\n';
                     }
                     let climats = '';
                     for(let clm in this.batOverlap.seed.climat) {
                         climats+=getByTag(this.batOverlap.seed.climat[clm])[0].name+' ';
                     }
-                    tmpText+='\nFertilité : '+this.batOverlap.fertility;
-                    let sante = this.batOverlap.maxWeeds - this.batOverlap.weeds
-                    tmpText+='\nSanté : '+sante+' / '+this.batOverlap.maxWeeds;
-                    tmpText+='\nClimats : '+climats;
-                    tmpText+='\nDescription culture : '+this.batOverlap.seed.desc;
+                    tmpText+='Fertilité : '+this.batOverlap.fertility+'\n';
+                    let sante = this.batOverlap.maxWeeds - this.batOverlap.weeds;
+                    tmpText+='Santé : '+sante+' / '+this.batOverlap.maxWeeds+'\n';
+                    tmpText+='Climats : '+climats+'\n';
+                    tmpText+='Description culture : '+this.batOverlap.seed.desc+'\n';
                 }
-                tmpText+='\nHistorique : ';
+                tmpText+='Historique : ';
                 this.batOverlap.oldseed.forEach(value => {
                     tmpText+=value.name+' ';
                 });
