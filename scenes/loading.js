@@ -141,6 +141,10 @@ class Loading extends Phaser.Scene {
         this.load.image('ration-button', 'assets/menu/ration.png');
         this.load.image('indus-button', 'assets/menu/indus.png');
 
+        this.load.image('barbare-button', 'assets/menu/barbare.png');
+        this.load.image('propre-button', 'assets/menu/propre.png');
+        this.load.image('rituel-button', 'assets/menu/rituel.png');
+
 
         // Chargement des autres assets du menu
         this.load.image("circle", "assets/menu/circle.png"); 
@@ -174,6 +178,10 @@ class Loading extends Phaser.Scene {
         this.load.image('grains-search', 'assets/search/grains.png');
         this.load.image('ration-search', 'assets/search/ration.png');
         this.load.image('indus-search', 'assets/search/indus.png');
+        
+        this.load.image('barbare-search', 'assets/search/barbare.png');
+        this.load.image('propre-search', 'assets/search/propre.png');
+        this.load.image('rituel-search', 'assets/search/rituel.png');
 
 
     }

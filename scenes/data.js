@@ -562,7 +562,7 @@ let data = [
     //Vendre
     {
         tag:'barbare',
-        type:'meal',
+        type:'sell',
         typeName:'Abbatoire',
         name:'Abbattage avec peu de respect des normes',
         desc:'Ca fait souffrir les vaches',
@@ -574,12 +574,12 @@ let data = [
         prix:10000
     },
     {
-        tag:'barbare',
-        type:'meal',
+        tag:'rituel',
+        type:'sell',
         typeName:'Abbatoire',
-        name:'Abbattage avec peu de respect des normes',
-        desc:'Ca fait souffrir les vaches',
-        info:'Trop répandu aujourd\'hui',
+        name:'Abbattage rituel sans étourdissement',
+        desc:'Ca fait beaucoup souffrir les vaches',
+        info:'Compliqué de l\'interdire',
         unlock:true,
         unlockPrice:10000,
         money:100,
@@ -587,15 +587,15 @@ let data = [
         prix:10000
     },
     {
-        tag:'ration',
-        type:'meal',
-        typeName:'Nourriture pour animaux',
-        name:'Aliments constitutifs de la ration',
-        desc:'Miam la bonne herbe',
-        info:'Ca pollue fort',
+        tag:'propre',
+        type:'sell',
+        typeName:'Abbatoire',
+        name:'Abbattage dans le respect des normes',
+        desc:'Ca fait pas souffrir (normalement)',
+        info:'Devrait être plus controllé pour que ca soit le cas dans tous les abbatoires',
         unlock:false,
         unlockPrice:10000,
-        feed:30,
+        money:100,
         care:-10,
         prix:10000
     },
