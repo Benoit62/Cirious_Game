@@ -274,7 +274,7 @@ class Loading extends Phaser.Scene {
             type:'search',
             tag:'meal',
             name:'Nourriture pour animaux',
-            children:getByType('health'),
+            children:getByType('meal'),
             desc:'Faut bien nourrir les vaches',
             info:''
         });
