@@ -825,8 +825,8 @@ class Menu extends Phaser.Scene {
 
     seedyAdvice(type, ref, ref2){
         this.scene.pause(this.registry.get('climat')+'Scene');
-        // Seedy 764x673  scale 0.8 => 611.2x538.4
-        let seedy = this.add.image(window.innerWidth - 305.6, window.innerHeight - 269.2, 'seedyAdvice').setScrollFactor(0).setScale(0.8).setOrigin(0.5,0.5);
+        // Seedy 727x660  scale 0.8 => 581.6x528
+        let seedy = this.add.image(window.innerWidth - 290.8 + 40, window.innerHeight - 264 + 40, 'seedyAdvice').setScrollFactor(0).setScale(0.8).setOrigin(0.5,0.5);
         let text = this.add.text(seedy.x - (seedy.width*0.8)/2, seedy.y - (seedy.height*0.8)/2, '', { lineSpacing:7, wordWrap: { width: 284 }, fontSize:17, fontFamily:'monospace', color:'#000000' }).setScrollFactor(0).setOrigin(0,0);
         switch(type){
             case 'lowMeal':

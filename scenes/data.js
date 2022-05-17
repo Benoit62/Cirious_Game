@@ -53,7 +53,7 @@ let data = [
         upgrade:[0,20000,35000,60000],
         name:'Cochon',
         desc:'Tout est bon dans le cochon',
-        info:'',
+        info:'La population porcine mondiale est estimée à 826 millions de têtes (FAO, 1988). C\'est le porc qui, comparé aux autres espèces domestiques, qui offre la productivité la plus élevée. ',
         climat:['europe']
     },
     {
@@ -63,19 +63,19 @@ let data = [
         buildCost:40000,
         upgrade:[0,20000,35000,60000],
         name:'Vache',
-        desc:'Tout est bon dans la vache',
-        info:'',
-        climat:['europe']
+        desc:'La vache kiri',
+        info:'Permet de fournir de la viande, du lait cru, des peaux, un travail de traction, du fumier, du combustible, des sous-produits et l\'entretien des espaces ouverts',
+        climat:['europe','tropic']
     },
     {
         tag:'sheep',
         type:'animal',
         lvlMax:3,
-        buildCost:40000,
+        buildCost:40000, //moins rentable que l'elevage bovin niveau rendement 
         upgrade:[0,20000,35000,60000],
         name:'Mouton',
-        desc:'Tout est bon dans le mouton',
-        info:'',
+        desc:'BEEEEHHHHH',
+        info:'En plus d\'être élevé pour leurs lait,laine et viande, les moutons donnent une image positive aux paysages urbains. Ils sont un atout fort d’un point de vue touristique',
         climat:['europe']
     },
     {
@@ -86,7 +86,7 @@ let data = [
         upgrade:[0,20000,35000,60000],
         name:'Saumon',
         desc:'Tout est bon dans le saumon',
-        info:'',
+        info:'Le réel avantage de la pisciculture est la protection des ressources halieutiques mondiales qui commencent sérieusement à se raréfier',
         climat:['polaire']
     },
     {
@@ -96,8 +96,8 @@ let data = [
         buildCost:30000,
         upgrade:[0,20000,35000,60000],
         name:'Renne',
-        desc:'Tout est bon dans le renne',
-        info:'',
+        desc:'Les rennes des neiges',
+        info:'aucune',
         climat:['polaire']
     },
     {
@@ -107,10 +107,11 @@ let data = [
         buildCost:30000,
         upgrade:[0,20000,35000,60000],
         name:'Bison',
-        desc:'Tout est bon dans le bison',
-        info:'',
-        climat:['tropic']
+        desc:'YAKARI',
+        info:'Il en existe deux espèces : bisons d\'Europe et le bisons d\'Amerique (ayant comme sous-espèce les bisons des bois et des plaines) majoritairement élevé pour sa viande ',
+        climat:['tropic','europe','polaire']
     },
+
     {
         tag:'chamel',
         type:'animal',
@@ -118,10 +119,11 @@ let data = [
         buildCost:30000,
         upgrade:[0,20000,35000,60000],
         name:'Chameau',
-        desc:'Tout est bon dans le chameau',
-        info:'',
-        climat:['aride']
+        desc:'BLEUBLEU',
+        info:'les chameaux ont une grande capacité à puiser dans leurs réserves d\'énergie lorsque les ressources alimentaires se font rare. Une aubaine face au réchauffement climatique actuel et aux périodes de sécheresse dont l\'élevage européen fait face.',
+        climat:['desert']
     },
+    
 
 
 
