@@ -318,7 +318,7 @@ class Menu extends Phaser.Scene {
             if(!i.unlock) this.sells[i.tag].setAlpha(0.4);
             this.sells[i.tag].on('pointerdown', function(){
                 if(i.unlock && this.batOverlap.type == 'animal' && this.batOverlap.level > 0 && !this.batOverlap.dead && this.batOverlap.qt > 50) {
-                    //this.europeScene.sell(this.batOverlap, i);
+                    this.europeScene.sell(this.batOverlap, i);
                     for(let i of getByType('sell')) {
                         this.sells[i.tag].setVisible(false);
                     }
@@ -389,6 +389,7 @@ class Menu extends Phaser.Scene {
         this.build = this.add.image(115, 35, "builder").setScale(0.1).setInteractive();
         this.build.on('pointerdown', function(){
             if((this.batOverlap.type == 'animal' || this.batOverlap.type == 'struct' || this.batOverlap.type == 'field') && this.batOverlap.level == 0 && this.batOverlap.tag == 'build') {
+                this.closeButtons();
                 if(this.batOverlap.type == 'animal') {
                     for(let i of getByType('animal')) {
                         this.animals[i.tag].setVisible(true);
@@ -419,6 +420,7 @@ class Menu extends Phaser.Scene {
         this.feed = this.add.image(180, 35, "meal").setScale(0.1).setInteractive();
         this.feed.on('pointerdown', function(){
             if(this.batOverlap.type == 'animal' && this.batOverlap.level > 0 && !this.batOverlap.dead && this.batOverlap.feed < 100) {
+                this.closeButtons();
                 for(let i of getByType('meal')) {
                     this.meals[i.tag].setVisible(true);
                 }
@@ -431,6 +433,7 @@ class Menu extends Phaser.Scene {
         this.sell = this.add.image(245, 35, "sellAnimal").setScale(0.1).setInteractive();
         this.sell.on('pointerdown', function(){
             if(this.batOverlap.type == 'animal' && this.batOverlap.level > 0 && !this.batOverlap.dead && this.batOverlap.qt > 50) {
+                this.closeButtons();
                 for(let i of getByType('sell')) {
                     this.sells[i.tag].setVisible(true);
                 }
@@ -443,6 +446,7 @@ class Menu extends Phaser.Scene {
         this.planter = this.add.image(50, 90, "planter").setScale(0.1).setInteractive();
         this.planter.on('pointerdown', function(){
             if(this.batOverlap.type == 'field' && !this.batOverlap.plant && this.batOverlap.level == 1 && (this.batOverlap.tag == 'labor' || this.batOverlap.tag == 'water')) {
+                this.closeButtons();
                 for(let i of getByType('plant')) {
                     this.plants[i.tag].setVisible(true);
                 }
@@ -478,6 +482,7 @@ class Menu extends Phaser.Scene {
         this.health = this.add.image(180, 90, "health").setScale(0.1).setInteractive();
         this.health.on('pointerdown', function(){
             if(this.batOverlap.level == 1 && this.batOverlap.type == 'field' && this.batOverlap.weeds > 0) {
+                this.closeButtons();
                 for(let i of getByType('health')) {
                     this.luttes[i.tag].setVisible(true);
                 }
@@ -490,6 +495,7 @@ class Menu extends Phaser.Scene {
         this.fertility = this.add.image(245, 90, "fertility").setScale(0.1).setInteractive();
         this.fertility.on('pointerdown', function(){
             if(this.batOverlap.type == 'field' && !this.batOverlap.plant && this.batOverlap.level == 1 && (this.batOverlap.tag == 'labor' || this.batOverlap.tag == 'water') && this.batOverlap.fertility < 100) {
+                this.closeButtons();
                 for(let i of getByType('fertility')) {
                     this.engrais[i.tag].setVisible(true);
                 }
@@ -783,6 +789,34 @@ class Menu extends Phaser.Scene {
     }
 
 
-    close
+    closeButtons(){
+        for(let i of getByType('health')) {
+            this.luttes[i.tag].setVisible(false);
+        }
+        for(let i of getByType('fertility')) {
+            this.engrais[i.tag].setVisible(false);
+        }
+        for(let i of getByType('sell')) {
+            this.sells[i.tag].setVisible(false);
+        }
+        for(let i of getByType('meal')) {
+            this.meals[i.tag].setVisible(false);
+        }
+        for(let i of getByType('plant')) {
+            this.plants[i.tag].setVisible(false);
+        }
+        for(let i of getByType('animal')) {
+            this.animals[i.tag].setVisible(false);
+        }
+        for(let i of getByType('struct')) {
+            this.structs[i.tag].setVisible(false);
+        }
+        for(let i of getByType('field')) {
+            this.fields[i.tag].setVisible(false);
+        }
+        for(let i of getByType('destroy')) {
+            this.bull[i.tag].setVisible(false);
+        }
+    }
 
 }

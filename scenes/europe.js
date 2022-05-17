@@ -27,6 +27,7 @@ class Europe extends Phaser.Scene {
         this.timerDeadanimal = 0;
         this.timerMeal = 0;
         this.timerHunger = 0;
+        this.timerBirth = 0;
 
         this.climat = 'europe';
 
@@ -482,6 +483,13 @@ class Europe extends Phaser.Scene {
             this.timerMeal = 0 - Phaser.Math.Between(0, 400);
         }
 
+        this.timerBirth++;
+        if (this.timerBirth == 1000) {
+            console.log('Check birth');
+            this.birth();
+            this.timerBirth = 0 - Phaser.Math.Between(0, 400);
+        }
+
         if (this.timer % 60 == 0) {
             let moneyPerSec = 0;
             for (let i in this.data.values) {
@@ -719,11 +727,13 @@ class Europe extends Phaser.Scene {
                 this.images[bat.key - 1]['plant'].destroy();
 
 
-                let textMoney = this.add.text(bat.x, bat.y, '+'+moneyWin+'$', { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
+                let textMoney = this.add.text(bat.x, bat.y, '+'+moneyWin, { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
+                let moneyButton = this.add.image(textMoney.x + textMoney.width / 1.5, textMoney.y, 'dollar').setScale(0.08).setOrigin(0,0.5);
                 let textHunger = this.add.text(bat.x, textMoney.y + textMoney.height*0.8, hungerWin, { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
                 let hungerButton = this.add.image(textHunger.x + textHunger.width / 1.5, textHunger.y, 'hunger-care').setScale(0.08).setOrigin(0,0.5);
                 setTimeout(() => {
                     textMoney.destroy();
+                    moneyButton.destroy();
                     textHunger.destroy();
                     hungerButton.destroy();
                 }, 2000);
@@ -890,9 +900,70 @@ class Europe extends Phaser.Scene {
                                 }, 2000);
                             }, 5000);
                         }
+                        else if(bat.feed < 25) {
+                            console.log('Hunger animal !', bat);
+
+                            this.updateJauge('animalCare', -4);
+
+                            let textAnimal = this.add.text(bat.x, bat.y, '-4', { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
+                            let animalButton = this.add.image(textAnimal.x + textAnimal.width / 1.5, textAnimal.y, 'animal-care').setScale(0.08).setOrigin(0,0.5);
+                            setTimeout(() => {
+                                textAnimal.destroy();
+                                animalButton.destroy();
+                            }, 2000);
+                        }
                     }
                 }
             }
+        }
+    }
+
+    birth() {
+        for (let i in this.data.values) {
+            let bat = this.data.values[i];
+            if (bat.level > 0 && bat.type == 'animal' && !bat.dead && bat.feed > 50) {
+                if (bat.feed > 0) {
+                    if (Phaser.Math.Between(1, 10) <= 7) {
+                        bat.qt += 5;
+                        console.log('Birth animal !', bat);
+
+                        if(bat.qt > 100) bat.qt = 100;
+                    }
+                }
+            }
+        }
+    }
+
+    sell(bat, sell) {
+        console.log('Sell : ', bat);
+        if (bat.type == 'animal' && !bat.dead && bat.level > 0 && bat.qt > 50) {
+            bat.qt -= 30;
+            console.log('Selled !', bat);
+
+            let moneyWin = sell.money*30;
+
+            this.registry.set('money', this.registry.get('money') + moneyWin);
+            this.updateJauge('hunger', sell.hunger);
+            this.updateJauge('animalCare', sell.care);
+
+
+            let textMoney = this.add.text(bat.x, bat.y, '+'+moneyWin, { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
+            let moneyButton = this.add.image(textMoney.x + textMoney.width / 1.5, textMoney.y, 'dollar').setScale(0.08).setOrigin(0,0.5);
+            
+            let textAnimal = this.add.text(bat.x, textMoney.y + textMoney.height*0.8, sell.care.toString(), { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
+            let animalButton = this.add.image(textAnimal.x + textAnimal.width / 1.5, textAnimal.y, 'animal-care').setScale(0.08).setOrigin(0,0.5);
+
+            let texthunger = this.add.text(bat.x, textAnimal.y + textAnimal.height*0.8, sell.hunger.toString(), { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
+            let hungerButton = this.add.image(texthunger.x + texthunger.width / 1.5, texthunger.y, 'hunger-care').setScale(0.08).setOrigin(0,0.5);
+            console.log(textAnimal);
+            setTimeout(() => {
+                textMoney.destroy();
+                moneyButton.destroy();
+                textAnimal.destroy();
+                animalButton.destroy();
+                texthunger.destroy();
+                hungerButton.destroy();
+            }, 2000);
         }
     }
 

@@ -425,7 +425,7 @@ let data = [
         prix:10000
     },
     {
-        tag:'physique',
+        tag:'lutte_physique',
         type:'health',
         typeName:'Protection des cultures',
         name:' physique',
@@ -477,7 +477,7 @@ let data = [
         prix:10000
     },
     {
-        tag:'biologic',
+        tag:'lutte_bio',
         type:'health',
         typeName:'Protection des cultures',
         name:'biologique',
@@ -490,7 +490,7 @@ let data = [
         prix:10000
     },
     {
-        tag:'biopesticid',
+        tag:'biopesticides',
         type:'health',
         typeName:'Protection des cultures',
         name:'Biopesticides',
@@ -571,6 +571,7 @@ let data = [
         unlockPrice:10000,
         money:100,
         care:-10,
+        hunger:20,
         prix:10000
     },
     {
@@ -584,6 +585,7 @@ let data = [
         unlockPrice:10000,
         money:100,
         care:-10,
+        hunger:20,
         prix:10000
     },
     {
@@ -596,7 +598,8 @@ let data = [
         unlock:false,
         unlockPrice:10000,
         money:100,
-        care:-10,
+        care:0,
+        hunger:20,
         prix:10000
     },
 ];

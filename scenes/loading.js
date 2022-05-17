@@ -152,27 +152,6 @@ class Loading extends Phaser.Scene {
 
 
         //Chargement ds icones de recherche
-        this.load.image('fumier-search', 'assets/search/fumier.png');
-        this.load.image('compost-search', 'assets/search/compost.png');
-        this.load.image('vert-search', 'assets/search/vert.png');
-        this.load.image('engrais-search', 'assets/search/engrais.png');
-
-        this.load.image('lutte_chimique-search', 'assets/search/lutte_chimique.png');
-        this.load.image('physique-search', 'assets/search/lutte_physique.png');
-        this.load.image('drone-search', 'assets/search/drone.png');
-        this.load.image('drone2-search', 'assets/search/drone2.png');
-        this.load.image('humain-search', 'assets/search/humain.png');
-        this.load.image('biologic-search', 'assets/search/lutte_bio.png');
-        this.load.image('biopesticid-search', 'assets/search/biopesticides.png');
-
-        this.load.image('fourrages-search', 'assets/search/fourrages.png');
-        this.load.image('grains-search', 'assets/search/grains.png');
-        this.load.image('ration-search', 'assets/search/ration.png');
-        this.load.image('indus-search', 'assets/search/indus.png');
-        
-        this.load.image('barbare-search', 'assets/search/barbare.png');
-        this.load.image('propre-search', 'assets/search/propre.png');
-        this.load.image('rituel-search', 'assets/search/rituel.png');
 
         //Boutton des engrais
         this.load.image('fertility-search', 'assets/search/fertility.png');
