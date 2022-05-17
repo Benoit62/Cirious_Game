@@ -78,7 +78,7 @@ class Europe extends Phaser.Scene {
             scale: 0.5,
             ref: {},
             dead:false,
-            feed:80,
+            feed:60,
             qt:100
         });
 
@@ -976,6 +976,10 @@ class Europe extends Phaser.Scene {
                                 textAnimal.destroy();
                                 animalButton.destroy();
                             }, 2000);
+
+                            if(bat.feed < 25) {
+                                this.menuScene.seedyAdvice();
+                            }
                         }
                     }
                 }
@@ -986,7 +990,7 @@ class Europe extends Phaser.Scene {
     birth() {
         for (let i in this.data.values) {
             let bat = this.data.values[i];
-            if (bat.level > 0 && bat.type == 'animal' && !bat.dead && bat.feed > 50) {
+            if (bat.level > 0 && bat.type == 'animal' && !bat.dead && bat.feed > 35) {
                 if (bat.feed > 0) {
                     if (Phaser.Math.Between(1, 10) <= 7) {
                         bat.qt += 5;
@@ -994,9 +998,9 @@ class Europe extends Phaser.Scene {
 
                         if(bat.qt > 100) bat.qt = 100;
                         if(bat.qt <= 100) this.images[bat.key - 1].setFrame((bat.level - 1));
-                        if(bat.qt <= 75) this.images[bat.key - 1].setFrame((bat.level - 1) + 4 * bat.ref.lvlMax);
-                        if(bat.qt <= 50) this.images[bat.key - 1].setFrame((bat.level - 1) + 2 * bat.ref.lvlMax);
-                        if(bat.qt <= 25) this.images[bat.key - 1].setFrame((bat.level - 1) + 3 * bat.ref.lvlMax);
+                        if(bat.qt < 75) this.images[bat.key - 1].setFrame((bat.level - 1) + 4 * bat.ref.lvlMax);
+                        if(bat.qt < 50) this.images[bat.key - 1].setFrame((bat.level - 1) + 2 * bat.ref.lvlMax);
+                        if(bat.qt < 25) this.images[bat.key - 1].setFrame((bat.level - 1) + 3 * bat.ref.lvlMax);
                     }
                 }
             }
@@ -1010,9 +1014,9 @@ class Europe extends Phaser.Scene {
             console.log('Selled !', bat);
 
             if(bat.qt <= 100) this.images[bat.key - 1].setFrame((bat.level - 1));
-            if(bat.qt <= 75) this.images[bat.key - 1].setFrame((bat.level - 1) + 4 * bat.ref.lvlMax);
-            if(bat.qt <= 50) this.images[bat.key - 1].setFrame((bat.level - 1) + 2 * bat.ref.lvlMax);
-            if(bat.qt <= 25) this.images[bat.key - 1].setFrame((bat.level - 1) + 3 * bat.ref.lvlMax);
+            if(bat.qt < 75) this.images[bat.key - 1].setFrame((bat.level - 1) + 4 * bat.ref.lvlMax);
+            if(bat.qt < 50) this.images[bat.key - 1].setFrame((bat.level - 1) + 2 * bat.ref.lvlMax);
+            if(bat.qt < 25) this.images[bat.key - 1].setFrame((bat.level - 1) + 3 * bat.ref.lvlMax);
 
             let moneyWin = sell.money*30;
 
