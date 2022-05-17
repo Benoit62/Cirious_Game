@@ -283,6 +283,14 @@ class Loading extends Phaser.Scene {
             desc:'Faut bien nourrir les vaches',
             info:''
         });
+        this.registry.set('search4', {
+            type:'search',
+            tag:'sell',
+            name:'Abbattages des animaux',
+            children:getByType('sell'),
+            desc:'Miam la viande',
+            info:''
+        });
     }
 
 }

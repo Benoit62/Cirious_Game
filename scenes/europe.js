@@ -811,9 +811,14 @@ class Europe extends Phaser.Scene {
                         //Si il vend le batiment des animaux pas mort il gagne un bonus bien-être
                         this.updateJauge('animalCare', 20);
 
-                        let textAnimal = this.add.text(bat.x, bat.y, '+20', { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
+                        let textMoney = this.add.text(bat.x, bat.y, '-'+destroyRef.cost, { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
+                        let moneyButton = this.add.image(textMoney.x + textMoney.width / 1.5, textMoney.y, 'dollar').setScale(0.08).setOrigin(0,0.5);
+
+                        let textAnimal = this.add.text(bat.x, textMoney.y + textMoney.height*0.8, +20, { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
                         let animalButton = this.add.image(textAnimal.x + textAnimal.width / 1.5, textAnimal.y, 'animal-care').setScale(0.08).setOrigin(0,0.5);
                         setTimeout(() => {
+                            textMoney.destroy();
+                            moneyButton.destroy();
                             textAnimal.destroy();
                             animalButton.destroy();
                         }, 2000);
@@ -841,10 +846,26 @@ class Europe extends Phaser.Scene {
                     bat.weeds = 0;
                     bat.plant = false;
                     bat.fertility = 100;
+
+                    let textMoney = this.add.text(bat.x, bat.y, '-'+destroyRef.cost, { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
+                    let moneyButton = this.add.image(textMoney.x + textMoney.width / 1.5, textMoney.y, 'dollar').setScale(0.08).setOrigin(0,0.5);
+
+                    setTimeout(() => {
+                        textMoney.destroy();
+                        moneyButton.destroy();
+                    }, 2000);
                 }
                 if(bat.type == 'struct') {
                     this.images[bat.key - 1].destroy();
                     this.images[bat.key - 1] = this.physics.add.image(bat.x, bat.y, 'build').setScale(bat.scale);
+
+                    let textMoney = this.add.text(bat.x, bat.y, '-'+destroyRef.cost, { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
+                    let moneyButton = this.add.image(textMoney.x + textMoney.width / 1.5, textMoney.y, 'dollar').setScale(0.08).setOrigin(0,0.5);
+
+                    setTimeout(() => {
+                        textMoney.destroy();
+                        moneyButton.destroy();
+                    }, 2000);
                 }
 
                 this.physics.add.overlap(this.player, this.images[bat.key - 1], this.overlapBat, null, this);
@@ -949,7 +970,7 @@ class Europe extends Phaser.Scene {
 
             let textMoney = this.add.text(bat.x, bat.y, '+'+moneyWin, { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
             let moneyButton = this.add.image(textMoney.x + textMoney.width / 1.5, textMoney.y, 'dollar').setScale(0.08).setOrigin(0,0.5);
-            
+
             let textAnimal = this.add.text(bat.x, textMoney.y + textMoney.height*0.8, sell.care.toString(), { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
             let animalButton = this.add.image(textAnimal.x + textAnimal.width / 1.5, textAnimal.y, 'animal-care').setScale(0.08).setOrigin(0,0.5);
 
@@ -1019,3 +1040,30 @@ class Europe extends Phaser.Scene {
         blocked.none = !blocked.left && !blocked.right && !blocked.up && !blocked.down;
     }
 }
+
+
+
+
+// texte des gains
+/*let textMoney = this.add.text(bat.x, bat.y, '+'+moneyWin, { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
+let moneyButton = this.add.image(textMoney.x + textMoney.width / 1.5, textMoney.y, 'dollar').setScale(0.08).setOrigin(0,0.5);
+
+let textAnimal = this.add.text(bat.x, textMoney.y + textMoney.height*0.8, sell.care.toString(), { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
+let animalButton = this.add.image(textAnimal.x + textAnimal.width / 1.5, textAnimal.y, 'animal-care').setScale(0.08).setOrigin(0,0.5);
+
+let texthunger = this.add.text(bat.x, textAnimal.y + textAnimal.height*0.8, sell.hunger.toString(), { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
+let hungerButton = this.add.image(texthunger.x + texthunger.width / 1.5, texthunger.y, 'hunger-care').setScale(0.08).setOrigin(0,0.5);
+
+let textEcology = this.add.text(bat.x,  texthunger.y + texthunger.height*0.8, engrais.ecology.toString(), { lineSpacing:10, fontSize:40, color:'#ffffff' }).setOrigin(0.5, 0.5);
+let ecologyButton = this.add.image(textEcology.x + textEcology.width / 1.5, textEcology.y, 'ecology-care').setScale(0.08).setOrigin(0,0.5);
+
+setTimeout(() => {
+    textMoney.destroy();
+    moneyButton.destroy();
+    textAnimal.destroy();
+    animalButton.destroy();
+    texthunger.destroy();
+    hungerButton.destroy();
+    textEcology.destroy();
+    ecologyButton.destroy();
+}, 2000);*/
