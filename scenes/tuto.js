@@ -253,12 +253,21 @@ class Tuto extends Phaser.Scene {
         this.introBat = false;
         this.introField = false;
         this.introM = false;
+        this.finish = false;
+
+        this.input.keyboard.on('keydown_ESC', function () {
+            this.musique.destroy();
+            this.scene.stop('tutoScene');
+            this.scene.stop('headerScene');
+            this.scene.stop('menuScene');
+            this.scene.start('mapScene');
+        }, this);
     }
 
     update() {
         //console.log(this.data.list.bat3.plant)
-        if (this.data.list.bat3.plant) {
-            console.log('ok');
+        if (this.data.list.bat3.plant && this.finish) {
+            //console.log('ok');
             this.musique.destroy();
             this.scene.stop('tutoScene');
             this.scene.stop('headerScene');
@@ -266,7 +275,7 @@ class Tuto extends Phaser.Scene {
             this.scene.start('mapScene');
         }
         else {
-            console.log('not ok');
+            //console.log('not ok');
         }
         //console.log(this.data.list);
         //console.log(this.player.x);
@@ -277,9 +286,11 @@ class Tuto extends Phaser.Scene {
             this.introContext = true;
             This.dialBox = this.add.graphics();
             This.dialBox.fillStyle(0x70402a, 1);
-            This.dialBox.fillRect(80, window.innerHeight - 75, window.innerWidth, 150);
+            This.dialBox.fillRect(0, window.innerHeight - 100, window.innerWidth, 150);
             This.dialBox.setScrollFactor(0);
-            This.seedi = this.add.sprite(230, 400, 'seedySlt').setScale(0.2);
+
+            //Seedy => 531x398 scale 0.3 => 265.5x199
+            This.seedi = this.add.sprite(310, window.innerHeight - 100 - 199, 'seedySlt').setScale(0.5);
             This.seedi.setScrollFactor(0);
             This.seedi.setOrigin(0, 0);
             var content = [
@@ -292,22 +303,33 @@ class Tuto extends Phaser.Scene {
                 ""
             ];
             This.text0 = this.make.text({
-                x: 300,
-                y: 525,
+                x: 310,
+                y: innerHeight - 95,
                 text: 'Seedy :',
+                style:{
+                    fontSize:25,
+                    color:'#f00020',
+                    fontFamily:'Arial',
+                }
             });
             This.text0.setTint(0xff0000);
             This.text1 = this.make.text({
-                x: 300,
-                y: 550,
+                x: 310,
+                y: innerHeight - 60,
                 text: '',
-                font: '64px Arial'
+                style:{
+                    fontSize:20,
+                    fontFamily:'Arial',
+                }
             });
             This.text2 = this.make.text({
-                x: 300,
-                y: 575,
+                x: 310,
+                y: innerHeight - 30,
                 text: '',
-                font: '128px Arial'
+                style:{
+                    fontSize:20,
+                    fontFamily:'Arial',
+                }
             });
             This.text0.setScrollFactor(0);
             This.text1.setScrollFactor(0);
@@ -320,7 +342,7 @@ class Tuto extends Phaser.Scene {
             var bool = false;
             function loop() {
                 setTimeout(function () {
-                    wait = 50;
+                    wait = 30;
                     if (bool) {
                         This.text0.setText(content[i]);
                         This.text1.setText('');
@@ -398,20 +420,33 @@ class Tuto extends Phaser.Scene {
                     "",
                 ];
                 This.text0 = this.make.text({
-                    x: 300,
-                    y: 525,
+                    x: 310,
+                    y: innerHeight - 95,
                     text: 'Seedy :',
+                    style:{
+                        fontSize:25,
+                        color:'#f00020',
+                        fontFamily:'Arial',
+                    }
                 });
                 This.text0.setTint(0xff0000);
                 This.text1 = this.make.text({
-                    x: 300,
-                    y: 550,
+                    x: 310,
+                    y: innerHeight - 60,
                     text: '',
+                    style:{
+                        fontSize:20,
+                        fontFamily:'Arial',
+                    }
                 });
                 This.text2 = this.make.text({
-                    x: 300,
-                    y: 575,
+                    x: 310,
+                    y: innerHeight - 30,
                     text: '',
+                    style:{
+                        fontSize:20,
+                        fontFamily:'Arial',
+                    }
                 });
                 This.text0.setScrollFactor(0);
                 This.text1.setScrollFactor(0);
@@ -424,7 +459,7 @@ class Tuto extends Phaser.Scene {
                 var bool = false;
                 function loop() {
                     setTimeout(function () {
-                        wait = 50;
+                        wait = 30;
                         if (bool) {
                             This.text0.setText(content[i]);
                             This.text1.setText('');
@@ -513,20 +548,33 @@ class Tuto extends Phaser.Scene {
                     ""
                 ];
                 This.text0 = this.make.text({
-                    x: 300,
-                    y: 525,
+                    x: 310,
+                    y: innerHeight - 95,
                     text: 'Seedy :',
+                    style:{
+                        fontSize:25,
+                        color:'#f00020',
+                        fontFamily:'Arial',
+                    }
                 });
                 This.text0.setTint(0xff0000);
                 This.text1 = this.make.text({
-                    x: 300,
-                    y: 550,
+                    x: 310,
+                    y: innerHeight - 60,
                     text: '',
+                    style:{
+                        fontSize:20,
+                        fontFamily:'Arial',
+                    }
                 });
                 This.text2 = this.make.text({
-                    x: 300,
-                    y: 575,
+                    x: 310,
+                    y: innerHeight - 30,
                     text: '',
+                    style:{
+                        fontSize:20,
+                        fontFamily:'Arial',
+                    }
                 });
                 This.text0.setScrollFactor(0);
                 This.text1.setScrollFactor(0);
@@ -539,7 +587,7 @@ class Tuto extends Phaser.Scene {
                 var bool = false;
                 function loop() {
                     setTimeout(function () {
-                        wait = 50;
+                        wait = 30;
                         if (bool) {
                             This.text0.setText(content[i]);
                             This.text1.setText('');
@@ -624,20 +672,33 @@ class Tuto extends Phaser.Scene {
                     ""
                 ];
                 This.text0 = this.make.text({
-                    x: 300,
-                    y: 525,
+                    x: 310,
+                    y: innerHeight - 95,
                     text: 'Seedy :',
+                    style:{
+                        fontSize:25,
+                        color:'#f00020',
+                        fontFamily:'Arial',
+                    }
                 });
                 This.text0.setTint(0xff0000);
                 This.text1 = this.make.text({
-                    x: 300,
-                    y: 550,
+                    x: 310,
+                    y: innerHeight - 60,
                     text: '',
+                    style:{
+                        fontSize:20,
+                        fontFamily:'Arial',
+                    }
                 });
                 This.text2 = this.make.text({
-                    x: 300,
-                    y: 575,
+                    x: 310,
+                    y: innerHeight - 30,
                     text: '',
+                    style:{
+                        fontSize:20,
+                        fontFamily:'Arial',
+                    }
                 });
                 This.text0.setScrollFactor(0);
                 This.text1.setScrollFactor(0);
@@ -650,7 +711,7 @@ class Tuto extends Phaser.Scene {
                 var bool = false;
                 function loop() {
                     setTimeout(function () {
-                        wait = 50;
+                        wait = 30;
                         if (bool) {
                             This.text0.setText(content[i]);
                             This.text1.setText('');
@@ -728,20 +789,33 @@ class Tuto extends Phaser.Scene {
                         ""
                     ];
                     This.text0 = this.make.text({
-                        x: 300,
-                        y: 525,
+                        x: 310,
+                        y: innerHeight - 95,
                         text: 'Seedy :',
+                        style:{
+                            fontSize:25,
+                            color:'#f00020',
+                            fontFamily:'Arial',
+                        }
                     });
                     This.text0.setTint(0xff0000);
                     This.text1 = this.make.text({
-                        x: 300,
-                        y: 550,
+                        x: 310,
+                        y: innerHeight - 60,
                         text: '',
+                        style:{
+                            fontSize:20,
+                            fontFamily:'Arial',
+                        }
                     });
                     This.text2 = this.make.text({
-                        x: 300,
-                        y: 575,
+                        x: 310,
+                        y: innerHeight - 30,
                         text: '',
+                        style:{
+                            fontSize:20,
+                            fontFamily:'Arial',
+                        }
                     });
                     This.text0.setScrollFactor(0);
                     This.text1.setScrollFactor(0);
@@ -754,7 +828,7 @@ class Tuto extends Phaser.Scene {
                     var bool = false;
                     function loop() {
                         setTimeout(function () {
-                            wait = 50;
+                            wait = 30;
                             if (bool) {
                                 This.text0.setText(content[i]);
                                 This.text1.setText('');
@@ -796,6 +870,7 @@ class Tuto extends Phaser.Scene {
                                     This.text1.destroy();
                                     This.text2.destroy();
                                     This.seedi.destroy();
+                                    this.finish = true;
                                 }, 1000);
                             }
                         }, wait)
