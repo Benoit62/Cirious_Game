@@ -180,7 +180,7 @@ let data = [
         costPlant:5000,
         money:10000,
         maxGrow:3,
-        name:'Carrotes',
+        name:'Carottes',
         desc:'Légumes',
         info:'La carotte est cultivée pratiquement partout sur la planète, et elle fait partie des légumes les plus consommés sur la planète . Aujourd’hui, on dénombre pas moins de 500 variétés de carottes dans le monde',
         climat:['europe', 'polaire' , 'desert']

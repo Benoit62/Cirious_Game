@@ -820,18 +820,20 @@ class Europe extends Phaser.Scene {
                         this.menuScene.seedyAdvice('lowWinPlant', bat, bat.seed);
                     }
     
-                    if(bat.fertility < 25 && bat.fertility >= 20) {
+                    setTimeout(() => {
+                        if(bat.fertility < 25 && bat.fertility >= 20) {
                         
-                        this.menuScene.seedyAdvice('lowFertility', bat.fertility);
-                    }
-                    if(bat.fertility < 10) {
-                        
-                        this.menuScene.seedyAdvice('veryLowFertility', bat.fertility);
-                    }
-                    if(bat.fertility == 0) {
-                        
-                        this.menuScene.seedyAdvice('noFertility', bat.fertility);
-                    }
+                            this.menuScene.seedyAdvice('lowFertility', bat.fertility);
+                        }
+                        if(bat.fertility < 10) {
+                            
+                            this.menuScene.seedyAdvice('veryLowFertility', bat.fertility);
+                        }
+                        if(bat.fertility == 0) {
+                            
+                            this.menuScene.seedyAdvice('noFertility', bat.fertility);
+                        }
+                    }, 10000);
                 }, 5000);
 
                 bat.seed = {};

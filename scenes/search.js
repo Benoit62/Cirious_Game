@@ -7,6 +7,8 @@ class Search extends Phaser.Scene {
         this.search = [];
 
         this.icones = [];
+
+        this.circles = [];
     }
 
     create ()
@@ -24,14 +26,16 @@ class Search extends Phaser.Scene {
         let nbCategori = this.search.length +1;
         let compt1 = 0;
         this.search.forEach(function(value){
-            let catIcone = this.add.image((innerWidth/nbCategori)*(compt1+1), innerHeight/6, value.tag+'-search').setScale(0.2).setInteractive();
+            let catIcone = this.add.image((innerWidth/nbCategori)*(compt1+1), 75, value.tag+'-search').setScale(0.2).setInteractive();
+            let shineCatIcon = this.add.image((innerWidth/nbCategori)*(compt1+1), 75, 'circle').setScale(0.2).setVisible(false);
+            this.circles.push(shineCatIcon);
             let compt2 = 0;
             let nbUnderCat = value.children.length+1;
             let arraySearchIcone = [];
             value.children.forEach(function(value) {
-                let searchIcone = this.add.image((innerWidth/nbUnderCat)*(compt2+1), 3*(innerHeight/6), value.tag+'-search').setScale(0.15).setInteractive().setVisible(false);
+                let searchIcone = this.add.image((innerWidth/nbUnderCat)*(compt2+1), catIcone.y + 130, value.tag+'-search').setScale(0.15).setInteractive().setVisible(false);
                 if(!value.unlock) {
-                    searchIcone.setAlpha(0.3);
+                    searchIcone.setAlpha(0.5);
                 }
                 searchIcone.on('pointerdown', function(){
                     if(this.registry.get('money') > value.unlockPrice) {
@@ -56,10 +60,14 @@ class Search extends Phaser.Scene {
                     img.visible = false;
                 }, this);
                 arraySearchIcone.forEach(img => img.visible = !img.visible);
+                this.circles.forEach(function(img){
+                    img.visible = false;
+                }, this);
+                shineCatIcon.visible = !shineCatIcon.visible;
             }, this);
 
             catIcone.on('pointermove', function(){
-                this.displayText(value.name, 0, 0, 0, value.desc, value.info)
+                this.displayText(value.name, 0, 0, 0, value.desc, value.info);
             }, this);
             compt1++;
         }, this);
@@ -164,8 +172,7 @@ class Search extends Phaser.Scene {
         });
 
 
-        let close = this.add.text(50, 50, 'X', { fontSize: 70, fontColor:'#ffffff'}).setOrigin(0.5,0.5).setInteractive();
-        close.on('pointerdown', function(){
+        let close = this.add.text(50, 50, 'X', { fontSize: 70, fontColor:'#ffffff', fontFamily:'monospace'}).setOrigin(0.5,0.5).setInteractive().on('pointerdown', function(){
             this.scene.stop('searchScene');
             this.scene.setVisible(true, this.registry.get('climat')+'Scene');            
             this.scene.launch('headerScene');
@@ -180,7 +187,7 @@ class Search extends Phaser.Scene {
         
     }
 
-    displayText(nom, prix, loss, apport, desc, info){
+    displayText(type, ref){
         this.nom.setText(nom);
         if(prix != 0) this.prix.setText(prix+' €');
         if(loss != 0) this.loss.setText('Perte '+loss);
