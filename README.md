@@ -32,4 +32,4 @@ To redeploy this project you will need to
  *  Start MySQL
  *  Create a database named iseed and import [this](https://pastebin.com/Zg0XBmrN) as a .sql file
  *  Start XAMPP
- *  Now you can launch the Cirious_game folder and enjoy the game
+ *  Now you can launch the Cirious_Game folder in your localhost and enjoy the game
