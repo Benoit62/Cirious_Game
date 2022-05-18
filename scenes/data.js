@@ -18,7 +18,8 @@ let data = [
         money:[0,2,5,10],
         name:'Reservoir d\'eau',
         desc:'Le tank pemret de recuperer et stocker de l\'eau qui pourra être utilisé pour les cultures',
-        info:''
+        info:'',
+        product:'water_product'
     },
     {
         tag:'solaire',
@@ -29,7 +30,8 @@ let data = [
         money:[0,5,15,30],
         name:'Panneau solaire',
         desc:'Le panneau solaire permet de produire d\'électricité',
-        info:''
+        info:'',
+        product:'electricity_product'
     },
     {
         tag:'methane',
@@ -40,7 +42,8 @@ let data = [
         money:[0,5,15,30],
         name:'Usine de méthanisation',
         desc:'Produit du méthane, grosse source d\'énergie',
-        info:''
+        info:'',
+        product:'methane_product'
     },
 
 
@@ -611,6 +614,39 @@ let data = [
         care:0,
         hunger:20,
         prix:10000
+    },
+
+
+    // Amélioration  structures
+    {
+        tag:'rain',
+        type:'water_product',
+        typeName:'Gestion de l\'eau',
+        name:'Récupération de l\'eau de pluie',
+        desc:'',
+        info:'',
+        unlock:false,
+        unlockPrice:10000
+    },
+    {
+        tag:'hybrid',
+        type:'electricity_product',
+        typeName:'Gestion de l\'eléctricité',
+        name:'Tracteur hybride',
+        desc:'',
+        info:'',
+        unlock:false,
+        unlockPrice:10000
+    },
+    {
+        tag:'h2',
+        type:'methane_product',
+        typeName:'Gestion du méthane',
+        name:'Frabrication de dihydrogène',
+        desc:'',
+        info:'',
+        unlock:false,
+        unlockPrice:10000
     },
 ];
 

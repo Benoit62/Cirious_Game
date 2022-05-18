@@ -184,6 +184,16 @@ class Loading extends Phaser.Scene {
             this.load.image(i.tag+'-search', 'assets/search/'+i.tag+'.png');
         }
 
+        //Boutton des abbatages
+        this.load.image('struct-search', 'assets/search/struct.png');
+        for(let i of getByType('struct')) {
+            this.load.image(i.tag+'-search', 'assets/search/'+i.tag+'.png');
+            for(let j of getByType(i.product)) {
+                this.load.image(j.tag+'-search', 'assets/search/'+j.tag+'.png');
+                
+            }
+        }
+
 
     }
     create() {
@@ -293,6 +303,14 @@ class Loading extends Phaser.Scene {
             name:'Abbattages des animaux',
             children:getByType('sell'),
             desc:'Miam la viande',
+            info:''
+        });
+        this.registry.set('search5', {
+            type:'search',
+            tag:'struct',
+            name:'Gestion des ressources',
+            children:getByType('struct'),
+            desc:'Valorisez les ressources que vous produisez en recherchant de nouvelles technologies',
             info:''
         });
     }

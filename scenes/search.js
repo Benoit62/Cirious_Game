@@ -8,7 +8,11 @@ class Search extends Phaser.Scene {
 
         this.icones = [];
 
+        this.icones2 = [];
+
         this.circles = [];
+
+        this.circles2 = [];
     }
 
     create ()
@@ -32,24 +36,73 @@ class Search extends Phaser.Scene {
             let compt2 = 0;
             let nbUnderCat = value.children.length+1;
             let arraySearchIcone = [];
+            let arraySearchIcone2 = [];
             value.children.forEach(function(value) {
-                let searchIcone = this.add.image((innerWidth/nbUnderCat)*(compt2+1), catIcone.y + 130, value.tag+'-search').setScale(0.15).setInteractive().setVisible(false);
-                if(!value.unlock) {
-                    searchIcone.setAlpha(0.5);
+                let searchIcone;
+                if(value.type != 'struct') {
+                    searchIcone = this.add.image((innerWidth/nbUnderCat)*(compt2+1), catIcone.y + 130, value.tag+'-search').setScale(0.15).setInteractive().setVisible(false);
+                    if(!value.unlock) {
+                        searchIcone.setAlpha(0.5);
+                    }
+                    searchIcone.on('pointerdown', function(){
+                        if(this.registry.get('money') > value.unlockPrice) {
+                            value.unlock = true;
+                            searchIcone.setAlpha(1);
+                            this.registry.set('money', this.registry.get('money') - value.unlockPrice);
+                        }
+                        else {
+                            this.errorText('Vous n\'avez pas assez d\'argent');
+                        }
+                    }, this);
+                    searchIcone.on('pointermove', function(){
+                        this.displayText('unlock', value);
+                    }, this);
                 }
-                searchIcone.on('pointerdown', function(){
-                    if(this.registry.get('money') > value.unlockPrice) {
-                        value.unlock = true;
-                        searchIcone.setAlpha(1);
-                        this.registry.set('money', this.registry.get('money') - value.unlockPrice);
-                    }
-                    else {
-                        this.errorText('Vous n\'avez pas assez d\'argent');
-                    }
-                }, this);
-                searchIcone.on('pointermove', function(){
-                    this.displayText('unlock', value);
-                }, this);
+                else {
+                    searchIcone = this.add.image((innerWidth/nbUnderCat)*(compt2+1), catIcone.y + 110, value.tag+'-search').setScale(0.16).setInteractive().setVisible(false);
+                    let shineCatIcon2 = this.add.image((innerWidth/nbUnderCat)*(compt2+1), catIcone.y + 110, 'circle').setScale(0.16).setVisible(false);
+                    this.circles2.push(shineCatIcon2);
+                    let compt3 = 0;
+                    let tmpArrayStructIcones = [];
+                    let nbUnderCat2 = getByType(value.product).length+1;
+                    getByType(value.product).forEach(function(value) {
+                        let productIcone = this.add.image((innerWidth/nbUnderCat2)*(compt3+1), searchIcone.y + 100, value.tag+'-search').setScale(0.14).setInteractive().setVisible(false);
+                        if(!value.unlock) {
+                            productIcone.setAlpha(0.5);
+                        }
+                        productIcone.on('pointerdown', function(){
+                            if(this.registry.get('money') > value.unlockPrice) {
+                                value.unlock = true;
+                                productIcone.setAlpha(1);
+                                this.registry.set('money', this.registry.get('money') - value.unlockPrice);
+                            }
+                            else {
+                                this.errorText('Vous n\'avez pas assez d\'argent');
+                            }
+                        }, this);
+                        productIcone.on('pointermove', function(){
+                            this.displayText('unlock', value);
+                        }, this);
+
+
+                        compt3++;
+                        arraySearchIcone2.push(productIcone);
+                        tmpArrayStructIcones.push(productIcone);
+                        this.icones2.push(productIcone);
+                    }, this);
+                    searchIcone.on('pointerdown', function(){
+                        console.log(arraySearchIcone2);
+                        arraySearchIcone2.forEach(img => img.visible = false);
+                        tmpArrayStructIcones.forEach(img => img.visible = !img.visible);
+                        this.circles2.forEach(function(img){
+                            img.visible = false;
+                        }, this);
+                        shineCatIcon2.visible = !shineCatIcon2.visible;
+                    }, this);
+                    searchIcone.on('pointermove', function(){
+                        this.displayText('struct', value);
+                    }, this);
+                }
                 compt2++;
                 arraySearchIcone.push(searchIcone);
                 this.icones.push(searchIcone);
@@ -59,8 +112,15 @@ class Search extends Phaser.Scene {
                 this.icones.forEach(function(img){
                     img.visible = false;
                 }, this);
+                this.icones2.forEach(function(img){
+                    img.visible = false;
+                }, this);
                 arraySearchIcone.forEach(img => img.visible = !img.visible);
                 this.circles.forEach(function(img){
+                    img.visible = false;
+                }, this);
+                if(arraySearchIcone2.length) arraySearchIcone2.forEach(img => img.visible = false);
+                this.circles2.forEach(function(img){
                     img.visible = false;
                 }, this);
                 shineCatIcon.visible = !shineCatIcon.visible;
@@ -194,51 +254,6 @@ class Search extends Phaser.Scene {
         console.log(type, ref);
         switch(type) {
             case 'unlock':
-                switch(ref.tag) {
-                    case 'fertility':
-                        this.nom.setText(ref.name).setOrigin(0.5,0);
-                        this.desc.setText(ref.desc);
-                        this.info.setText(ref.info);
-                        this.barre.clear();
-                        this.barre.fillStyle(0xffffff, 1);
-                        this.barre.fillRect(window.innerWidth/2 - 1, window.innerHeight - 155, 2, 200);
-                        break;
-                    case 'health':
-                        this.nom.setText(ref.name).setOrigin(0.5,0);
-                        this.desc.setText(ref.desc);
-                        this.info.setText(ref.info);
-                        this.barre.clear();
-                        this.barre.fillStyle(0xffffff, 1);
-                        this.barre.fillRect(window.innerWidth/2 - 1, window.innerHeight - 155, 2, 200);
-                        break;
-                    case 'meal':
-                        this.nom.setText(ref.name).setOrigin(0.5,0);
-                        this.desc.setText(ref.desc);
-                        this.info.setText(ref.info);
-                        this.barre.clear();
-                        this.barre.fillStyle(0xffffff, 1);
-                        this.barre.fillRect(window.innerWidth/2 - 1, window.innerHeight - 155, 2, 200);
-                        break;
-                    case 'sell':
-                        this.nom.setText(ref.name).setOrigin(0.5,0);
-                        this.desc.setText(ref.desc);
-                        this.info.setText(ref.info);
-                        this.barre.clear();
-                        this.barre.fillStyle(0xffffff, 1);
-                        this.barre.fillRect(window.innerWidth/2 - 1, window.innerHeight - 155, 2, 200);
-                        break;
-                    default:
-                        this.nom.setText('');
-                        this.prix.setText('');
-                        this.loss.setText('');
-                        this.apport.setText('');
-                        this.desc.setText('');
-                        this.info.setText('');
-                        this.barre.clear();
-                        break;
-                }
-                break;
-            case 'cat':
                 switch(ref.type) {
                     case 'fertility':
                         this.nom.setText(ref.name).setOrigin(0.5,0);
@@ -265,8 +280,8 @@ class Search extends Phaser.Scene {
                     case 'meal':
                         this.nom.setText(ref.name).setOrigin(0.5,0);
                         this.prix.setText('Prix : '+ref.unlockPrice).setOrigin(0.5,0);
-                        this.loss.setText('Ecologie : '+ref.ecology).setOrigin(0.5,0);
-                        this.apport.setText('Santé : '+ref.health).setOrigin(0.5,0);
+                        this.loss.setText('Bien-être animal : '+ref.care).setOrigin(0.5,0);
+                        this.apport.setText('Nourriture : '+ref.feed).setOrigin(0.5,0);
                         this.desc.setText(ref.desc);
                         this.info.setText(ref.info);
                         this.barre.clear();
@@ -276,8 +291,172 @@ class Search extends Phaser.Scene {
                     case 'sell':
                         this.nom.setText(ref.name).setOrigin(0.5,0);
                         this.prix.setText('Prix : '+ref.unlockPrice).setOrigin(0.5,0);
-                        this.loss.setText('Ecologie : '+ref.ecology).setOrigin(0.5,0);
-                        this.apport.setText('Santé : '+ref.health).setOrigin(0.5,0);
+                        this.loss.setText('Bien-être animal : '+ref.care).setOrigin(0.5,0);
+                        this.apport.setText('Faim dans le monde : '+ref.hunger).setOrigin(0.5,0);
+                        this.desc.setText(ref.desc);
+                        this.info.setText(ref.info);
+                        this.barre.clear();
+                        this.barre.fillStyle(0xffffff, 1);
+                        this.barre.fillRect(window.innerWidth/2 - 1, window.innerHeight - 155, 2, 200);
+                        break;
+                    case 'water_product':
+                        this.nom.setText(ref.name).setOrigin(0.5,0);
+                        this.prix.setText('Prix : '+ref.unlockPrice).setOrigin(0.5,0);
+                        //this.loss.setText('Bien-être animal : '+ref.care).setOrigin(0.5,0);
+                        //this.apport.setText('Faim dans le monde : '+ref.hunger).setOrigin(0.5,0);
+                        this.loss.setText('');
+                        this.apport.setText('');
+                        this.desc.setText(ref.desc);
+                        this.info.setText(ref.info);
+                        this.barre.clear();
+                        this.barre.fillStyle(0xffffff, 1);
+                        this.barre.fillRect(window.innerWidth/2 - 1, window.innerHeight - 155, 2, 200);
+                        break;
+                    case 'electricity_product':
+                        this.nom.setText(ref.name).setOrigin(0.5,0);
+                        this.prix.setText('Prix : '+ref.unlockPrice).setOrigin(0.5,0);
+                        //this.loss.setText('Bien-être animal : '+ref.care).setOrigin(0.5,0);
+                        //this.apport.setText('Faim dans le monde : '+ref.hunger).setOrigin(0.5,0);
+                        this.loss.setText('');
+                        this.apport.setText('');
+                        this.desc.setText(ref.desc);
+                        this.info.setText(ref.info);
+                        this.barre.clear();
+                        this.barre.fillStyle(0xffffff, 1);
+                        this.barre.fillRect(window.innerWidth/2 - 1, window.innerHeight - 155, 2, 200);
+                        break;
+                    case 'methane_product':
+                        this.nom.setText(ref.name).setOrigin(0.5,0);
+                        this.prix.setText('Prix : '+ref.unlockPrice).setOrigin(0.5,0);
+                        //this.loss.setText('Bien-être animal : '+ref.care).setOrigin(0.5,0);
+                        //this.apport.setText('Faim dans le monde : '+ref.hunger).setOrigin(0.5,0);
+                        this.loss.setText('');
+                        this.apport.setText('');
+                        this.desc.setText(ref.desc);
+                        this.info.setText(ref.info);
+                        this.barre.clear();
+                        this.barre.fillStyle(0xffffff, 1);
+                        this.barre.fillRect(window.innerWidth/2 - 1, window.innerHeight - 155, 2, 200);
+                        break;
+                    default:
+                        this.nom.setText('');
+                        this.prix.setText('');
+                        this.loss.setText('');
+                        this.apport.setText('');
+                        this.desc.setText('');
+                        this.info.setText('');
+                        this.barre.clear();
+                        break;
+                }
+                break;
+            case 'cat':
+                switch(ref.tag) {
+                    case 'fertility':
+                        this.nom.setText(ref.name).setOrigin(0.5,0);
+                        this.prix.setText('');
+                        this.loss.setText('');
+                        this.apport.setText('');
+                        this.desc.setText(ref.desc);
+                        this.info.setText(ref.info);
+                        this.barre.clear();
+                        this.barre.fillStyle(0xffffff, 1);
+                        this.barre.fillRect(window.innerWidth/2 - 1, window.innerHeight - 155, 2, 200);
+                        break;
+                    case 'health':
+                        this.nom.setText(ref.name).setOrigin(0.5,0);
+                        this.prix.setText('');
+                        this.loss.setText('');
+                        this.apport.setText('');
+                        this.desc.setText(ref.desc);
+                        this.info.setText(ref.info);
+                        this.barre.clear();
+                        this.barre.fillStyle(0xffffff, 1);
+                        this.barre.fillRect(window.innerWidth/2 - 1, window.innerHeight - 155, 2, 200);
+                        break;
+                    case 'meal':
+                        this.nom.setText(ref.name).setOrigin(0.5,0);
+                        this.prix.setText('');
+                        this.loss.setText('');
+                        this.apport.setText('');
+                        this.desc.setText(ref.desc);
+                        this.info.setText(ref.info);
+                        this.barre.clear();
+                        this.barre.fillStyle(0xffffff, 1);
+                        this.barre.fillRect(window.innerWidth/2 - 1, window.innerHeight - 155, 2, 200);
+                        break;
+                    case 'sell':
+                        this.nom.setText(ref.name).setOrigin(0.5,0);
+                        this.prix.setText('');
+                        this.loss.setText('');
+                        this.apport.setText('');
+                        this.desc.setText(ref.desc);
+                        this.info.setText(ref.info);
+                        this.barre.clear();
+                        this.barre.fillStyle(0xffffff, 1);
+                        this.barre.fillRect(window.innerWidth/2 - 1, window.innerHeight - 155, 2, 200);
+                        break;
+                    case 'struct':
+                        this.nom.setText(ref.name).setOrigin(0.5,0);
+                        this.prix.setText('');
+                        this.loss.setText('');
+                        this.apport.setText('');
+                        this.desc.setText(ref.desc);
+                        this.info.setText(ref.info);
+                        this.barre.clear();
+                        this.barre.fillStyle(0xffffff, 1);
+                        this.barre.fillRect(window.innerWidth/2 - 1, window.innerHeight - 155, 2, 200);
+                        break;
+                    default:
+                        this.nom.setText('');
+                        this.prix.setText('');
+                        this.loss.setText('');
+                        this.apport.setText('');
+                        this.desc.setText('');
+                        this.info.setText('');
+                        this.barre.clear();
+                        break;
+                }
+                break;
+            case 'struct':
+                switch(ref.tag) {
+                    case 'tank':
+                        this.nom.setText(ref.name).setOrigin(0.5,0);
+                        this.prix.setText('');
+                        this.loss.setText('');
+                        this.apport.setText('');
+                        this.desc.setText(ref.desc);
+                        this.info.setText(ref.info);
+                        this.barre.clear();
+                        this.barre.fillStyle(0xffffff, 1);
+                        this.barre.fillRect(window.innerWidth/2 - 1, window.innerHeight - 155, 2, 200);
+                        break;
+                    case 'solaire':
+                        this.nom.setText(ref.name).setOrigin(0.5,0);
+                        this.prix.setText('');
+                        this.loss.setText('');
+                        this.apport.setText('');
+                        this.desc.setText(ref.desc);
+                        this.info.setText(ref.info);
+                        this.barre.clear();
+                        this.barre.fillStyle(0xffffff, 1);
+                        this.barre.fillRect(window.innerWidth/2 - 1, window.innerHeight - 155, 2, 200);
+                        break;
+                    case 'methane':
+                        this.nom.setText(ref.name).setOrigin(0.5,0);
+                        this.prix.setText('');
+                        this.loss.setText('');
+                        this.apport.setText('');
+                        this.desc.setText(ref.desc);
+                        this.info.setText(ref.info);
+                        this.barre.clear();
+                        this.barre.fillStyle(0xffffff, 1);
+                        this.barre.fillRect(window.innerWidth/2 - 1, window.innerHeight - 155, 2, 200);
+                        break;
+                    case 'sell':
+                        this.nom.setText(ref.name).setOrigin(0.5,0);
+                        this.prix.setText('');
+                        this.loss.setText('');
+                        this.apport.setText('');
                         this.desc.setText(ref.desc);
                         this.info.setText(ref.info);
                         this.barre.clear();
@@ -304,6 +483,7 @@ class Search extends Phaser.Scene {
                 this.info.setText('');
                 this.barre.clear();
                 break; 
+            
         }
         
     }
