@@ -517,25 +517,25 @@ class Menu extends Phaser.Scene {
 
 
         //Progress bars
-        let widthBar = 200;
-        let heightBar = 30;
+        this.widthBar = 200;
+        this.heightBar = 30;
         this.progressBox1 = this.add.graphics();
         this.progressBox1.fillStyle(0xffffff, 0.2);
-        this.progressBox1.fillRect(10, this.textBat.y + this.textBat.height, widthBar, heightBar);
+        this.progressBox1.fillRect(10, this.textBat.y + this.textBat.height, this.widthBar, this.heightBar);
         this.progressBox1.setVisible(false);
         
         this.progressBar1 = this.add.graphics();
         this.progressBar1.fillStyle(0xf00020, 1);
-        this.progressBar1.fillRect(10, this.progressBar1.y, 0, heightBar);
+        this.progressBar1.fillRect(10, this.progressBox1.y, 0, this.heightBar);
         this.progressBar1.setVisible(false);
 
         this.percentText1 = this.make.text({
-            x: 10 + widthBar/2,
-            y: progressBox1.y,
+            x: 10 + this.widthBar/2,
+            y: this.progressBox1.y,
             text: '',
             style: {
                 font: '18px monospace',
-                fill: '#ffffff'
+                fill: '#000000'
             }
         });
         this.percentText1.setOrigin(0.5, 0.5);
@@ -728,7 +728,8 @@ class Menu extends Phaser.Scene {
                 this.progressBox1.setVisible(true);
                 this.progressBar1.clear();
                 this.progressBar1.fillStyle(0xffc0cb, 1);
-                this.progressBar1.fillRect(w3, h3, this.batOverlap.feed, heightBar);
+                this.progressBar1.fillRect(10, this.progressBox1.y, this.batOverlap.feed, this.heightBar);
+                console.log(this.progressBox1);
                 this.progressBar1.setVisible(true);
                 this.percentText1.setText(this.batOverlap.feed+'%');
                 this.percentText1.setVisible(true);
