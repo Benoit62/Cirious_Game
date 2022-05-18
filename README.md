@@ -4,6 +4,7 @@
 
 *   [Contributors](#contributors)
 *   [Purpose](#purpose)
+*   [Redeployment](#redeployment)
 
 <a name="about"></a>
 ## Contributors
@@ -22,3 +23,13 @@ The main purpose of this project is to sensibilize the population about the farm
 *   animal well-beeing
 *   ecology
 *   feeding the planet
+
+## Redeployment
+To redeploy this project you will need to
+ *  [Download XAMPP](https://www.apachefriends.org/fr/index.html)
+ *  Clone this repository in your htdocs folder
+ *  Launch XAMPP 
+ *  Start MySQL
+ *  Create a database named iseed and import [this](https://pastebin.com/Zg0XBmrN) as a .sql file
+ *  Start XAMPP
+ *  Now you can launch the Cirious_game folder and enjoy the game
