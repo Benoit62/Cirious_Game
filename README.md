@@ -26,7 +26,7 @@ The main purpose of this project is to sensibilize the population about the farm
 
 ## Redeployment
 To redeploy this project you will need to
- *  [Download XAMPP](https://www.apachefriends.org/fr/index.html)
+ *  Download [XAMPP](https://www.apachefriends.org/fr/index.html)
  *  Clone this repository in your htdocs folder
  *  Launch XAMPP 
  *  Start MySQL
