@@ -3,32 +3,22 @@
 ## Table of Contents
 
 *   [Contributors](#contributors)
-*   [Codemap](#codemap)
-*   [Installation](#installation)
-*   [Quick Start](#quick-start)
-*   [Documentation](#documentation)
-*   [Contributing](#contributing)
-*   [License](#license)
+*   [Purpose](#purpose)
 
 <a name="about"></a>
 ## Contributors
 
-This project was made in cooperation by :
+This project was made by :
 
-The suite contains:
-
-*   
-*   Bocquet Corentin
 *   [Ahounou Matthieu](https://github.com/Geud)
-*   A linear programming solver;
-*   Wrappers around commercial and other open source solvers, including mixed
-    integer solvers;
-*   Bin packing and knapsack algorithms;
-*   Algorithms for the Traveling Salesman Problem and Vehicle Routing Problem;
-*   Graph algorithms (shortest paths, min cost flow, max flow, linear sum
-    assignment).
+*   [Bocquet Corentin](https://github.com/Corentin-Bocquet)
+*   [Letey Hugo](https://github.com/hletey)
+*   [Sellier Mathieu](https://github.com/Sellierm)
+*   [Wattigne Benoît](https://https://github.com/Benoit62)
 
-We wrote OR-Tools in C++, but also provide wrappers in Python, C# and
-Java.
+## Purpose
 
-## Codemap
+The main purpose of this project is to sensibilize the population about the farm of the future, by guiding them through a game were he has to fill 3 progress bar wich reprensents:
+*   animal well-beeing
+*   ecology
+*   feeding the planet
