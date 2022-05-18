@@ -56,13 +56,16 @@ class Tuto extends Phaser.Scene {
             key: 1,
             x: 115,
             y: 160,
-            dataType: 'bat',
+            dataType:'bat',
             type: 'animal',
-            typeName: 'Elevage',
-            level: 1,
+            typeName:'Elevage',
+            level: 2,
             tag: 'cow',
             scale: 0.5,
-            ref: {}
+            ref: {},
+            dead:false,
+            feed:80,
+            qt:90
         });
 
 
@@ -84,9 +87,9 @@ class Tuto extends Phaser.Scene {
             key: 3,
             x: -368,
             y: -128,
-            dataType: 'bat',
+            dataType:'bat',
             type: 'field',
-            typeName: 'Culture',
+            typeName:'Culture',
             level: 1,
             tag: 'labor',
             scale: 0.5,
@@ -95,10 +98,10 @@ class Tuto extends Phaser.Scene {
             seed: {},
             oldseed: [getByTag('carrot')[0]],
             grow: 0,
-            dead: false,
-            fertility: 90,
-            weeds: 0,
-            maxWeeds: 3
+            dead:false,
+            fertility:65,
+            weeds:3,
+            maxWeeds:10
         });
 
 

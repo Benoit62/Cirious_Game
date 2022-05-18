@@ -26,7 +26,7 @@ class Cinematique1 extends Phaser.Scene {
         Phaser.Display.Align.In.Center(this.background, this.add.zone(window.innerWidth / 2, window.innerHeight / 2, window.innerWidth, window.innerHeight));
 
 
-        this.Mathieu = this.add.sprite(window.innerWidth / 4, window.innerHeight / 2, 'sellier', 9);
+        this.Mathieu = this.add.sprite(window.innerWidth / 4, window.innerHeight - 105/2, 'sellier', 9);
 
         this.anims.create({
             key: 'walkE',
@@ -41,7 +41,7 @@ class Cinematique1 extends Phaser.Scene {
             repeat: -1
         });
 
-        this.eddison = this.add.sprite(window.innerWidth + 64, window.innerHeight / 2).setScale(2);
+        this.eddison = this.add.sprite(window.innerWidth + 64, window.innerHeight - 42).setScale(2);
         this.eddison.play('walkE');
         this.bool = false;
         this.nextS = false;
@@ -68,7 +68,7 @@ class Cinematique1 extends Phaser.Scene {
 
         if (this.eddison.x <= 480 && this.walkE) {
             this.eddison.destroy();
-            this.eddison = this.add.sprite(480, window.innerHeight / 2, 'scient', 4).setScale(2);
+            this.eddison = this.add.sprite(480, window.innerHeight - 42, 'scient', 4).setScale(2);
             this.walkE = false;
             var dialBox = this.add.graphics();
             dialBox.fillStyle(0x70402a, 1);
@@ -193,7 +193,7 @@ class Cinematique1 extends Phaser.Scene {
         //console.log(this.walkS)
 
         if (this.nextS && !this.walkS) {
-            this.eddison = this.add.sprite(480, window.innerHeight / 2, 'scient', 0).setScale(2);
+            this.eddison = this.add.sprite(480, window.innerHeight - 42, 'scient', 0).setScale(2);
             this.Mathieu.play('walkL');
             this.Mathieu.y += 10;
             this.walkS = true;
@@ -239,15 +239,15 @@ class Cinematique2 extends Phaser.Scene {
         Phaser.Display.Align.In.Center(this.background, this.add.zone(window.innerWidth / 2, window.innerHeight / 2, window.innerWidth, window.innerHeight));
 
 
-
-        this.seedi = this.add.sprite(200, window.innerHeight / 2, 'seedySlt', 2).setScale(0.2);//assigner a la variable differentes 
+        // Taille 531x398 => 106.2x
+        this.seedi = this.add.image(200, window.innerHeight - 106.2/2, 'seedySlt').setScale(0.2);//assigner a la variable differentes 
         this.anims.create({
             key: 'walkL',
             frames: this.anims.generateFrameNumbers('sellier', { frames: [5, 4] }),
             frameRate: 10,
             repeat: -1
         });
-        this.Mathieu = this.add.sprite(window.innerWidth + 60, window.innerHeight / 2);
+        this.Mathieu = this.add.sprite(window.innerWidth + 60, window.innerHeight - 100/2);
         this.Mathieu.play('walkL');
         this.bool = false;
         this.nextS = false;
@@ -282,7 +282,7 @@ class Cinematique2 extends Phaser.Scene {
         if (this.Mathieu.x <= 300 && !this.nextS && this.walk) {
             this.walk = false;
             this.Mathieu.destroy();
-            this.Mathieu = this.add.sprite(300, window.innerHeight / 2, 'sellier', 3);
+            this.Mathieu = this.add.sprite(300, window.innerHeight - 100/2, 'sellier', 3);
             var dialBox = this.add.graphics();
             dialBox.fillStyle(0x70402a, 1);
             dialBox.fillRect(0, 0, window.innerWidth, 130);

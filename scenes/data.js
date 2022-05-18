@@ -619,10 +619,43 @@ let data = [
 
     // Amélioration  structures
     {
+        tag:'pompe',
+        type:'water_product',
+        typeName:'Gestion de l\'eau',
+        name:'Pompage dans la rivière',
+        desc:'',
+        info:'',
+        unlock:false,
+        unlockPrice:10000,
+        need:''
+    },
+    {
+        tag:'forage',
+        type:'water_product',
+        typeName:'Gestion de l\'eau',
+        name:'Forage',
+        desc:'',
+        info:'',
+        unlock:false,
+        unlockPrice:10000,
+        need:''
+    },
+    {
         tag:'rain',
         type:'water_product',
         typeName:'Gestion de l\'eau',
         name:'Récupération de l\'eau de pluie',
+        desc:'',
+        info:'',
+        unlock:false,
+        unlockPrice:10000,
+        need:''
+    },
+    {
+        tag:'light',
+        type:'electricity_product',
+        typeName:'Gestion de l\'eléctricité',
+        name:'Eclairage de la ferme',
         desc:'',
         info:'',
         unlock:false,
@@ -636,7 +669,8 @@ let data = [
         desc:'',
         info:'',
         unlock:false,
-        unlockPrice:10000
+        unlockPrice:10000,
+        need:'light'
     },
     {
         tag:'h2',
@@ -646,7 +680,19 @@ let data = [
         desc:'',
         info:'',
         unlock:false,
-        unlockPrice:10000
+        unlockPrice:10000,
+        need:''
+    },
+    {
+        tag:'h2tractor',
+        type:'methane_product',
+        typeName:'Gestion du méthane',
+        name:'Tracteur à hydrogène',
+        desc:'',
+        info:'',
+        unlock:false,
+        unlockPrice:10000,
+        need:'h2'
     },
 ];
 

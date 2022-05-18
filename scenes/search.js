@@ -72,9 +72,14 @@ class Search extends Phaser.Scene {
                         }
                         productIcone.on('pointerdown', function(){
                             if(this.registry.get('money') > value.unlockPrice) {
-                                value.unlock = true;
-                                productIcone.setAlpha(1);
-                                this.registry.set('money', this.registry.get('money') - value.unlockPrice);
+                                if(value.need == '' || getByTag(value.need)[0].unlock) {
+                                    value.unlock = true;
+                                    productIcone.setAlpha(1);
+                                    this.registry.set('money', this.registry.get('money') - value.unlockPrice);
+                                }
+                                else {
+                                    this.errorText('Vous devez d\'abord débloquer la recherche : '+getByTag(value.need)[0].name);
+                                }
                             }
                             else {
                                 this.errorText('Vous n\'avez pas assez d\'argent');
