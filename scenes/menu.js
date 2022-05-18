@@ -555,6 +555,23 @@ class Menu extends Phaser.Scene {
             }
         });
         this.percentText2.setOrigin(0.5, 0.5).setVisible(false);
+
+        this.imgProgressBar3 = this.add.image(0, 0, 'white').setVisible(false).setScale(0.08);
+        this.progressBox3 = this.add.graphics();
+        this.progressBox3.setVisible(false);
+        this.progressBar3 = this.add.graphics();
+        this.progressBar3.setVisible(false);
+        this.percentText3 = this.make.text({
+            x: 80 + this.widthBar/2,
+            y: 0,
+            text: '',
+            style: {
+                fontSize:15,
+                fontFamily:'monospace',
+                color: '#ffffff'
+            }
+        });
+        this.percentText3.setOrigin(0.5, 0.5).setVisible(false);
     }
 
     update() {
@@ -797,18 +814,49 @@ class Menu extends Phaser.Scene {
                 this.percentText2.setText('Santé : '+tmphealtbar+'%');
                 this.percentText2.setY(this.textBat.y + this.textBat.height + this.heightBar*1.4 + this.heightBar/2);
                 this.percentText2.setVisible(true);
+
+                if(this.batOverlap.plant) {
+                    this.imgProgressBar3.destroy();
+                    this.imgProgressBar3 = this.add.image(40, this.textBat.y + this.textBat.height + this.textBat.height + this.heightBar*1.4 + this.heightBar/2, 'plant').setVisible(true).setScale(0.08);
+                    this.progressBox3.clear();
+                    this.progressBox3.fillStyle(0xffffff, 0.2);
+                    this.progressBox3.fillRect(80, this.textBat.y + this.textBat.height + this.heightBar*1.4, this.widthBar, this.heightBar);
+                    this.progressBox3.setVisible(true);
+                    
+                    let tmpgrowbar = (this.batOverlap.seed.maxGrow*100)/this.batOverlap.grow;
+
+                    this.progressBar3.clear();
+                    this.progressBar3.fillStyle(0x008000, 1);
+                    this.progressBar3.fillRect(80, this.textBat.y + this.textBat.height + this.textBat.height + this.heightBar*1.4, tmpgrowbar, this.heightBar);
+                    this.progressBar3.setVisible(true);
+                    this.percentText3.setText('Croissance : '+tmpgrowbar+'%');
+                    this.percentText3.setY(this.textBat.y + this.textBat.height + this.textBat.height + this.heightBar*1.4 + this.heightBar/2);
+                    this.percentText3.setVisible(true);
+                }
+                else {
+                    this.imgProgressBar3.setVisible(false);
+                    this.progressBox3.setVisible(false);
+                    this.progressBar3.setVisible(false);
+                    this.percentText3.setVisible(false);
+                    this.percentText3.setText('');
+                }
             }
             else {
                 this.imgProgressBar1.setVisible(false);
                 this.imgProgressBar2.setVisible(false);
+                this.imgProgressBar3.setVisible(false);
                 this.progressBox1.setVisible(false);
                 this.progressBox2.setVisible(false);
+                this.progressBox3.setVisible(false);
                 this.progressBar1.setVisible(false);
                 this.progressBar2.setVisible(false);
+                this.progressBar3.setVisible(false);
                 this.percentText1.setVisible(false);
                 this.percentText2.setVisible(false);
+                this.percentText3.setVisible(false);
                 this.percentText1.setText('');
                 this.percentText2.setText('');
+                this.percentText3.setText('');
             }
         }
         
