@@ -48,7 +48,7 @@ class Search extends Phaser.Scene {
                     }
                 }, this);
                 searchIcone.on('pointermove', function(){
-                    this.displayText(value.name, value.unlockPrice, value.health || value.fertility, value.ecology, value.desc, value.info)
+                    this.displayText(value.type, value);
                 }, this);
                 compt2++;
                 arraySearchIcone.push(searchIcone);
@@ -76,7 +76,7 @@ class Search extends Phaser.Scene {
 
         this.nom = this.make.text({
             x: 10,
-            y: innerHeight - 4*(innerHeight - 4*(innerHeight/6))/5,
+            y: window.innerHeight - 200,
             text: '',
             style:{
                 color:'#f00020',
@@ -92,7 +92,7 @@ class Search extends Phaser.Scene {
 
         this.prix = this.make.text({
             x: 10,
-            y: innerHeight - 3*(innerHeight - 4*(innerHeight/6))/5,
+            y: innerHeight - 150,
             text: '',
             style:{
                 color:'#0080ff',
@@ -108,7 +108,7 @@ class Search extends Phaser.Scene {
 
         this.loss = this.make.text({
             x: 10,
-            y: innerHeight - 2*(innerHeight - 4*(innerHeight/6))/5,
+            y: innerHeight -100,
             text: '',
             style:{
                 color:'#0080ff',
@@ -125,7 +125,7 @@ class Search extends Phaser.Scene {
 
         this.apport = this.make.text({
             x: 10,
-            y: innerHeight - 1*(innerHeight - 4*(innerHeight/6))/5,
+            y: innerHeight - 50,
             text: '',
             style:{
                 color:'#0080ff',
@@ -142,7 +142,7 @@ class Search extends Phaser.Scene {
 
         this.desc = this.make.text({
             x: innerWidth/5,
-            y: 4*(innerHeight/6),
+            y: window.innerHeight - 200,
             text: '',
             style:{
                 fontSize:17,
@@ -157,7 +157,7 @@ class Search extends Phaser.Scene {
 
         this.info = this.make.text({
             x: 3*(innerWidth/5) + 10,
-            y: 4*(innerHeight/6),
+            y: window.innerHeight - 200,
             text: '',
             style:{
                 color:'#7f00ff ',
@@ -188,12 +188,24 @@ class Search extends Phaser.Scene {
     }
 
     displayText(type, ref){
-        this.nom.setText(nom);
-        if(prix != 0) this.prix.setText(prix+' €');
-        if(loss != 0) this.loss.setText('Perte '+loss);
-        if(apport != 0) this.apport.setText('Apport '+apport);
-        this.desc.setText(desc);
-        this.info.setText(info);
+        switch(type) {
+            case 'fertility':
+                this.nom.setText(ref.name);
+                this.prix.setText('Prix : '+ref.unlockPrice);
+                this.loss.setText('Ecologie : '+ref.ecology);
+                this.apport.setText('Fertilité : '+ref.fertility);
+                this.desc.setText(ref.desc);
+                this.info.setText(ref.info);
+                break;
+            default:
+                this.nom.setText('');
+                this.prix.setText('');
+                this.loss.setText('');
+                this.apport.setText('');
+                this.desc.setText('');
+                this.info.setText('');
+                break;
+        }
     }
 
 
