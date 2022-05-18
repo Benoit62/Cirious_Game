@@ -150,6 +150,7 @@ class Loading extends Phaser.Scene {
         this.load.image("savoirPlus", "assets/menu/savoirPlus.png"); 
         this.load.image('error', 'assets/menu/error.png');
         this.load.image('seedyAdvice', 'assets/menu/seedyAdvice.png');
+        this.load.image('white', 'assets/menu/white.png');
 
 
 
@@ -251,9 +252,7 @@ class Loading extends Phaser.Scene {
                 progressBox.destroy();
                 loadingText.destroy();
                 percentText.destroy();
-                this.scene.start('playScene');
-                /*this.scene.launch('menuScene');
-                this.scene.launch('headerScene');*/
+                this.scene.start('mapScene');
             } else {
                 progress(i);
                 i+=10;
