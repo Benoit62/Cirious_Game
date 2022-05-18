@@ -75,40 +75,40 @@ class Search extends Phaser.Scene {
 
 
         this.nom = this.make.text({
-            x: 10,
+            x: window.innerWidth/2,
+            y: window.innerHeight - 260,
+            text: '',
+            style:{
+                color:'#ffffff',
+                fontSize:30,
+                fontFamily:'monospace',
+                align:'center',
+                wordWrap:{
+                    width:window.innerWidth
+                },
+                lineSpacing:10
+            }
+        }).setOrigin(0.5,0);
+
+        this.prix = this.make.text({
+            x: window.innerWidth/4,
             y: window.innerHeight - 200,
             text: '',
             style:{
-                color:'#f00020',
-                fontSize:25,
-                fontFamily:'monospace',
-                align:'center',
-                wordWrap:{
-                    width:window.innerWidth/5 - 20
-                },
-                lineSpacing:10
-            }
-        });
-
-        this.prix = this.make.text({
-            x: 10,
-            y: innerHeight - 150,
-            text: '',
-            style:{
                 color:'#0080ff',
                 fontSize:25,
                 fontFamily:'monospace',
                 align:'center',
                 wordWrap:{
-                    width:window.innerWidth/5 - 20
+                    width:window.innerWidth/3
                 },
                 lineSpacing:10
             }
-        });
+        }).setOrigin(0.5,0);
 
         this.loss = this.make.text({
-            x: 10,
-            y: innerHeight -100,
+            x: 2*window.innerWidth/4,
+            y: window.innerHeight -200,
             text: '',
             style:{
                 color:'#0080ff',
@@ -116,16 +116,16 @@ class Search extends Phaser.Scene {
                 fontFamily:'monospace',
                 align:'center',
                 wordWrap:{
-                    width:window.innerWidth/5 - 20
+                    width:window.innerWidth/3
                 },
                 lineSpacing:10
             }
-        });
+        }).setOrigin(0.5,0);
 
 
         this.apport = this.make.text({
-            x: 10,
-            y: innerHeight - 50,
+            x: 3*window.innerWidth/4,
+            y: window.innerHeight - 200,
             text: '',
             style:{
                 color:'#0080ff',
@@ -133,39 +133,40 @@ class Search extends Phaser.Scene {
                 fontFamily:'monospace',
                 align:'center',
                 wordWrap:{
-                    width:window.innerWidth/5 - 20
+                    width:window.innerWidth/3
                 },
                 lineSpacing:10
             }
-        });
+        }).setOrigin(0.5,0);
 
 
         this.desc = this.make.text({
-            x: innerWidth/5,
-            y: window.innerHeight - 200,
+            x: 0,
+            y: window.innerHeight - 150,
             text: '',
             style:{
+                color:'#ffffff ',
                 fontSize:17,
                 fontFamily:'monospace',
                 align:'center',
                 wordWrap:{
-                    width:window.innerWidth/2.5
+                    width:window.innerWidth/2
                 },
                 lineSpacing:10
             }
         });
 
         this.info = this.make.text({
-            x: 3*(innerWidth/5) + 10,
-            y: window.innerHeight - 200,
+            x: window.innerWidth/2,
+            y: window.innerHeight - 150,
             text: '',
             style:{
-                color:'#7f00ff ',
+                color:'#ffffff ',
                 fontSize:17,
                 fontFamily:'monospace',
                 align:'center',
                 wordWrap:{
-                    width:window.innerWidth/2.5
+                    width:window.innerWidth/2
                 },
                 lineSpacing:10
             }
@@ -190,12 +191,12 @@ class Search extends Phaser.Scene {
     displayText(type, ref){
         switch(type) {
             case 'fertility':
-                this.nom.setText(ref.name);
-                this.prix.setText('Prix : '+ref.unlockPrice);
-                this.loss.setText('Ecologie : '+ref.ecology);
-                this.apport.setText('Fertilité : '+ref.fertility);
-                this.desc.setText(ref.desc);
-                this.info.setText(ref.info);
+                this.nom.setText(ref.name).setOrigin(0.5,0);
+                this.prix.setText('Prix : '+ref.unlockPrice).setOrigin(0.5,0);
+                this.loss.setText('Ecologie : '+ref.ecology).setOrigin(0.5,0);
+                this.apport.setText('Fertilité : '+ref.fertility).setOrigin(0.5,0);
+                this.desc.setText(ref.desc).setOrigin(0.5,0);
+                this.info.setText(ref.info).setOrigin(0.5,0);
                 break;
             default:
                 this.nom.setText('');
