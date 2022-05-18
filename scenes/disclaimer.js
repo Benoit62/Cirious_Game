@@ -16,7 +16,11 @@ class Disclaimer extends Phaser.Scene {
 
     create() {
         if(this.esc) {
-            this.scene.start('mapScene');
+            /*this.scene.start('mapScene');
+            this.scene.stop('disclaimerScene');*/
+            this.scene.start('tutoScene');
+            this.scene.launch('menuScene');
+            this.scene.launch('headerScene');
             this.scene.stop('disclaimerScene');
         }
         const txt = this.make.text({
@@ -41,6 +45,8 @@ class Disclaimer extends Phaser.Scene {
 
     start() {
         this.scene.start('tutoScene');
+        this.scene.launch('menuScene');
+        this.scene.launch('headerScene');
         this.scene.stop('disclaimerScene');
     }
 

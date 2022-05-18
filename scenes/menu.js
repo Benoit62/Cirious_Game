@@ -31,18 +31,7 @@ class Menu extends Phaser.Scene {
         this.circlePlanter;
         this.circleUpgrade;
 
-        this.batOverlap = {
-            key:0,
-            x:0,
-            y:0,
-            type:'',
-            level:0,
-            name:'',
-            scale:0,
-            money:0,
-            plant:'',
-        };
-
+        this.batOverlap;
 
         this.textBat;
         this.textInfo;
@@ -55,6 +44,17 @@ class Menu extends Phaser.Scene {
 
     create ()
     {
+        this.batOverlap = {
+            key:0,
+            x:0,
+            y:0,
+            type:'',
+            level:0,
+            name:'',
+            scale:0,
+            money:0,
+            plant:'',
+        };
         this.scene.bringToTop('menuScene');
         //this.scene.setVisible(false);
         this.gameScene = this.scene.get(this.registry.get('gameScene')+'Scene');
@@ -514,6 +514,31 @@ class Menu extends Phaser.Scene {
         this.circleFertility = this.add.image(this.fertility.x, this.fertility.y, "circle").setScale(0.1).setVisible(false);
         this.circleHealth = this.add.image(this.health.x, this.health.y, "circle").setScale(0.1).setVisible(false);
 
+
+
+        //Progress bars
+        let widthBar = 200;
+        let heightBar = 30;
+        this.progressBox1 = this.add.graphics();
+        this.progressBox1.fillStyle(0xffffff, 0.2);
+        this.progressBox1.fillRect(10, this.textBat.y + this.textBat.height, widthBar, heightBar);
+        this.progressBox1.setVisible(false);
+        
+        this.progressBar1 = this.add.graphics();
+        this.progressBar1.fillStyle(0xf00020, 1);
+        this.progressBar1.fillRect(10, this.progressBar1.y, 0, heightBar);
+        this.progressBar1.setVisible(false);
+
+        this.percentText1 = this.make.text({
+            x: 10 + widthBar/2,
+            y: progressBox1.y,
+            text: '',
+            style: {
+                font: '18px monospace',
+                fill: '#ffffff'
+            }
+        });
+        this.percentText1.setOrigin(0.5, 0.5);
     }
 
     update() {
@@ -699,27 +724,14 @@ class Menu extends Phaser.Scene {
             this.textBat.setText(tmpText);
 
             //Jauges d'informations
-            let widthBar = 200;
-            let heightBar = 30;
             if(this.batOverlap.type == 'animal') {
-                var progressBox1 = this.add.graphics();
-                progressBox1.fillStyle(0xffffff, 0.2);
-                progressBox1.fillRect(10, this.textBat.y + this.textBat.height, widthBar, heightBar);
-                
-                var progressBar1 = this.add.graphics();
-                progressBar1.fillStyle(0x0080ff, 1);
-                progressBar1.fillRect(progressBox1.x, progressBox1.y, this.batOverlap.feed, heightBar);
-
-                var percentText1 = this.make.text({
-                    x: this.textBat.x + widthBar/2,
-                    y: this.textBat.y + this.textBat.height,
-                    text: this.batOverlap.feed+'%',
-                    style: {
-                        font: '18px monospace',
-                        fill: '#ffffff'
-                    }
-                });
-                percentText1.setOrigin(0.5, 0.5);
+                this.progressBox1.setVisible(true);
+                this.progressBar1.clear();
+                this.progressBar1.fillStyle(0xffc0cb, 1);
+                this.progressBar1.fillRect(w3, h3, this.batOverlap.feed, heightBar);
+                this.progressBar1.setVisible(true);
+                this.percentText1.setText(this.batOverlap.feed+'%');
+                this.percentText1.setVisible(true);
             }
         }
         
