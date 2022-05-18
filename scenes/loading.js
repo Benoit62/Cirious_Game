@@ -36,12 +36,13 @@ class Loading extends Phaser.Scene {
         // Batiments ferme
         this.load.spritesheet('labor', 'assets/build/labor.png', { frameWidth: 288, frameHeight: 416 });
         this.load.spritesheet('water', 'assets/build/water.png', { frameWidth: 288, frameHeight: 416 });
-        this.load.spritesheet('tank', 'assets/build/tank.png', { frameWidth: 192, frameHeight: 192 });
-        this.load.spritesheet('solaire', 'assets/build/solaire.png', { frameWidth: 192, frameHeight: 192 });
         this.load.spritesheet('house', 'assets/build/house.png', { frameWidth: 384, frameHeight: 256 });
         this.load.spritesheet('river', 'assets/build/river.png', { frameWidth: 384, frameHeight: 256 });
         this.load.image('build', 'assets/build/build.png');
 
+        for(let i of getByType('struct')) {
+            this.load.spritesheet(i.tag, 'assets/build/'+i.tag+'.png', { frameWidth: 192, frameHeight: 192 });
+        }
 
 
         //Animaux

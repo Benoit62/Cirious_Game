@@ -48,7 +48,7 @@ class Search extends Phaser.Scene {
                     }
                 }, this);
                 searchIcone.on('pointermove', function(){
-                    this.displayText(value.type, value);
+                    this.displayText('unlock', value);
                 }, this);
                 compt2++;
                 arraySearchIcone.push(searchIcone);
@@ -67,7 +67,7 @@ class Search extends Phaser.Scene {
             }, this);
 
             catIcone.on('pointermove', function(){
-                this.displayText(value.name, 0, 0, 0, value.desc, value.info);
+                this.displayText('cat', value);
             }, this);
             compt1++;
         }, this);
@@ -80,7 +80,7 @@ class Search extends Phaser.Scene {
             text: '',
             style:{
                 color:'#ffffff',
-                fontSize:30,
+                fontSize:40,
                 fontFamily:'monospace',
                 align:'center',
                 wordWrap:{
@@ -141,8 +141,8 @@ class Search extends Phaser.Scene {
 
 
         this.desc = this.make.text({
-            x: 0,
-            y: window.innerHeight - 150,
+            x: 25,
+            y: window.innerHeight - 140,
             text: '',
             style:{
                 color:'#ffffff ',
@@ -150,15 +150,15 @@ class Search extends Phaser.Scene {
                 fontFamily:'monospace',
                 align:'center',
                 wordWrap:{
-                    width:window.innerWidth/2
+                    width:window.innerWidth/2 - 50
                 },
                 lineSpacing:10
             }
         });
 
         this.info = this.make.text({
-            x: window.innerWidth/2,
-            y: window.innerHeight - 150,
+            x: window.innerWidth/2 + 25,
+            y: window.innerHeight - 140,
             text: '',
             style:{
                 color:'#ffffff ',
@@ -166,11 +166,13 @@ class Search extends Phaser.Scene {
                 fontFamily:'monospace',
                 align:'center',
                 wordWrap:{
-                    width:window.innerWidth/2
+                    width:window.innerWidth/2 - 50
                 },
                 lineSpacing:10
             }
         });
+
+        this.barre = this.add.graphics();
 
 
         let close = this.add.text(50, 50, 'X', { fontSize: 70, fontColor:'#ffffff', fontFamily:'monospace'}).setOrigin(0.5,0.5).setInteractive().on('pointerdown', function(){
@@ -189,14 +191,109 @@ class Search extends Phaser.Scene {
     }
 
     displayText(type, ref){
+        console.log(type, ref);
         switch(type) {
-            case 'fertility':
-                this.nom.setText(ref.name).setOrigin(0.5,0);
-                this.prix.setText('Prix : '+ref.unlockPrice).setOrigin(0.5,0);
-                this.loss.setText('Ecologie : '+ref.ecology).setOrigin(0.5,0);
-                this.apport.setText('Fertilité : '+ref.fertility).setOrigin(0.5,0);
-                this.desc.setText(ref.desc).setOrigin(0.5,0);
-                this.info.setText(ref.info).setOrigin(0.5,0);
+            case 'unlock':
+                switch(ref.tag) {
+                    case 'fertility':
+                        this.nom.setText(ref.name).setOrigin(0.5,0);
+                        this.desc.setText(ref.desc);
+                        this.info.setText(ref.info);
+                        this.barre.clear();
+                        this.barre.fillStyle(0xffffff, 1);
+                        this.barre.fillRect(window.innerWidth/2 - 1, window.innerHeight - 155, 2, 200);
+                        break;
+                    case 'health':
+                        this.nom.setText(ref.name).setOrigin(0.5,0);
+                        this.desc.setText(ref.desc);
+                        this.info.setText(ref.info);
+                        this.barre.clear();
+                        this.barre.fillStyle(0xffffff, 1);
+                        this.barre.fillRect(window.innerWidth/2 - 1, window.innerHeight - 155, 2, 200);
+                        break;
+                    case 'meal':
+                        this.nom.setText(ref.name).setOrigin(0.5,0);
+                        this.desc.setText(ref.desc);
+                        this.info.setText(ref.info);
+                        this.barre.clear();
+                        this.barre.fillStyle(0xffffff, 1);
+                        this.barre.fillRect(window.innerWidth/2 - 1, window.innerHeight - 155, 2, 200);
+                        break;
+                    case 'sell':
+                        this.nom.setText(ref.name).setOrigin(0.5,0);
+                        this.desc.setText(ref.desc);
+                        this.info.setText(ref.info);
+                        this.barre.clear();
+                        this.barre.fillStyle(0xffffff, 1);
+                        this.barre.fillRect(window.innerWidth/2 - 1, window.innerHeight - 155, 2, 200);
+                        break;
+                    default:
+                        this.nom.setText('');
+                        this.prix.setText('');
+                        this.loss.setText('');
+                        this.apport.setText('');
+                        this.desc.setText('');
+                        this.info.setText('');
+                        this.barre.clear();
+                        break;
+                }
+                break;
+            case 'cat':
+                switch(ref.type) {
+                    case 'fertility':
+                        this.nom.setText(ref.name).setOrigin(0.5,0);
+                        this.prix.setText('Prix : '+ref.unlockPrice).setOrigin(0.5,0);
+                        this.loss.setText('Ecologie : '+ref.ecology).setOrigin(0.5,0);
+                        this.apport.setText('Fertilité : '+ref.fertility).setOrigin(0.5,0);
+                        this.desc.setText(ref.desc);
+                        this.info.setText(ref.info);
+                        this.barre.clear();
+                        this.barre.fillStyle(0xffffff, 1);
+                        this.barre.fillRect(window.innerWidth/2 - 1, window.innerHeight - 155, 2, 200);
+                        break;
+                    case 'health':
+                        this.nom.setText(ref.name).setOrigin(0.5,0);
+                        this.prix.setText('Prix : '+ref.unlockPrice).setOrigin(0.5,0);
+                        this.loss.setText('Ecologie : '+ref.ecology).setOrigin(0.5,0);
+                        this.apport.setText('Santé : '+ref.health).setOrigin(0.5,0);
+                        this.desc.setText(ref.desc);
+                        this.info.setText(ref.info);
+                        this.barre.clear();
+                        this.barre.fillStyle(0xffffff, 1);
+                        this.barre.fillRect(window.innerWidth/2 - 1, window.innerHeight - 155, 2, 200);
+                        break;
+                    case 'meal':
+                        this.nom.setText(ref.name).setOrigin(0.5,0);
+                        this.prix.setText('Prix : '+ref.unlockPrice).setOrigin(0.5,0);
+                        this.loss.setText('Ecologie : '+ref.ecology).setOrigin(0.5,0);
+                        this.apport.setText('Santé : '+ref.health).setOrigin(0.5,0);
+                        this.desc.setText(ref.desc);
+                        this.info.setText(ref.info);
+                        this.barre.clear();
+                        this.barre.fillStyle(0xffffff, 1);
+                        this.barre.fillRect(window.innerWidth/2 - 1, window.innerHeight - 155, 2, 200);
+                        break;
+                    case 'sell':
+                        this.nom.setText(ref.name).setOrigin(0.5,0);
+                        this.prix.setText('Prix : '+ref.unlockPrice).setOrigin(0.5,0);
+                        this.loss.setText('Ecologie : '+ref.ecology).setOrigin(0.5,0);
+                        this.apport.setText('Santé : '+ref.health).setOrigin(0.5,0);
+                        this.desc.setText(ref.desc);
+                        this.info.setText(ref.info);
+                        this.barre.clear();
+                        this.barre.fillStyle(0xffffff, 1);
+                        this.barre.fillRect(window.innerWidth/2 - 1, window.innerHeight - 155, 2, 200);
+                        break;
+                    default:
+                        this.nom.setText('');
+                        this.prix.setText('');
+                        this.loss.setText('');
+                        this.apport.setText('');
+                        this.desc.setText('');
+                        this.info.setText('');
+                        this.barre.clear();
+                        break;
+                }
                 break;
             default:
                 this.nom.setText('');
@@ -205,8 +302,10 @@ class Search extends Phaser.Scene {
                 this.apport.setText('');
                 this.desc.setText('');
                 this.info.setText('');
-                break;
+                this.barre.clear();
+                break; 
         }
+        
     }
 
 
