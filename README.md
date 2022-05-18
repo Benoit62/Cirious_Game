@@ -19,7 +19,7 @@ The suite contains:
 
 *   
 *   Bocquet Corentin
-*   [![Ahounou Matthieu](https://github.com/Geud)]
+*   [Ahounou Matthieu](https://github.com/Geud)
 *   A linear programming solver;
 *   Wrappers around commercial and other open source solvers, including mixed
     integer solvers;
