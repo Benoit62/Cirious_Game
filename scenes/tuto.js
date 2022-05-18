@@ -266,7 +266,7 @@ class Tuto extends Phaser.Scene {
 
     update() {
         //console.log(this.data.list.bat3.plant)
-        if (this.data.list.bat3.plant && this.finish) {
+        if (this.data.list.bat3.plant && this.data.list.bat3.grow > 0) {
             //console.log('ok');
             this.musique.destroy();
             this.scene.stop('tutoScene');
@@ -407,9 +407,9 @@ class Tuto extends Phaser.Scene {
             if (!this.introCow) {
                 This.dialBox = this.add.graphics();
                 This.dialBox.fillStyle(0x70402a, 1);
-                This.dialBox.fillRect(80, window.innerHeight - 75, window.innerWidth, 150);
+                This.dialBox.fillRect(0, window.innerHeight - 100, window.innerWidth, 150);
                 This.dialBox.setScrollFactor(0);
-                This.seedi = this.add.sprite(230, 400, 'seedySlt').setScale(0.2);
+                This.seedi = this.add.sprite(310, window.innerHeight - 100 - 199, 'seedySlt').setScale(0.5);
                 This.seedi.setScrollFactor(0);
                 This.seedi.setOrigin(0, 0);
                 var content = [
@@ -536,9 +536,9 @@ class Tuto extends Phaser.Scene {
             if (!this.introBat) {
                 This.dialBox = this.add.graphics();
                 This.dialBox.fillStyle(0x70402a, 1);
-                This.dialBox.fillRect(80, window.innerHeight - 75, window.innerWidth, 150);
+                This.dialBox.fillRect(0, window.innerHeight - 100, window.innerWidth, 150);
                 This.dialBox.setScrollFactor(0);
-                This.seedi = this.add.sprite(230, 400, 'seedySlt').setScale(0.2);
+                This.seedi = this.add.sprite(310, window.innerHeight - 100 - 199, 'seedySlt').setScale(0.5);
                 This.seedi.setScrollFactor(0);
                 This.seedi.setOrigin(0, 0);
                 var content = [
@@ -657,9 +657,9 @@ class Tuto extends Phaser.Scene {
             if (!this.introField) {
                 This.dialBox = this.add.graphics();
                 This.dialBox.fillStyle(0x70402a, 1);
-                This.dialBox.fillRect(80, window.innerHeight - 75, window.innerWidth, 150);
+                This.dialBox.fillRect(0, window.innerHeight - 100, window.innerWidth, 150);
                 This.dialBox.setScrollFactor(0);
-                This.seedi = this.add.sprite(230, 400, 'seedySlt').setScale(0.2);
+                This.seedi = this.add.sprite(310, window.innerHeight - 100 - 199, 'seedySlt').setScale(0.5);
                 This.seedi.setScrollFactor(0);
                 This.seedi.setOrigin(0, 0);
                 var content = [
@@ -777,9 +777,9 @@ class Tuto extends Phaser.Scene {
                 if (!this.introM) {
                     This.dialBox = this.add.graphics();
                     This.dialBox.fillStyle(0x70402a, 1);
-                    This.dialBox.fillRect(80, window.innerHeight - 75, window.innerWidth, 150);
+                    This.dialBox.fillRect(0, window.innerHeight - 100, window.innerWidth, 150);
                     This.dialBox.setScrollFactor(0);
-                    This.seedi = this.add.sprite(230, 400, 'seedySlt').setScale(0.2);
+                    This.seedi = this.add.sprite(310, window.innerHeight - 100 - 199, 'seedySlt').setScale(0.5);
                     This.seedi.setScrollFactor(0);
                     This.seedi.setOrigin(0, 0);
                     var content = [
@@ -870,7 +870,6 @@ class Tuto extends Phaser.Scene {
                                     This.text1.destroy();
                                     This.text2.destroy();
                                     This.seedi.destroy();
-                                    this.finish = true;
                                 }, 1000);
                             }
                         }, wait)
