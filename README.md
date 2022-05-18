@@ -38,5 +38,11 @@ To redeploy this project you will need to
 
 ## Bibliography
 
-*  [Phaser 3](https://phaser.io/examples/v3)
+*  [Phaser 3 examples](https://phaser.io/examples/v3)
 *  https://www.europe1.fr/societe/quelles-sont-les-regles-en-matiere-dabattage-des-animaux-2705950#:~:text=Ainsi%2C%20selon%20la%20loi%2C%20un,pourtant%20l%C3%A9gal)%2C%20par%20%C3%A9lectrocution%20ou
+*  https://fr.wikipedia.org/wiki/Alimentation_animale#Grains
+*  https://youtu.be/5ysUySSNW3M
+*  https://journals.openedition.org/vertigo/4093#:~:text=1En%20mati%C3%A8re%20de%20protection,1
+*  [For every plant documentation](https://fr.wikipedia.org) 
+*  https://www.francetvinfo.fr/monde/afrique/niger/niger-en-plein-desert-des-eleveurs-touaregs-se-reconvertissent-a-l-agriculture_3702733.html
+*  https://www.bioalaune.com/fr/actualite-bio/37364/faire-pousser-legumes-dans-desert-plus-aride-monde-cest-possible
