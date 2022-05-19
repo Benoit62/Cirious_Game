@@ -341,6 +341,11 @@ class Europe extends Phaser.Scene {
                             bat.seed = seed;
                             this.images.push(arrayField);
                         }
+                        if (bat.rotate) {
+                            this.images[j]['ground'].rotation = 3.141592 / 2;
+                            this.images[j]['weeds'].rotation = 3.141592 / 2;
+                            if(this.images[j]['plant']) this.images[j]['plant'].rotation = 3.141592 / 2;
+                        }
                     }
                 }
                 else if(bat.tag != 'river') {

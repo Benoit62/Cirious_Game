@@ -173,7 +173,8 @@ class Desert extends Phaser.Scene {
             dead:false,
             fertility:100,
             weeds:0,
-            maxWeeds:10
+            maxWeeds:10,
+            rotate:true
         });
 
 
@@ -326,6 +327,11 @@ class Desert extends Phaser.Scene {
                             bat.seed = seed;
                             this.images.push(arrayField);
                         }
+                        if (bat.rotate) {
+                            this.images[j]['ground'].rotation = 3.141592 / 2;
+                            this.images[j]['weeds'].rotation = 3.141592 / 2;
+                            if(this.images[j]['plant']) this.images[j]['plant'].rotation = 3.141592 / 2;
+                        }
                     }
                 }
                 else if(bat.tag != 'river') {
@@ -369,6 +375,7 @@ class Desert extends Phaser.Scene {
 
 
         //this.registry.set('money', 100000);
+        this.registry.set('money', this.registry.get('money') || 100000);
         this.registry.set('moneyPerTick', 0);
         this.registry.set('mult', 1);
         this.registry.set('ecology', 10);
