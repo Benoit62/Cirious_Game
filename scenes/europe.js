@@ -366,7 +366,7 @@ class Europe extends Phaser.Scene {
             }
         });*/
         //polygone des hitboxs
-        var dataRiv = [window.innerWidth, -540, -325, -540, -960, -540, -960, 540, -390, 540, -390, 470, -330, 470, -330, 400, -270, 400, -270, 140, -320, 125, -540, 125, -540, 300, -640, 390, -680, 390, -700, 430, -780, 430, -790, 460, -840, 460, -860, 490, -960, 490, -960, -80, -620, -80, -560, 5, -515, 10, -370, 10, -370, -50, -430, -100, -430, -385, -590, -385, -590, -210, -620, -210, -620, -80, -960, -80, -960, -536, -570, -536, -570, -503, -335, -503, -320, -536, window.innerWidth, -536, window.innerWidth, -540];
+        var dataRiv = [-325, -550, -960, -550, -960, 535, -390, 535, -390, 470, -330, 470, -330, 400, -270, 400, -270, 140, -320, 125, -550, 125, -540, 300, -640, 390, -680, 390, -700, 430, -780, 430, -790, 460, -840, 460, -860, 490, -960, 490, -960, -80, -620, -80, -560, 5, -515, 10, -370, 10, -370, -50, -430, -100, -430, -385, -590, -385, -590, -210, -620, -210, -620, -80, -960, -80, -960, -540, -570, -540, -570, -503, -335, -503, -325, -550];
         // The boundary
         this.Bounds = new Phaser.Geom.Polygon(dataRiv);
 
@@ -385,6 +385,7 @@ class Europe extends Phaser.Scene {
 
         this.registry.set('money', 100000);
         this.registry.set('moneyPerTick', 0);
+        this.registry.set('mult', 1);
         this.registry.set('ecology', 10);
         this.registry.set('animalCare', 60);
         this.registry.set('hunger', 10);
@@ -496,6 +497,7 @@ class Europe extends Phaser.Scene {
             this.timerBirth = 0 - Phaser.Math.Between(0, 400);
         }
 
+        let mult = 1;
         if (this.timer % 60 == 0) {
             let moneyPerSec = 0;
             for (let i in this.data.values) {
@@ -506,9 +508,12 @@ class Europe extends Phaser.Scene {
                         getByType(bat.ref.product).forEach(value => value.unlock ? moneyPerSec +=value.passif : moneyPerSec+=0);
                     }
                 }
+                if(bat.type == 'house') mult = bat.ref.mult[bat.level];
             }
-            this.registry.set('money', this.registry.get('money') + moneyPerSec);
             this.registry.set('moneyPerTick', moneyPerSec);
+            moneyPerSec *= mult;
+            this.registry.set('money', this.registry.get('money') + moneyPerSec);
+            this.registry.set('mult', mult);
         }
         this.timer++;
     }
@@ -544,7 +549,7 @@ class Europe extends Phaser.Scene {
         console.log('Upgrade batiment : ', bat)
         if (bat.type == 'animal' || bat.type == 'struct' || bat.type == 'house') {
             if (bat.level < bat.ref.lvlMax && bat.level != 0) {
-                if (this.money() >= bat.ref.upgrade[bat.level]) {
+                if (this.money() >= bat.ref.upgrade[bat.level +1]) {
                     if(bat.type != 'animal') {
                         bat.level += 1;
                         this.registry.set('money', this.registry.get('money') - bat.ref.upgrade[bat.level]);
@@ -907,6 +912,7 @@ class Europe extends Phaser.Scene {
             if (bat.level > 0 && bat.type == 'animal' && !bat.dead) {
                 if (!bat.ref.climat.includes(this.climat)) {
                     bat.dead = true;
+                    bat.qt = 0;
                     console.log('Dead animal !', bat);
                     this.images[bat.key - 1].setFrame((bat.level - 1) + bat.ref.lvlMax);
 

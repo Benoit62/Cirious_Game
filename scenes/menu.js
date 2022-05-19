@@ -357,11 +357,15 @@ class Menu extends Phaser.Scene {
         
         this.upgrade.on('pointermove', function(){
             if((this.batOverlap.type == 'animal' || this.batOverlap.type == 'struct' || this.batOverlap.type == 'house') && this.batOverlap.level < this.batOverlap.ref.lvlMax && this.batOverlap.level != 0) {
-                if(this.batOverlap.type != 'animal') {
+                if(this.batOverlap.type == 'struct') {
                     this.cardInfo.setVisible(true);
-                    this.textInfo.setText('Prix : '+this.batOverlap.ref.upgrade[this.batOverlap.level+1]);
+                    this.textInfo.setText('Prix : '+this.batOverlap.ref.upgrade[this.batOverlap.level+1]+'\nGain : +'+this.batOverlap.ref.passif[this.batOverlap.level+1]+'/s');
                 }
-                else if(!this.batOverlap.dead) {
+                if(this.batOverlap.type == 'house') {
+                    this.cardInfo.setVisible(true);
+                    this.textInfo.setText('Prix : '+this.batOverlap.ref.upgrade[this.batOverlap.level+1]+'\nMultiplicateur : x'+this.batOverlap.ref.mult[this.batOverlap.level+1]);
+                }
+                if(this.batOverlap.type == 'animal' && !this.batOverlap.dead) {
                     this.cardInfo.setVisible(true);
                     this.textInfo.setText('Prix : '+this.batOverlap.ref.upgrade[this.batOverlap.level+1]);
                 }
@@ -579,6 +583,13 @@ class Menu extends Phaser.Scene {
         this.imgTechs.push(this.add.image(0, 0, 'white').setVisible(false).setScale(0.08));
         this.imgTechs.push(this.add.image(0, 0, 'white').setVisible(false).setScale(0.08));
         this.imgTechs.push(this.add.image(0, 0, 'white').setVisible(false).setScale(0.08));
+        this.textTechs = [];
+        this.textTechs.push(this.add.text(0, 0, '', { fontSize:10, fontFamily:'monospace' }).setVisible(false));
+        this.textTechs.push(this.add.text(0, 0, '', { fontSize:10, fontFamily:'monospace' }).setVisible(false));
+        this.textTechs.push(this.add.text(0, 0, '', { fontSize:10, fontFamily:'monospace' }).setVisible(false));
+        this.textTechs.push(this.add.text(0, 0, '', { fontSize:10, fontFamily:'monospace' }).setVisible(false));
+        this.textTechs.push(this.add.text(0, 0, '', { fontSize:10, fontFamily:'monospace' }).setVisible(false));
+
     }
 
     update() {
@@ -722,6 +733,9 @@ class Menu extends Phaser.Scene {
                 getByType(this.batOverlap.ref.product).forEach(value => value.unlock ? moneyPerSec +=value.passif : moneyPerSec+=0);
                 tmpText+='Gain : '+moneyPerSec+'/s\n';
             }
+            if(this.batOverlap.ref.mult && this.batOverlap.type == 'house') {
+                tmpText+='Multiplicateur : x'+this.batOverlap.ref.mult[this.batOverlap.level]+'\n';
+            }
             if(this.batOverlap.type != 'field') {
                 if(this.batOverlap.level < this.batOverlap.ref.lvlMax){
                     tmpText+='Niveau : '+this.batOverlap.level+' / '+this.batOverlap.ref.lvlMax;
@@ -766,13 +780,19 @@ class Menu extends Phaser.Scene {
                 this.imgTechs.forEach(value => value.destroy());
                 buttons.forEach(function(value) {
                     this.imgTechs[compt] = this.add.image((300/taille)*(compt+1), this.textBat.y + this.textBat.height + 20, value.tag+'-search').setScale(0.08).setVisible(true);
-                    if(!value.unlock) this.imgTechs[compt].setAlpha(0.5);
+                    /*this.textTechs[compt].setText('+'+value.passif).setX(this.imgTechs[compt].x).setY(this.imgTechs[compt].y + this.imgTechs[compt].height / 2 + 5).setVisible(true);
+                    /*if(!value.unlock) {
+                        this.imgTechs[compt].setAlpha(0.5);
+                        this.textTechs[compt].setVisible(false);
+                    }*/
                     compt++;
                 }, this);
                 console.log(this.imgTechs);
+                console.log(this.textTechs);
             }
             else {
                 this.imgTechs.forEach(value => value.destroy());
+                this.textTechs.forEach(value => value.setText('').setVisible(false));
             }
 
 
