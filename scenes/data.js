@@ -165,9 +165,9 @@ let data = [
     {
         tag: 'house',
         type: 'house',
-        lvlMax: 2,
-        upgrade: [0, 1000000, 2000000],
-        money: [0, 10, 25, 60],
+        lvlMax: 3,
+        upgrade: [0, 1, 200000, 500000],
+        mult: [1, 1, 10, 15],
         name: 'Maison',
         desc: 'Lieu de recherche et d\'innovation',
         info: ''
@@ -638,7 +638,7 @@ let data = [
         name:'Pompage dans la rivière',
         desc:'',
         info:'',
-        unlock:false,
+        unlock:true,
         unlockPrice:1000,
         need:'',
         passif:100
@@ -677,7 +677,7 @@ let data = [
         unlock:false,
         unlockPrice:30000,
         need:'',
-        passif:400
+        passif:600
     },
     {
         tag:'light',

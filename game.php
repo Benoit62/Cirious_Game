@@ -282,9 +282,11 @@ include("config/configbdd.php");
 
                 // Money 
                 //521px *0.05 => 25px
-                this.add.image(315, 25, 'dollar').setScale(0.05);
-                this.moneyText = this.add.text(330, 25, '0').setOrigin(0,0.5);
-                this.moneyPerTickText = this.add.text(410, 25, '0').setOrigin(0,0.5);
+                this.add.image(315, 18, 'dollar').setScale(0.05);
+                this.moneyText = this.add.text(330, 18, '0', { fontSize:20, fontFamily:'monospace' }).setOrigin(0,0.5);
+                this.winText = this.add.text(338, 35, '0', { fontSize:12, fontFamily:'monospace' }).setOrigin(0,0.5);
+                this.moneyPerTickText = this.add.text(410, 15, '0', { fontSize:15, fontFamily:'monospace' }).setOrigin(0,0.5);
+                this.multText = this.add.text(410, 35, '0', { fontSize:15, fontFamily:'monospace' }).setOrigin(0,0.5);
 
 
                 // Barre de progressions
@@ -355,7 +357,10 @@ include("config/configbdd.php");
                 //  Check the Registry and hit our callback every time the 'money' value is updated
                 this.registry.events.on('changedata', function(){
                     this.moneyText.setText(this.registry.get('money'));
+                    let win = this.registry.get('moneyPerTick')*this.registry.get('mult')
+                    this.winText.setText('+ '+win);
                     this.moneyPerTickText.setText(this.registry.get('moneyPerTick')+'/s');
+                    this.multText.setText('x '+this.registry.get('mult'));
                     percentText1.setText(this.registry.get('animalCare')+'%');
                     percentText2.setText(this.registry.get('ecology')+'%');
                     percentText3.setText(this.registry.get('hunger')+'%');
