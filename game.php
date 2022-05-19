@@ -126,17 +126,23 @@ include("config/configbdd.php");
                 Phaser.Display.Align.In.Center(this.foret, this.add.zone(window.innerWidth/2, window.innerHeight/2, window.innerWidth, window.innerHeight));
                 this.foret.setX(this.foret.x+780);
                 this.foret.setY(this.foret.y+218);
-                if(!this.registry.get('unlock').includes('foret')) {
+                if(!this.registry.get('unlock').includes('tropic')) {
                     this.add.image(this.foret.x, this.foret.y, 'cadenas').setScale(0.6);
                 }
                 this.foret.on('pointerdown', function(){
-                    if(this.registry.get('unlock').includes('foret')) {
-                        if(this.scene.isSleeping('foretScene')) {                        
-                            this.scene.wake('foretScene');
+                    if(this.registry.get('unlock').includes('tropic')) {
+                        if(this.scene.isSleeping('tropicScene')) {                        
+                            this.scene.wake('tropicScene');
+                            this.scene.get('tropicScene').musique.play();
+                            this.registry.set('climat', 'europe');
+                            this.registry.set('gameScene', 'europe');
                         }
                         else {
-                            this.scene.start('foretScene');
+                            this.scene.start('tropic');
                         }
+                        this.scene.stop('mapScene');
+                        this.scene.launch('menuScene');
+                        this.scene.launch('headerScene');
                     }
                     else {
                         this.errorText('Vous n\'avez pas encore débloqué cette île');
@@ -243,7 +249,7 @@ include("config/configbdd.php");
                 let text = this.add.text(602, 572, errorTxt, { fontFamily: 'Arial', fontSize: 100, color: '#000000', wordWrap: { width: 1500 }, align: 'center' });
                 Phaser.Display.Align.In.Center(container, this.add.zone(window.innerWidth/2, window.innerHeight/2, window.innerWidth, window.innerHeight));
                 Phaser.Display.Align.In.Center(text, this.add.zone(container.x, container.y, container.width*0.8, container.height*0.8));
-                text.setX(text.x+100);
+                text.setX(text.x+110).setY(text.y-60);
                 setTimeout(() => {
                     text.destroy();
                     container.destroy();

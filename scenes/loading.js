@@ -321,7 +321,7 @@ class Loading extends Phaser.Scene {
 
         // Data
         this.registry.set('unlock', ['europe']);
-        this.registry.set('lock', ['aride', 'foret', 'glace']);
+        this.registry.set('lock', ['aride', 'tropic', 'glace']);
     }
 
 }
