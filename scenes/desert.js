@@ -36,7 +36,7 @@ class Desert extends Phaser.Scene {
 
     create ()
     {
-        this.musique = this.sound.add('game_musique', {
+        this.musique = this.sound.add('desert_musique', {
             mute: false,
             volume: 0.1,
             rate: 1,

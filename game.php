@@ -87,7 +87,7 @@ include("config/configbdd.php");
             {
                 var music = this.sound.add('map_musique', {
                     mute: false,
-                    volume: 0.1,
+                    volume: 0.3,
                     rate: 1,
                     detune: 0,
                     seek: 0,

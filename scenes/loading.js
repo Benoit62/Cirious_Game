@@ -20,6 +20,7 @@ class Loading extends Phaser.Scene {
         // Musique
         this.load.audio('game_musique', 'assets/musique/game_musique.mp3');
         this.load.audio('map_musique', 'assets/musique/map_musique.mp3');
+        this.load.audio('desert_musique', 'assets/musique/desert_musique.mp3');
         //this.load.audio('cinematiq_musique', 'assets/musique/cinematiq_musique.mp3');
 
         // Maps et icones
