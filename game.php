@@ -246,10 +246,10 @@ include("config/configbdd.php");
             errorText(errorTxt) {
                 //Width 1000px à 0.8 => 800  Height 350px à 0.8 => 280
                 let container = this.add.image(0, 0, 'errorLock').setScale(3);
-                let text = this.add.text(602, 572, errorTxt, { fontFamily: 'Arial', fontSize: 100, color: '#000000', wordWrap: { width: 1500 }, align: 'center' });
+                let text = this.add.text(602, 572, errorTxt, { fontFamily: 'Arial', fontSize: 100, color: '#000000', wordWrap: { width: 1600 }, align: 'center' }).setOrigin(0.5,0.5);
                 Phaser.Display.Align.In.Center(container, this.add.zone(window.innerWidth/2, window.innerHeight/2, window.innerWidth, window.innerHeight));
                 Phaser.Display.Align.In.Center(text, this.add.zone(container.x, container.y, container.width*0.8, container.height*0.8));
-                text.setX(text.x+110).setY(text.y-60);
+                text.setX(text.x+400).setY(text.y-100);
                 setTimeout(() => {
                     text.destroy();
                     container.destroy();
