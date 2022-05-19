@@ -288,7 +288,7 @@ class Tuto extends Phaser.Scene {
 
     update() {
         //console.log(this.data.list.bat3.plant)
-        if (this.data.list.bat3.plant && this.data.list.bat3.grow > 0) {
+        if (this.data.list.bat3.plant && this.data.list.bat3.grow > 2) {
             //console.log('ok');
             this.musique.destroy();
             this.scene.stop('tutoScene');
@@ -316,12 +316,17 @@ class Tuto extends Phaser.Scene {
             This.seedi.setScrollFactor(0);
             This.seedi.setOrigin(0, 0);
             var content = [
-                "Nous voici arrivés",
-                "comme tu peux le voir en haut de l'écran tu as 3 jauges,",
-                "elles réprésentent le bien être animal, l'écologie, et la production de nourriture",
-                "ton objectif est de remplir au maximum les 3 barres",
-                "afin de représenter au mieux la ferme du futur.",
-                "Maintenant je vais te présenter ma ferme",
+                "Nous voici arrivés dans ta nouvelle ferme",
+                "Tout d'abord, tu peux voir en haut de l'écran 3 jauges.",
+                "Elles réprésentent le bien être animal, l'écologie, et la production de nourriture,",
+                "les trois objectifs que tu dois remplir, pour atteindre la ferme du futur.",
+                "Quand elles ont toutes atteintes au moins 90%, tu débloques la ferme suivante",
+                "A gauches des jauges, tu peux voir l'argent que tu gagnes et quelques détails.",
+                "A droite se trouvent les boutons : Recherche, Carte et Quitter.",
+                "Le bouton Recherche permet de débloquer des nouvelles méthodes de cultures ou d'élevage,",
+                "ainsi que de nouvelles technologies. Je te laisse découvrir par toi-même.",
+                "Maintenant je vais te présenter la ferme et les actions que tu peux y faire.",
+                "Chaque action aura un impact sur les jauges, à toi d'apprendre et de les équilibrer au mieux.",
                 ""
             ];
             This.text0 = this.make.text({
@@ -435,10 +440,14 @@ class Tuto extends Phaser.Scene {
                 This.seedi.setScrollFactor(0);
                 This.seedi.setOrigin(0, 0);
                 var content = [
-                    "ici se trouve un batiment d'élevage, tu peux élever différents animaux, mais fais bien atttention",
-                    "à ne pas élever des animaux qui ne sont pas adaptés au climat de la ferme",
-                    "tu peux améliorer le batiment en appuyant sur le premier bouton du menu",
+                    "Ici se trouve un batiment d'élevage, tu peux élever différents animaux, mais fais bien atttention,",
+                    "chaque animal s'adapte plus au moins bien au climat de la ferme.",
+                    "Tu peux améliorer le bâtiment en appuyant sur le premier bouton du menu, si tu as assez d'argent",
                     "ou en appuyant sur la touche 'A' de ton clavier ",
+                    "Les actions réalisables pour chaque bâtiment sont affichées en surbrillance, sois curieux(se)",
+                    "Comme pour tous les bâtiments que tu rencontrera, de nombreuses informations sont présentées sur le coté.",
+                    "Ici on y retrouve notamment la nourriture ainsi que les quantité de vaches présentes.",
+                    "A toi de bien les surveiller",
                     "",
                 ];
                 This.text0 = this.make.text({
@@ -527,7 +536,7 @@ class Tuto extends Phaser.Scene {
                 loop();
             }
         }
-        if (this.introBat && this.data.list.bat1.level == 2) {
+        if (this.introBat && this.data.list.bat1.level >= 1) {
             This.dialBox.destroy();
             This.text0.destroy();
             This.text1.destroy();
@@ -552,8 +561,8 @@ class Tuto extends Phaser.Scene {
             else {
                 this.introBat = false;
                 this.player.anims.play('up', true);
-                this.moneyGame += 65000;
-                this.registry.set('money', 65000);
+                this.moneyGame += 40000;
+                this.registry.set('money', 40000);
             }
 
             if (!this.introBat) {
@@ -565,9 +574,12 @@ class Tuto extends Phaser.Scene {
                 This.seedi.setScrollFactor(0);
                 This.seedi.setOrigin(0, 0);
                 var content = [
-                    "ici se trouve une zone de construction de batiments,",
-                    "ces bâtiments permettent de générer un revenu passif à ta ferme",
-                    "contruits un réservoir à eau en appuyant sur le deuxième boutton",
+                    "Ici se trouve une zone vide, où tu peux construire un bâtiment selon le type d'emplacement ou tu es.",
+                    "Quelques informations du bâtiment s'affichent dans la carte blanche.",
+                    "Les bâtiment Infrastructures permettent de générer un revenu passif pour la ferme.",
+                    "Chaque bâtiment produit une ressource qu'il est possible de valoriser via des recherches.",
+                    "Ces recherches augmentent les revenus de la ferme.",
+                    "Tu peux par exemples contruire un réservoir à eau en appuyant sur le deuxième boutton",
                     ""
                 ];
                 This.text0 = this.make.text({
@@ -664,7 +676,7 @@ class Tuto extends Phaser.Scene {
 
         }
 
-        if (this.introField && this.data.list.bat2.level == 1) {
+        if (this.introField && this.data.list.bat2.level >= 1) {
             if (this.player.y < -110) {
                 this.player.y += 3;
             }
@@ -687,12 +699,15 @@ class Tuto extends Phaser.Scene {
                 This.seedi.setScrollFactor(0);
                 This.seedi.setOrigin(0, 0);
                 var content = [
-                    "ici se trouve un champ,",
-                    "tu peux panter différents types de cultures, mais attention,",
-                    "comme pour les bâtiments d'élevage, tu dois bien faire attention au climat",
-                    "tu peux aussi replanter la culture précédante en appuyant sur la touche 'E' de ton clavier,",
-                    " tu peux aussi récolter le champ en appuyant sur la touche",
-                    "'Z' de ton clavier",
+                    "Ici se trouve un champ,",
+                    "C'est là que tu peux planter différents types de cultures, mais attention,",
+                    "comme pour les animaux, tu dois bien faire attention au climat",
+                    "Là aussi se trouvent de nombreuses informations concernant le champs, comme sa fertilité ou sa santé,",
+                    "surveille les bien !",
+                    "Les revenus potentiellements générés sont affiché en fonction des données du champs,",
+                    "par rapport aux revenus maximum qu'il est possible d'obtenir",
+                    "Tu peux aussi replanter la culture précédante en appuyant sur la touche 'E'.",
+                    "Une fois le champs prêt, tu peux le récolter via le bouton Récolte ou en appuyant sur la touche 'Z'",
                     ""
                 ];
                 This.text0 = this.make.text({
@@ -807,9 +822,8 @@ class Tuto extends Phaser.Scene {
                     This.seedi.setScrollFactor(0);
                     This.seedi.setOrigin(0, 0);
                     var content = [
-                        "ici se trouve un champ,",
-                        "tu peux cultiver différents types de cultures, mais attention,",
-                        "comme pour les batiments d'élevages, tu dois bien faire attention au climat",
+                        "C'est tout pour moi, je te laisse découvrir ta ferme et tout ce que tu peux y faire.",
+                        "Mais n'oublie pas, je ne suis pas loin si tu as besoin d'aide !",
                         ""
                     ];
                     This.text0 = this.make.text({
@@ -841,6 +855,7 @@ class Tuto extends Phaser.Scene {
                             fontFamily:'Arial',
                         }
                     });
+                    This.text2.setTint(0xff0000)
                     This.text0.setScrollFactor(0);
                     This.text1.setScrollFactor(0);
                     This.text2.setScrollFactor(0);
