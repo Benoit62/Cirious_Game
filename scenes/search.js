@@ -242,7 +242,7 @@ class Search extends Phaser.Scene {
 
         let close = this.add.text(50, 50, 'X', { fontSize: 70, fontColor:'#ffffff', fontFamily:'monospace'}).setOrigin(0.5,0.5).setInteractive().on('pointerdown', function(){
             this.scene.stop('searchScene');
-            this.scene.setVisible(true, this.registry.get('climat')+'Scene');            
+            this.scene.setVisible(true, this.registry.get('gameScene')+'Scene');            
             this.scene.launch('headerScene');
             this.scene.launch('menuScene');
             this.search = [];

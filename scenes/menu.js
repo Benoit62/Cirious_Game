@@ -780,11 +780,11 @@ class Menu extends Phaser.Scene {
                 this.imgTechs.forEach(value => value.destroy());
                 buttons.forEach(function(value) {
                     this.imgTechs[compt] = this.add.image((300/taille)*(compt+1), this.textBat.y + this.textBat.height + 20, value.tag+'-search').setScale(0.08).setVisible(true);
-                    /*this.textTechs[compt].setText('+'+value.passif).setX(this.imgTechs[compt].x).setY(this.imgTechs[compt].y + this.imgTechs[compt].height / 2 + 5).setVisible(true);
-                    /*if(!value.unlock) {
+                    //this.textTechs[compt].setText('+'+value.passif).setX(this.imgTechs[compt].x).setY(this.imgTechs[compt].y + this.imgTechs[compt].height / 2 + 5).setVisible(true);
+                    if(!value.unlock) {
                         this.imgTechs[compt].setAlpha(0.5);
-                        this.textTechs[compt].setVisible(false);
-                    }*/
+                        //this.textTechs[compt].setVisible(false);
+                    }
                     compt++;
                 }, this);
                 console.log(this.imgTechs);
@@ -1034,7 +1034,14 @@ class Menu extends Phaser.Scene {
         }
     }
 
-
+    unlock() {
+        let unlock = this.registry.get('unlock');
+        let lock = this.registry.get('lock');
+        unlock.push(lock[0]);
+        this.registry.set('unlock', unlock);
+        lock.shift();
+        this.registry.set('lock', lock);
+    }
 
 
     seedyAdvice(type, ref, ref2){
@@ -1113,6 +1120,12 @@ class Menu extends Phaser.Scene {
             case 'noFertility':
                 tmpText = 'La fertilité d\'un de vos champs est nulle.\n\nFertilisez le au plus vite !';
                 text.setText(tmpText);
+                break;
+
+
+            case 'unlock':
+                tmpText = 'Félicitation vous venez de débloquer une nouvelle île ! \n\n'+getByTag(this.registry.get('lock')[0])[0].name;
+                text.setText(tmpText).setTint(0xf00020);
                 break;
             default:
                 seedy.destroy();

@@ -32,6 +32,8 @@ class Europe extends Phaser.Scene {
         this.climat = 'europe';
 
         this.musique;
+
+        this.finish = false;
     }
 
     create() {
@@ -400,9 +402,28 @@ class Europe extends Phaser.Scene {
         this.input.keyboard.on('keydown_W', function(){
             this.registry.set('money', this.registry.get('money') + 10000);
         }, this);
+
+        this.input.keyboard.on('keydown_I', function(){
+            this.registry.set('animalCare', this.registry.get('animalCare') < 100 ? this.registry.get('animalCare') + 10 : this.registry.get('animalCare'));
+        }, this);
+
+        this.input.keyboard.on('keydown_O', function(){
+            this.registry.set('ecology', this.registry.get('ecology') < 100 ? this.registry.get('ecology') + 10 : this.registry.get('ecology'));
+        }, this);
+
+        this.input.keyboard.on('keydown_P', function(){
+            this.registry.set('hunger', this.registry.get('hunger') < 100 ? this.registry.get('hunger') + 10 : this.registry.get('hunger'));
+        }, this);
     }
 
     update() {
+        if(this.registry.get('ecology') >= 90 && this.registry.get('animalCare') >= 90 && this.registry.get('hunger') >= 90 && !this.finish) {
+            this.finish = true;
+            this.menuScene.seedyAdvice('unlock');
+            this.menuScene.unlock();
+            console.log('unlock');
+        }
+
         if (this.cursors.up.isDown) {
             this.player.setVelocityY(-650);
             this.menuScene.closeSavoirPlus();

@@ -94,8 +94,8 @@ include("config/configbdd.php");
                 });
                 music.play();*/
 
-                this.mute = this.add.image(window.innerWidth-25, 25, 'mute').setInteractive().setScale(0.08).setScrollFactor(0);
-                this.sound = this.add.image(window.innerWidth-25, 25, 'sound').setInteractive().setScale(0.08).setVisible(false).setScrollFactor(0);
+                this.mute = this.add.image(window.innerWidth-25, 25, 'mute').setInteractive().setScale(2).setScrollFactor(0);
+                this.sound = this.add.image(window.innerWidth-25, 25, 'sound').setInteractive().setScale(2).setVisible(false).setScrollFactor(0);
                 this.mute.on('pointerdown', function(){
                     //this.mute.setFrame((this.mute.frame + 1)%2);
                     this.mute.visible = !this.mute.visible;
@@ -109,10 +109,6 @@ include("config/configbdd.php");
                     music.mute = !music.mute;
                 }, this);
                 console.log(this.mute, this.sound);
-
-                // Data
-                this.data.set('unlock', ['europe', 'desert']);
-                this.data.set('lock', ['foret', 'glace']);
 
                 // Ajout de la map et centrage
                 const map = this.add.image(0, 0, 'map');
@@ -129,11 +125,11 @@ include("config/configbdd.php");
                 Phaser.Display.Align.In.Center(this.foret, this.add.zone(window.innerWidth/2, window.innerHeight/2, window.innerWidth, window.innerHeight));
                 this.foret.setX(this.foret.x+780);
                 this.foret.setY(this.foret.y+218);
-                if(!this.data.get('unlock').includes('foret')) {
+                if(!this.registry.get('unlock').includes('foret')) {
                     this.add.image(this.foret.x, this.foret.y, 'cadenas').setScale(0.6);
                 }
                 this.foret.on('pointerdown', function(){
-                    if(this.data.get('unlock').includes('foret')) {
+                    if(this.registry.get('unlock').includes('foret')) {
                         if(this.scene.isSleeping('foretScene')) {                        
                             this.scene.wake('foretScene');
                         }
@@ -142,7 +138,7 @@ include("config/configbdd.php");
                         }
                     }
                     else {
-                        this.lockText();
+                        this.errorText('Vous n\'avez pas encore débloqué cette île');
                     }
                 }, this);
 
@@ -153,14 +149,16 @@ include("config/configbdd.php");
                 Phaser.Display.Align.In.Center(this.europe, this.add.zone(window.innerWidth/2, window.innerHeight/2, window.innerWidth, window.innerHeight));
                 this.europe.setX(this.europe.x-318);
                 this.europe.setY(this.europe.y-250);
-                if(!this.data.get('unlock').includes('europe')) {
+                if(!this.registry.get('unlock').includes('europe')) {
                     this.add.image(this.europe.x, this.europe.y, 'cadenas').setScale(0.6);
                 }
                 this.europe.on('pointerdown', function(){
-                    if(this.data.get('unlock').includes('europe')) {
+                    if(this.registry.get('unlock').includes('europe')) {
                         if(this.scene.isSleeping('europeScene')) {                        
                             this.scene.wake('europeScene');
                             this.scene.get('europeScene').musique.play();
+                            this.registry.set('climat', 'europe');
+                            this.registry.set('gameScene', 'europe');
                         }
                         else {
                             this.scene.start('europeScene');
@@ -179,14 +177,16 @@ include("config/configbdd.php");
                 Phaser.Display.Align.In.Center(this.desert, this.add.zone(window.innerWidth/2, window.innerHeight/2, window.innerWidth, window.innerHeight));
                 this.desert.setX(this.desert.x-702);
                 this.desert.setY(this.desert.y+446);
-                if(!this.data.get('unlock').includes('desert')) {
+                if(!this.registry.get('unlock').includes('desert')) {
                     this.add.image(this.desert.x, this.desert.y, 'cadenas').setScale(0.6);
                 }
                 this.desert.on('pointerdown', function(){
-                    if(this.data.get('unlock').includes('desert')) {
+                    if(this.registry.get('unlock').includes('desert')) {
                         if(this.scene.isSleeping('desertScene')) {                        
                             this.scene.wake('desertScene');
                             this.scene.get('desertScene').musique.play();
+                            this.registry.set('climat', 'aride');
+                            this.registry.set('gameScene', 'desert');
                         }
                         else {
                             this.scene.start('desertScene');
@@ -197,7 +197,7 @@ include("config/configbdd.php");
                         //music.stop();
                     }
                     else {
-                        this.lockText();
+                        this.errorText('Vous n\'avez pas encore débloqué cette île');
                     }
                 }, this);
 
@@ -208,11 +208,11 @@ include("config/configbdd.php");
                 Phaser.Display.Align.In.Center(this.glace, this.add.zone(window.innerWidth/2, window.innerHeight/2, window.innerWidth, window.innerHeight));
                 this.glace.setX(this.glace.x+982);
                 this.glace.setY(this.glace.y-772);
-                if(!this.data.get('unlock').includes('glace')) {
+                if(!this.registry.get('unlock').includes('glace')) {
                     this.add.image(this.glace.x, this.glace.y, 'cadenas').setScale(0.6);
                 }
                 this.glace.on('pointerdown', function(){
-                    if(this.data.get('unlock').includes('glace')) {
+                    if(this.registry.get('unlock').includes('glace')) {
                         if(this.scene.isSleeping('glaceScene')) {                        
                             this.scene.wake('glaceScene');
                         }
@@ -221,7 +221,7 @@ include("config/configbdd.php");
                         }
                     }
                     else {
-                        this.lockText();
+                        this.errorText('Vous n\'avez pas encore débloqué cette île');
                     }
                 }, this);
 
@@ -234,6 +234,20 @@ include("config/configbdd.php");
                     text.destroy();
                 }, 1000);
                 console.log('Not unlocked')
+            }
+
+            errorText(errorTxt) {
+                //Width 1000px à 0.8 => 800  Height 350px à 0.8 => 280
+                let container = this.add.image(0, 0, 'errorLock').setScale(3);
+                let text = this.add.text(602, 572, errorTxt, { fontFamily: 'Arial', fontSize: 100, color: '#000000', wordWrap: { width: 1500 }, align: 'center' });
+                Phaser.Display.Align.In.Center(container, this.add.zone(window.innerWidth/2, window.innerHeight/2, window.innerWidth, window.innerHeight));
+                Phaser.Display.Align.In.Center(text, this.add.zone(container.x, container.y, container.width*0.8, container.height*0.8));
+                text.setX(text.x+100);
+                setTimeout(() => {
+                    text.destroy();
+                    container.destroy();
+                }, 2000);
+                console.log('Error : ', errorTxt);
             }
 
         }
