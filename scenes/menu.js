@@ -574,7 +574,11 @@ class Menu extends Phaser.Scene {
         this.percentText3.setOrigin(0.5, 0.5).setVisible(false);
 
         this.imgTechs = [];
-        this.imgTech2.push(this.add.image(0, 0, 'white').setVisible(false).setScale(0.08));
+        this.imgTechs.push(this.add.image(0, 0, 'white').setVisible(false).setScale(0.08));
+        this.imgTechs.push(this.add.image(0, 0, 'white').setVisible(false).setScale(0.08));
+        this.imgTechs.push(this.add.image(0, 0, 'white').setVisible(false).setScale(0.08));
+        this.imgTechs.push(this.add.image(0, 0, 'white').setVisible(false).setScale(0.08));
+        this.imgTechs.push(this.add.image(0, 0, 'white').setVisible(false).setScale(0.08));
     }
 
     update() {
@@ -747,23 +751,30 @@ class Menu extends Phaser.Scene {
             }
 
 
+            this.plus.setVisible(true);
+            this.textBat.setText(tmpText);
+
+
 
             //Boutons des amélioration batiments
             if(this.batOverlap.type == 'struct') {
-                let buttons = getByTag(this.batOverlap.product);
-                let taille = buttons.length
+                let buttons = getByType(this.batOverlap.ref.product);
+                console.log(buttons);
+                let taille = buttons.length +1;
+                let compt = 0;
+                this.imgTechs.forEach(value => value.destroy());
                 buttons.forEach(function(value) {
-                    this.imgTechs.forEach(value => value.destroy());
-                    this.add.image((window.innerWidth/nbCategori)*(compt1+1), 65, value.tag+'-search').setScale(0.2).setInteractive();
+                    this.imgTechs[compt] = this.add.image((300/taille)*(compt+1), this.textBat.y + this.textBat.height + 20, value.tag+'-search').setScale(0.08).setVisible(true);
+                    if(!value.unlock) this.imgTechs[compt].setAlpha(0.5);
+                    compt++;
                 }, this);
+                console.log(this.imgTechs);
             }
             else {
-
+                this.imgTechs.forEach(value => value.destroy());
             }
 
 
-            this.plus.setVisible(true);
-            this.textBat.setText(tmpText);
 
             //Jauges d'informations
             if(this.batOverlap.type == 'animal' && this.batOverlap.level > 0) {
