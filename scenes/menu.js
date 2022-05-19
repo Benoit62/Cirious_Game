@@ -298,7 +298,7 @@ class Menu extends Phaser.Scene {
             this.meals[i.tag].on('pointermove', function(){
                 if(i.unlock) {
                     this.cardInfo.setVisible(true);
-                    this.textInfo.setText('Nourriture '+i.name+'\nApport : '+i.feed+'\nBien-être : '+i.care);
+                    this.textInfo.setText('Nourriture '+i.name+'\nApport en nourriture : '+i.feed+'\nBien-être animal : '+i.care+'\nPrix : '+i.prix);
                 }
             }, this);
             this.meals[i.tag].on('pointerout', function(){

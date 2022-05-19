@@ -621,7 +621,7 @@ class Europe extends Phaser.Scene {
                             moneyButton.destroy();
                             textAnimal.destroy();
                             animalButton.destroy();
-                        }, 2000);
+                        }, 3000);
                     }
                     else {
                         let textMoney = this.add.text(bat.x, bat.y, '-'+bat.ref.upgrade[bat.level], { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
@@ -630,7 +630,7 @@ class Europe extends Phaser.Scene {
                         setTimeout(() => {
                             textMoney.destroy();
                             moneyButton.destroy();
-                        }, 2000);
+                        }, 3000);
                     }
                 }
                 else {
@@ -668,7 +668,7 @@ class Europe extends Phaser.Scene {
                             moneyButton.destroy();
                             textAnimal.destroy();
                             animalButton.destroy();
-                        }, 2000);
+                        }, 3000);
                     }
                     else {
                         let textMoney = this.add.text(bat.x, bat.y, '-'+ref.buildCost, { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
@@ -677,7 +677,7 @@ class Europe extends Phaser.Scene {
                         setTimeout(() => {
                             textMoney.destroy();
                             moneyButton.destroy();
-                        }, 2000);
+                        }, 3000);
                     }
                 }
                 else {
@@ -692,7 +692,7 @@ class Europe extends Phaser.Scene {
                     setTimeout(() => {
                         textMoney.destroy();
                         moneyButton.destroy();
-                    }, 2000);
+                    }, 3000);
                 }
             }
             else {
@@ -719,7 +719,7 @@ class Europe extends Phaser.Scene {
                     setTimeout(() => {
                         textMoney.destroy();
                         moneyButton.destroy();
-                    }, 2000);
+                    }, 3000);
 
                     setTimeout(() => {
                         let nbOldSeed = 0;
@@ -798,7 +798,7 @@ class Europe extends Phaser.Scene {
                     setTimeout(() => {
                         textHealth.destroy();
                         healthButton.destroy();
-                    }, 2000);
+                    }, 3000);
                 }
                 if(bat.weed == 8) {
                     
@@ -837,7 +837,7 @@ class Europe extends Phaser.Scene {
                 ecologyButton.destroy();
                 textHealth.destroy();
                 healthButton.destroy();
-            }, 2000);
+            }, 3000);
         }
     }
     recolte(bat) {
@@ -911,7 +911,7 @@ class Europe extends Phaser.Scene {
                     hungerButton.destroy();
                     textHealth.destroy();
                     healthButton.destroy();
-                }, 2000);
+                }, 3000);
             }
             else {
                 bat.plant = false;
@@ -931,7 +931,7 @@ class Europe extends Phaser.Scene {
                 setTimeout(() => {
                     textHunger.destroy();
                     hungerButton.destroy();
-                }, 2000);
+                }, 3000);
             }
         }
     }
@@ -959,7 +959,7 @@ class Europe extends Phaser.Scene {
                 ecologyButton.destroy();
                 textFertility.destroy();
                 fertilityButton.destroy();
-            }, 2000);
+            }, 3000);
         }
     }
 
@@ -982,7 +982,7 @@ class Europe extends Phaser.Scene {
                     setTimeout(() => {
                         textAnimal.destroy();
                         animalButton.destroy();
-                    }, 2000);
+                    }, 3000);
                 }
             }
         }
@@ -1009,7 +1009,7 @@ class Europe extends Phaser.Scene {
                             moneyButton.destroy();
                             textAnimal.destroy();
                             animalButton.destroy();
-                        }, 2000);
+                        }, 3000);
                     }
                     bat.dead = false;
                     bat.feed = 90;
@@ -1041,7 +1041,7 @@ class Europe extends Phaser.Scene {
                     setTimeout(() => {
                         textMoney.destroy();
                         moneyButton.destroy();
-                    }, 2000);
+                    }, 3000);
                 }
                 if(bat.type == 'struct') {
                     this.images[bat.key - 1].destroy();
@@ -1053,7 +1053,7 @@ class Europe extends Phaser.Scene {
                     setTimeout(() => {
                         textMoney.destroy();
                         moneyButton.destroy();
-                    }, 2000);
+                    }, 3000);
                 }
 
                 this.physics.add.overlap(this.player, this.images[bat.key - 1], this.overlapBat, null, this);
@@ -1073,7 +1073,7 @@ class Europe extends Phaser.Scene {
             console.log('Feeded !', bat);
             this.updateJauge('animalCare', meal.care);
 
-            this.registry.set('money', this.registry.get('money') - engrais.prix);
+            this.registry.set('money', this.registry.get('money') - meal.prix);
 
             let textMoney = this.add.text(bat.x, bat.y, '-'+meal.prix, { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
             let moneyButton = this.add.image(textMoney.x + textMoney.width / 1.5, textMoney.y, 'dollar').setScale(0.08).setOrigin(0,0.5);
@@ -1085,7 +1085,7 @@ class Europe extends Phaser.Scene {
                 moneyButton.destroy();
                 textAnimal.destroy();
                 animalButton.destroy();
-            }, 2000);
+            }, 3000);
         }
     }
 
@@ -1113,7 +1113,7 @@ class Europe extends Phaser.Scene {
                                 setTimeout(() => {
                                     textAnimal.destroy();
                                     animalButton.destroy();
-                                }, 2000);
+                                }, 3000);
                             }, 10000);
                         }
                         else if(bat.feed < 25) {
@@ -1126,7 +1126,7 @@ class Europe extends Phaser.Scene {
                             setTimeout(() => {
                                 textAnimal.destroy();
                                 animalButton.destroy();
-                            }, 2000);
+                            }, 3000);
 
                             //Seedy Advice
                             if(bat.feed >= 5 && bat.feed < 10) {
@@ -1201,7 +1201,7 @@ class Europe extends Phaser.Scene {
                 animalButton.destroy();
                 texthunger.destroy();
                 hungerButton.destroy();
-            }, 2000);
+            }, 3000);
         }
     }
 
