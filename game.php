@@ -134,11 +134,11 @@ include("config/configbdd.php");
                         if(this.scene.isSleeping('tropicScene')) {                        
                             this.scene.wake('tropicScene');
                             this.scene.get('tropicScene').musique.play();
-                            this.registry.set('climat', 'europe');
-                            this.registry.set('gameScene', 'europe');
+                            this.registry.set('climat', 'tropic');
+                            this.registry.set('gameScene', 'tropic');
                         }
                         else {
-                            this.scene.start('tropic');
+                            this.scene.start('tropicScene');
                         }
                         this.scene.stop('mapScene');
                         this.scene.launch('menuScene');
@@ -189,7 +189,7 @@ include("config/configbdd.php");
                 }
                 this.desert.on('pointerdown', function(){
                     if(this.registry.get('unlock').includes('aride')) {
-                        if(this.scene.isSleeping('desertScene')) {                        
+                        if(this.scene.isSleeping('arideScene')) {                        
                             this.scene.wake('arideScene');
                             this.scene.get('arideScene').musique.play();
                             this.registry.set('climat', 'aride');
@@ -445,7 +445,7 @@ include("config/configbdd.php");
             audio: {
                 disableWebAudio: false
             },
-            scene: [Loading, Play, Cinematique1, Cinematique2, Map, Europe, Desert, Glace, Header, Menu, Search, Disclaimer, Tuto]
+            scene: [Loading, Play, Cinematique1, Cinematique2, Map, Europe, Desert, Foret, Glace, Header, Menu, Search, Disclaimer, Tuto]
         };
 
         let game = new Phaser.Game(config);

@@ -1124,7 +1124,7 @@ class Menu extends Phaser.Scene {
 
 
             case 'unlock':
-                tmpText = 'Félicitation vous venez de débloquer une nouvelle île ! \n\n'+getByTag(this.registry.get('lock')[0])[0].name;
+                tmpText = '\nFélicitation vous venez de débloquer une nouvelle île ! \n\n'+getByTag(this.registry.get('lock')[0])[0].name;
                 text.setText(tmpText).setTint(0xf00020);
                 break;
             default:

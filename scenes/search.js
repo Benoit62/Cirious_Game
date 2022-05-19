@@ -19,7 +19,6 @@ class Search extends Phaser.Scene {
     {
 
         for(let i in this.registry.list) {
-            console.log(this.registry.list[i]);
             let obj = this.registry.list[i];
             if(obj.type && obj.type == 'search') {
                 this.search.push(obj);
@@ -96,7 +95,6 @@ class Search extends Phaser.Scene {
                         this.icones2.push(productIcone);
                     }, this);
                     searchIcone.on('pointerdown', function(){
-                        console.log(arraySearchIcone2);
                         arraySearchIcone2.forEach(img => img.visible = false);
                         tmpArrayStructIcones.forEach(img => img.visible = !img.visible);
                         this.circles2.forEach(function(img){
@@ -256,7 +254,6 @@ class Search extends Phaser.Scene {
     }
 
     displayText(type, ref){
-        console.log(type, ref);
         switch(type) {
             case 'unlock':
                 switch(ref.type) {
