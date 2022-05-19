@@ -177,19 +177,19 @@ include("config/configbdd.php");
                 Phaser.Display.Align.In.Center(this.desert, this.add.zone(window.innerWidth/2, window.innerHeight/2, window.innerWidth, window.innerHeight));
                 this.desert.setX(this.desert.x-702);
                 this.desert.setY(this.desert.y+446);
-                if(!this.registry.get('unlock').includes('desert')) {
+                if(!this.registry.get('unlock').includes('aride')) {
                     this.add.image(this.desert.x, this.desert.y, 'cadenas').setScale(0.6);
                 }
                 this.desert.on('pointerdown', function(){
-                    if(this.registry.get('unlock').includes('desert')) {
+                    if(this.registry.get('unlock').includes('aride')) {
                         if(this.scene.isSleeping('desertScene')) {                        
-                            this.scene.wake('desertScene');
-                            this.scene.get('desertScene').musique.play();
+                            this.scene.wake('arideScene');
+                            this.scene.get('arideScene').musique.play();
                             this.registry.set('climat', 'aride');
-                            this.registry.set('gameScene', 'desert');
+                            this.registry.set('gameScene', 'aride');
                         }
                         else {
-                            this.scene.start('desertScene');
+                            this.scene.start('arideScene');
                         }
                         this.scene.stop('mapScene');
                         this.scene.launch('menuScene');

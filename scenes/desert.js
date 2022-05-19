@@ -2,7 +2,7 @@ class Desert extends Phaser.Scene {
 
     constructor ()
     {
-        super({ key: 'desertScene' });
+        super({ key: 'arideScene' });
         this.player;
         this.cursors;
         this.animal1;
@@ -28,7 +28,8 @@ class Desert extends Phaser.Scene {
         this.timerHunger = 0;
         this.timerBirth = 0;
 
-        this.climat = 'europe';
+        this.climat = 'aride';
+        this.gameScene = 'aride';
 
         this.musique;
     }
@@ -48,7 +49,7 @@ class Desert extends Phaser.Scene {
 
 
         this.registry.set('climat', 'aride');
-        this.registry.set('gameScene', 'desert');
+        this.registry.set('gameScene', 'aride');
 
 
         // Animaux
@@ -59,8 +60,8 @@ class Desert extends Phaser.Scene {
             dataType:'bat',
             type: 'animal',
             typeName:'Elevage',
-            level: 2,
-            tag: 'cow',
+            level: 0,
+            tag: 'build',
             scale: 0.5,
             ref: {},
             dead:false,
@@ -76,8 +77,8 @@ class Desert extends Phaser.Scene {
             dataType:'bat',
             type: 'struct',
             typeName:'Infrastructure',
-            level: 1,
-            tag: 'tank',
+            level: 0,
+            tag: 'build',
             scale: 0.3,
             ref: {}
         });
@@ -88,8 +89,8 @@ class Desert extends Phaser.Scene {
             dataType:'bat',
             type: 'struct',
             typeName:'Infrastructure',
-            level: 2,
-            tag: 'solaire',
+            level: 0,
+            tag: 'build',
             scale: 0.3,
             ref: {}
         });
@@ -102,8 +103,8 @@ class Desert extends Phaser.Scene {
             dataType:'bat',
             type: 'field',
             typeName:'Culture',
-            level: 1,
-            tag: 'labor',
+            level: 0,
+            tag: 'build',
             scale: 0.5,
             ref: {},
             plant: false,
@@ -122,8 +123,8 @@ class Desert extends Phaser.Scene {
             dataType:'bat',
             type: 'field',
             typeName:'Culture',
-            level: 1,
-            tag: 'labor',
+            level: 0,
+            tag: 'build',
             scale: 0.5,
             ref: {},
             plant: false,
@@ -136,15 +137,15 @@ class Desert extends Phaser.Scene {
             maxWeeds:10
         });
         
-        this.data.set('bat7', {
-            key: 7,
+        this.data.set('bat6', {
+            key: 6,
             x: 710,
             y: -185,
             dataType:'bat',
             type: 'field',
             typeName:'Culture',
-            level: 1,
-            tag: 'labor',
+            level: 0,
+            tag: 'build',
             scale: 0.5,
             ref: {},
             plant: false,
@@ -160,8 +161,8 @@ class Desert extends Phaser.Scene {
 
 
         // Maison/labo
-        this.data.set('bat8', {
-            key: 8,
+        this.data.set('bat7', {
+            key: 7,
             x: 676,// 432
             y: 350,// 304
             dataType:'bat',
@@ -174,8 +175,8 @@ class Desert extends Phaser.Scene {
         });
 
 
-        this.data.set('bat9', {
-            key: 9,
+        this.data.set('bat8', {
+            key: 8,
             x: 0,
             y: 0,
             type: 'river',
@@ -271,14 +272,14 @@ class Desert extends Phaser.Scene {
             if(bat.dataType == 'bat'){
                 if (bat.level > 0 && bat.tag != 'build') {
                     if(bat.type != 'field' && bat.type != 'animal') {
-                        this.images.push(this.physics.add.image(bat.x, bat.y, bat.tag, bat.level - 1));
+                        this.images.push(this.physics.add.image(bat.x, bat.y, bat.tag+this.gameScene, bat.level - 1));
                         bat.ref = getByTag(bat.tag)[0];
                         if (bat.rotate) {
                             this.images[j].rotation = 3.141592 / 2;
                         }
                     }
                     if(bat.type == 'animal') {
-                        this.images.push(this.physics.add.image(bat.x, bat.y, bat.tag, bat.level - 1));
+                        this.images.push(this.physics.add.image(bat.x, bat.y, bat.tag+this.gameScene, bat.level - 1));
                         bat.ref = getByTag(bat.tag)[0];
                         if(bat.dead) {
                             this.images[j].setFrame((bat.level - 1) + bat.ref.lvlMax);
@@ -290,7 +291,7 @@ class Desert extends Phaser.Scene {
                     if(bat.type == 'field') {
                         if(!bat.plant) {
                             let arrayField = [];
-                            arrayField['ground'] = this.physics.add.image(bat.x, bat.y, bat.tag, bat.level - 1);
+                            arrayField['ground'] = this.physics.add.image(bat.x, bat.y, bat.tag+this.gameScene, bat.level - 1);
                             arrayField['weeds'] = this.add.image(bat.x, bat.y, 'weeds', bat.weeds);
                             arrayField['plant'] = null;
                             bat.ref = getByTag(bat.tag)[0];
@@ -300,7 +301,7 @@ class Desert extends Phaser.Scene {
                             let seed = getByTag(bat.tag)[0];
                             bat.seed = seed;
                             let arrayField = [];
-                            arrayField['ground'] = this.physics.add.image(bat.x, bat.y, seed.ground, bat.level - 1);
+                            arrayField['ground'] = this.physics.add.image(bat.x, bat.y, seed.ground+this.gameScene, bat.level - 1);
                             arrayField['weeds'] = this.add.image(bat.x, bat.y, 'weeds', bat.weeds);
                             arrayField['plant'] = this.add.image(bat.x, bat.y, bat.tag, bat.grow);
                             bat.tag = seed.tag;
@@ -316,9 +317,9 @@ class Desert extends Phaser.Scene {
                     }
                 }
                 else if(bat.tag != 'river') {
-                    this.images.push(this.physics.add.image(bat.x, bat.y, 'build').setScale(bat.scale));
+                    this.images.push(this.physics.add.image(bat.x, bat.y, 'build'+this.gameScene).setScale(bat.scale));
                 }
-                if(bat.type == 'field' && bat.level > 0 && bat.tag != 'build') {
+                if(bat.type == 'field' && bat.level > 0 && bat.tag != 'build'+this.gameScene) {
                     this.physics.add.overlap(this.player, this.images[j]['ground'], this.overlapBat, null, this);
                 }
                 else {
@@ -368,9 +369,28 @@ class Desert extends Phaser.Scene {
         this.input.keyboard.on('keydown_W', function(){
             this.registry.set('money', this.registry.get('money') + 10000);
         }, this);
+
+        this.input.keyboard.on('keydown_I', function(){
+            this.registry.set('animalCare', this.registry.get('animalCare') < 100 ? this.registry.get('animalCare') + 10 : this.registry.get('animalCare'));
+        }, this);
+
+        this.input.keyboard.on('keydown_O', function(){
+            this.registry.set('ecology', this.registry.get('ecology') < 100 ? this.registry.get('ecology') + 10 : this.registry.get('ecology'));
+        }, this);
+
+        this.input.keyboard.on('keydown_P', function(){
+            this.registry.set('hunger', this.registry.get('hunger') < 100 ? this.registry.get('hunger') + 10 : this.registry.get('hunger'));
+        }, this);
     }
 
     update() {
+        if(this.registry.get('ecology') >= 90 && this.registry.get('animalCare') >= 90 && this.registry.get('hunger') >= 90 && !this.finish) {
+            this.finish = true;
+            this.menuScene.seedyAdvice('unlock');
+            this.menuScene.unlock();
+            console.log('unlock');
+        }
+
         if (this.cursors.up.isDown) {
             this.player.setVelocityY(-650);
             this.menuScene.closeSavoirPlus();
@@ -491,6 +511,18 @@ class Desert extends Phaser.Scene {
         this.timer++;
     }
 
+    // Calcul de l'argent
+    calcul() {
+        let moneyPerTick = 0;
+        for (let i in this.data.values) {
+            let bat = this.data.values[i];
+            if (bat.level > 0 && bat.tag != 'build' && bat.type != 'labor') {
+                if (typeof bat.ref.money[bat.level] == "number") {
+                    moneyPerTick += bat.ref.money[bat.level];
+                }
+            }
+        }
+    }
 
     overlapBat(player, obj) {
         let returnBat;
@@ -566,7 +598,7 @@ class Desert extends Phaser.Scene {
                 this.registry.set('money', this.registry.get('money') - ref.buildCost);
                 if(bat.type != 'field') {
                     console.log('Builded !', bat);
-                    this.images[bat.key - 1] = this.physics.add.image(bat.x, bat.y, bat.tag, bat.level - 1);
+                    this.images[bat.key - 1] = this.physics.add.image(bat.x, bat.y, bat.tag+this.gameScene, bat.level - 1);
                     if (bat.rotate) {
                         this.images[bat.key - 1].rotation = 3.141592 / 2;
                     }
@@ -597,7 +629,7 @@ class Desert extends Phaser.Scene {
                     }
                 }
                 else {
-                    this.images[bat.key - 1]['ground'] = this.physics.add.image(bat.x, bat.y, ref.tag, bat.level - 1);
+                    this.images[bat.key - 1]['ground'] = this.physics.add.image(bat.x, bat.y, ref.tag+this.gameScene, bat.level - 1);
                     this.images[bat.key - 1]['weeds'] = this.add.image(bat.x, bat.y, 'weeds', bat.weeds);
                     this.images[bat.key - 1]['plant'];
                     bat.ref = getByTag(bat.tag)[0];
@@ -1154,5 +1186,4 @@ class Desert extends Phaser.Scene {
         }
         blocked.none = !blocked.left && !blocked.right && !blocked.up && !blocked.down;
     }
-
 }

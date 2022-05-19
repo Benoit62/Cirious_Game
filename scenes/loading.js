@@ -36,20 +36,20 @@ class Loading extends Phaser.Scene {
 
         for(let z of getByType('climat')) {
             // Batiments ferme
-            this.load.spritesheet('labor', 'assets/'+z.tag+'/build/labor.png', { frameWidth: 288, frameHeight: 416 });
-            this.load.spritesheet('water', 'assets/'+z.tag+'/build/water.png', { frameWidth: 288, frameHeight: 416 });
-            this.load.spritesheet('house', 'assets/'+z.tag+'/build/house.png', { frameWidth: 384, frameHeight: 256 });
-            this.load.spritesheet('river', 'assets/'+z.tag+'/build/river.png', { frameWidth: 384, frameHeight: 256 });
-            this.load.image('build', 'assets/'+z.tag+'/build/build.png');
+            this.load.spritesheet('labor'+z.tag, 'assets/'+z.tag+'/build/labor.png', { frameWidth: 288, frameHeight: 416 });
+            this.load.spritesheet('water'+z.tag, 'assets/'+z.tag+'/build/water.png', { frameWidth: 288, frameHeight: 416 });
+            this.load.spritesheet('house'+z.tag, 'assets/'+z.tag+'/build/house.png', { frameWidth: 384, frameHeight: 256 });
+            this.load.spritesheet('river'+z.tag, 'assets/'+z.tag+'/build/river.png', { frameWidth: 384, frameHeight: 256 });
+            this.load.image('build'+z.tag, 'assets/'+z.tag+'/build/build.png');
 
             for(let i of getByType('struct')) {
-                this.load.spritesheet(i.tag, 'assets/'+z.tag+'/build/'+i.tag+'.png', { frameWidth: 192, frameHeight: 192 });
+                this.load.spritesheet(i.tag+z.tag, 'assets/'+z.tag+'/build/'+i.tag+'.png', { frameWidth: 192, frameHeight: 192 });
             }
 
 
             //Animaux
             for(let i of getByType('animal')) {
-                this.load.spritesheet(i.tag, 'assets/'+z.tag+'/animal/'+i.tag+'.png', { frameWidth: 416, frameHeight: 416 });
+                this.load.spritesheet(i.tag+z.tag, 'assets/'+z.tag+'/animal/'+i.tag+'.png', { frameWidth: 416, frameHeight: 416 });
             }
         }
 
@@ -320,7 +320,7 @@ class Loading extends Phaser.Scene {
 
         // Data
         this.registry.set('unlock', ['europe']);
-        this.registry.set('lock', ['desert', 'foret', 'glace']);
+        this.registry.set('lock', ['aride', 'foret', 'glace']);
     }
 
 }

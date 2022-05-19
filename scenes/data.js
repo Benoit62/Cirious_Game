@@ -354,7 +354,7 @@ let data = [
         info: ''
     },
     {
-        tag: 'desert',
+        tag: 'aride',
         type: 'climat',
         typeName: 'Climat',
         name: 'Aride',

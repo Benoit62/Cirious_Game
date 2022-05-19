@@ -30,6 +30,7 @@ class Europe extends Phaser.Scene {
         this.timerBirth = 0;
 
         this.climat = 'europe';
+        this.gameScene = 'europe';
 
         this.musique;
 
@@ -308,14 +309,14 @@ class Europe extends Phaser.Scene {
             if(bat.dataType == 'bat'){
                 if (bat.level > 0 && bat.tag != 'build') {
                     if(bat.type != 'field' && bat.type != 'animal') {
-                        this.images.push(this.physics.add.image(bat.x, bat.y, bat.tag, bat.level - 1));
+                        this.images.push(this.physics.add.image(bat.x, bat.y, bat.tag+this.gameScene, bat.level - 1));
                         bat.ref = getByTag(bat.tag)[0];
                         if (bat.rotate) {
                             this.images[j].rotation = 3.141592 / 2;
                         }
                     }
                     if(bat.type == 'animal') {
-                        this.images.push(this.physics.add.image(bat.x, bat.y, bat.tag, bat.level - 1));
+                        this.images.push(this.physics.add.image(bat.x, bat.y, bat.tag+this.gameScene, bat.level - 1));
                         bat.ref = getByTag(bat.tag)[0];
                         if(bat.dead) {
                             this.images[j].setFrame((bat.level - 1) + bat.ref.lvlMax);
@@ -327,7 +328,7 @@ class Europe extends Phaser.Scene {
                     if(bat.type == 'field') {
                         if(!bat.plant) {
                             let arrayField = [];
-                            arrayField['ground'] = this.physics.add.image(bat.x, bat.y, bat.tag, bat.level - 1);
+                            arrayField['ground'] = this.physics.add.image(bat.x, bat.y, bat.tag+this.gameScene, bat.level - 1);
                             arrayField['weeds'] = this.add.image(bat.x, bat.y, 'weeds', bat.weeds);
                             arrayField['plant'] = null;
                             bat.ref = getByTag(bat.tag)[0];
@@ -337,7 +338,7 @@ class Europe extends Phaser.Scene {
                             let seed = getByTag(bat.tag)[0];
                             bat.seed = seed;
                             let arrayField = [];
-                            arrayField['ground'] = this.physics.add.image(bat.x, bat.y, seed.ground, bat.level - 1);
+                            arrayField['ground'] = this.physics.add.image(bat.x, bat.y, seed.ground+this.gameScene, bat.level - 1);
                             arrayField['weeds'] = this.add.image(bat.x, bat.y, 'weeds', bat.weeds);
                             arrayField['plant'] = this.add.image(bat.x, bat.y, bat.tag, bat.grow);
                             bat.tag = seed.tag;
@@ -353,9 +354,9 @@ class Europe extends Phaser.Scene {
                     }
                 }
                 else if(bat.tag != 'river') {
-                    this.images.push(this.physics.add.image(bat.x, bat.y, 'build').setScale(bat.scale));
+                    this.images.push(this.physics.add.image(bat.x, bat.y, 'build'+this.gameScene).setScale(bat.scale));
                 }
-                if(bat.type == 'field' && bat.level > 0 && bat.tag != 'build') {
+                if(bat.type == 'field' && bat.level > 0 && bat.tag != 'build'+this.gameScene) {
                     this.physics.add.overlap(this.player, this.images[j]['ground'], this.overlapBat, null, this);
                 }
                 else {
@@ -648,7 +649,7 @@ class Europe extends Phaser.Scene {
                 this.registry.set('money', this.registry.get('money') - ref.buildCost);
                 if(bat.type != 'field') {
                     console.log('Builded !', bat);
-                    this.images[bat.key - 1] = this.physics.add.image(bat.x, bat.y, bat.tag, bat.level - 1);
+                    this.images[bat.key - 1] = this.physics.add.image(bat.x, bat.y, bat.tag+this.gameScene, bat.level - 1);
                     if (bat.rotate) {
                         this.images[bat.key - 1].rotation = 3.141592 / 2;
                     }
@@ -679,7 +680,7 @@ class Europe extends Phaser.Scene {
                     }
                 }
                 else {
-                    this.images[bat.key - 1]['ground'] = this.physics.add.image(bat.x, bat.y, ref.tag, bat.level - 1);
+                    this.images[bat.key - 1]['ground'] = this.physics.add.image(bat.x, bat.y, ref.tag+this.gameScene, bat.level - 1);
                     this.images[bat.key - 1]['weeds'] = this.add.image(bat.x, bat.y, 'weeds', bat.weeds);
                     this.images[bat.key - 1]['plant'];
                     bat.ref = getByTag(bat.tag)[0];
