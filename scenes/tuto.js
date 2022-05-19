@@ -890,11 +890,11 @@ class Tuto extends Phaser.Scene {
                                 This.text1.destroy();
                                 This.text2.destroy();
                                 This.seedi.destroy();
-                                this.musique.destroy();
-                                this.scene.stop('tutoScene');
-                                this.scene.stop('headerScene');
-                                this.scene.stop('menuScene');
-                                this.scene.start('mapScene');
+                                This.musique.destroy();
+                                This.scene.stop('tutoScene');
+                                This.scene.stop('headerScene');
+                                This.scene.stop('menuScene');
+                                This.scene.start('mapScene');
                             }, 2000);
                         }
                     }, wait)
