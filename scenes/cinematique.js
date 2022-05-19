@@ -82,7 +82,7 @@ class Cinematique1 extends Phaser.Scene {
                 "",
                 "Chênebleu :",
                 "L'agriculture d'aujourd'hui va mal, il faut nourrir de plus en plus de monde et nos méthodes sont dépassées.",
-                "J'ai besoin de toi pour prduire plus et nourrir le monde.",
+                "J'ai besoin de toi pour produire plus et nourrir le monde.",
                 "",
                 ""+namePlayer+"",
                 "J'accepte cette mission, mais nous devons aussi faire attention à l'écologie.",
@@ -105,14 +105,14 @@ class Cinematique1 extends Phaser.Scene {
                 y: 10,
                 text: 'Chênebleu :',
                 style: {
-                    font: '18px monospace',
+                    font: '25px monospace',
                     fill: '#ffffff'
                 }
             });
-            text0.setTint(0xff0000);
+            text0.setTint(0x0080ff );
             var text1 = this.make.text({
                 x: 10,
-                y: 45,
+                y: 50,
                 text: '',
                 style: {
                     font: '18px monospace',
@@ -120,8 +120,8 @@ class Cinematique1 extends Phaser.Scene {
                 }
             });
             var text2 = this.make.text({
-                x: 5,
-                y: 80,
+                x: 10,
+                y: 90,
                 text: '',
                 style: {
                     font: '18px monospace',
@@ -136,7 +136,7 @@ class Cinematique1 extends Phaser.Scene {
             var bool = false;
             function loop() {
                 setTimeout(function () {
-                    wait = 30;
+                    wait = 40;
                     if (bool) {
                         text0.setText(content[i]);
                         text1.setText('');
@@ -295,18 +295,30 @@ class Cinematique2 extends Phaser.Scene {
             var text0 = this.make.text({
                 x: 10,
                 y: 10,
-                text: 'Seedy :'
+                text: 'Seedy :',
+                style: {
+                    font: '25px monospace',
+                    fill: '#ffffff'
+                }
             });
-            text0.setTint(0xff0000);
+            text0.setTint(0x0080ff);
             var text1 = this.make.text({
                 x: 10,
-                y: 45,
-                text: ''
+                y: 50,
+                text: '',
+                style: {
+                    font: '18px monospace',
+                    fill: '#ffffff'
+                }
             });
             var text2 = this.make.text({
                 x: 10,
-                y: 80,
-                text: ''
+                y: 90,
+                text: '',
+                style: {
+                    font: '18px monospace',
+                    fill: '#ffffff'
+                }
             });
             var txt = 0;
             var tmp = '';
@@ -316,7 +328,7 @@ class Cinematique2 extends Phaser.Scene {
             var bool = false;
             function loop() {
                 setTimeout(function () {
-                    wait = 30;
+                    wait = 40;
                     if (bool) {
                         text0.setText(content[i]);
                         text1.setText('');

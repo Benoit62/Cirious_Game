@@ -386,12 +386,12 @@ let data = [
         typeName: 'Engrais',
         name: 'Engrais chimique',
         desc: 'Les engrais sont des substances organiques ou minérales destinés à apporter aux plantes des compléments d\'éléments nutritifs, de façon à améliorer leur croissance, à augmenter le rendement, et la qualité des cultures.',
-        info: 'Les engrais présentent un risque de pollution de l\'eau potable.',
+        info: 'Efficace mais pollue le sol et les eaux',
         unlock: true,
-        unlockPrice: 10000,
+        unlockPrice: 1000,
         fertility: 20,
-        ecology: -20,
-        prix: 10000
+        ecology: -10,
+        prix: 1000
     },
     {
         tag: 'vert',
@@ -399,12 +399,12 @@ let data = [
         typeName: 'Engrais',
         name: 'Engrais vert',
         desc: 'Un engrais vert est une culture destinée à être enfouie, à l\'état vert sur place, pour améliorer la structure du sol et sa fertilité. Elle peut comporter une ou plusieurs espèces de plantes.',
-        info: 'Les engrais vert fissurent le sol et améliorent sa perméabilité à l\'air et à l\'eau et étouffent les "mauvaises herbes"',
+        info: 'Assez efficace mais demande du travail, ne pollue pas directement',
         unlock: false,
         unlockPrice: 10000,
         fertility: 10,
-        ecology: 20,
-        prix: 10000
+        ecology: 6,
+        prix: 1000
     },
     {
         tag: 'fumier',
@@ -412,12 +412,12 @@ let data = [
         typeName: 'Engrais',
         name: 'Fumier',
         desc: 'Le fumier est un matériau semi-solide composé de différents déchets de matière organique (pailles de céréales, fougères, granulés de bois, etc).',
-        info: 'L\'apport du fumier tend à améliorer l\'environnement biologique, chimique et les propriétés chimiques du sol',
+        info: 'Engrais effiace mais selon le type de fumier et sa quantité épandue peut devenir une sourec de pollution des sols',
         unlock: false,
-        unlockPrice: 10000,
+        unlockPrice: 5000,
         fertility: 15,
-        ecology: 5,
-        prix: 10000
+        ecology: 3,
+        prix: 1000
     },
     {
         tag: 'compost',
@@ -425,12 +425,13 @@ let data = [
         typeName: 'Engrais',
         name: 'Compost',
         desc: 'Le compostage est un processus biologique de conversion et de valorisation des matières organiques en un produit naturel, stabilisé, hygiénique riche en composés humiques et minéraux appelé compost.',
-        info: 'Il permet aussi de se débarrasser des carcasses et déjections d\'animaux, et traite les mauvaises odeurs liées aux déjections animales et au fumier',
+        
+        info: 'Efficace mais est difficilement trouvable en quantité suffisante pour un champ',
         unlock: false,
-        unlockPrice: 10000,
-        fertility: 15,
-        ecology: 5,
-        prix: 10000
+        unlockPrice: 1000,
+        fertility: 5,
+        ecology: 10,
+        prix: 1000
     },
 
 
@@ -536,7 +537,7 @@ let data = [
         typeName: 'Nourriture pour animaux',
         name: 'Fourrages',
         desc: 'Plante ou un mélange de plantes, utilisé pour l\'alimentation des animaux d\'élevage.',
-        info: 'Augmentation faible du bonheur animal',
+        info: 'Alimentation nutritive et naturelle',
         unlock: true,
         unlockPrice: 10000,
         feed: 20,
