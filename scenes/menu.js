@@ -213,7 +213,7 @@ class Menu extends Phaser.Scene {
             this.engrais[i.tag].on('pointermove', function(){
                 if(i.unlock) {
                     this.cardInfo.setVisible(true);
-                    this.textInfo.setText('Engrais : '+i.name+'\nApport : '+i.fertility+'\nEcologie : '+i.ecology);
+                    this.textInfo.setText('Engrais : '+i.name+'\nEfficacité : '+i.fertility+'\nEcologie : '+i.ecology+'\nPrix : '+i.prix);
                 }
             }, this);
             this.engrais[i.tag].on('pointerout', function(){
@@ -242,7 +242,7 @@ class Menu extends Phaser.Scene {
             this.luttes[i.tag].on('pointermove', function(){
                 if(i.unlock) {
                     this.cardInfo.setVisible(true);
-                    this.textInfo.setText('Lutte '+i.name+'\nApport : '+i.health+'\nEcologie : '+i.ecology);
+                    this.textInfo.setText('Lutte '+i.name+'\nEfficacité : '+i.health+'\nEcologie : '+i.ecology+'\nPrix : '+i.prix);
                 }
             }, this);
             this.luttes[i.tag].on('pointerout', function(){

@@ -447,7 +447,7 @@ let data = [
         unlockPrice: 10000,
         health: 4,
         ecology: -10,
-        prix: 10000
+        prix: 1000
     },
     {
         tag: 'lutte_physique',
@@ -460,7 +460,7 @@ let data = [
         unlockPrice: 12000,
         health: 3,
         ecology: -3,
-        prix: 10000
+        prix: 1000
     },
     {
         tag: 'humain',
@@ -473,7 +473,7 @@ let data = [
         unlockPrice: 1000,
         health: 1,
         ecology: 10,
-        prix: 10000
+        prix: 1000
     },
     {
         tag: 'drone',
@@ -486,7 +486,7 @@ let data = [
         unlockPrice: 20000,
         health: 3,
         ecology: -7,
-        prix: 10000
+        prix: 1000
     },
     {
         tag: 'drone2',
@@ -494,12 +494,12 @@ let data = [
         typeName: 'Protection des cultures',
         name: 'Par drone',
         desc: 'Sarcloir autonome',
-        info: 'Très efficace et pollution des sols nulle',
+        info: 'Très efficace car cible précisement chaque herbe non désirable et tourne jour et nuit',
         unlock: false,
         unlockPrice: 40000,
-        health: 3,
-        ecology: -5,
-        prix: 10000
+        health: 5,
+        ecology: 5,
+        prix: 1000
     },
     {
         tag: 'lutte_bio',
@@ -507,12 +507,12 @@ let data = [
         typeName: 'Protection des cultures',
         name: 'biologique',
         desc: 'Parasites, prédateurs, plantes transgéniques (OGM)',
-        info: 'Augmentation moyenne du rendement et augmentation faible de l\'écologie (biodiversité)',
+        info: 'Moyennement efficace et demande du temps, cependant attention à la biodiversité si ce n\'est pas suffisameent controlé',
         unlock: false,
         unlockPrice: 10000,
         health: 2,
-        ecology: 0,
-        prix: 10000
+        ecology: 2,
+        prix: 1000
     },
     {
         tag: 'biopesticides',
@@ -520,12 +520,12 @@ let data = [
         typeName: 'Protection des cultures',
         name: 'Biopesticides',
         desc: 'Extraits de plantes, bactéries et virus pathogènes, nématodes',
-        info: 'Augmentation moyenne du rendement',
+        info: 'Efficacité moyenne',
         unlock: false,
-        unlockPrice: 10000,
+        unlockPrice: 20000,
         health: 3,
-        ecology: 5,
-        prix: 10000
+        ecology: 2,
+        prix: 1000
     },
 
 
