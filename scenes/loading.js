@@ -13,7 +13,7 @@ class Loading extends Phaser.Scene {
         this.load.image('seedySlt', 'assets/cinematique/seedy_salut.png');
         this.load.image('seedySaut', 'assets/cinematique/seedy_saut.png');
         this.load.spritesheet('tiles', 'assets/cinematique/fantasy-tiles.png', { frameWidth: 64, frameHeight: 64 });
-        this.load.spritesheet('sellier', 'assets/cinematique/selliersheet.png', { frameWidth: 67.6, frameHeight: 105 });
+        this.load.spritesheet('sellier', 'assets/cinematique/selliersheet.png', { frameWidth: 67.6, frameHeight: 106 });
         this.load.spritesheet('scient', 'assets/cinematique/eddisonsheet.png', { frameWidth: 32, frameHeight: 48 });
 
 
