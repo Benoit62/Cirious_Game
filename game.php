@@ -36,6 +36,7 @@ include("config/configbdd.php");
     <script type="text/javascript" src="scenes/glace.js"></script>
     <script type="text/javascript" src="scenes/europe.js"></script>
     <script type="text/javascript">
+        let namePlayer = '<?=$_SESSION['pseudo']?>';
 
         
 

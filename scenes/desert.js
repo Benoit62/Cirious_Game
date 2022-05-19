@@ -558,10 +558,10 @@ class Desert extends Phaser.Scene {
                     if(bat.type == 'animal') {
                         this.updateJauge('animalCare', 10 * bat.level);
 
-                        let textMoney = this.add.text(bat.x, bat.y, '-'+bat.ref.upgrade[bat.level], { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
+                        let textMoney = this.add.text(bat.x, bat.y, '-'+bat.ref.upgrade[bat.level], { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
                         let moneyButton = this.add.image(textMoney.x + textMoney.width / 1.5, textMoney.y, 'dollar').setScale(0.08).setOrigin(0,0.5);
 
-                        let textAnimal = this.add.text(bat.x, textMoney.y + textMoney.height*0.8, '+'+(10 * bat.level).toString(), { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
+                        let textAnimal = this.add.text(bat.x, textMoney.y + textMoney.height*0.8, '+'+(10 * bat.level).toString(), { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
                         let animalButton = this.add.image(textAnimal.x + textAnimal.width / 1.5, textAnimal.y, 'animal-care').setScale(0.08).setOrigin(0,0.5);
                         console.log(textAnimal);
                         setTimeout(() => {
@@ -572,7 +572,7 @@ class Desert extends Phaser.Scene {
                         }, 2000);
                     }
                     else {
-                        let textMoney = this.add.text(bat.x, bat.y, '-'+bat.ref.upgrade[bat.level], { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
+                        let textMoney = this.add.text(bat.x, bat.y, '-'+bat.ref.upgrade[bat.level], { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
                         let moneyButton = this.add.image(textMoney.x + textMoney.width / 1.5, textMoney.y, 'dollar').setScale(0.08).setOrigin(0,0.5);
 
                         setTimeout(() => {
@@ -605,10 +605,10 @@ class Desert extends Phaser.Scene {
                     if(bat.type == 'animal') {
                         this.updateJauge('animalCare', -30);
 
-                        let textMoney = this.add.text(bat.x, bat.y, '-'+ref.buildCost, { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
+                        let textMoney = this.add.text(bat.x, bat.y, '-'+ref.buildCost, { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
                         let moneyButton = this.add.image(textMoney.x + textMoney.width / 1.5, textMoney.y, 'dollar').setScale(0.08).setOrigin(0,0.5);
 
-                        let textAnimal = this.add.text(bat.x, textMoney.y + textMoney.height*0.8, '-40', { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
+                        let textAnimal = this.add.text(bat.x, textMoney.y + textMoney.height*0.8, '-40', { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
                         let animalButton = this.add.image(textAnimal.x + textAnimal.width / 1.5, textAnimal.y, 'animal-care').setScale(0.08).setOrigin(0,0.5);
 
                         setTimeout(() => {
@@ -619,7 +619,7 @@ class Desert extends Phaser.Scene {
                         }, 2000);
                     }
                     else {
-                        let textMoney = this.add.text(bat.x, bat.y, '-'+ref.buildCost, { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
+                        let textMoney = this.add.text(bat.x, bat.y, '-'+ref.buildCost, { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
                         let moneyButton = this.add.image(textMoney.x + textMoney.width / 1.5, textMoney.y, 'dollar').setScale(0.08).setOrigin(0,0.5);
 
                         setTimeout(() => {
@@ -634,7 +634,7 @@ class Desert extends Phaser.Scene {
                     this.images[bat.key - 1]['plant'];
                     bat.ref = getByTag(bat.tag)[0];
 
-                    let textMoney = this.add.text(bat.x, bat.y, '-'+ref.buildCost, { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
+                    let textMoney = this.add.text(bat.x, bat.y, '-'+ref.buildCost, { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
                     let moneyButton = this.add.image(textMoney.x + textMoney.width / 1.5, textMoney.y, 'dollar').setScale(0.08).setOrigin(0,0.5);
 
                     setTimeout(() => {
@@ -661,7 +661,7 @@ class Desert extends Phaser.Scene {
                     console.log('Planted !', bat);
                     this.images[bat.key - 1]['plant'] = this.add.image(bat.x, bat.y, seed.tag, bat.grow);
 
-                    let textMoney = this.add.text(bat.x, bat.y, '-'+seed.costPlant, { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
+                    let textMoney = this.add.text(bat.x, bat.y, '-'+seed.costPlant, { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
                     let moneyButton = this.add.image(textMoney.x + textMoney.width / 1.5, textMoney.y, 'dollar').setScale(0.08).setOrigin(0,0.5);
 
                     setTimeout(() => {
@@ -740,7 +740,7 @@ class Desert extends Phaser.Scene {
                     this.images[bat.key - 1]['weeds'].setFrame(bat.weeds);
 
 
-                    let textHealth = this.add.text(bat.x, bat.y, '-1', { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
+                    let textHealth = this.add.text(bat.x, bat.y, '-1', { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
                     let healthButton = this.add.image(textHealth.x + textHealth.width / 1.5, textHealth.y, 'health').setScale(0.08).setOrigin(0,0.5);
 
                     setTimeout(() => {
@@ -769,12 +769,18 @@ class Desert extends Phaser.Scene {
 
             this.updateJauge('ecology', lutte.ecology);
 
-            let textEcology = this.add.text(bat.x, bat.y, lutte.ecology.toString(), { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
+            this.registry.set('money', this.registry.get('money') - lutte.prix);
+
+            let textMoney = this.add.text(bat.x, bat.y, '-'+lutte.prix, { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
+            let moneyButton = this.add.image(textMoney.x + textMoney.width / 1.5, textMoney.y, 'dollar').setScale(0.08).setOrigin(0,0.5);
+            let textEcology = this.add.text(bat.x, textMoney.y + textMoney.height*0.8, lutte.ecology.toString(), { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
             let ecologyButton = this.add.image(textEcology.x + textEcology.width / 1.5, textEcology.y, 'ecology-care').setScale(0.08).setOrigin(0,0.5);
-            let textHealth = this.add.text(bat.x, textEcology.y + textEcology.height*0.8, '+'+lutte.health, { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
+            let textHealth = this.add.text(bat.x, textEcology.y + textEcology.height*0.8, '+'+lutte.health, { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
             let healthButton = this.add.image(textHealth.x + textHealth.width / 1.5, textHealth.y, 'health').setScale(0.08).setOrigin(0,0.5);
             console.log(textEcology);
             setTimeout(() => {
+                textMoney.destroy();
+                moneyButton.destroy();
                 textEcology.destroy();
                 ecologyButton.destroy();
                 textHealth.destroy();
@@ -840,11 +846,11 @@ class Desert extends Phaser.Scene {
 
                 bat.seed = {};
 
-                let textMoney = this.add.text(bat.x, bat.y, '+'+moneyWin, { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
+                let textMoney = this.add.text(bat.x, bat.y, '+'+moneyWin, { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
                 let moneyButton = this.add.image(textMoney.x + textMoney.width / 1.5, textMoney.y, 'dollar').setScale(0.08).setOrigin(0,0.5);
-                let textHunger = this.add.text(bat.x, textMoney.y + textMoney.height*0.8, hungerWin, { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
+                let textHunger = this.add.text(bat.x, textMoney.y + textMoney.height*0.8, hungerWin, { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
                 let hungerButton = this.add.image(textHunger.x + textHunger.width / 1.5, textHunger.y, 'hunger-care').setScale(0.08).setOrigin(0,0.5);
-                let textHealth = this.add.text(bat.x, textHunger.y + textHunger.height*0.8, '-'+looseFertility, { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
+                let textHealth = this.add.text(bat.x, textHunger.y + textHunger.height*0.8, '-'+looseFertility, { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
                 let healthButton = this.add.image(textHealth.x + textHealth.width / 1.5, textHealth.y, 'fertility').setScale(0.08).setOrigin(0,0.5);
                 setTimeout(() => {
                     textMoney.destroy();
@@ -868,7 +874,7 @@ class Desert extends Phaser.Scene {
                 this.images[bat.key - 1]['plant'].destroy();
 
 
-                let textHunger = this.add.text(bat.x, bat.y, '-10', { lineSpacing:10, fontSize:40, color:'#f00020' }).setOrigin(0.5, 0.5);
+                let textHunger = this.add.text(bat.x, bat.y, '-10', { lineSpacing:10, fontSize:40, color:'#ffffff' }).setOrigin(0.5, 0.5);
                 let hungerButton = this.add.image(textHunger.x + textHunger.width / 1.5, textHunger.y, 'hunger-care').setScale(0.08).setOrigin(0,0.5);
                 setTimeout(() => {
                     textHunger.destroy();
@@ -885,12 +891,18 @@ class Desert extends Phaser.Scene {
             console.log('Fertilised !', bat);
             this.updateJauge('ecology', engrais.ecology);
 
-            let textEcology = this.add.text(bat.x, bat.y, engrais.ecology.toString(), { lineSpacing:10, fontSize:40, color:'#ffffff' }).setOrigin(0.5, 0.5);
+            this.registry.set('money', this.registry.get('money') - engrais.prix);
+
+            let textMoney = this.add.text(bat.x, bat.y, '-'+engrais.prix, { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
+            let moneyButton = this.add.image(textMoney.x + textMoney.width / 1.5, textMoney.y, 'dollar').setScale(0.08).setOrigin(0,0.5);
+            let textEcology = this.add.text(bat.x, textMoney.y + textMoney.height*0.8, engrais.ecology.toString(), { lineSpacing:10, fontSize:40, color:'#ffffff' }).setOrigin(0.5, 0.5);
             let ecologyButton = this.add.image(textEcology.x + textEcology.width / 1.5, textEcology.y, 'ecology-care').setScale(0.08).setOrigin(0,0.5);
-            let textFertility = this.add.text(bat.x, textEcology.y + textEcology.height*0.8, '+'+engrais.fertility, { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
+            let textFertility = this.add.text(bat.x, textEcology.y + textEcology.height*0.8, '+'+engrais.fertility, { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
             let fertilityButton = this.add.image(textFertility.x + textFertility.width / 1.5, textFertility.y, 'fertility').setScale(0.08).setOrigin(0,0.5);
             console.log(textEcology);
             setTimeout(() => {
+                textMoney.destroy();
+                moneyButton.destroy();
                 textEcology.destroy();
                 ecologyButton.destroy();
                 textFertility.destroy();
@@ -913,7 +925,7 @@ class Desert extends Phaser.Scene {
 
                     this.updateJauge('animalCare', -40);
 
-                    let textAnimal = this.add.text(bat.x, bat.y, '-40', { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
+                    let textAnimal = this.add.text(bat.x, bat.y, '-40', { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
                     let animalButton = this.add.image(textAnimal.x + textAnimal.width / 1.5, textAnimal.y, 'animal-care').setScale(0.08).setOrigin(0,0.5);
                     setTimeout(() => {
                         textAnimal.destroy();
@@ -935,10 +947,10 @@ class Desert extends Phaser.Scene {
                         //Si il vend le batiment des animaux pas mort il gagne un bonus bien-être
                         this.updateJauge('animalCare', 20);
 
-                        let textMoney = this.add.text(bat.x, bat.y, '-'+destroyRef.cost, { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
+                        let textMoney = this.add.text(bat.x, bat.y, '-'+destroyRef.cost, { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
                         let moneyButton = this.add.image(textMoney.x + textMoney.width / 1.5, textMoney.y, 'dollar').setScale(0.08).setOrigin(0,0.5);
 
-                        let textAnimal = this.add.text(bat.x, textMoney.y + textMoney.height*0.8, +20, { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
+                        let textAnimal = this.add.text(bat.x, textMoney.y + textMoney.height*0.8, +20, { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
                         let animalButton = this.add.image(textAnimal.x + textAnimal.width / 1.5, textAnimal.y, 'animal-care').setScale(0.08).setOrigin(0,0.5);
                         setTimeout(() => {
                             textMoney.destroy();
@@ -971,7 +983,7 @@ class Desert extends Phaser.Scene {
                     bat.plant = false;
                     bat.fertility = 100;
 
-                    let textMoney = this.add.text(bat.x, bat.y, '-'+destroyRef.cost, { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
+                    let textMoney = this.add.text(bat.x, bat.y, '-'+destroyRef.cost, { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
                     let moneyButton = this.add.image(textMoney.x + textMoney.width / 1.5, textMoney.y, 'dollar').setScale(0.08).setOrigin(0,0.5);
 
                     setTimeout(() => {
@@ -983,7 +995,7 @@ class Desert extends Phaser.Scene {
                     this.images[bat.key - 1].destroy();
                     this.images[bat.key - 1] = this.physics.add.image(bat.x, bat.y, 'build').setScale(bat.scale);
 
-                    let textMoney = this.add.text(bat.x, bat.y, '-'+destroyRef.cost, { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
+                    let textMoney = this.add.text(bat.x, bat.y, '-'+destroyRef.cost, { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
                     let moneyButton = this.add.image(textMoney.x + textMoney.width / 1.5, textMoney.y, 'dollar').setScale(0.08).setOrigin(0,0.5);
 
                     setTimeout(() => {
@@ -1009,10 +1021,16 @@ class Desert extends Phaser.Scene {
             console.log('Feeded !', bat);
             this.updateJauge('animalCare', meal.care);
 
-            let textAnimal = this.add.text(bat.x, bat.y, meal.care.toString(), { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
+            this.registry.set('money', this.registry.get('money') - engrais.prix);
+
+            let textMoney = this.add.text(bat.x, bat.y, '-'+meal.prix, { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
+            let moneyButton = this.add.image(textMoney.x + textMoney.width / 1.5, textMoney.y, 'dollar').setScale(0.08).setOrigin(0,0.5);
+            let textAnimal = this.add.text(bat.x, textMoney.y + textMoney.height*0.8, meal.care.toString(), { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
             let animalButton = this.add.image(textAnimal.x + textAnimal.width / 1.5, textAnimal.y, 'animal-care').setScale(0.08).setOrigin(0,0.5);
             console.log(textAnimal);
             setTimeout(() => {
+                textMoney.destroy();
+                moneyButton.destroy();
                 textAnimal.destroy();
                 animalButton.destroy();
             }, 2000);
@@ -1038,7 +1056,7 @@ class Desert extends Phaser.Scene {
 
                                 this.updateJauge('animalCare', -40);
 
-                                let textAnimal = this.add.text(bat.x, bat.y, '-40', { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
+                                let textAnimal = this.add.text(bat.x, bat.y, '-40', { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
                                 let animalButton = this.add.image(textAnimal.x + textAnimal.width / 1.5, textAnimal.y, 'animal-care').setScale(0.08).setOrigin(0,0.5);
                                 setTimeout(() => {
                                     textAnimal.destroy();
@@ -1051,7 +1069,7 @@ class Desert extends Phaser.Scene {
 
                             this.updateJauge('animalCare', -4);
 
-                            let textAnimal = this.add.text(bat.x, bat.y, '-4', { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
+                            let textAnimal = this.add.text(bat.x, bat.y, '-4', { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
                             let animalButton = this.add.image(textAnimal.x + textAnimal.width / 1.5, textAnimal.y, 'animal-care').setScale(0.08).setOrigin(0,0.5);
                             setTimeout(() => {
                                 textAnimal.destroy();
@@ -1115,13 +1133,13 @@ class Desert extends Phaser.Scene {
             this.updateJauge('animalCare', sell.care);
 
 
-            let textMoney = this.add.text(bat.x, bat.y, '+'+moneyWin, { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
+            let textMoney = this.add.text(bat.x, bat.y, '+'+moneyWin, { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
             let moneyButton = this.add.image(textMoney.x + textMoney.width / 1.5, textMoney.y, 'dollar').setScale(0.08).setOrigin(0,0.5);
 
-            let textAnimal = this.add.text(bat.x, textMoney.y + textMoney.height*0.8, sell.care.toString(), { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
+            let textAnimal = this.add.text(bat.x, textMoney.y + textMoney.height*0.8, sell.care.toString(), { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
             let animalButton = this.add.image(textAnimal.x + textAnimal.width / 1.5, textAnimal.y, 'animal-care').setScale(0.08).setOrigin(0,0.5);
 
-            let texthunger = this.add.text(bat.x, textAnimal.y + textAnimal.height*0.8, sell.hunger.toString(), { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
+            let texthunger = this.add.text(bat.x, textAnimal.y + textAnimal.height*0.8, sell.hunger.toString(), { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
             let hungerButton = this.add.image(texthunger.x + texthunger.width / 1.5, texthunger.y, 'hunger-care').setScale(0.08).setOrigin(0,0.5);
             console.log(textAnimal);
             setTimeout(() => {
