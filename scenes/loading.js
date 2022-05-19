@@ -256,7 +256,6 @@ class Loading extends Phaser.Scene {
                     points += '.';
                 }
                 loadingText.setText(tmp + points);
-                //console.log(value);
             }
             
         };
