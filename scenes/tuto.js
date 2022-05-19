@@ -57,16 +57,16 @@ class Tuto extends Phaser.Scene {
             key: 1,
             x: 115,
             y: 160,
-            dataType:'bat',
+            dataType: 'bat',
             type: 'animal',
-            typeName:'Elevage',
+            typeName: 'Elevage',
             level: 1,
             tag: 'cow',
             scale: 0.5,
             ref: {},
-            dead:false,
-            feed:80,
-            qt:90
+            dead: false,
+            feed: 80,
+            qt: 90
         });
 
 
@@ -88,9 +88,9 @@ class Tuto extends Phaser.Scene {
             key: 3,
             x: -368,
             y: -128,
-            dataType:'bat',
+            dataType: 'bat',
             type: 'field',
-            typeName:'Culture',
+            typeName: 'Culture',
             level: 1,
             tag: 'labor',
             scale: 0.5,
@@ -99,10 +99,10 @@ class Tuto extends Phaser.Scene {
             seed: {},
             oldseed: [getByTag('carrot')[0]],
             grow: 0,
-            dead:false,
-            fertility:65,
-            weeds:3,
-            maxWeeds:10
+            dead: false,
+            fertility: 65,
+            weeds: 3,
+            maxWeeds: 10
         });
 
 
@@ -196,29 +196,29 @@ class Tuto extends Phaser.Scene {
         let j = 0;
         for (let i in this.data.values) {
             let bat = this.data.values[i];
-            if(bat.dataType == 'bat'){
+            if (bat.dataType == 'bat') {
                 if (bat.level > 0 && bat.tag != 'build') {
-                    if(bat.type != 'field' && bat.type != 'animal') {
-                        this.images.push(this.physics.add.image(bat.x, bat.y, bat.tag+this.gameScene, bat.level - 1));
+                    if (bat.type != 'field' && bat.type != 'animal') {
+                        this.images.push(this.physics.add.image(bat.x, bat.y, bat.tag + this.gameScene, bat.level - 1));
                         bat.ref = getByTag(bat.tag)[0];
                         if (bat.rotate) {
                             this.images[j].rotation = 3.141592 / 2;
                         }
                     }
-                    if(bat.type == 'animal') {
-                        this.images.push(this.physics.add.image(bat.x, bat.y, bat.tag+this.gameScene, bat.level - 1));
+                    if (bat.type == 'animal') {
+                        this.images.push(this.physics.add.image(bat.x, bat.y, bat.tag + this.gameScene, bat.level - 1));
                         bat.ref = getByTag(bat.tag)[0];
-                        if(bat.dead) {
+                        if (bat.dead) {
                             this.images[j].setFrame((bat.level - 1) + bat.ref.lvlMax);
                         }
                         if (bat.rotate) {
                             this.images[j].rotation = 3.141592 / 2;
                         }
                     }
-                    if(bat.type == 'field') {
-                        if(!bat.plant) {
+                    if (bat.type == 'field') {
+                        if (!bat.plant) {
                             let arrayField = [];
-                            arrayField['ground'] = this.physics.add.image(bat.x, bat.y, bat.tag+this.gameScene, bat.level - 1);
+                            arrayField['ground'] = this.physics.add.image(bat.x, bat.y, bat.tag + this.gameScene, bat.level - 1);
                             arrayField['weeds'] = this.add.image(bat.x, bat.y, 'weeds', bat.weeds);
                             arrayField['plant'] = null;
                             bat.ref = getByTag(bat.tag)[0];
@@ -228,7 +228,7 @@ class Tuto extends Phaser.Scene {
                             let seed = getByTag(bat.tag)[0];
                             bat.seed = seed;
                             let arrayField = [];
-                            arrayField['ground'] = this.physics.add.image(bat.x, bat.y, seed.ground+this.gameScene, bat.level - 1);
+                            arrayField['ground'] = this.physics.add.image(bat.x, bat.y, seed.ground + this.gameScene, bat.level - 1);
                             arrayField['weeds'] = this.add.image(bat.x, bat.y, 'weeds', bat.weeds);
                             arrayField['plant'] = this.add.image(bat.x, bat.y, bat.tag, bat.grow);
                             bat.tag = seed.tag;
@@ -239,14 +239,14 @@ class Tuto extends Phaser.Scene {
                         if (bat.rotate) {
                             this.images[j]['ground'].rotation = 3.141592 / 2;
                             this.images[j]['weeds'].rotation = 3.141592 / 2;
-                            if(this.images[j]['plant']) this.images[j]['plant'].rotation = 3.141592 / 2;
+                            if (this.images[j]['plant']) this.images[j]['plant'].rotation = 3.141592 / 2;
                         }
                     }
                 }
-                else if(bat.tag != 'river') {
-                    this.images.push(this.physics.add.image(bat.x, bat.y, 'build'+this.gameScene).setScale(bat.scale));
+                else if (bat.tag != 'river') {
+                    this.images.push(this.physics.add.image(bat.x, bat.y, 'build' + this.gameScene).setScale(bat.scale));
                 }
-                if(bat.type == 'field' && bat.level > 0 && bat.tag != 'build'+this.gameScene) {
+                if (bat.type == 'field' && bat.level > 0 && bat.tag != 'build' + this.gameScene) {
                     this.physics.add.overlap(this.player, this.images[j]['ground'], this.overlapBat, null, this);
                 }
                 else {
@@ -286,19 +286,10 @@ class Tuto extends Phaser.Scene {
         }, this);
     }
 
+
+
     update() {
-        //console.log(this.data.list.bat3.plant)
-        if (this.data.list.bat3.plant && this.data.list.bat3.grow > 2) {
-            //console.log('ok');
-            this.musique.destroy();
-            this.scene.stop('tutoScene');
-            this.scene.stop('headerScene');
-            this.scene.stop('menuScene');
-            this.scene.start('mapScene');
-        }
-        else {
-            //console.log('not ok');
-        }
+
         //console.log(this.data.list);
         //console.log(this.player.x);
         //console.log(this.player.y);
@@ -333,10 +324,10 @@ class Tuto extends Phaser.Scene {
                 x: 310,
                 y: innerHeight - 95,
                 text: 'Seedy :',
-                style:{
-                    fontSize:25,
-                    color:'#f00020',
-                    fontFamily:'Arial',
+                style: {
+                    fontSize: 25,
+                    color: '#f00020',
+                    fontFamily: 'Arial',
                 }
             });
             This.text0.setTint(0xff0000);
@@ -344,18 +335,18 @@ class Tuto extends Phaser.Scene {
                 x: 310,
                 y: innerHeight - 60,
                 text: '',
-                style:{
-                    fontSize:20,
-                    fontFamily:'Arial',
+                style: {
+                    fontSize: 20,
+                    fontFamily: 'Arial',
                 }
             });
             This.text2 = this.make.text({
                 x: 310,
                 y: innerHeight - 30,
                 text: '',
-                style:{
-                    fontSize:20,
-                    fontFamily:'Arial',
+                style: {
+                    fontSize: 20,
+                    fontFamily: 'Arial',
                 }
             });
             This.text0.setScrollFactor(0);
@@ -454,10 +445,10 @@ class Tuto extends Phaser.Scene {
                     x: 310,
                     y: innerHeight - 95,
                     text: 'Seedy :',
-                    style:{
-                        fontSize:25,
-                        color:'#f00020',
-                        fontFamily:'Arial',
+                    style: {
+                        fontSize: 25,
+                        color: '#f00020',
+                        fontFamily: 'Arial',
                     }
                 });
                 This.text0.setTint(0xff0000);
@@ -465,18 +456,18 @@ class Tuto extends Phaser.Scene {
                     x: 310,
                     y: innerHeight - 60,
                     text: '',
-                    style:{
-                        fontSize:20,
-                        fontFamily:'Arial',
+                    style: {
+                        fontSize: 20,
+                        fontFamily: 'Arial',
                     }
                 });
                 This.text2 = this.make.text({
                     x: 310,
                     y: innerHeight - 30,
                     text: '',
-                    style:{
-                        fontSize:20,
-                        fontFamily:'Arial',
+                    style: {
+                        fontSize: 20,
+                        fontFamily: 'Arial',
                     }
                 });
                 This.text0.setScrollFactor(0);
@@ -586,10 +577,10 @@ class Tuto extends Phaser.Scene {
                     x: 310,
                     y: innerHeight - 95,
                     text: 'Seedy :',
-                    style:{
-                        fontSize:25,
-                        color:'#f00020',
-                        fontFamily:'Arial',
+                    style: {
+                        fontSize: 25,
+                        color: '#f00020',
+                        fontFamily: 'Arial',
                     }
                 });
                 This.text0.setTint(0xff0000);
@@ -597,18 +588,18 @@ class Tuto extends Phaser.Scene {
                     x: 310,
                     y: innerHeight - 60,
                     text: '',
-                    style:{
-                        fontSize:20,
-                        fontFamily:'Arial',
+                    style: {
+                        fontSize: 20,
+                        fontFamily: 'Arial',
                     }
                 });
                 This.text2 = this.make.text({
                     x: 310,
                     y: innerHeight - 30,
                     text: '',
-                    style:{
-                        fontSize:20,
-                        fontFamily:'Arial',
+                    style: {
+                        fontSize: 20,
+                        fontFamily: 'Arial',
                     }
                 });
                 This.text0.setScrollFactor(0);
@@ -714,10 +705,10 @@ class Tuto extends Phaser.Scene {
                     x: 310,
                     y: innerHeight - 95,
                     text: 'Seedy :',
-                    style:{
-                        fontSize:25,
-                        color:'#f00020',
-                        fontFamily:'Arial',
+                    style: {
+                        fontSize: 25,
+                        color: '#f00020',
+                        fontFamily: 'Arial',
                     }
                 });
                 This.text0.setTint(0xff0000);
@@ -725,18 +716,18 @@ class Tuto extends Phaser.Scene {
                     x: 310,
                     y: innerHeight - 60,
                     text: '',
-                    style:{
-                        fontSize:20,
-                        fontFamily:'Arial',
+                    style: {
+                        fontSize: 20,
+                        fontFamily: 'Arial',
                     }
                 });
                 This.text2 = this.make.text({
                     x: 310,
                     y: innerHeight - 30,
                     text: '',
-                    style:{
-                        fontSize:20,
-                        fontFamily:'Arial',
+                    style: {
+                        fontSize: 20,
+                        fontFamily: 'Arial',
                     }
                 });
                 This.text0.setScrollFactor(0);
@@ -788,11 +779,6 @@ class Tuto extends Phaser.Scene {
                         }
                         else {
                             setTimeout(function () {
-                                This.dialBox.destroy();
-                                This.text0.destroy();
-                                This.text1.destroy();
-                                This.text2.destroy();
-                                This.seedi.destroy();
                                 This.introM = true;
                             }, 1000);
                         }
@@ -800,124 +786,124 @@ class Tuto extends Phaser.Scene {
                 }
                 loop();
             }
-            if (this.introM) {
-                if (this.player.x < 415) {
-                    this.player.anims.play('right', true);
-                    this.player.x += 3;
-                }
-                else if (this.player.y > -110) {
-                    this.player.anims.play('up', true);
-                    this.player.y -= 3;
-                }
-                else {
-                    this.introM = false;
-
-                }
-                if (!this.introM) {
-                    This.dialBox = this.add.graphics();
-                    This.dialBox.fillStyle(0x70402a, 1);
-                    This.dialBox.fillRect(0, window.innerHeight - 100, window.innerWidth, 150);
-                    This.dialBox.setScrollFactor(0);
-                    This.seedi = this.add.sprite(310, window.innerHeight - 100 - 199, 'seedySlt').setScale(0.5);
-                    This.seedi.setScrollFactor(0);
-                    This.seedi.setOrigin(0, 0);
-                    var content = [
-                        "C'est tout pour moi, je te laisse découvrir ta ferme et tout ce que tu peux y faire.",
-                        "Mais n'oublie pas, je ne suis pas loin si tu as besoin d'aide !",
-                        ""
-                    ];
-                    This.text0 = this.make.text({
-                        x: 310,
-                        y: innerHeight - 95,
-                        text: 'Seedy :',
-                        style:{
-                            fontSize:25,
-                            color:'#f00020',
-                            fontFamily:'Arial',
-                        }
-                    });
-                    This.text0.setTint(0xff0000);
-                    This.text1 = this.make.text({
-                        x: 310,
-                        y: innerHeight - 60,
-                        text: '',
-                        style:{
-                            fontSize:20,
-                            fontFamily:'Arial',
-                        }
-                    });
-                    This.text2 = this.make.text({
-                        x: 310,
-                        y: innerHeight - 30,
-                        text: '',
-                        style:{
-                            fontSize:20,
-                            fontFamily:'Arial',
-                        }
-                    });
-                    This.text2.setTint(0xff0000)
-                    This.text0.setScrollFactor(0);
-                    This.text1.setScrollFactor(0);
-                    This.text2.setScrollFactor(0);
-                    var txt = 0;
-                    var tmp = '';
-                    var i = 0;
-                    var j = 0;
-                    var wait = 50;
-                    var bool = false;
-                    function loop() {
-                        setTimeout(function () {
-                            wait = 30;
-                            if (bool) {
-                                This.text0.setText(content[i]);
-                                This.text1.setText('');
-                                This.text2.setText('');
-                                if (i + 1 < content.length) i++;
-                                bool = false;
-                            }
-                            tmp += content[i][j];
-                            if (txt % 2 == 0) {
-                                This.text1.setText(tmp);
-                                This.text2.setText('');
-                            }
-                            else {
-                                This.text2.setText(tmp);
-                            }
-                            j++;
-                            if (j == content[i].length) {
-                                j = 0;
-                                txt += 1;
-                                txt = txt % 2;
-                                i++;
-
-                                if (i < content.length && content[i].length == 0) {
-                                    i++;
-                                    wait = 1000;
-                                    txt = 0;
-                                    bool = true;
-                                }
-                                tmp = '';
-                            }
-                            if (i < content.length) {
-                                // console.log(wait)
-                                loop();
-                            }
-                            else {
-                                setTimeout(function () {
-                                    This.dialBox.destroy();
-                                    This.text0.destroy();
-                                    This.text1.destroy();
-                                    This.text2.destroy();
-                                    This.seedi.destroy();
-                                }, 1000);
-                            }
-                        }, wait)
-                    }
-                    loop();
-                }
-            }
-            
         }
+        if (this.introM && this.data.list.bat3.plant) {
+            This.dialBox.destroy();
+            This.text0.destroy();
+            This.text1.destroy();
+            This.text2.destroy();
+            This.seedi.destroy();
+            this.introM = false;
+            if (!this.introM) {
+                This.dialBox = this.add.graphics();
+                This.dialBox.fillStyle(0x70402a, 1);
+                This.dialBox.fillRect(0, window.innerHeight - 100, window.innerWidth, 150);
+                This.dialBox.setScrollFactor(0);
+                This.seedi = this.add.sprite(310, window.innerHeight - 100 - 199, 'seedySlt').setScale(0.5);
+                This.seedi.setScrollFactor(0);
+                This.seedi.setOrigin(0, 0);
+                var content = [
+                    "C'est tout pour moi, je te laisse découvrir ta ferme et tout ce que tu peux y faire.",
+                    "Mais n'oublie pas, je ne suis pas loin si tu as besoin d'aide !",
+                    ""
+                ];
+                This.text0 = this.make.text({
+                    x: 310,
+                    y: innerHeight - 95,
+                    text: 'Seedy :',
+                    style: {
+                        fontSize: 25,
+                        color: '#f00020',
+                        fontFamily: 'Arial',
+                    }
+                });
+                This.text0.setTint(0xff0000);
+                This.text1 = this.make.text({
+                    x: 310,
+                    y: innerHeight - 60,
+                    text: '',
+                    style: {
+                        fontSize: 20,
+                        fontFamily: 'Arial',
+                    }
+                });
+                This.text2 = this.make.text({
+                    x: 310,
+                    y: innerHeight - 30,
+                    text: '',
+                    style: {
+                        fontSize: 20,
+                        fontFamily: 'Arial',
+                    }
+                });
+                This.text2.setTint(0xff0000)
+                This.text0.setScrollFactor(0);
+                This.text1.setScrollFactor(0);
+                This.text2.setScrollFactor(0);
+                var txt = 0;
+                var tmp = '';
+                var i = 0;
+                var j = 0;
+                var wait = 50;
+                var bool = false;
+                function loop() {
+                    setTimeout(function () {
+                        wait = 30;
+                        if (bool) {
+                            This.text0.setText(content[i]);
+                            This.text1.setText('');
+                            This.text2.setText('');
+                            if (i + 1 < content.length) i++;
+                            bool = false;
+                        }
+                        tmp += content[i][j];
+                        if (txt % 2 == 0) {
+                            This.text1.setText(tmp);
+                            This.text2.setText('');
+                        }
+                        else {
+                            This.text2.setText(tmp);
+                        }
+                        j++;
+                        if (j == content[i].length) {
+                            j = 0;
+                            txt += 1;
+                            txt = txt % 2;
+                            i++;
+
+                            if (i < content.length && content[i].length == 0) {
+                                i++;
+                                wait = 1000;
+                                txt = 0;
+                                bool = true;
+                            }
+                            tmp = '';
+                        }
+                        if (i < content.length) {
+                            // console.log(wait)
+                            loop();
+                        }
+                        else {
+                            setTimeout(function () {
+                                This.dialBox.destroy();
+                                This.text0.destroy();
+                                This.text1.destroy();
+                                This.text2.destroy();
+                                This.seedi.destroy();
+                                this.musique.destroy();
+                                this.scene.stop('tutoScene');
+                                this.scene.stop('headerScene');
+                                this.scene.stop('menuScene');
+                                this.scene.start('mapScene');
+                            }, 2000);
+                        }
+                    }, wait)
+                }
+                loop();
+            }
+        }
+
+
 
 
 
@@ -979,10 +965,10 @@ class Tuto extends Phaser.Scene {
                 if (bat.level > 0 && bat.tag != 'build' && bat.type == 'struct') {
                     if (typeof bat.ref.passif[bat.level] == "number") {
                         moneyPerSec += bat.ref.passif[bat.level];
-                        getByType(bat.ref.product).forEach(value => value.unlock ? moneyPerSec +=value.passif : moneyPerSec+=0);
+                        getByType(bat.ref.product).forEach(value => value.unlock ? moneyPerSec += value.passif : moneyPerSec += 0);
                     }
                 }
-                if(bat.type == 'house') mult = bat.ref.mult[bat.level];
+                if (bat.type == 'house') mult = bat.ref.mult[bat.level];
             }
             this.registry.set('moneyPerTick', moneyPerSec);
             moneyPerSec *= mult;
@@ -1010,27 +996,27 @@ class Tuto extends Phaser.Scene {
         console.log('Upgrade batiment : ', bat)
         if (bat.type == 'animal' || bat.type == 'struct' || bat.type == 'house') {
             if (bat.level < bat.ref.lvlMax && bat.level != 0) {
-                if (this.money() >= bat.ref.upgrade[bat.level +1]) {
-                    if(bat.type != 'animal') {
+                if (this.money() >= bat.ref.upgrade[bat.level + 1]) {
+                    if (bat.type != 'animal') {
                         bat.level += 1;
                         this.registry.set('money', this.registry.get('money') - bat.ref.upgrade[bat.level]);
                         console.log('Upgraded !', bat);
                         this.images[bat.key - 1].setFrame(bat.level - 1);
                     }
-                    else if(!bat.dead) {
+                    else if (!bat.dead) {
                         bat.level += 1;
                         this.registry.set('money', this.registry.get('money') - bat.ref.upgrade[bat.level]);
                         console.log('Upgraded !', bat);
                         this.images[bat.key - 1].setFrame(bat.level - 1);
                     }
-                    if(bat.type == 'animal') {
+                    if (bat.type == 'animal') {
                         this.updateJauge('animalCare', 10 * bat.level);
 
-                        let textMoney = this.add.text(bat.x, bat.y, '-'+bat.ref.upgrade[bat.level], { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
-                        let moneyButton = this.add.image(textMoney.x + textMoney.width / 1.5, textMoney.y, 'dollar').setScale(0.08).setOrigin(0,0.5);
+                        let textMoney = this.add.text(bat.x, bat.y, '-' + bat.ref.upgrade[bat.level], { lineSpacing: 10, fontSize: 40, color: '#f00020 ' }).setOrigin(0.5, 0.5);
+                        let moneyButton = this.add.image(textMoney.x + textMoney.width / 1.5, textMoney.y, 'dollar').setScale(0.08).setOrigin(0, 0.5);
 
-                        let textAnimal = this.add.text(bat.x, textMoney.y + textMoney.height*0.8, '+'+(10 * bat.level).toString(), { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
-                        let animalButton = this.add.image(textAnimal.x + textAnimal.width / 1.5, textAnimal.y, 'animal-care').setScale(0.08).setOrigin(0,0.5);
+                        let textAnimal = this.add.text(bat.x, textMoney.y + textMoney.height * 0.8, '+' + (10 * bat.level).toString(), { lineSpacing: 10, fontSize: 40, color: '#f00020 ' }).setOrigin(0.5, 0.5);
+                        let animalButton = this.add.image(textAnimal.x + textAnimal.width / 1.5, textAnimal.y, 'animal-care').setScale(0.08).setOrigin(0, 0.5);
                         console.log(textAnimal);
                         setTimeout(() => {
                             textMoney.destroy();
@@ -1040,8 +1026,8 @@ class Tuto extends Phaser.Scene {
                         }, 2000);
                     }
                     else {
-                        let textMoney = this.add.text(bat.x, bat.y, '-'+bat.ref.upgrade[bat.level], { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
-                        let moneyButton = this.add.image(textMoney.x + textMoney.width / 1.5, textMoney.y, 'dollar').setScale(0.08).setOrigin(0,0.5);
+                        let textMoney = this.add.text(bat.x, bat.y, '-' + bat.ref.upgrade[bat.level], { lineSpacing: 10, fontSize: 40, color: '#f00020 ' }).setOrigin(0.5, 0.5);
+                        let moneyButton = this.add.image(textMoney.x + textMoney.width / 1.5, textMoney.y, 'dollar').setScale(0.08).setOrigin(0, 0.5);
 
                         setTimeout(() => {
                             textMoney.destroy();
@@ -1064,20 +1050,20 @@ class Tuto extends Phaser.Scene {
                 bat.tag = ref.tag;
                 bat.ref = ref;
                 this.registry.set('money', this.registry.get('money') - ref.buildCost);
-                if(bat.type != 'field') {
+                if (bat.type != 'field') {
                     console.log('Builded !', bat);
-                    this.images[bat.key - 1] = this.physics.add.image(bat.x, bat.y, bat.tag+this.gameScene, bat.level - 1);
+                    this.images[bat.key - 1] = this.physics.add.image(bat.x, bat.y, bat.tag + this.gameScene, bat.level - 1);
                     if (bat.rotate) {
                         this.images[bat.key - 1].rotation = 3.141592 / 2;
                     }
-                    if(bat.type == 'animal') {
+                    if (bat.type == 'animal') {
                         this.updateJauge('animalCare', -30);
 
-                        let textMoney = this.add.text(bat.x, bat.y, '-'+ref.buildCost, { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
-                        let moneyButton = this.add.image(textMoney.x + textMoney.width / 1.5, textMoney.y, 'dollar').setScale(0.08).setOrigin(0,0.5);
+                        let textMoney = this.add.text(bat.x, bat.y, '-' + ref.buildCost, { lineSpacing: 10, fontSize: 40, color: '#f00020 ' }).setOrigin(0.5, 0.5);
+                        let moneyButton = this.add.image(textMoney.x + textMoney.width / 1.5, textMoney.y, 'dollar').setScale(0.08).setOrigin(0, 0.5);
 
-                        let textAnimal = this.add.text(bat.x, textMoney.y + textMoney.height*0.8, '-40', { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
-                        let animalButton = this.add.image(textAnimal.x + textAnimal.width / 1.5, textAnimal.y, 'animal-care').setScale(0.08).setOrigin(0,0.5);
+                        let textAnimal = this.add.text(bat.x, textMoney.y + textMoney.height * 0.8, '-40', { lineSpacing: 10, fontSize: 40, color: '#f00020 ' }).setOrigin(0.5, 0.5);
+                        let animalButton = this.add.image(textAnimal.x + textAnimal.width / 1.5, textAnimal.y, 'animal-care').setScale(0.08).setOrigin(0, 0.5);
 
                         setTimeout(() => {
                             textMoney.destroy();
@@ -1087,8 +1073,8 @@ class Tuto extends Phaser.Scene {
                         }, 2000);
                     }
                     else {
-                        let textMoney = this.add.text(bat.x, bat.y, '-'+ref.buildCost, { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
-                        let moneyButton = this.add.image(textMoney.x + textMoney.width / 1.5, textMoney.y, 'dollar').setScale(0.08).setOrigin(0,0.5);
+                        let textMoney = this.add.text(bat.x, bat.y, '-' + ref.buildCost, { lineSpacing: 10, fontSize: 40, color: '#f00020 ' }).setOrigin(0.5, 0.5);
+                        let moneyButton = this.add.image(textMoney.x + textMoney.width / 1.5, textMoney.y, 'dollar').setScale(0.08).setOrigin(0, 0.5);
 
                         setTimeout(() => {
                             textMoney.destroy();
@@ -1097,13 +1083,13 @@ class Tuto extends Phaser.Scene {
                     }
                 }
                 else {
-                    this.images[bat.key - 1]['ground'] = this.physics.add.image(bat.x, bat.y, ref.tag+this.gameScene, bat.level - 1);
+                    this.images[bat.key - 1]['ground'] = this.physics.add.image(bat.x, bat.y, ref.tag + this.gameScene, bat.level - 1);
                     this.images[bat.key - 1]['weeds'] = this.add.image(bat.x, bat.y, 'weeds', bat.weeds);
                     this.images[bat.key - 1]['plant'];
                     bat.ref = getByTag(bat.tag)[0];
 
-                    let textMoney = this.add.text(bat.x, bat.y, '-'+ref.buildCost, { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
-                    let moneyButton = this.add.image(textMoney.x + textMoney.width / 1.5, textMoney.y, 'dollar').setScale(0.08).setOrigin(0,0.5);
+                    let textMoney = this.add.text(bat.x, bat.y, '-' + ref.buildCost, { lineSpacing: 10, fontSize: 40, color: '#f00020 ' }).setOrigin(0.5, 0.5);
+                    let moneyButton = this.add.image(textMoney.x + textMoney.width / 1.5, textMoney.y, 'dollar').setScale(0.08).setOrigin(0, 0.5);
 
                     setTimeout(() => {
                         textMoney.destroy();
@@ -1129,8 +1115,8 @@ class Tuto extends Phaser.Scene {
                     console.log('Planted !', bat);
                     this.images[bat.key - 1]['plant'] = this.add.image(bat.x, bat.y, seed.tag, bat.grow);
 
-                    let textMoney = this.add.text(bat.x, bat.y, '-'+seed.costPlant, { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
-                    let moneyButton = this.add.image(textMoney.x + textMoney.width / 1.5, textMoney.y, 'dollar').setScale(0.08).setOrigin(0,0.5);
+                    let textMoney = this.add.text(bat.x, bat.y, '-' + seed.costPlant, { lineSpacing: 10, fontSize: 40, color: '#f00020 ' }).setOrigin(0.5, 0.5);
+                    let moneyButton = this.add.image(textMoney.x + textMoney.width / 1.5, textMoney.y, 'dollar').setScale(0.08).setOrigin(0, 0.5);
 
                     setTimeout(() => {
                         textMoney.destroy();
@@ -1139,16 +1125,16 @@ class Tuto extends Phaser.Scene {
 
                     setTimeout(() => {
                         let nbOldSeed = 0;
-                        while(bat.seed == bat.oldseed[nbOldSeed]){
+                        while (bat.seed == bat.oldseed[nbOldSeed]) {
                             nbOldSeed++;
                         }
-                        if(nbOldSeed == 1) {
+                        if (nbOldSeed == 1) {
                             this.menuScene.seedyAdvice('sameSeed', bat.seed);
                         }
-                        if(nbOldSeed == 2) {
+                        if (nbOldSeed == 2) {
                             this.menuScene.seedyAdvice('sameSeed2', bat.seed);
                         }
-                        if(nbOldSeed >= 3) {
+                        if (nbOldSeed >= 3) {
                             this.menuScene.seedyAdvice('toMuchSameSeed', bat.seed);
                         }
                     }, 4000);
@@ -1184,7 +1170,7 @@ class Tuto extends Phaser.Scene {
             }
         }
     }
-    rotten(){
+    rotten() {
         for (let i in this.data.values) {
             let bat = this.data.values[i];
             if (bat.level == 1 && bat.type == 'field' && (bat.tag != 'labor' || bat.tag != 'water') && bat.plant && !bat.dead) {
@@ -1197,50 +1183,50 @@ class Tuto extends Phaser.Scene {
             }
         }
     }
-    weeds(){
+    weeds() {
         for (let i in this.data.values) {
             let bat = this.data.values[i];
             if (bat.level == 1 && bat.type == 'field') {
                 if (Phaser.Math.Between(1, 5) <= 2) {
                     bat.weeds++;
-                    if(bat.weeds > bat.maxWeeds) bat.weeds = bat.maxWeeds;
+                    if (bat.weeds > bat.maxWeeds) bat.weeds = bat.maxWeeds;
                     console.log('Weeds !', bat);
                     this.images[bat.key - 1]['weeds'].setFrame(bat.weeds);
 
 
-                    let textHealth = this.add.text(bat.x, bat.y, '-1', { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
-                    let healthButton = this.add.image(textHealth.x + textHealth.width / 1.5, textHealth.y, 'health').setScale(0.08).setOrigin(0,0.5);
+                    let textHealth = this.add.text(bat.x, bat.y, '-1', { lineSpacing: 10, fontSize: 40, color: '#f00020 ' }).setOrigin(0.5, 0.5);
+                    let healthButton = this.add.image(textHealth.x + textHealth.width / 1.5, textHealth.y, 'health').setScale(0.08).setOrigin(0, 0.5);
 
                     setTimeout(() => {
                         textHealth.destroy();
                         healthButton.destroy();
                     }, 2000);
                 }
-                if(bat.weed == 8) {
-                    
+                if (bat.weed == 8) {
+
                     this.menuScene.seedyAdvice('weeds', bat.ref);
                 }
-                if(bat.weed == 10) {
-                    
+                if (bat.weed == 10) {
+
                     this.menuScene.seedyAdvice('fullWeeds', bat.ref);
                 }
             }
         }
     }
-    clean(bat, lutte){
+    clean(bat, lutte) {
         console.log('Cleaning : ', bat);
         if (bat.type == 'field' && bat.level == 1 && bat.weeds > 0) {
             bat.weeds -= lutte.health;
-            if(bat.weeds < 0) bat.weeds = 0;
+            if (bat.weeds < 0) bat.weeds = 0;
             console.log('Cleaned !', bat);
             this.images[bat.key - 1]['weeds'].setFrame(bat.weeds);
 
             this.updateJauge('ecology', lutte.ecology);
 
-            let textEcology = this.add.text(bat.x, bat.y, lutte.ecology.toString(), { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
-            let ecologyButton = this.add.image(textEcology.x + textEcology.width / 1.5, textEcology.y, 'ecology-care').setScale(0.08).setOrigin(0,0.5);
-            let textHealth = this.add.text(bat.x, textEcology.y + textEcology.height*0.8, '+'+lutte.health, { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
-            let healthButton = this.add.image(textHealth.x + textHealth.width / 1.5, textHealth.y, 'health').setScale(0.08).setOrigin(0,0.5);
+            let textEcology = this.add.text(bat.x, bat.y, lutte.ecology.toString(), { lineSpacing: 10, fontSize: 40, color: '#f00020 ' }).setOrigin(0.5, 0.5);
+            let ecologyButton = this.add.image(textEcology.x + textEcology.width / 1.5, textEcology.y, 'ecology-care').setScale(0.08).setOrigin(0, 0.5);
+            let textHealth = this.add.text(bat.x, textEcology.y + textEcology.height * 0.8, '+' + lutte.health, { lineSpacing: 10, fontSize: 40, color: '#f00020 ' }).setOrigin(0.5, 0.5);
+            let healthButton = this.add.image(textHealth.x + textHealth.width / 1.5, textHealth.y, 'health').setScale(0.08).setOrigin(0, 0.5);
             console.log(textEcology);
             setTimeout(() => {
                 textEcology.destroy();
@@ -1253,26 +1239,26 @@ class Tuto extends Phaser.Scene {
     recolte(bat) {
         console.log('Recolte : ', bat);
         if (bat.type == 'field' && bat.plant && bat.level == 1 && (bat.tag != 'labor' || bat.tag != 'water') && (bat.grow == bat.seed.maxGrow || bat.dead)) {
-            let percent = bat.fertility/100;
-            let percent2 = (bat.maxWeeds - bat.weeds)/10;
+            let percent = bat.fertility / 100;
+            let percent2 = (bat.maxWeeds - bat.weeds) / 10;
             console.log(percent, percent2);
-            let moneyWin = bat.seed.money*percent*percent2;
-            let hungerWin = 5*percent*percent2;
+            let moneyWin = bat.seed.money * percent * percent2;
+            let hungerWin = 5 * percent * percent2;
 
             // Compte l'echainement des graines
             let looseFertility = 0;
             let nbOldSeed = 0;
-            while(bat.seed == bat.oldseed[nbOldSeed]){
+            while (bat.seed == bat.oldseed[nbOldSeed]) {
                 nbOldSeed++;
-                looseFertility += 10*nbOldSeed;
+                looseFertility += 10 * nbOldSeed;
             }
-            if(nbOldSeed == 0) {
+            if (nbOldSeed == 0) {
                 looseFertility += 5;
             }
             bat.fertility -= looseFertility;
-            if(bat.fertility < 0) bat.fertility = 0;
+            if (bat.fertility < 0) bat.fertility = 0;
 
-            if(!bat.dead) {
+            if (!bat.dead) {
                 bat.plant = false;
                 bat.oldseed.unshift(bat.seed);
                 bat.tag = bat.seed.ground;
@@ -1282,25 +1268,25 @@ class Tuto extends Phaser.Scene {
                 console.log('Recolté !', bat);
                 this.images[bat.key - 1]['plant'].destroy();
 
-                
+
 
                 setTimeout(() => {
-                    if(moneyWin < bat.seed.money * 0.15) {
-                    
+                    if (moneyWin < bat.seed.money * 0.15) {
+
                         this.menuScene.seedyAdvice('lowWinPlant', bat, bat.seed);
                     }
-    
+
                     setTimeout(() => {
-                        if(bat.fertility < 25 && bat.fertility >= 20) {
-                        
+                        if (bat.fertility < 25 && bat.fertility >= 20) {
+
                             this.menuScene.seedyAdvice('lowFertility', bat.fertility);
                         }
-                        if(bat.fertility < 10) {
-                            
+                        if (bat.fertility < 10) {
+
                             this.menuScene.seedyAdvice('veryLowFertility', bat.fertility);
                         }
-                        if(bat.fertility == 0) {
-                            
+                        if (bat.fertility == 0) {
+
                             this.menuScene.seedyAdvice('noFertility', bat.fertility);
                         }
                     }, 10000);
@@ -1308,12 +1294,12 @@ class Tuto extends Phaser.Scene {
 
                 bat.seed = {};
 
-                let textMoney = this.add.text(bat.x, bat.y, '+'+moneyWin, { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
-                let moneyButton = this.add.image(textMoney.x + textMoney.width / 1.5, textMoney.y, 'dollar').setScale(0.08).setOrigin(0,0.5);
-                let textHunger = this.add.text(bat.x, textMoney.y + textMoney.height*0.8, hungerWin, { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
-                let hungerButton = this.add.image(textHunger.x + textHunger.width / 1.5, textHunger.y, 'hunger-care').setScale(0.08).setOrigin(0,0.5);
-                let textHealth = this.add.text(bat.x, textHunger.y + textHunger.height*0.8, '-'+looseFertility, { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
-                let healthButton = this.add.image(textHealth.x + textHealth.width / 1.5, textHealth.y, 'fertility').setScale(0.08).setOrigin(0,0.5);
+                let textMoney = this.add.text(bat.x, bat.y, '+' + moneyWin, { lineSpacing: 10, fontSize: 40, color: '#f00020 ' }).setOrigin(0.5, 0.5);
+                let moneyButton = this.add.image(textMoney.x + textMoney.width / 1.5, textMoney.y, 'dollar').setScale(0.08).setOrigin(0, 0.5);
+                let textHunger = this.add.text(bat.x, textMoney.y + textMoney.height * 0.8, hungerWin, { lineSpacing: 10, fontSize: 40, color: '#f00020 ' }).setOrigin(0.5, 0.5);
+                let hungerButton = this.add.image(textHunger.x + textHunger.width / 1.5, textHunger.y, 'hunger-care').setScale(0.08).setOrigin(0, 0.5);
+                let textHealth = this.add.text(bat.x, textHunger.y + textHunger.height * 0.8, '-' + looseFertility, { lineSpacing: 10, fontSize: 40, color: '#f00020 ' }).setOrigin(0.5, 0.5);
+                let healthButton = this.add.image(textHealth.x + textHealth.width / 1.5, textHealth.y, 'fertility').setScale(0.08).setOrigin(0, 0.5);
                 setTimeout(() => {
                     textMoney.destroy();
                     moneyButton.destroy();
@@ -1336,8 +1322,8 @@ class Tuto extends Phaser.Scene {
                 this.images[bat.key - 1]['plant'].destroy();
 
 
-                let textHunger = this.add.text(bat.x, bat.y, '-10', { lineSpacing:10, fontSize:40, color:'#f00020' }).setOrigin(0.5, 0.5);
-                let hungerButton = this.add.image(textHunger.x + textHunger.width / 1.5, textHunger.y, 'hunger-care').setScale(0.08).setOrigin(0,0.5);
+                let textHunger = this.add.text(bat.x, bat.y, '-10', { lineSpacing: 10, fontSize: 40, color: '#f00020' }).setOrigin(0.5, 0.5);
+                let hungerButton = this.add.image(textHunger.x + textHunger.width / 1.5, textHunger.y, 'hunger-care').setScale(0.08).setOrigin(0, 0.5);
                 setTimeout(() => {
                     textHunger.destroy();
                     hungerButton.destroy();
@@ -1349,14 +1335,14 @@ class Tuto extends Phaser.Scene {
         console.log('Fertilisation : ', bat);
         if (bat.type == 'field' && !bat.plant && bat.level == 1 && (bat.tag == 'labor' || bat.tag == 'water') && bat.fertility < 100) {
             bat.fertility += engrais.fertility;
-            if(bat.fertility > 100) bat.fertility = 100;
+            if (bat.fertility > 100) bat.fertility = 100;
             console.log('Fertilised !', bat);
             this.updateJauge('ecology', engrais.ecology);
 
-            let textEcology = this.add.text(bat.x, bat.y, engrais.ecology.toString(), { lineSpacing:10, fontSize:40, color:'#ffffff' }).setOrigin(0.5, 0.5);
-            let ecologyButton = this.add.image(textEcology.x + textEcology.width / 1.5, textEcology.y, 'ecology-care').setScale(0.08).setOrigin(0,0.5);
-            let textFertility = this.add.text(bat.x, textEcology.y + textEcology.height*0.8, '+'+engrais.fertility, { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
-            let fertilityButton = this.add.image(textFertility.x + textFertility.width / 1.5, textFertility.y, 'fertility').setScale(0.08).setOrigin(0,0.5);
+            let textEcology = this.add.text(bat.x, bat.y, engrais.ecology.toString(), { lineSpacing: 10, fontSize: 40, color: '#ffffff' }).setOrigin(0.5, 0.5);
+            let ecologyButton = this.add.image(textEcology.x + textEcology.width / 1.5, textEcology.y, 'ecology-care').setScale(0.08).setOrigin(0, 0.5);
+            let textFertility = this.add.text(bat.x, textEcology.y + textEcology.height * 0.8, '+' + engrais.fertility, { lineSpacing: 10, fontSize: 40, color: '#f00020 ' }).setOrigin(0.5, 0.5);
+            let fertilityButton = this.add.image(textFertility.x + textFertility.width / 1.5, textFertility.y, 'fertility').setScale(0.08).setOrigin(0, 0.5);
             console.log(textEcology);
             setTimeout(() => {
                 textEcology.destroy();
@@ -1381,8 +1367,8 @@ class Tuto extends Phaser.Scene {
 
                     this.updateJauge('animalCare', -40);
 
-                    let textAnimal = this.add.text(bat.x, bat.y, '-40', { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
-                    let animalButton = this.add.image(textAnimal.x + textAnimal.width / 1.5, textAnimal.y, 'animal-care').setScale(0.08).setOrigin(0,0.5);
+                    let textAnimal = this.add.text(bat.x, bat.y, '-40', { lineSpacing: 10, fontSize: 40, color: '#f00020 ' }).setOrigin(0.5, 0.5);
+                    let animalButton = this.add.image(textAnimal.x + textAnimal.width / 1.5, textAnimal.y, 'animal-care').setScale(0.08).setOrigin(0, 0.5);
                     setTimeout(() => {
                         textAnimal.destroy();
                         animalButton.destroy();
@@ -1396,18 +1382,18 @@ class Tuto extends Phaser.Scene {
         console.log('Destruction batiment : ', bat);
         if (bat.level > 0 && bat.tag != "build" && bat.type == 'animal' || bat.type == 'struct' || bat.type == 'field') {
             if (this.money() >= destroyRef.cost) {
-                if(bat.type == 'animal') {
+                if (bat.type == 'animal') {
                     this.images[bat.key - 1].destroy();
                     this.images[bat.key - 1] = this.physics.add.image(bat.x, bat.y, 'build').setScale(bat.scale);
-                    if(!bat.dead) {
+                    if (!bat.dead) {
                         //Si il vend le batiment des animaux pas mort il gagne un bonus bien-être
                         this.updateJauge('animalCare', 20);
 
-                        let textMoney = this.add.text(bat.x, bat.y, '-'+destroyRef.cost, { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
-                        let moneyButton = this.add.image(textMoney.x + textMoney.width / 1.5, textMoney.y, 'dollar').setScale(0.08).setOrigin(0,0.5);
+                        let textMoney = this.add.text(bat.x, bat.y, '-' + destroyRef.cost, { lineSpacing: 10, fontSize: 40, color: '#f00020 ' }).setOrigin(0.5, 0.5);
+                        let moneyButton = this.add.image(textMoney.x + textMoney.width / 1.5, textMoney.y, 'dollar').setScale(0.08).setOrigin(0, 0.5);
 
-                        let textAnimal = this.add.text(bat.x, textMoney.y + textMoney.height*0.8, +20, { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
-                        let animalButton = this.add.image(textAnimal.x + textAnimal.width / 1.5, textAnimal.y, 'animal-care').setScale(0.08).setOrigin(0,0.5);
+                        let textAnimal = this.add.text(bat.x, textMoney.y + textMoney.height * 0.8, +20, { lineSpacing: 10, fontSize: 40, color: '#f00020 ' }).setOrigin(0.5, 0.5);
+                        let animalButton = this.add.image(textAnimal.x + textAnimal.width / 1.5, textAnimal.y, 'animal-care').setScale(0.08).setOrigin(0, 0.5);
                         setTimeout(() => {
                             textMoney.destroy();
                             moneyButton.destroy();
@@ -1423,11 +1409,11 @@ class Tuto extends Phaser.Scene {
                 bat.tag = 'build';
                 bat.ref = {};
                 this.registry.set('money', this.registry.get('money') - destroyRef.cost);
-                if(bat.type == 'field') {
+                if (bat.type == 'field') {
                     console.log('Destroy field !', bat);
                     this.images[bat.key - 1]['ground'].destroy();
                     this.images[bat.key - 1]['weeds'].destroy();
-                    if(bat.plant) {
+                    if (bat.plant) {
                         this.images[bat.key - 1]['plant'].destroy();
                     }
                     this.images[bat.key - 1] = this.physics.add.image(bat.x, bat.y, 'build').setScale(bat.scale);
@@ -1439,20 +1425,20 @@ class Tuto extends Phaser.Scene {
                     bat.plant = false;
                     bat.fertility = 100;
 
-                    let textMoney = this.add.text(bat.x, bat.y, '-'+destroyRef.cost, { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
-                    let moneyButton = this.add.image(textMoney.x + textMoney.width / 1.5, textMoney.y, 'dollar').setScale(0.08).setOrigin(0,0.5);
+                    let textMoney = this.add.text(bat.x, bat.y, '-' + destroyRef.cost, { lineSpacing: 10, fontSize: 40, color: '#f00020 ' }).setOrigin(0.5, 0.5);
+                    let moneyButton = this.add.image(textMoney.x + textMoney.width / 1.5, textMoney.y, 'dollar').setScale(0.08).setOrigin(0, 0.5);
 
                     setTimeout(() => {
                         textMoney.destroy();
                         moneyButton.destroy();
                     }, 2000);
                 }
-                if(bat.type == 'struct') {
+                if (bat.type == 'struct') {
                     this.images[bat.key - 1].destroy();
                     this.images[bat.key - 1] = this.physics.add.image(bat.x, bat.y, 'build').setScale(bat.scale);
 
-                    let textMoney = this.add.text(bat.x, bat.y, '-'+destroyRef.cost, { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
-                    let moneyButton = this.add.image(textMoney.x + textMoney.width / 1.5, textMoney.y, 'dollar').setScale(0.08).setOrigin(0,0.5);
+                    let textMoney = this.add.text(bat.x, bat.y, '-' + destroyRef.cost, { lineSpacing: 10, fontSize: 40, color: '#f00020 ' }).setOrigin(0.5, 0.5);
+                    let moneyButton = this.add.image(textMoney.x + textMoney.width / 1.5, textMoney.y, 'dollar').setScale(0.08).setOrigin(0, 0.5);
 
                     setTimeout(() => {
                         textMoney.destroy();
@@ -1473,12 +1459,12 @@ class Tuto extends Phaser.Scene {
         console.log('Feed : ', bat);
         if (bat.type == 'animal' && !bat.dead && bat.level > 0 && bat.feed < 100) {
             bat.feed += meal.feed;
-            if(bat.feed > 100) bat.feed = 100;
+            if (bat.feed > 100) bat.feed = 100;
             console.log('Feeded !', bat);
             this.updateJauge('animalCare', meal.care);
 
-            let textAnimal = this.add.text(bat.x, bat.y, meal.care.toString(), { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
-            let animalButton = this.add.image(textAnimal.x + textAnimal.width / 1.5, textAnimal.y, 'animal-care').setScale(0.08).setOrigin(0,0.5);
+            let textAnimal = this.add.text(bat.x, bat.y, meal.care.toString(), { lineSpacing: 10, fontSize: 40, color: '#f00020 ' }).setOrigin(0.5, 0.5);
+            let animalButton = this.add.image(textAnimal.x + textAnimal.width / 1.5, textAnimal.y, 'animal-care').setScale(0.08).setOrigin(0, 0.5);
             console.log(textAnimal);
             setTimeout(() => {
                 textAnimal.destroy();
@@ -1496,7 +1482,7 @@ class Tuto extends Phaser.Scene {
                         bat.feed -= 5;
                         console.log('Eat animal !', bat);
 
-                        if(bat.feed <= 0) {
+                        if (bat.feed <= 0) {
                             this.menuScene.seedyAdvice('noMeal');
                             bat.feed = 0;
                             setTimeout(() => {
@@ -1506,31 +1492,31 @@ class Tuto extends Phaser.Scene {
 
                                 this.updateJauge('animalCare', -40);
 
-                                let textAnimal = this.add.text(bat.x, bat.y, '-40', { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
-                                let animalButton = this.add.image(textAnimal.x + textAnimal.width / 1.5, textAnimal.y, 'animal-care').setScale(0.08).setOrigin(0,0.5);
+                                let textAnimal = this.add.text(bat.x, bat.y, '-40', { lineSpacing: 10, fontSize: 40, color: '#f00020 ' }).setOrigin(0.5, 0.5);
+                                let animalButton = this.add.image(textAnimal.x + textAnimal.width / 1.5, textAnimal.y, 'animal-care').setScale(0.08).setOrigin(0, 0.5);
                                 setTimeout(() => {
                                     textAnimal.destroy();
                                     animalButton.destroy();
                                 }, 2000);
                             }, 10000);
                         }
-                        else if(bat.feed < 25) {
+                        else if (bat.feed < 25) {
                             console.log('Hunger animal !', bat);
 
                             this.updateJauge('animalCare', -4);
 
-                            let textAnimal = this.add.text(bat.x, bat.y, '-4', { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
-                            let animalButton = this.add.image(textAnimal.x + textAnimal.width / 1.5, textAnimal.y, 'animal-care').setScale(0.08).setOrigin(0,0.5);
+                            let textAnimal = this.add.text(bat.x, bat.y, '-4', { lineSpacing: 10, fontSize: 40, color: '#f00020 ' }).setOrigin(0.5, 0.5);
+                            let animalButton = this.add.image(textAnimal.x + textAnimal.width / 1.5, textAnimal.y, 'animal-care').setScale(0.08).setOrigin(0, 0.5);
                             setTimeout(() => {
                                 textAnimal.destroy();
                                 animalButton.destroy();
                             }, 2000);
 
                             //Seedy Advice
-                            if(bat.feed >= 5 && bat.feed < 10) {
+                            if (bat.feed >= 5 && bat.feed < 10) {
                                 this.menuScene.seedyAdvice('veryLowMeal');
                             }
-                            if(bat.feed >= 20 && bat.feed < 25) {
+                            if (bat.feed >= 20 && bat.feed < 25) {
                                 this.menuScene.seedyAdvice('lowMeal');
                             }
                         }
@@ -1549,15 +1535,15 @@ class Tuto extends Phaser.Scene {
                         bat.qt += 5;
                         console.log('Birth animal !', bat);
 
-                        if(bat.qt > 100) bat.qt = 100;
-                        if(bat.qt <= 100) this.images[bat.key - 1].setFrame((bat.level - 1));
-                        if(bat.qt < 75) this.images[bat.key - 1].setFrame((bat.level - 1) + 4 * bat.ref.lvlMax);
-                        if(bat.qt < 50) this.images[bat.key - 1].setFrame((bat.level - 1) + 2 * bat.ref.lvlMax);
-                        if(bat.qt < 25) this.images[bat.key - 1].setFrame((bat.level - 1) + 3 * bat.ref.lvlMax);
+                        if (bat.qt > 100) bat.qt = 100;
+                        if (bat.qt <= 100) this.images[bat.key - 1].setFrame((bat.level - 1));
+                        if (bat.qt < 75) this.images[bat.key - 1].setFrame((bat.level - 1) + 4 * bat.ref.lvlMax);
+                        if (bat.qt < 50) this.images[bat.key - 1].setFrame((bat.level - 1) + 2 * bat.ref.lvlMax);
+                        if (bat.qt < 25) this.images[bat.key - 1].setFrame((bat.level - 1) + 3 * bat.ref.lvlMax);
                     }
                 }
-                if(bat.feed < 35 && bat.feed >= 30) {
-                    
+                if (bat.feed < 35 && bat.feed >= 30) {
+
                     this.menuScene.seedyAdvice('notEnoughtMeal', bat.ref);
                 }
 
@@ -1571,26 +1557,26 @@ class Tuto extends Phaser.Scene {
             bat.qt -= 30;
             console.log('Selled !', bat);
 
-            if(bat.qt <= 100) this.images[bat.key - 1].setFrame((bat.level - 1));
-            if(bat.qt < 75) this.images[bat.key - 1].setFrame((bat.level - 1) + 4 * bat.ref.lvlMax);
-            if(bat.qt < 50) this.images[bat.key - 1].setFrame((bat.level - 1) + 2 * bat.ref.lvlMax);
-            if(bat.qt < 25) this.images[bat.key - 1].setFrame((bat.level - 1) + 3 * bat.ref.lvlMax);
+            if (bat.qt <= 100) this.images[bat.key - 1].setFrame((bat.level - 1));
+            if (bat.qt < 75) this.images[bat.key - 1].setFrame((bat.level - 1) + 4 * bat.ref.lvlMax);
+            if (bat.qt < 50) this.images[bat.key - 1].setFrame((bat.level - 1) + 2 * bat.ref.lvlMax);
+            if (bat.qt < 25) this.images[bat.key - 1].setFrame((bat.level - 1) + 3 * bat.ref.lvlMax);
 
-            let moneyWin = sell.money*30;
+            let moneyWin = sell.money * 30;
 
             this.registry.set('money', this.registry.get('money') + moneyWin);
             this.updateJauge('hunger', sell.hunger);
             this.updateJauge('animalCare', sell.care);
 
 
-            let textMoney = this.add.text(bat.x, bat.y, '+'+moneyWin, { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
-            let moneyButton = this.add.image(textMoney.x + textMoney.width / 1.5, textMoney.y, 'dollar').setScale(0.08).setOrigin(0,0.5);
+            let textMoney = this.add.text(bat.x, bat.y, '+' + moneyWin, { lineSpacing: 10, fontSize: 40, color: '#f00020 ' }).setOrigin(0.5, 0.5);
+            let moneyButton = this.add.image(textMoney.x + textMoney.width / 1.5, textMoney.y, 'dollar').setScale(0.08).setOrigin(0, 0.5);
 
-            let textAnimal = this.add.text(bat.x, textMoney.y + textMoney.height*0.8, sell.care.toString(), { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
-            let animalButton = this.add.image(textAnimal.x + textAnimal.width / 1.5, textAnimal.y, 'animal-care').setScale(0.08).setOrigin(0,0.5);
+            let textAnimal = this.add.text(bat.x, textMoney.y + textMoney.height * 0.8, sell.care.toString(), { lineSpacing: 10, fontSize: 40, color: '#f00020 ' }).setOrigin(0.5, 0.5);
+            let animalButton = this.add.image(textAnimal.x + textAnimal.width / 1.5, textAnimal.y, 'animal-care').setScale(0.08).setOrigin(0, 0.5);
 
-            let texthunger = this.add.text(bat.x, textAnimal.y + textAnimal.height*0.8, sell.hunger.toString(), { lineSpacing:10, fontSize:40, color:'#f00020 ' }).setOrigin(0.5, 0.5);
-            let hungerButton = this.add.image(texthunger.x + texthunger.width / 1.5, texthunger.y, 'hunger-care').setScale(0.08).setOrigin(0,0.5);
+            let texthunger = this.add.text(bat.x, textAnimal.y + textAnimal.height * 0.8, sell.hunger.toString(), { lineSpacing: 10, fontSize: 40, color: '#f00020 ' }).setOrigin(0.5, 0.5);
+            let hungerButton = this.add.image(texthunger.x + texthunger.width / 1.5, texthunger.y, 'hunger-care').setScale(0.08).setOrigin(0, 0.5);
             console.log(textAnimal);
             setTimeout(() => {
                 textMoney.destroy();
@@ -1604,16 +1590,16 @@ class Tuto extends Phaser.Scene {
     }
 
 
-    updateJauge(jauge, value){
+    updateJauge(jauge, value) {
         let result = this.registry.get(jauge) + value;
-        if(result > 100) result = 100;
-        if(result < 0) result = 0;
+        if (result > 100) result = 100;
+        if (result < 0) result = 0;
         this.registry.set(jauge, result);
     }
 
 
-    textGain(text){
-        let textMoney = this.add.text(bat.x, bat.y, '+'+moneyWin+'$\n+'+hungerWin+' Nourriture', { lineSpacing:10, fontSize:40, color:'#ffffff' }).setOrigin(0.5, 0.5);
+    textGain(text) {
+        let textMoney = this.add.text(bat.x, bat.y, '+' + moneyWin + '$\n+' + hungerWin + ' Nourriture', { lineSpacing: 10, fontSize: 40, color: '#ffffff' }).setOrigin(0.5, 0.5);
         setTimeout(() => {
             textWin.destroy();
         }, 2000);
