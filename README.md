@@ -49,5 +49,5 @@ To redeploy this project you will need to
 *  https://agriculture.canada.ca/fr
 *  https://www.cairn.info/revue-apres-demain-2014-3-page-26.htm#:~:text=L'agriculture%20africaine%20dominante%20est,aval%20des%20fili%C3%A8res%20%5BJohn%20Murray
 *  https://www.afrique-agriculture.org/
-*  http://geoconfluences.ens-lyon.fr/informations-scientifiques/dossiers-regionaux/asie-du-sud-est/articles-scientifiques/agricultures-mondialisation#:~:text=L'agriculture%20d'Asie%20du,Indon%C3%A9sie%2C%20Malaisie%2C%20Tha%C3%AFlande).
+*  http://geoconfluences.ens-lyon.fr/informations-scientifiques/dossiers-regionaux/asie-du-sud-est/articles-scientifiques/agricultures-mondialisation#:~:text=L'agriculture%20d'Asie%20du,Indon%C3%A9sie%2C%20Malaisie%2C%20Tha%C3%AFlande
 *  https://www.oecd-ilibrary.org/docserver/312b7d43-fr.pdf?expires=1652955512&id=id&accname=guest&checksum=A1B7CC3982CE48FAC8461D27502C099C#:~:text=La%20r%C3%A9gion%20se%20positionne%20comme,et%20de%20fruits%20et%20l%C3%A9gumes
