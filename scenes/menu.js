@@ -710,17 +710,17 @@ class Menu extends Phaser.Scene {
                     tmpText+='Type : '+this.batOverlap.typeName+'\n';
                 }
             }
-            if(this.batOverlap.type != 'field') {
-                if(this.batOverlap.level < this.batOverlap.ref.lvlMax){
-                    tmpText+='Niveau : '+this.batOverlap.level+' / '+this.batOverlap.ref.lvlMax+'\n';
-                }
-                else {
-                    tmpText+='Niveau : Max'+'\n';
-                }
-            }
             if(this.batOverlap.ref.money && this.batOverlap.type != 'field' && this.batOverlap.type != 'animal') {
                 let moneyPerSec = this.batOverlap.ref.money[this.batOverlap.level];
-                tmpText+='Gain : '+moneyPerSec+'/s';
+                tmpText+='Gain : '+moneyPerSec+'/s\n';
+            }
+            if(this.batOverlap.type != 'field') {
+                if(this.batOverlap.level < this.batOverlap.ref.lvlMax){
+                    tmpText+='Niveau : '+this.batOverlap.level+' / '+this.batOverlap.ref.lvlMax;
+                }
+                else {
+                    tmpText+='Niveau : Max';
+                }
             }
             if(this.batOverlap.type == 'animal') {
                 if(this.batOverlap.dead) {
