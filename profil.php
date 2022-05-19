@@ -131,18 +131,18 @@ $query->closeCursor();
   <div class="disp">
     <img src="./images/background_profil.jpg">
     <div class="container">
-      <a href="game.php"><span>Continue</span></a>
-      <a><span>New game</span></a>
+      <!--<a ><span>Continue</span></a>-->
+      <a href="game.php"><span>New game</span></a>
     </div>
-    <div class="info">
-      <ul>
+    <!--<div class="info">
+       <ul>
         <li>Niveau :</li>
         <li>Argent :</li>
       </ul>
       <ul>
         <li></li>
       </ul>
-    </div>
+    </div>-->
   </div>
 
 
