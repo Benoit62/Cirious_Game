@@ -333,10 +333,10 @@ include("config/configbdd.php");
                 //coords of bars
                 var w1 = 530;
                 var h1 = 10;
-                var w2 = w1 + widthBar + 70;
-                var h2 = 10;
-                var w3 = w2 + widthBar + 70;
+                var w3 = window.innerWidth - 170 - widthBar;
                 var h3 = 10;
+                var w2 = (w3 + w1)/2;
+                var h2 = 10;
                 progressBox1.fillRect(w1, h1, widthBar, heightBar);
                 progressBox2.fillRect(w2, h2, widthBar, heightBar);
                 progressBox3.fillRect(w3, h3, widthBar, heightBar);
