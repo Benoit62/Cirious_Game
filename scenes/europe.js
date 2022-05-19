@@ -500,9 +500,10 @@ class Europe extends Phaser.Scene {
             let moneyPerSec = 0;
             for (let i in this.data.values) {
                 let bat = this.data.values[i];
-                if (bat.level > 0 && bat.tag != 'build' && bat.type != 'field' && bat.type != 'animal') {
-                    if (typeof bat.ref.money[bat.level] == "number") {
-                        moneyPerSec += bat.ref.money[bat.level];
+                if (bat.level > 0 && bat.tag != 'build' && bat.type == 'struct') {
+                    if (typeof bat.ref.passif[bat.level] == "number") {
+                        moneyPerSec += bat.ref.passif[bat.level];
+                        getByType(bat.ref.product).forEach(value => value.unlock ? moneyPerSec +=value.passif : moneyPerSec+=0);
                     }
                 }
             }

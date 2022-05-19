@@ -717,8 +717,9 @@ class Menu extends Phaser.Scene {
                     tmpText+='Type : '+this.batOverlap.typeName+'\n';
                 }
             }
-            if(this.batOverlap.ref.money && this.batOverlap.type != 'field' && this.batOverlap.type != 'animal') {
-                let moneyPerSec = this.batOverlap.ref.money[this.batOverlap.level];
+            if(this.batOverlap.ref.passif && this.batOverlap.type == 'struct') {
+                let moneyPerSec = this.batOverlap.ref.passif[this.batOverlap.level];
+                getByType(this.batOverlap.ref.product).forEach(value => value.unlock ? moneyPerSec +=value.passif : moneyPerSec+=0);
                 tmpText+='Gain : '+moneyPerSec+'/s\n';
             }
             if(this.batOverlap.type != 'field') {
