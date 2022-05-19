@@ -779,7 +779,7 @@ class Menu extends Phaser.Scene {
                 let compt = 0;
                 this.imgTechs.forEach(value => value.destroy());
                 buttons.forEach(function(value) {
-                    this.imgTechs[compt] = this.add.image((300/taille)*(compt+1), this.textBat.y + this.textBat.height + 20, value.tag+'-search').setScale(0.08).setVisible(true);
+                    this.imgTechs[compt] = this.add.image((300/taille)*(compt+1), window.innerHeight - 75, value.tag+'-search').setScale(0.08).setVisible(true);
                     //this.textTechs[compt].setText('+'+value.passif).setX(this.imgTechs[compt].x).setY(this.imgTechs[compt].y + this.imgTechs[compt].height / 2 + 5).setVisible(true);
                     if(!value.unlock) {
                         this.imgTechs[compt].setAlpha(0.5);
@@ -807,83 +807,83 @@ class Menu extends Phaser.Scene {
 
 
                 this.imgProgressBar1.destroy();
-                this.imgProgressBar1 = this.add.image(40, this.textBat.y + this.textBat.height +this.heightBar/2, 'meal').setVisible(true).setScale(0.08);
+                this.imgProgressBar1 = this.add.image(40, window.innerHeight - 55 - this.heightBar*1.4 - this.heightBar/2, 'meal').setVisible(true).setScale(0.08);
                 this.progressBox1.clear();
                 this.progressBox1.fillStyle(0xffffff, 0.2);
-                this.progressBox1.fillRect(80, this.textBat.y + this.textBat.height, this.widthBar, this.heightBar);
+                this.progressBox1.fillRect(80, window.innerHeight - 55 - this.heightBar - this.heightBar*1.4, this.widthBar, this.heightBar);
                 this.progressBox1.setVisible(true);
                 this.progressBar1.clear();
                 this.progressBar1.fillStyle(0xf00020, 1);
-                this.progressBar1.fillRect(80, this.textBat.y + this.textBat.height, this.widthBar*(this.batOverlap.feed/100), this.heightBar);
+                this.progressBar1.fillRect(80, window.innerHeight - 55 - this.heightBar - this.heightBar*1.4, this.widthBar*(this.batOverlap.feed/100), this.heightBar);
                 this.progressBar1.setVisible(true);
                 this.percentText1.setText('Nourriture : '+this.batOverlap.feed+'%');
-                this.percentText1.setY(this.textBat.y + this.textBat.height +this.heightBar/2);
+                this.percentText1.setY(window.innerHeight - 55 - this.heightBar*1.4 - this.heightBar/2);
                 this.percentText1.setVisible(true);
 
 
                 this.imgProgressBar2.destroy();
-                this.imgProgressBar2 = this.add.image(40, this.textBat.y + this.textBat.height + this.heightBar*1.4 + this.heightBar/2, 'sellAnimal').setVisible(true).setScale(0.08);
+                this.imgProgressBar2 = this.add.image(40, window.innerHeight - 55 - this.heightBar/2, 'sellAnimal').setVisible(true).setScale(0.08);
                 this.progressBox2.clear();
                 this.progressBox2.fillStyle(0xffffff, 0.2);
-                this.progressBox2.fillRect(80, this.textBat.y + this.textBat.height + this.heightBar*1.4, this.widthBar, this.heightBar);
+                this.progressBox2.fillRect(80, window.innerHeight - 55 - this.heightBar, this.widthBar, this.heightBar);
                 this.progressBox2.setVisible(true);
                 this.progressBar2.clear();
                 this.progressBar2.fillStyle(0x008000, 1);
-                this.progressBar2.fillRect(80, this.textBat.y + this.textBat.height + this.heightBar*1.4, this.widthBar*(this.batOverlap.qt/100), this.heightBar);
+                this.progressBar2.fillRect(80, window.innerHeight - 55 - this.heightBar, this.widthBar*(this.batOverlap.qt/100), this.heightBar);
                 this.progressBar2.setVisible(true);
                 this.percentText2.setText('Quantité : '+this.batOverlap.qt+'%');
-                this.percentText2.setY(this.textBat.y + this.textBat.height + this.heightBar*1.4 + this.heightBar/2);
+                this.percentText2.setY(window.innerHeight - 55 - this.heightBar/2);
                 this.percentText2.setVisible(true);
                 
             }
             else if(this.batOverlap.type == 'field' && this.batOverlap.level > 0){
                 this.imgProgressBar1.destroy();
-                this.imgProgressBar1 = this.add.image(40, this.textBat.y + this.textBat.height +this.heightBar/2, 'fertility').setVisible(true).setScale(0.08);
+                this.imgProgressBar1 = this.add.image(40, window.innerHeight - 55 - this.heightBar*2.8- this.heightBar/2, 'fertility').setVisible(true).setScale(0.08);
                 this.progressBox1.clear();
                 this.progressBox1.fillStyle(0xffffff, 0.2);
-                this.progressBox1.fillRect(80, this.textBat.y + this.textBat.height, this.widthBar, this.heightBar);
+                this.progressBox1.fillRect(80, window.innerHeight - 55 - this.heightBar - this.heightBar*2.8, this.widthBar, this.heightBar);
                 this.progressBox1.setVisible(true);
                 this.progressBar1.clear();
                 this.progressBar1.fillStyle(0xf00020, 1);
-                this.progressBar1.fillRect(80, this.textBat.y + this.textBat.height, this.widthBar*(this.batOverlap.fertility/100), this.heightBar);
+                this.progressBar1.fillRect(80, window.innerHeight - 55 - this.heightBar - this.heightBar*2.8, this.widthBar*(this.batOverlap.fertility/100), this.heightBar);
                 this.progressBar1.setVisible(true);
                 let tmpfertilitybar = this.batOverlap.fertility.toString();
                 this.percentText1.setText('Fertilité : '+tmpfertilitybar+'%');
-                this.percentText1.setY(this.textBat.y + this.textBat.height +this.heightBar/2);
+                this.percentText1.setY(window.innerHeight - 55 - this.heightBar*2.8 - this.heightBar/2);
                 this.percentText1.setVisible(true);
 
 
                 this.imgProgressBar2.destroy();
-                this.imgProgressBar2 = this.add.image(40, this.textBat.y + this.textBat.height + this.heightBar*1.4 + this.heightBar/2, 'health').setVisible(true).setScale(0.08);
+                this.imgProgressBar2 = this.add.image(40, window.innerHeight - 55 - this.heightBar*1.4 - this.heightBar/2, 'health').setVisible(true).setScale(0.08);
                 this.progressBox2.clear();
                 this.progressBox2.fillStyle(0xffffff, 0.2);
-                this.progressBox2.fillRect(80, this.textBat.y + this.textBat.height + this.heightBar*1.4, this.widthBar, this.heightBar);
+                this.progressBox2.fillRect(80, window.innerHeight - 55 - this.heightBar - this.heightBar*1.4, this.widthBar, this.heightBar);
                 this.progressBox2.setVisible(true);
                 this.progressBar2.clear();
                 this.progressBar2.fillStyle(0x008000, 1);
-                this.progressBar2.fillRect(80, this.textBat.y + this.textBat.height + this.heightBar*1.4, this.widthBar*((this.batOverlap.maxWeeds-this.batOverlap.weeds)/10), this.heightBar);
+                this.progressBar2.fillRect(80, window.innerHeight - 55 - this.heightBar - this.heightBar*1.4, this.widthBar*((this.batOverlap.maxWeeds-this.batOverlap.weeds)/10), this.heightBar);
                 this.progressBar2.setVisible(true);
                 let tmphealtbar = (this.batOverlap.maxWeeds-this.batOverlap.weeds)*10
                 this.percentText2.setText('Santé : '+tmphealtbar+'%');
-                this.percentText2.setY(this.textBat.y + this.textBat.height + this.heightBar*1.4 + this.heightBar/2);
+                this.percentText2.setY(window.innerHeight - 55 - this.heightBar*1.4 - this.heightBar/2);
                 this.percentText2.setVisible(true);
 
                 if(this.batOverlap.plant) {
                     this.imgProgressBar3.destroy();
-                    this.imgProgressBar3 = this.add.image(40, this.textBat.y + this.textBat.height + this.heightBar*2.8 + this.heightBar/2, 'planter').setVisible(true).setScale(0.08);
+                    this.imgProgressBar3 = this.add.image(40, window.innerHeight - 55 - this.heightBar/2, 'planter').setVisible(true).setScale(0.08);
                     this.progressBox3.clear();
                     this.progressBox3.fillStyle(0xffffff, 0.2);
-                    this.progressBox3.fillRect(80, this.textBat.y + this.textBat.height + this.heightBar*2.8, this.widthBar, this.heightBar);
+                    this.progressBox3.fillRect(80, window.innerHeight - 55 - this.heightBar, this.widthBar, this.heightBar);
                     this.progressBox3.setVisible(true);
                     
                     let tmpgrowbar = Math.round((this.batOverlap.grow*100)/this.batOverlap.seed.maxGrow);
 
                     this.progressBar3.clear();
                     this.progressBar3.fillStyle(0x0080ff , 1);
-                    this.progressBar3.fillRect(80, this.textBat.y + this.textBat.height + this.heightBar*2.8, this.widthBar*(tmpgrowbar/100), this.heightBar);
+                    this.progressBar3.fillRect(80, window.innerHeight - 55 - this.heightBar, this.widthBar*(tmpgrowbar/100), this.heightBar);
                     this.progressBar3.setVisible(true);
                     this.percentText3.setText('Croissance : '+tmpgrowbar+'%');
-                    this.percentText3.setY(this.textBat.y + this.textBat.height + this.heightBar*2.8 + this.heightBar/2);
+                    this.percentText3.setY(window.innerHeight - 55 - this.heightBar/2);
                     this.percentText3.setVisible(true);
                 }
                 else {

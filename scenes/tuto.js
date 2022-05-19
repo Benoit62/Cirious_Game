@@ -572,7 +572,7 @@ class Tuto extends Phaser.Scene {
                     "Les bâtiment Infrastructures permettent de générer un revenu passif pour la ferme.",
                     "Chaque bâtiment produit une ressource qu'il est possible de valoriser via des recherches.",
                     "Ces recherches augmentent les revenus de la ferme.",
-                    "Tu peux par exemples contruire un réservoir à eau en appuyant sur le deuxième boutton",
+                    "Tu peux par exemple contruire un réservoir à eau en appuyant sur le deuxième bouton",
                     ""
                 ];
                 This.text0 = this.make.text({
@@ -692,16 +692,16 @@ class Tuto extends Phaser.Scene {
                 This.seedi.setScrollFactor(0);
                 This.seedi.setOrigin(0, 0);
                 var content = [
-                    "Ici se trouve un champ,",
+                    "Ici se trouve un champ.",
                     "C'est là que tu peux planter différents types de cultures, mais attention,",
-                    "comme pour les animaux, tu dois bien faire attention au climat",
+                    "comme pour les animaux, tu dois bien faire attention au climat.",
                     "Tu peux essayer de planter une culture.",
                     "Là aussi se trouvent de nombreuses informations concernant le champs, comme sa fertilité ou sa santé,",
                     "surveille les bien !",
                     "Les revenus potentiellements générés sont affiché en fonction des données du champs,",
-                    "par rapport aux revenus maximum qu'il est possible d'obtenir",
+                    "par rapport aux revenus maximum qu'il est possible d'obtenir.",
                     "Tu peux aussi replanter la culture précédante en appuyant sur la touche 'E'.",
-                    "Une fois le champs prêt, tu peux le récolter via le bouton Récolte ou en appuyant sur la touche 'Z'",
+                    "Une fois le champs prêt, tu peux le récolter via le bouton Récolte ou en appuyant sur la touche 'Z'.",
                     ""
                 ];
                 This.text0 = this.make.text({

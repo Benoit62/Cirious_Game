@@ -59,13 +59,13 @@ class Foret extends Phaser.Scene {
         // Animaux
         this.data.set('bat1', {
             key: 1,
-            x: -16,
-            y: 304,
+            x: -322,
+            y: 300,
             dataType:'bat',
             type: 'animal',
             typeName:'Elevage',
-            level: 0,
-            tag: 'build',
+            level: 1,
+            tag: 'cow',
             scale: 0.5,
             ref: {},
             dead:false,
@@ -74,8 +74,8 @@ class Foret extends Phaser.Scene {
         });
         this.data.set('bat2', {
             key: 2,
-            x: -16,
-            y: -304,
+            x: 196,
+            y: 264,
             dataType:'bat',
             type: 'animal',
             typeName:'Elevage',
@@ -84,15 +84,15 @@ class Foret extends Phaser.Scene {
             scale: 0.5,
             ref: {},
             dead:false,
-            feed:25,
+            feed:100,
             qt:100
         });
 
         // Structures
         this.data.set('bat3', {
             key: 3,
-            x: 352,
-            y: -192,
+            x: 772,
+            y: -384,
             dataType:'bat',
             type: 'struct',
             typeName:'Infrastructure',
@@ -103,13 +103,13 @@ class Foret extends Phaser.Scene {
         });
         this.data.set('bat4', {
             key: 4,
-            x: 352,
-            y: -448,
+            x: -762,
+            y: 390,
             dataType:'bat',
             type: 'struct',
             typeName:'Infrastructure',
-            level: 0,
-            tag: 'build',
+            level: 1,
+            tag: 'solaire',
             scale: 0.3,
             ref: {}
         });
@@ -117,8 +117,8 @@ class Foret extends Phaser.Scene {
         //Champs
         this.data.set('bat5', {
             key: 5,
-            x: -784,
-            y: -303,
+            x: -804,
+            y: -328,
             dataType:'bat',
             type: 'field',
             typeName:'Culture',
@@ -137,48 +137,8 @@ class Foret extends Phaser.Scene {
         });
         this.data.set('bat6', {
             key: 6,
-            x: -784,
-            y: 175,
-            dataType:'bat',
-            type: 'field',
-            typeName:'Culture',
-            level: 0,
-            tag: 'build',
-            scale: 0.5,
-            ref: {},
-            plant: false,
-            seed: {},
-            oldseed: [],
-            grow: 0,
-            dead:false,
-            fertility:100,
-            weeds:0,
-            maxWeeds:10
-        });
-        this.data.set('bat7', {
-            key: 7,
-            x: +784,
-            y: 112,
-            dataType:'bat',
-            type: 'field',
-            typeName:'Culture',
-            level: 1,
-            tag: 'water',
-            scale: 0.5,
-            ref: {},
-            plant: false,
-            seed: {},
-            oldseed: [],
-            grow: 0,
-            dead:false,
-            fertility:100,
-            weeds:0,
-            maxWeeds:10
-        });
-        this.data.set('bat8', {
-            key: 8,
-            x: +432,
-            y: +304,
+            x: -426,
+            y: -372,
             dataType:'bat',
             type: 'field',
             typeName:'Culture',
@@ -188,20 +148,42 @@ class Foret extends Phaser.Scene {
             ref: {},
             plant: false,
             seed: {},
-            oldseed: [getByTag('carrot')[0]],
+            oldseed: [],
             grow: 0,
             dead:false,
-            fertility:50,
-            weeds:7,
-            maxWeeds:10
+            fertility:100,
+            weeds:0,
+            maxWeeds:10,
+            rotate:true
+        });
+        this.data.set('bat7', {
+            key: 7,
+            x: +674,
+            y: 312,
+            dataType:'bat',
+            type: 'field',
+            typeName:'Culture',
+            level: 1,
+            tag: 'labor',
+            scale: 0.5,
+            ref: {},
+            plant: false,
+            seed: {},
+            oldseed: [],
+            grow: 0,
+            dead:false,
+            fertility:100,
+            weeds:0,
+            maxWeeds:10,
+            rotate:true
         });
 
 
         // Maison/labo
-        this.data.set('bat9', {
-            key: 9,
-            x: 768,
-            y: -416,
+        this.data.set('bat8', {
+            key: 8,
+            x: 300,
+            y: -214,
             dataType:'bat',
             type: 'house',
             typeName:'Laboratoire',
@@ -212,8 +194,8 @@ class Foret extends Phaser.Scene {
         });
 
 
-        this.data.set('bat10', {
-            key: 10,
+        this.data.set('bat9', {
+            key: 9,
             x: 0,
             y: 0,
             type: 'river',
@@ -376,7 +358,7 @@ class Foret extends Phaser.Scene {
             }
         });*/
         //polygone des hitboxs
-        var dataRiv = [-325, -550, -960, -550, -960, 535, -390, 535, -390, 470, -330, 470, -330, 400, -270, 400, -270, 140, -320, 125, -550, 125, -540, 300, -640, 390, -680, 390, -700, 430, -780, 430, -790, 460, -840, 460, -860, 490, -960, 490, -960, -80, -620, -80, -560, 5, -515, 10, -370, 10, -370, -50, -430, -100, -430, -385, -590, -385, -590, -210, -620, -210, -620, -80, -960, -80, -960, -540, -570, -540, -570, -503, -335, -503, -325, -550];
+        var dataRiv = [-1500, -17, -850, -17, -827, -55, -800, -55, -800, 125, -840, 125, -872, 155, -1500, 155, -1500, 124, -735, 124, -705, 90, -595, 90, -547, 30, -135, 30, -90, 0, -35, 0, -5, -35, 420, -35, 495, 25, 520, 25, 560, 70, 575, 70, 575, 60, 635, 60, 800, 60, 825, 90, 1500, 90, 1500, -120, 910, -120, 910, -57, 823, -57, 803, -25, 690, -25, 690, -59, 640, -59, 640, 60, 575, 60, 575, -59, 505, -59, 480, -89, 52, -89, 52, -320, 83, -375, 83, -385, 83, -500, 100, -500, 120, -520, 120, -1500, -56, -1500, -56, -500, 83, -500, 83, -385, -56, -385, -85, -372, -85, -215, -115, -215, -115, -150, -140, -150, -160, -120, -460, -120, -475, -90, -585, -90, -600, -60, -735, -60, -735, 124, -1500, 124, -1500, -17];
         // The boundary
         this.Bounds = new Phaser.Geom.Polygon(dataRiv);
 

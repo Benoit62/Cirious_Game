@@ -84,8 +84,8 @@ class Europe extends Phaser.Scene {
             scale: 0.5,
             ref: {},
             dead:false,
-            feed:25,
-            qt:100
+            feed:95,
+            qt:90
         });
 
         // Structures
@@ -132,7 +132,7 @@ class Europe extends Phaser.Scene {
             grow: 0,
             dead:false,
             fertility:100,
-            weeds:0,
+            weeds:1,
             maxWeeds:10
         });
         this.data.set('bat6', {
@@ -162,8 +162,8 @@ class Europe extends Phaser.Scene {
             dataType:'bat',
             type: 'field',
             typeName:'Culture',
-            level: 1,
-            tag: 'water',
+            level: 0,
+            tag: 'build',
             scale: 0.5,
             ref: {},
             plant: false,
@@ -191,8 +191,8 @@ class Europe extends Phaser.Scene {
             oldseed: [getByTag('carrot')[0]],
             grow: 0,
             dead:false,
-            fertility:50,
-            weeds:7,
+            fertility:90,
+            weeds:2,
             maxWeeds:10
         });
 
