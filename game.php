@@ -80,12 +80,12 @@ include("config/configbdd.php");
                 this.glace;
                 this.foret;
                 this.mute;
-                this.sound;
+                this.soundButton;
             }
 
             create ()
             {
-                /*var music = this.sound.add('map_musique', {
+                var music = this.sound.add('map_musique', {
                     mute: false,
                     volume: 0.1,
                     rate: 1,
@@ -94,20 +94,20 @@ include("config/configbdd.php");
                     loop: true,
                     delay: 0
                 });
-                music.play();*/
+                music.play();
 
                 this.mute = this.add.image(window.innerWidth-25, 25, 'mute').setInteractive().setScale(2).setScrollFactor(0);
-                this.sound = this.add.image(window.innerWidth-25, 25, 'sound').setInteractive().setScale(2).setVisible(false).setScrollFactor(0);
+                this.soundButton = this.add.image(window.innerWidth-25, 25, 'sound').setInteractive().setScale(2).setVisible(false).setScrollFactor(0);
                 this.mute.on('pointerdown', function(){
                     //this.mute.setFrame((this.mute.frame + 1)%2);
                     this.mute.visible = !this.mute.visible;
-                    this.sound.visible = !this.sound.visible;
+                    this.soundButton.visible = !this.soundButton.visible;
                     music.mute = !music.mute;
                 }, this);
-                this.sound.on('pointerdown', function(){
+                this.soundButton.on('pointerdown', function(){
                     //this.mute.setFrame((this.mute.frame + 1)%2);
                     this.mute.visible = !this.mute.visible;
-                    this.sound.visible = !this.sound.visible;
+                    this.soundButton.visible = !this.soundButton.visible;
                     music.mute = !music.mute;
                 }, this);
                 console.log(this.mute, this.sound);
@@ -144,6 +144,7 @@ include("config/configbdd.php");
                         this.scene.stop('mapScene');
                         this.scene.launch('menuScene');
                         this.scene.launch('headerScene');
+                        music.stop();
                     }
                     else {
                         this.errorText('Vous n\'avez pas encore débloqué cette île');
@@ -174,7 +175,7 @@ include("config/configbdd.php");
                         this.scene.stop('mapScene');
                         this.scene.launch('menuScene');
                         this.scene.launch('headerScene');
-                        //music.stop();
+                        music.stop();
                     }
                 }, this);
 
@@ -202,7 +203,7 @@ include("config/configbdd.php");
                         this.scene.stop('mapScene');
                         this.scene.launch('menuScene');
                         this.scene.launch('headerScene');
-                        //music.stop();
+                        music.stop();
                     }
                     else {
                         this.errorText('Vous n\'avez pas encore débloqué cette île');

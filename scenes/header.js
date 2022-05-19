@@ -32,7 +32,7 @@ class Header extends Phaser.Scene {
             this.scene.stop('headerScene');
             this.scene.stop('menuScene');
             this.scene.start('mapScene');
-            //this.gameScene.musique.stop();
+            this.gameScene.musique.stop();
         }, this);
 
         this.search.on('pointerup', function() {
