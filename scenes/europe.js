@@ -208,7 +208,7 @@ class Europe extends Phaser.Scene {
 
 
         this.data.set('bat10', {
-            key: 9,
+            key: 10,
             x: 0,
             y: 0,
             type: 'river',

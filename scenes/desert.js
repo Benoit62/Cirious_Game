@@ -55,21 +55,6 @@ class Desert extends Phaser.Scene {
         this.data.set('bat1', {
             key: 1,
             x: -16,
-            y: 304,
-            dataType:'bat',
-            type: 'animal',
-            typeName:'Elevage',
-            level: 0,
-            tag: 'build',
-            scale: 0.5,
-            ref: {},
-            dead:false,
-            feed:100,
-            qt:100
-        });
-        this.data.set('bat2', {
-            key: 2,
-            x: -16,
             y: -304,
             dataType:'bat',
             type: 'animal',
@@ -79,13 +64,13 @@ class Desert extends Phaser.Scene {
             scale: 0.5,
             ref: {},
             dead:false,
-            feed:25,
+            feed:100,
             qt:100
         });
 
         // Structures
-        this.data.set('bat3', {
-            key: 3,
+        this.data.set('bat2', {
+            key: 2,
             x: 352,
             y: -192,
             dataType:'bat',
@@ -96,22 +81,22 @@ class Desert extends Phaser.Scene {
             scale: 0.3,
             ref: {}
         });
-        this.data.set('bat4', {
-            key: 4,
+        this.data.set('bat3', {
+            key: 3,
             x: 352,
             y: -448,
             dataType:'bat',
             type: 'struct',
             typeName:'Infrastructure',
-            level: 0,
-            tag: 'build',
+            level: 2,
+            tag: 'solaire',
             scale: 0.3,
             ref: {}
         });
 
         //Champs
-        this.data.set('bat5', {
-            key: 5,
+        this.data.set('bat4', {
+            key: 4,
             x: -784,
             y: -303,
             dataType:'bat',
@@ -130,15 +115,35 @@ class Desert extends Phaser.Scene {
             weeds:0,
             maxWeeds:10
         });
-        this.data.set('bat6', {
-            key: 6,
+        this.data.set('bat5', {
+            key: 5,
             x: -784,
             y: 175,
             dataType:'bat',
             type: 'field',
             typeName:'Culture',
-            level: 0,
-            tag: 'build',
+            level: 1,
+            tag: 'labor',
+            scale: 0.5,
+            ref: {},
+            plant: false,
+            seed: {},
+            oldseed: [],
+            grow: 0,
+            dead:false,
+            fertility:100,
+            weeds:0,
+            maxWeeds:10
+        });
+        this.data.set('bat6', {
+            key: 6,
+            x: +784,
+            y: 112,
+            dataType:'bat',
+            type: 'field',
+            typeName:'Culture',
+            level: 1,
+            tag: 'labor',
             scale: 0.5,
             ref: {},
             plant: false,
@@ -152,26 +157,6 @@ class Desert extends Phaser.Scene {
         });
         this.data.set('bat7', {
             key: 7,
-            x: +784,
-            y: 112,
-            dataType:'bat',
-            type: 'field',
-            typeName:'Culture',
-            level: 1,
-            tag: 'water',
-            scale: 0.5,
-            ref: {},
-            plant: false,
-            seed: {},
-            oldseed: [],
-            grow: 0,
-            dead:false,
-            fertility:100,
-            weeds:0,
-            maxWeeds:10
-        });
-        this.data.set('bat8', {
-            key: 8,
             x: +432,
             y: +304,
             dataType:'bat',
@@ -186,15 +171,15 @@ class Desert extends Phaser.Scene {
             oldseed: [getByTag('carrot')[0]],
             grow: 0,
             dead:false,
-            fertility:50,
-            weeds:7,
+            fertility:100,
+            weeds:0,
             maxWeeds:10
         });
 
 
         // Maison/labo
-        this.data.set('bat9', {
-            key: 9,
+        this.data.set('bat8', {
+            key: 8,
             x: 768,
             y: -416,
             dataType:'bat',
@@ -207,7 +192,7 @@ class Desert extends Phaser.Scene {
         });
 
 
-        this.data.set('bat10', {
+        this.data.set('bat9', {
             key: 9,
             x: 0,
             y: 0,
@@ -366,7 +351,7 @@ class Desert extends Phaser.Scene {
             }
         });*/
         //polygone des hitboxs
-        var dataRiv = [-325, -550, -960, -550, -960, 535, -390, 535, -390, 470, -330, 470, -330, 400, -270, 400, -270, 140, -320, 125, -550, 125, -540, 300, -640, 390, -680, 390, -700, 430, -780, 430, -790, 460, -840, 460, -860, 490, -960, 490, -960, -80, -620, -80, -560, 5, -515, 10, -370, 10, -370, -50, -430, -100, -430, -385, -590, -385, -590, -210, -620, -210, -620, -80, -960, -80, -960, -540, -570, -540, -570, -503, -335, -503, -325, -550];
+        /*var dataRiv = [-325, -550, -960, -550, -960, 535, -390, 535, -390, 470, -330, 470, -330, 400, -270, 400, -270, 140, -320, 125, -550, 125, -540, 300, -640, 390, -680, 390, -700, 430, -780, 430, -790, 460, -840, 460, -860, 490, -960, 490, -960, -80, -620, -80, -560, 5, -515, 10, -370, 10, -370, -50, -430, -100, -430, -385, -590, -385, -590, -210, -620, -210, -620, -80, -960, -80, -960, -540, -570, -540, -570, -503, -335, -503, -325, -550];
         // The boundary
         this.Bounds = new Phaser.Geom.Polygon(dataRiv);
 
@@ -374,7 +359,7 @@ class Desert extends Phaser.Scene {
         this.playerRect = new Phaser.Geom.Rectangle();
 
         // Will hold a per-step velocity (distance)
-        this.tempVelocity = new Phaser.Math.Vector2();
+        this.tempVelocity = new Phaser.Math.Vector2();*/
 
         // On recupère les scenes annexes
         this.headerScene = this.scene.get('headerScene');
@@ -433,13 +418,13 @@ class Desert extends Phaser.Scene {
         this.body = this.player.body;
 
         // Move the player rectangle ahead by one step of the provisional velocity
-        this.projectRect(this.playerRect, this.body, 1 / this.physics.world.fps);
+        /*this.projectRect(this.playerRect, this.body, 1 / this.physics.world.fps);
 
         // Check if the player rectangle is within the polygon and "block" the body on any corresponding axes
         this.setBlocked(this.body.blocked, this.playerRect, this.Bounds);
 
         // Limit the provisional velocity based on the blocked axes
-        this.clampVelocity(this.body.velocity, this.body.blocked);
+        this.clampVelocity(this.body.velocity, this.body.blocked);*/
 
         // Draw the polygons
         //debug
