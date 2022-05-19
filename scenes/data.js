@@ -165,7 +165,7 @@ let data = [
     {
         tag: 'house',
         type: 'house',
-        lvlMax: 3,
+        lvlMax: 2,
         upgrade: [0, 1, 200000, 500000],
         mult: [1, 1, 10, 15],
         name: 'Maison',
