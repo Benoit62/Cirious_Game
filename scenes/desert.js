@@ -339,7 +339,7 @@ class Desert extends Phaser.Scene {
             }
         });*/
         //polygone des hitboxs
-        /*var dataRiv = [-325, -550, -960, -550, -960, 535, -390, 535, -390, 470, -330, 470, -330, 400, -270, 400, -270, 140, -320, 125, -550, 125, -540, 300, -640, 390, -680, 390, -700, 430, -780, 430, -790, 460, -840, 460, -860, 490, -960, 490, -960, -80, -620, -80, -560, 5, -515, 10, -370, 10, -370, -50, -430, -100, -430, -385, -590, -385, -590, -210, -620, -210, -620, -80, -960, -80, -960, -540, -570, -540, -570, -503, -335, -503, -325, -550];
+        var dataRiv = [-880, -440, -630, -440, -610, -405, -355, -405, -355, -315, -250, -315, -250, -470, -50, -470, -50, -270, -15, -270, -15, -90, -290, -90, -290, -315, -355, -315, -355, -90, -465, -90, -465, -65, -850, -65, -850, -185, -910, -185, -910, -405, -880, -440];
         // The boundary
         this.Bounds = new Phaser.Geom.Polygon(dataRiv);
 
@@ -347,7 +347,7 @@ class Desert extends Phaser.Scene {
         this.playerRect = new Phaser.Geom.Rectangle();
 
         // Will hold a per-step velocity (distance)
-        this.tempVelocity = new Phaser.Math.Vector2();*/
+        this.tempVelocity = new Phaser.Math.Vector2();
 
         // On recupère les scenes annexes
         this.headerScene = this.scene.get('headerScene');
@@ -360,9 +360,11 @@ class Desert extends Phaser.Scene {
         this.registry.set('money', this.registry.get('money') || 100000);
         this.registry.set('moneyPerTick', 0);
         this.registry.set('mult', 1);
-        this.registry.set('ecology', 10);
-        this.registry.set('animalCare', 60);
-        this.registry.set('hunger', 10);
+
+
+        this.registry.set('ecology'+this.gameScene, 10);
+        this.registry.set('animalCare'+this.gameScene, 60);
+        this.registry.set('hunger'+this.gameScene, 10);
 
 
         //Code triche
@@ -371,20 +373,20 @@ class Desert extends Phaser.Scene {
         }, this);
 
         this.input.keyboard.on('keydown_I', function(){
-            this.registry.set('animalCare', this.registry.get('animalCare') < 100 ? this.registry.get('animalCare') + 10 : this.registry.get('animalCare'));
+            this.registry.set('animalCare'+this.gameScene, this.registry.get('animalCare'+this.gameScene) < 100 ? this.registry.get('animalCare'+this.gameScene) + 10 : this.registry.get('animalCare'+this.gameScene));
         }, this);
 
         this.input.keyboard.on('keydown_O', function(){
-            this.registry.set('ecology', this.registry.get('ecology') < 100 ? this.registry.get('ecology') + 10 : this.registry.get('ecology'));
+            this.registry.set('ecology'+this.gameScene, this.registry.get('ecology'+this.gameScene) < 100 ? this.registry.get('ecology'+this.gameScene) + 10 : this.registry.get('ecology'+this.gameScene));
         }, this);
 
         this.input.keyboard.on('keydown_P', function(){
-            this.registry.set('hunger', this.registry.get('hunger') < 100 ? this.registry.get('hunger') + 10 : this.registry.get('hunger'));
+            this.registry.set('hunger'+this.gameScene, this.registry.get('hunger'+this.gameScene) < 100 ? this.registry.get('hunger'+this.gameScene) + 10 : this.registry.get('hunger'+this.gameScene));
         }, this);
     }
 
     update() {
-        if(this.registry.get('ecology') >= 90 && this.registry.get('animalCare') >= 90 && this.registry.get('hunger') >= 90 && !this.finish) {
+        if(this.registry.get('ecology'+this.gameScene) >= 90 && this.registry.get('animalCare'+this.gameScene) >= 90 && this.registry.get('hunger'+this.gameScene) >= 90 && !this.finish) {
             this.finish = true;
             this.menuScene.seedyAdvice('unlock');
             this.menuScene.unlock();
@@ -426,13 +428,13 @@ class Desert extends Phaser.Scene {
         this.body = this.player.body;
 
         // Move the player rectangle ahead by one step of the provisional velocity
-        /*this.projectRect(this.playerRect, this.body, 1 / this.physics.world.fps);
+        this.projectRect(this.playerRect, this.body, 1 / this.physics.world.fps);
 
         // Check if the player rectangle is within the polygon and "block" the body on any corresponding axes
         this.setBlocked(this.body.blocked, this.playerRect, this.Bounds);
 
         // Limit the provisional velocity based on the blocked axes
-        this.clampVelocity(this.body.velocity, this.body.blocked);*/
+        this.clampVelocity(this.body.velocity, this.body.blocked);
 
         // Draw the polygons
         //debug

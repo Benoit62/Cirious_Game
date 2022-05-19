@@ -304,8 +304,8 @@ class Search extends Phaser.Scene {
                     case 'water_product':
                         this.nom.setText(ref.name).setOrigin(0.5,0);
                         this.prix.setText('Prix : '+ref.unlockPrice).setOrigin(0.5,0);
-                        //this.loss.setText('Bien-être animal : '+ref.care).setOrigin(0.5,0);
-                        this.loss.setText('');
+                        if(ref.need) this.loss.setText('Requis : '+getByTag(ref.need)[0].name).setOrigin(0.5,0);
+                        if(!ref.need) this.loss.setText('').setOrigin(0.5,0);
                         this.apport.setText('Gain passif : + '+ref.passif).setOrigin(0.5,0);
                         this.desc.setText(ref.desc);
                         this.info.setText(ref.info);
@@ -316,8 +316,8 @@ class Search extends Phaser.Scene {
                     case 'electricity_product':
                         this.nom.setText(ref.name).setOrigin(0.5,0);
                         this.prix.setText('Prix : '+ref.unlockPrice).setOrigin(0.5,0);
-                        //this.loss.setText('Bien-être animal : '+ref.care).setOrigin(0.5,0);
-                        this.loss.setText('');
+                        if(ref.need) this.loss.setText('Requis : '+getByTag(ref.need)[0].name).setOrigin(0.5,0);
+                        if(!ref.need) this.loss.setText('').setOrigin(0.5,0);
                         this.apport.setText('Gain passif : + '+ref.passif).setOrigin(0.5,0);
                         this.desc.setText(ref.desc);
                         this.info.setText(ref.info);
@@ -328,8 +328,8 @@ class Search extends Phaser.Scene {
                     case 'methane_product':
                         this.nom.setText(ref.name).setOrigin(0.5,0);
                         this.prix.setText('Prix : '+ref.unlockPrice).setOrigin(0.5,0);
-                        //this.loss.setText('Bien-être animal : '+ref.care).setOrigin(0.5,0);
-                        this.loss.setText('');
+                        if(ref.need) this.loss.setText('Requis : '+getByTag(ref.need)[0].name).setOrigin(0.5,0);
+                        if(!ref.need) this.loss.setText('').setOrigin(0.5,0);
                         this.apport.setText('Gain passif : + '+ref.passif).setOrigin(0.5,0);
                         this.desc.setText(ref.desc);
                         this.info.setText(ref.info);

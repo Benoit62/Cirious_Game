@@ -307,7 +307,7 @@ class Tuto extends Phaser.Scene {
             This.seedi.setScrollFactor(0);
             This.seedi.setOrigin(0, 0);
             var content = [
-                "Nous voici arrivés dans ta nouvelle ferme",
+                "Nous voici arrivés dans ta nouvelle ferme.",
                 "Tout d'abord, tu peux voir en haut de l'écran 3 jauges.",
                 "Elles réprésentent le bien être animal, l'écologie, et la production de nourriture,",
                 "les trois objectifs que tu dois remplir, pour atteindre la ferme du futur.",

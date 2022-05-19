@@ -633,7 +633,7 @@ let data = [
         tag:'pompe',
         type:'water_product',
         typeName:'Gestion de l\'eau',
-        name:'Pompage dans la rivière',
+        name:'Eau de rivière',
         desc:'',
         info:'',
         unlock:true,
@@ -657,7 +657,7 @@ let data = [
         tag:'rain',
         type:'water_product',
         typeName:'Gestion de l\'eau',
-        name:'Récupération de l\'eau de pluie',
+        name:'Eau de pluie',
         desc:'',
         info:'',
         unlock:false,
@@ -674,7 +674,7 @@ let data = [
         info:'',
         unlock:false,
         unlockPrice:30000,
-        need:'',
+        need:'rain',
         passif:600
     },
     {

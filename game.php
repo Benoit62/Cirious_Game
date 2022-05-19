@@ -387,18 +387,18 @@ include("config/configbdd.php");
                     this.winText.setText('+ '+win);
                     this.moneyPerTickText.setText(this.registry.get('moneyPerTick')+'/s');
                     this.multText.setText('x '+this.registry.get('mult'));
-                    percentText1.setText(this.registry.get('animalCare')+'%');
-                    percentText2.setText(this.registry.get('ecology')+'%');
-                    percentText3.setText(this.registry.get('hunger')+'%');
+                    percentText1.setText(this.registry.get('animalCare'+this.registry.get('gameScene'))+'%');
+                    percentText2.setText(this.registry.get('ecology'+this.registry.get('gameScene'))+'%');
+                    percentText3.setText(this.registry.get('hunger'+this.registry.get('gameScene'))+'%');
                     progressBar1.clear();
                     progressBar1.fillStyle(0x0080ff, 1);
-                    progressBar1.fillRect(w1, h1, widthBar*(this.registry.get('animalCare')/100), heightBar);
+                    progressBar1.fillRect(w1, h1, widthBar*(this.registry.get('animalCare'+this.registry.get('gameScene'))/100), heightBar);
                     progressBar2.clear();
                     progressBar2.fillStyle(0x01D758, 1);
-                    progressBar2.fillRect(w2, h2, widthBar*(this.registry.get('ecology')/100), heightBar);
+                    progressBar2.fillRect(w2, h2, widthBar*(this.registry.get('ecology'+this.registry.get('gameScene'))/100), heightBar);
                     progressBar3.clear();
                     progressBar3.fillStyle(0xffc0cb, 1);
-                    progressBar3.fillRect(w3, h3, widthBar*(this.registry.get('hunger')/100), heightBar);
+                    progressBar3.fillRect(w3, h3, widthBar*(this.registry.get('hunger'+this.registry.get('gameScene'))/100), heightBar);
                 }, this);
 
 

@@ -397,9 +397,11 @@ class Europe extends Phaser.Scene {
         //Pour les autres carte => this.registry.set('money', this.registry.get('money') || 100000);
         this.registry.set('moneyPerTick', 0);
         this.registry.set('mult', 1);
-        this.registry.set('ecology', 10);
-        this.registry.set('animalCare', 60);
-        this.registry.set('hunger', 10);
+
+
+        this.registry.set('ecology'+this.gameScene, 10);
+        this.registry.set('animalCare'+this.gameScene, 60);
+        this.registry.set('hunger'+this.gameScene, 10);
 
 
         //Code triche
@@ -408,15 +410,15 @@ class Europe extends Phaser.Scene {
         }, this);
 
         this.input.keyboard.on('keydown_I', function(){
-            this.registry.set('animalCare', this.registry.get('animalCare') < 100 ? this.registry.get('animalCare') + 10 : this.registry.get('animalCare'));
+            this.registry.set('animalCare'+this.gameScene, this.registry.get('animalCare'+this.gameScene) < 100 ? this.registry.get('animalCare'+this.gameScene) + 10 : this.registry.get('animalCare'+this.gameScene));
         }, this);
 
         this.input.keyboard.on('keydown_O', function(){
-            this.registry.set('ecology', this.registry.get('ecology') < 100 ? this.registry.get('ecology') + 10 : this.registry.get('ecology'));
+            this.registry.set('ecology'+this.gameScene, this.registry.get('ecology'+this.gameScene) < 100 ? this.registry.get('ecology'+this.gameScene) + 10 : this.registry.get('ecology'+this.gameScene));
         }, this);
 
         this.input.keyboard.on('keydown_P', function(){
-            this.registry.set('hunger', this.registry.get('hunger') < 100 ? this.registry.get('hunger') + 10 : this.registry.get('hunger'));
+            this.registry.set('hunger'+this.gameScene, this.registry.get('hunger'+this.gameScene) < 100 ? this.registry.get('hunger'+this.gameScene) + 10 : this.registry.get('hunger'+this.gameScene));
         }, this);
 
         /*this.input.keyboard.on('keydown_M', function(){
@@ -436,7 +438,7 @@ class Europe extends Phaser.Scene {
     }
 
     update() {
-        if(this.registry.get('ecology') >= 90 && this.registry.get('animalCare') >= 90 && this.registry.get('hunger') >= 90 && !this.finish) {
+        if(this.registry.get('ecology'+this.gameScene) >= 90 && this.registry.get('animalCare'+this.gameScene) >= 90 && this.registry.get('hunger'+this.gameScene) >= 90 && !this.finish) {
             this.finish = true;
             this.menuScene.seedyAdvice('unlock');
             this.menuScene.unlock();

@@ -283,10 +283,10 @@ class Cinematique2 extends Phaser.Scene {
             dialBox.fillStyle(0x70402a, 1);
             dialBox.fillRect(0, 0, window.innerWidth, 130);
             var content = [
-                "Salut moi c'est Seedy ! Je serai ta guide dans cette nouvelle aventure",
+                "Salut moi c'est Seedy ! Je serai ta guide dans cette nouvelle aventure !",
                 "",
                 ""+namePlayer+"",
-                "Enchanté de faire ta connaissance Seedy, moi c’est "+namePlayer+", Chênebleu m'a dit que tu serai ma guide",
+                "Enchanté de faire ta connaissance Seedy, moi c’est "+namePlayer+", Chênebleu m'a dit que tu serai ma guide.",
                 "",
                 "Seedy :",
                 "Parfait ! Maintenant que les présentations sont faites, suis-moi, nous allons débuter ta formation !",
