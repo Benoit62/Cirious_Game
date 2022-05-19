@@ -394,6 +394,7 @@ class Europe extends Phaser.Scene {
 
 
         this.registry.set('money', 100000);
+        //Pour les autres carte => this.registry.set('money', this.registry.get('money') || 100000);
         this.registry.set('moneyPerTick', 0);
         this.registry.set('mult', 1);
         this.registry.set('ecology', 10);

@@ -164,7 +164,7 @@ class Desert extends Phaser.Scene {
         this.data.set('bat7', {
             key: 7,
             x: 676,// 432
-            y: 350,// 304
+            y: 352,// 304
             dataType:'bat',
             type: 'house',
             typeName:'Laboratoire',
@@ -384,12 +384,12 @@ class Desert extends Phaser.Scene {
     }
 
     update() {
-        /*if(this.registry.get('ecology') >= 90 && this.registry.get('animalCare') >= 90 && this.registry.get('hunger') >= 90 && !this.finish) {
+        if(this.registry.get('ecology') >= 90 && this.registry.get('animalCare') >= 90 && this.registry.get('hunger') >= 90 && !this.finish) {
             this.finish = true;
             this.menuScene.seedyAdvice('unlock');
             this.menuScene.unlock();
             console.log('unlock');
-        }*/
+        }
 
         if (this.cursors.up.isDown) {
             this.player.setVelocityY(-650);
