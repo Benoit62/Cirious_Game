@@ -54,8 +54,8 @@ class Desert extends Phaser.Scene {
         // Animaux
         this.data.set('bat1', {
             key: 1,
-            x: -16,
-            y: -304,
+            x: -245,
+            y: 338,
             dataType:'bat',
             type: 'animal',
             typeName:'Elevage',
@@ -71,8 +71,8 @@ class Desert extends Phaser.Scene {
         // Structures
         this.data.set('bat2', {
             key: 2,
-            x: 352,
-            y: -192,
+            x: 260,
+            y: 415,
             dataType:'bat',
             type: 'struct',
             typeName:'Infrastructure',
@@ -83,7 +83,7 @@ class Desert extends Phaser.Scene {
         });
         this.data.set('bat3', {
             key: 3,
-            x: 352,
+            x: 700,
             y: -448,
             dataType:'bat',
             type: 'struct',
@@ -97,8 +97,8 @@ class Desert extends Phaser.Scene {
         //Champs
         this.data.set('bat4', {
             key: 4,
-            x: -784,
-            y: -303,
+            x: 280,
+            y: -310,
             dataType:'bat',
             type: 'field',
             typeName:'Culture',
@@ -118,7 +118,7 @@ class Desert extends Phaser.Scene {
         this.data.set('bat5', {
             key: 5,
             x: -784,
-            y: 175,
+            y: 298,
             dataType:'bat',
             type: 'field',
             typeName:'Culture',
@@ -135,30 +135,11 @@ class Desert extends Phaser.Scene {
             weeds:0,
             maxWeeds:10
         });
-        this.data.set('bat6', {
-            key: 6,
-            x: +784,
-            y: 112,
-            dataType:'bat',
-            type: 'field',
-            typeName:'Culture',
-            level: 1,
-            tag: 'labor',
-            scale: 0.5,
-            ref: {},
-            plant: false,
-            seed: {},
-            oldseed: [],
-            grow: 0,
-            dead:false,
-            fertility:100,
-            weeds:0,
-            maxWeeds:10
-        });
+        
         this.data.set('bat7', {
             key: 7,
-            x: +432,
-            y: +304,
+            x: 710,
+            y: -185,
             dataType:'bat',
             type: 'field',
             typeName:'Culture',
@@ -181,8 +162,8 @@ class Desert extends Phaser.Scene {
         // Maison/labo
         this.data.set('bat8', {
             key: 8,
-            x: 768,
-            y: -416,
+            x: 676,// 432
+            y: 350,// 304
             dataType:'bat',
             type: 'house',
             typeName:'Laboratoire',
