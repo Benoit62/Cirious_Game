@@ -63,6 +63,7 @@ class Loading extends Phaser.Scene {
         //Player
         //this.load.spritesheet('dude', 'assets/dude.png', { frameWidth: 32, frameHeight: 48 });
         this.load.spritesheet('farmer', 'assets/farmer.png', { frameWidth: 41.3, frameHeight: 86 });
+        this.load.spritesheet('tractor', 'assets/tractor.png', { frameWidth: 148, frameHeight: 148 });
 
 
         // Chargement des assets du header

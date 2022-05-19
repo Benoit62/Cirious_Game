@@ -34,6 +34,8 @@ class Europe extends Phaser.Scene {
         this.musique;
 
         this.finish = false;
+
+        this.spritePlayer = 'player';
     }
 
     create() {
@@ -414,6 +416,21 @@ class Europe extends Phaser.Scene {
         this.input.keyboard.on('keydown_P', function(){
             this.registry.set('hunger', this.registry.get('hunger') < 100 ? this.registry.get('hunger') + 10 : this.registry.get('hunger'));
         }, this);
+
+        /*this.input.keyboard.on('keydown_M', function(){
+            if(this.spritePlayer == 'player') {
+                let currentX = this.player.x;
+                let currentY = this.player.y;
+                this.player = this.physics.add.sprite(currentX, currentY, 'tractor').setDepth(2000).setScale(0.5);
+                this.spritePlayer = 'tractor';
+            }
+            if(this.spritePlayer == 'tractor') {
+                let currentX = this.player.x;
+                let currentY = this.player.y;
+                this.player = this.physics.add.sprite(currentX, currentY, 'farmer').setDepth(2000).setScale(0.7);
+                this.spritePlayer = 'player';
+            }
+        }, this);*/
     }
 
     update() {
