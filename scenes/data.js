@@ -19,7 +19,7 @@ let data = [
         name: 'Reservoir d\'eau',
         desc: 'Le tank permet de recuperer et stocker de l\'eau qui pourra être utilisé pour les cultures',
         info: '',
-        product: 'water_product'
+        product: 'water_product',
     },
     {
         tag: 'solaire',

@@ -83,7 +83,7 @@ include("config/configbdd.php");
 
             create ()
             {
-                var music = this.sound.add('map_musique', {
+                /*var music = this.sound.add('map_musique', {
                     mute: false,
                     volume: 0.1,
                     rate: 1,
@@ -92,7 +92,7 @@ include("config/configbdd.php");
                     loop: true,
                     delay: 0
                 });
-                music.play();
+                music.play();*/
 
                 this.mute = this.add.image(window.innerWidth-25, 25, 'mute').setInteractive().setScale(0.08).setScrollFactor(0);
                 this.sound = this.add.image(window.innerWidth-25, 25, 'sound').setInteractive().setScale(0.08).setVisible(false).setScrollFactor(0);
@@ -111,8 +111,8 @@ include("config/configbdd.php");
                 console.log(this.mute, this.sound);
 
                 // Data
-                this.data.set('unlock', ['europe']);
-                this.data.set('lock', ['desert', 'foret', 'glace']);
+                this.data.set('unlock', ['europe', 'desert']);
+                this.data.set('lock', ['foret', 'glace']);
 
                 // Ajout de la map et centrage
                 const map = this.add.image(0, 0, 'map');
@@ -168,7 +168,7 @@ include("config/configbdd.php");
                         this.scene.stop('mapScene');
                         this.scene.launch('menuScene');
                         this.scene.launch('headerScene');
-                        music.stop();
+                        //music.stop();
                     }
                 }, this);
 
@@ -186,10 +186,15 @@ include("config/configbdd.php");
                     if(this.data.get('unlock').includes('desert')) {
                         if(this.scene.isSleeping('desertScene')) {                        
                             this.scene.wake('desertScene');
+                            this.scene.get('desertScene').musique.play();
                         }
                         else {
                             this.scene.start('desertScene');
                         }
+                        this.scene.stop('mapScene');
+                        this.scene.launch('menuScene');
+                        this.scene.launch('headerScene');
+                        //music.stop();
                     }
                     else {
                         this.lockText();

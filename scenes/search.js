@@ -308,9 +308,8 @@ class Search extends Phaser.Scene {
                         this.nom.setText(ref.name).setOrigin(0.5,0);
                         this.prix.setText('Prix : '+ref.unlockPrice).setOrigin(0.5,0);
                         //this.loss.setText('Bien-être animal : '+ref.care).setOrigin(0.5,0);
-                        //this.apport.setText('Faim dans le monde : '+ref.hunger).setOrigin(0.5,0);
                         this.loss.setText('');
-                        this.apport.setText('');
+                        this.apport.setText('Gain passif : + '+ref.passif).setOrigin(0.5,0);
                         this.desc.setText(ref.desc);
                         this.info.setText(ref.info);
                         this.barre.clear();
@@ -321,9 +320,8 @@ class Search extends Phaser.Scene {
                         this.nom.setText(ref.name).setOrigin(0.5,0);
                         this.prix.setText('Prix : '+ref.unlockPrice).setOrigin(0.5,0);
                         //this.loss.setText('Bien-être animal : '+ref.care).setOrigin(0.5,0);
-                        //this.apport.setText('Faim dans le monde : '+ref.hunger).setOrigin(0.5,0);
                         this.loss.setText('');
-                        this.apport.setText('');
+                        this.apport.setText('Gain passif : + '+ref.passif).setOrigin(0.5,0);
                         this.desc.setText(ref.desc);
                         this.info.setText(ref.info);
                         this.barre.clear();
@@ -334,9 +332,8 @@ class Search extends Phaser.Scene {
                         this.nom.setText(ref.name).setOrigin(0.5,0);
                         this.prix.setText('Prix : '+ref.unlockPrice).setOrigin(0.5,0);
                         //this.loss.setText('Bien-être animal : '+ref.care).setOrigin(0.5,0);
-                        //this.apport.setText('Faim dans le monde : '+ref.hunger).setOrigin(0.5,0);
                         this.loss.setText('');
-                        this.apport.setText('');
+                        this.apport.setText('Gain passif : + '+ref.passif).setOrigin(0.5,0);
                         this.desc.setText(ref.desc);
                         this.info.setText(ref.info);
                         this.barre.clear();
