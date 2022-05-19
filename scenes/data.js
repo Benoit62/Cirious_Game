@@ -442,11 +442,11 @@ let data = [
         typeName: 'Protection des cultures',
         name: 'chimique',
         desc: 'Herbicides, insecticides, fongicides, acaricides',
-        info: 'Augmentation grande du rendement et pollution des sols grande',
+        info: 'Très efficace mais forte pollution des sols',
         unlock: true,
         unlockPrice: 10000,
-        health: 2,
-        ecology: -30,
+        health: 4,
+        ecology: -10,
         prix: 10000
     },
     {
@@ -455,37 +455,11 @@ let data = [
         typeName: 'Protection des cultures',
         name: 'physique',
         desc: 'Mecanique, pneumatique, chaleur',
-        info: 'Augmentation moyenne du rendement et pollution des sols faible',
+        info: 'Efficace mais demande de la préparation et du temps, cependant faible pollution',
         unlock: false,
-        unlockPrice: 10000,
+        unlockPrice: 12000,
         health: 3,
-        ecology: 5,
-        prix: 10000
-    },
-    {
-        tag: 'drone',
-        type: 'health',
-        typeName: 'Protection des cultures',
-        name: 'Par drone',
-        desc: 'Drone agricole',
-        info: 'Augmentation moyenne du rendement et pollution des sols moyenne',
-        unlock: false,
-        unlockPrice: 10000,
-        health: 3,
-        ecology: -5,
-        prix: 10000
-    },
-    {
-        tag: 'drone2',
-        type: 'health',
-        typeName: 'Protection des cultures',
-        name: 'Par drone',
-        desc: 'Sarcloir autonome',
-        info: 'Augmentation moyenne du rendement et pollution des sols nulle',
-        unlock: false,
-        unlockPrice: 10000,
-        health: 3,
-        ecology: -5,
+        ecology: -3,
         prix: 10000
     },
     {
@@ -494,11 +468,37 @@ let data = [
         typeName: 'Protection des cultures',
         name: 'humaine',
         desc: 'Désherbage, surveillance, expertise',
-        info: 'Augmentation faible du rendement et pollution des sols faible',
+        info: 'Faible efficacité mais pas polluant',
         unlock: false,
-        unlockPrice: 10000,
+        unlockPrice: 1000,
         health: 1,
         ecology: 10,
+        prix: 10000
+    },
+    {
+        tag: 'drone',
+        type: 'health',
+        typeName: 'Protection des cultures',
+        name: 'Par drone',
+        desc: 'Drone agricole',
+        info: 'Efficace et précis, il permet de cibler les zones à traiter et rejette moins de pesticides.',
+        unlock: false,
+        unlockPrice: 20000,
+        health: 3,
+        ecology: -7,
+        prix: 10000
+    },
+    {
+        tag: 'drone2',
+        type: 'health',
+        typeName: 'Protection des cultures',
+        name: 'Par drone',
+        desc: 'Sarcloir autonome',
+        info: 'Très efficace et pollution des sols nulle',
+        unlock: false,
+        unlockPrice: 40000,
+        health: 3,
+        ecology: -5,
         prix: 10000
     },
     {
@@ -540,7 +540,7 @@ let data = [
         unlock: true,
         unlockPrice: 10000,
         feed: 20,
-        care: 10,
+        care: 4,
         prix: 1000
     },
     {
@@ -548,12 +548,12 @@ let data = [
         type: 'meal',
         typeName: 'Nourriture pour animaux',
         name: 'Grains',
-        desc: 'Les graines de céréales (riz, blé, avoine, orge, maïs...) fournissent dans presque tous les pays du monde la base énergétique de l\'alimentation',
+        desc: 'Les graines de céréales (riz, blé, avoine, orge, maïs...) fournissent dans presque tous les pays du monde la base énergétique de l\'alimentation C\'EST PAS BON !!!!!!!!',
         info: 'Augmentation très faible du bonheur animal',
         unlock: false,
         unlockPrice: 10000,
         feed: 20,
-        care: 5,
+        care: 2,
         prix: 1000
     },
     {
@@ -566,7 +566,7 @@ let data = [
         unlock: false,
         unlockPrice: 10000,
         feed: 30,
-        care: -10,
+        care: -4,
         prix: 1000
     },
     {
@@ -579,7 +579,7 @@ let data = [
         unlock: false,
         unlockPrice: 10000,
         feed: 2,
-        care: -30,
+        care: -10,
         prix: 1000
     },
 
@@ -595,9 +595,8 @@ let data = [
         unlock: true,
         unlockPrice: 10000,
         money: 500,
-        care: -10,
-        hunger: 20,
-        prix: 10000
+        care: -15,
+        hunger: 20
     },
     {
         tag: 'rituel',
@@ -605,13 +604,12 @@ let data = [
         typeName: 'Abbatoire',
         name: 'Abbattage rituel sans étourdissement',
         desc: 'Souffrance des animaux',
-        info: 'Baisse moyenne du bien être animal',
+        info: 'Baisse forte du bien être animal',
         unlock: true,
         unlockPrice: 10000,
         money: 500,
-        care: -10,
-        hunger: 20,
-        prix: 10000
+        care: -25,
+        hunger: 20
     },
     {
         tag: 'propre',
@@ -624,8 +622,7 @@ let data = [
         unlockPrice: 10000,
         money: 500,
         care: 0,
-        hunger: 20,
-        prix: 10000
+        hunger: 20
     },
 
 
