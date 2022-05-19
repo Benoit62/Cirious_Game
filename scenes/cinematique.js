@@ -125,7 +125,7 @@ class Cinematique1 extends Phaser.Scene {
             });
             var text2 = this.make.text({
                 x: 5,
-                y: 75,
+                y: 80,
                 text: '',
                 style: {
                     font: '18px monospace',
@@ -309,7 +309,7 @@ class Cinematique2 extends Phaser.Scene {
             });
             var text2 = this.make.text({
                 x: 10,
-                y: 75,
+                y: 80,
                 text: ''
             });
             var txt = 0;
