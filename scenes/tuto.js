@@ -693,6 +693,7 @@ class Tuto extends Phaser.Scene {
                     "Ici se trouve un champ,",
                     "C'est là que tu peux planter différents types de cultures, mais attention,",
                     "comme pour les animaux, tu dois bien faire attention au climat",
+                    "Tu peux essayer de planter une culture.",
                     "Là aussi se trouvent de nombreuses informations concernant le champs, comme sa fertilité ou sa santé,",
                     "surveille les bien !",
                     "Les revenus potentiellements générés sont affiché en fonction des données du champs,",
