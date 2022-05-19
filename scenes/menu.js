@@ -345,11 +345,9 @@ class Menu extends Phaser.Scene {
         this.upgrade.on('pointerdown', function(){
             if((this.batOverlap.type == 'animal' || this.batOverlap.type == 'struct' || this.batOverlap.type == 'house') && this.batOverlap.level < this.batOverlap.ref.lvlMax && this.batOverlap.level != 0) {
                 if(this.batOverlap.type != 'animal') {
-                    console.log('try1');
                     this.gameScene.upgradeBat(this.batOverlap);
                 }
                 else if(!this.batOverlap.dead) {
-                    console.log('try2');
                     this.gameScene.upgradeBat(this.batOverlap);
                 }
             }
@@ -411,7 +409,6 @@ class Menu extends Phaser.Scene {
                 }
             }
             if(this.batOverlap.level > 0 && this.batOverlap.tag != 'build') {
-                console.log(this.batOverlap.dead);
                 for(let i of getByType('destroy')) {
                     this.bull[i.tag].setVisible(true);
                 }
@@ -774,7 +771,6 @@ class Menu extends Phaser.Scene {
             //Boutons des amélioration batiments
             if(this.batOverlap.type == 'struct') {
                 let buttons = getByType(this.batOverlap.ref.product);
-                console.log(buttons);
                 let taille = buttons.length +1;
                 let compt = 0;
                 this.imgTechs.forEach(value => value.destroy());
@@ -787,8 +783,6 @@ class Menu extends Phaser.Scene {
                     }
                     compt++;
                 }, this);
-                console.log(this.imgTechs);
-                console.log(this.textTechs);
             }
             else {
                 this.imgTechs.forEach(value => value.destroy());
