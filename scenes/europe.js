@@ -410,15 +410,15 @@ class Europe extends Phaser.Scene {
         }, this);
 
         this.input.keyboard.on('keydown_I', function(){
-            this.registry.set('animalCare'+this.gameScene, this.registry.get('animalCare'+this.gameScene) < 100 ? this.registry.get('animalCare'+this.gameScene) + 10 : this.registry.get('animalCare'+this.gameScene));
+            this.registry.set('animalCare'+this.gameScene, this.registry.get('animalCare'+this.gameScene) < 90 ? this.registry.get('animalCare'+this.gameScene) + 10 : this.registry.get('animalCare'+this.gameScene));
         }, this);
 
         this.input.keyboard.on('keydown_O', function(){
-            this.registry.set('ecology'+this.gameScene, this.registry.get('ecology'+this.gameScene) < 100 ? this.registry.get('ecology'+this.gameScene) + 10 : this.registry.get('ecology'+this.gameScene));
+            this.registry.set('ecology'+this.gameScene, this.registry.get('ecology'+this.gameScene) < 90 ? this.registry.get('ecology'+this.gameScene) + 10 : this.registry.get('ecology'+this.gameScene));
         }, this);
 
         this.input.keyboard.on('keydown_P', function(){
-            this.registry.set('hunger'+this.gameScene, this.registry.get('hunger'+this.gameScene) < 100 ? this.registry.get('hunger'+this.gameScene) + 10 : this.registry.get('hunger'+this.gameScene));
+            this.registry.set('hunger'+this.gameScene, this.registry.get('hunger'+this.gameScene) < 90 ? this.registry.get('hunger'+this.gameScene) + 10 : this.registry.get('hunger'+this.gameScene));
         }, this);
 
         /*this.input.keyboard.on('keydown_M', function(){
@@ -1209,10 +1209,10 @@ class Europe extends Phaser.Scene {
 
 
     updateJauge(jauge, value){
-        let result = this.registry.get(jauge) + value;
+        let result = this.registry.get(jauge+this.gameScene) + value;
         if(result > 100) result = 100;
         if(result < 0) result = 0;
-        this.registry.set(jauge, result);
+        this.registry.set(jauge+this.gameScene, result);
     }
 
 

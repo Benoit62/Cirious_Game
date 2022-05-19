@@ -396,9 +396,11 @@ class Foret extends Phaser.Scene {
         this.registry.set('money', this.registry.get('money') || 100000);
         this.registry.set('moneyPerTick', 0);
         this.registry.set('mult', 1);
-        this.registry.set('ecology', 10);
-        this.registry.set('animalCare', 60);
-        this.registry.set('hunger', 10);
+
+
+        this.registry.set('ecology'+this.gameScene, 10);
+        this.registry.set('animalCare'+this.gameScene, 60);
+        this.registry.set('hunger'+this.gameScene, 10);
 
 
         //Code triche
@@ -407,15 +409,15 @@ class Foret extends Phaser.Scene {
         }, this);
 
         this.input.keyboard.on('keydown_I', function(){
-            this.registry.set('animalCare', this.registry.get('animalCare') < 100 ? this.registry.get('animalCare') + 10 : this.registry.get('animalCare'));
+            this.registry.set('animalCare'+this.gameScene, this.registry.get('animalCare'+this.gameScene) < 90 ? this.registry.get('animalCare'+this.gameScene) + 10 : this.registry.get('animalCare'+this.gameScene));
         }, this);
 
         this.input.keyboard.on('keydown_O', function(){
-            this.registry.set('ecology', this.registry.get('ecology') < 100 ? this.registry.get('ecology') + 10 : this.registry.get('ecology'));
+            this.registry.set('ecology'+this.gameScene, this.registry.get('ecology'+this.gameScene) < 90 ? this.registry.get('ecology'+this.gameScene) + 10 : this.registry.get('ecology'+this.gameScene));
         }, this);
 
         this.input.keyboard.on('keydown_P', function(){
-            this.registry.set('hunger', this.registry.get('hunger') < 100 ? this.registry.get('hunger') + 10 : this.registry.get('hunger'));
+            this.registry.set('hunger'+this.gameScene, this.registry.get('hunger'+this.gameScene) < 90 ? this.registry.get('hunger'+this.gameScene) + 10 : this.registry.get('hunger'+this.gameScene));
         }, this);
 
         /*this.input.keyboard.on('keydown_M', function(){
@@ -435,12 +437,12 @@ class Foret extends Phaser.Scene {
     }
 
     update() {
-        if(this.registry.get('ecology') >= 90 && this.registry.get('animalCare') >= 90 && this.registry.get('hunger') >= 90 && !this.finish) {
+        /*if(this.registry.get('ecology'+this.gameScene) >= 90 && this.registry.get('animalCare'+this.gameScene) >= 90 && this.registry.get('hunger'+this.gameScene) >= 90 && !this.finish) {
             this.finish = true;
             this.menuScene.seedyAdvice('unlock');
             this.menuScene.unlock();
             console.log('unlock');
-        }
+        }*/
 
         if (this.cursors.up.isDown) {
             this.player.setVelocityY(-650);
@@ -620,7 +622,7 @@ class Foret extends Phaser.Scene {
                             moneyButton.destroy();
                             textAnimal.destroy();
                             animalButton.destroy();
-                        }, 2000);
+                        }, 3000);
                     }
                     else {
                         let textMoney = this.add.text(bat.x, bat.y, '-'+bat.ref.upgrade[bat.level], { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
@@ -629,7 +631,7 @@ class Foret extends Phaser.Scene {
                         setTimeout(() => {
                             textMoney.destroy();
                             moneyButton.destroy();
-                        }, 2000);
+                        }, 3000);
                     }
                 }
                 else {
@@ -667,7 +669,7 @@ class Foret extends Phaser.Scene {
                             moneyButton.destroy();
                             textAnimal.destroy();
                             animalButton.destroy();
-                        }, 2000);
+                        }, 3000);
                     }
                     else {
                         let textMoney = this.add.text(bat.x, bat.y, '-'+ref.buildCost, { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
@@ -676,7 +678,7 @@ class Foret extends Phaser.Scene {
                         setTimeout(() => {
                             textMoney.destroy();
                             moneyButton.destroy();
-                        }, 2000);
+                        }, 3000);
                     }
                 }
                 else {
@@ -691,7 +693,7 @@ class Foret extends Phaser.Scene {
                     setTimeout(() => {
                         textMoney.destroy();
                         moneyButton.destroy();
-                    }, 2000);
+                    }, 3000);
                 }
             }
             else {
@@ -718,7 +720,7 @@ class Foret extends Phaser.Scene {
                     setTimeout(() => {
                         textMoney.destroy();
                         moneyButton.destroy();
-                    }, 2000);
+                    }, 3000);
 
                     setTimeout(() => {
                         let nbOldSeed = 0;
@@ -797,7 +799,7 @@ class Foret extends Phaser.Scene {
                     setTimeout(() => {
                         textHealth.destroy();
                         healthButton.destroy();
-                    }, 2000);
+                    }, 3000);
                 }
                 if(bat.weed == 8) {
                     
@@ -836,7 +838,7 @@ class Foret extends Phaser.Scene {
                 ecologyButton.destroy();
                 textHealth.destroy();
                 healthButton.destroy();
-            }, 2000);
+            }, 3000);
         }
     }
     recolte(bat) {
@@ -910,7 +912,7 @@ class Foret extends Phaser.Scene {
                     hungerButton.destroy();
                     textHealth.destroy();
                     healthButton.destroy();
-                }, 2000);
+                }, 3000);
             }
             else {
                 bat.plant = false;
@@ -930,7 +932,7 @@ class Foret extends Phaser.Scene {
                 setTimeout(() => {
                     textHunger.destroy();
                     hungerButton.destroy();
-                }, 2000);
+                }, 3000);
             }
         }
     }
@@ -958,7 +960,7 @@ class Foret extends Phaser.Scene {
                 ecologyButton.destroy();
                 textFertility.destroy();
                 fertilityButton.destroy();
-            }, 2000);
+            }, 3000);
         }
     }
 
@@ -981,7 +983,7 @@ class Foret extends Phaser.Scene {
                     setTimeout(() => {
                         textAnimal.destroy();
                         animalButton.destroy();
-                    }, 2000);
+                    }, 3000);
                 }
             }
         }
@@ -1008,7 +1010,7 @@ class Foret extends Phaser.Scene {
                             moneyButton.destroy();
                             textAnimal.destroy();
                             animalButton.destroy();
-                        }, 2000);
+                        }, 3000);
                     }
                     bat.dead = false;
                     bat.feed = 90;
@@ -1040,7 +1042,7 @@ class Foret extends Phaser.Scene {
                     setTimeout(() => {
                         textMoney.destroy();
                         moneyButton.destroy();
-                    }, 2000);
+                    }, 3000);
                 }
                 if(bat.type == 'struct') {
                     this.images[bat.key - 1].destroy();
@@ -1052,7 +1054,7 @@ class Foret extends Phaser.Scene {
                     setTimeout(() => {
                         textMoney.destroy();
                         moneyButton.destroy();
-                    }, 2000);
+                    }, 3000);
                 }
 
                 this.physics.add.overlap(this.player, this.images[bat.key - 1], this.overlapBat, null, this);
@@ -1072,7 +1074,7 @@ class Foret extends Phaser.Scene {
             console.log('Feeded !', bat);
             this.updateJauge('animalCare', meal.care);
 
-            this.registry.set('money', this.registry.get('money') - engrais.prix);
+            this.registry.set('money', this.registry.get('money') - meal.prix);
 
             let textMoney = this.add.text(bat.x, bat.y, '-'+meal.prix, { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
             let moneyButton = this.add.image(textMoney.x + textMoney.width / 1.5, textMoney.y, 'dollar').setScale(0.08).setOrigin(0,0.5);
@@ -1084,7 +1086,7 @@ class Foret extends Phaser.Scene {
                 moneyButton.destroy();
                 textAnimal.destroy();
                 animalButton.destroy();
-            }, 2000);
+            }, 3000);
         }
     }
 
@@ -1112,7 +1114,7 @@ class Foret extends Phaser.Scene {
                                 setTimeout(() => {
                                     textAnimal.destroy();
                                     animalButton.destroy();
-                                }, 2000);
+                                }, 3000);
                             }, 10000);
                         }
                         else if(bat.feed < 25) {
@@ -1125,7 +1127,7 @@ class Foret extends Phaser.Scene {
                             setTimeout(() => {
                                 textAnimal.destroy();
                                 animalButton.destroy();
-                            }, 2000);
+                            }, 3000);
 
                             //Seedy Advice
                             if(bat.feed >= 5 && bat.feed < 10) {
@@ -1200,16 +1202,16 @@ class Foret extends Phaser.Scene {
                 animalButton.destroy();
                 texthunger.destroy();
                 hungerButton.destroy();
-            }, 2000);
+            }, 3000);
         }
     }
 
 
     updateJauge(jauge, value){
-        let result = this.registry.get(jauge) + value;
+        let result = this.registry.get(jauge+this.gameScene) + value;
         if(result > 100) result = 100;
         if(result < 0) result = 0;
-        this.registry.set(jauge, result);
+        this.registry.set(jauge+this.gameScene, result);
     }
 
 

@@ -35,6 +35,15 @@ class Loading extends Phaser.Scene {
         this.load.image('cadenas', 'assets/map/cadenas.png');
         this.load.image('errorLock', 'assets/map/errorLock.png');
 
+        //Tuto
+        // Batiments ferme
+        this.load.spritesheet('labortuto', 'assets/tuto/build/labor.png', { frameWidth: 288, frameHeight: 416 });
+        this.load.spritesheet('housetuto', 'assets/tuto/build/house.png', { frameWidth: 384, frameHeight: 256 });
+        this.load.image('buildtuto', 'assets/tuto/build/build.png');
+        this.load.spritesheet('tanktuto', 'assets/tuto/build/tank.png', { frameWidth: 192, frameHeight: 192 });
+        this.load.spritesheet('cowtuto', 'assets/tuto/animal/cow.png', { frameWidth: 416, frameHeight: 416 });
+
+        //Autres maps
         for(let z of getByType('climat')) {
             // Batiments ferme
             this.load.spritesheet('labor'+z.tag, 'assets/'+z.tag+'/build/labor.png', { frameWidth: 288, frameHeight: 416 });
