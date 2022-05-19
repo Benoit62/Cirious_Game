@@ -572,6 +572,9 @@ class Menu extends Phaser.Scene {
             }
         });
         this.percentText3.setOrigin(0.5, 0.5).setVisible(false);
+
+        this.imgTechs = [];
+        this.imgTech2.push(this.add.image(0, 0, 'white').setVisible(false).setScale(0.08));
     }
 
     update() {
@@ -742,6 +745,23 @@ class Menu extends Phaser.Scene {
                     tmpText+='Historique : '+this.batOverlap.oldseed[0].name;
                 }
             }
+
+
+
+            //Boutons des amélioration batiments
+            if(this.batOverlap.type == 'struct') {
+                let buttons = getByTag(this.batOverlap.product);
+                let taille = buttons.length
+                buttons.forEach(function(value) {
+                    this.imgTechs.forEach(value => value.destroy());
+                    this.add.image((window.innerWidth/nbCategori)*(compt1+1), 65, value.tag+'-search').setScale(0.2).setInteractive();
+                }, this);
+            }
+            else {
+
+            }
+
+
             this.plus.setVisible(true);
             this.textBat.setText(tmpText);
 

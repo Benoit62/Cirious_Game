@@ -234,7 +234,7 @@ class Europe extends Phaser.Scene {
 
         //  Our player animations, turning, walking left and walking right.
         this.anims.create({
-            key: 'left',
+            key: 'left_player',
             frames: this.anims.generateFrameNumbers('farmer', {
                 start: 3,
                 end: 5
@@ -244,7 +244,7 @@ class Europe extends Phaser.Scene {
         });
 
         this.anims.create({
-            key: 'turn',
+            key: 'turn_player',
             frames: [{
                 key: 'farmer',
                 frame: 0
@@ -253,7 +253,7 @@ class Europe extends Phaser.Scene {
         });
 
         this.anims.create({
-            key: 'right',
+            key: 'right_player',
             frames: this.anims.generateFrameNumbers('farmer', {
                 start: 9,
                 end: 11
@@ -263,21 +263,23 @@ class Europe extends Phaser.Scene {
         });
 
         this.anims.create({
-            key: 'up',
-            frames: [{
-                key: 'farmer',
-                frame: 0
-            }],
-            frameRate: 20
+            key: 'up_player',
+            frames: this.anims.generateFrameNumbers('farmer', {
+                start: 6,
+                end: 8
+            }),
+            frameRate: 10,
+            repeat: -1
         });
 
         this.anims.create({
-            key: 'down',
-            frames: [{
-                key: 'farmer',
-                frame: 0
-            }],
-            frameRate: 20
+            key: 'down_player',
+            frames: this.anims.generateFrameNumbers('farmer', {
+                start: 0,
+                end: 2
+            }),
+            frameRate: 10,
+            repeat: -1
         });
 
 
@@ -398,12 +400,13 @@ class Europe extends Phaser.Scene {
         if (this.cursors.up.isDown) {
             this.player.setVelocityY(-650);
             this.menuScene.closeSavoirPlus();
-            //player.anims.play('up', true);
+            this.player.anims.play('up_player', true);
         } else if (this.cursors.down.isDown) {
             this.player.setVelocityY(650);
             this.menuScene.closeSavoirPlus();
 
-            //player.anims.play('down', true);
+            console.log('down');
+            this.player.anims.play('down_player', true);
         } else {
             this.player.setVelocityY(0);
         }
@@ -412,19 +415,19 @@ class Europe extends Phaser.Scene {
             this.player.setVelocityX(-650);
             this.menuScene.closeSavoirPlus();
 
-            this.player.anims.play('left', true);
+            this.player.anims.play('left_player', true);
         } else if (this.cursors.right.isDown) {
             this.player.setVelocityX(650);
             this.menuScene.closeSavoirPlus();
 
-            this.player.anims.play('right', true);
+            this.player.anims.play('right_player', true);
         } else {
             this.player.setVelocityX(0);
         }
 
         if (!this.cursors.left.isDown && !this.cursors.right.isDown) {
 
-            this.player.anims.play('turn', true);
+            this.player.anims.play('turn_player', true);
         }
         this.body = this.player.body;
 

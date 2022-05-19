@@ -29,20 +29,20 @@ class Cinematique1 extends Phaser.Scene {
         this.Mathieu = this.add.sprite(window.innerWidth / 4, window.innerHeight - 105/2, 'sellier', 9);
 
         this.anims.create({
-            key: 'walkE',
+            key: 'walkE1',
             frames: this.anims.generateFrameNumbers('scient', { frames: [7, 6, 5, 4] }),
             frameRate: 10,
             repeat: -1
         });
         this.anims.create({
-            key: 'walkL',
+            key: 'walkL1',
             frames: this.anims.generateFrameNumbers('sellier', { frames: [5, 4] }),
             frameRate: 10,
             repeat: -1
         });
 
         this.eddison = this.add.sprite(window.innerWidth + 64, window.innerHeight - 42).setScale(2);
-        this.eddison.play('walkE');
+        this.eddison.play('walkE1');
         this.bool = false;
         this.nextS = false;
         this.walkE = true;
@@ -194,7 +194,7 @@ class Cinematique1 extends Phaser.Scene {
 
         if (this.nextS && !this.walkS) {
             this.eddison = this.add.sprite(480, window.innerHeight - 42, 'scient', 0).setScale(2);
-            this.Mathieu.play('walkL');
+            this.Mathieu.play('walkL1');
             this.Mathieu.y += 10;
             this.walkS = true;
         }
@@ -242,13 +242,13 @@ class Cinematique2 extends Phaser.Scene {
         // Taille 531x398 => 106.2x
         this.seedi = this.add.image(200, window.innerHeight - 106.2/2, 'seedySlt').setScale(0.2);//assigner a la variable differentes 
         this.anims.create({
-            key: 'walkL',
+            key: 'walkL2',
             frames: this.anims.generateFrameNumbers('sellier', { frames: [5, 4] }),
             frameRate: 10,
             repeat: -1
         });
         this.Mathieu = this.add.sprite(window.innerWidth + 60, window.innerHeight - 100/2);
-        this.Mathieu.play('walkL');
+        this.Mathieu.play('walkL2');
         this.bool = false;
         this.nextS = false;
         this.walk = true;

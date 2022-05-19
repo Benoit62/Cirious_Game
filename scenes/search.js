@@ -30,8 +30,8 @@ class Search extends Phaser.Scene {
         let nbCategori = this.search.length +1;
         let compt1 = 0;
         this.search.forEach(function(value){
-            let catIcone = this.add.image((window.innerWidth/nbCategori)*(compt1+1), 70, value.tag+'-search').setScale(0.2).setInteractive();
-            let shineCatIcon = this.add.image((window.innerWidth/nbCategori)*(compt1+1), 70, 'circle').setScale(0.2).setVisible(false);
+            let catIcone = this.add.image((window.innerWidth/nbCategori)*(compt1+1), 65, value.tag+'-search').setScale(0.2).setInteractive();
+            let shineCatIcon = this.add.image((window.innerWidth/nbCategori)*(compt1+1), 65, 'circle').setScale(0.2).setVisible(false);
             this.circles.push(shineCatIcon);
             let compt2 = 0;
             let nbUnderCat = value.children.length+1;
@@ -59,14 +59,14 @@ class Search extends Phaser.Scene {
                     }, this);
                 }
                 else {
-                    searchIcone = this.add.image((window.innerWidth/nbUnderCat)*(compt2+1), catIcone.y + 100, value.tag+'-search').setScale(0.15).setInteractive().setVisible(false);
-                    let shineCatIcon2 = this.add.image((window.innerWidth/nbUnderCat)*(compt2+1), catIcone.y + 100, 'circle').setScale(0.15).setVisible(false);
+                    searchIcone = this.add.image((window.innerWidth/nbUnderCat)*(compt2+1), catIcone.y + 90, value.tag+'-search').setScale(0.15).setInteractive().setVisible(false);
+                    let shineCatIcon2 = this.add.image((window.innerWidth/nbUnderCat)*(compt2+1), catIcone.y + 90, 'circle').setScale(0.15).setVisible(false);
                     this.circles2.push(shineCatIcon2);
                     let compt3 = 0;
                     let tmpArrayStructIcones = [];
                     let nbUnderCat2 = getByType(value.product).length+1;
                     getByType(value.product).forEach(function(value) {
-                        let productIcone = this.add.image((window.innerWidth/nbUnderCat2)*(compt3+1), searchIcone.y + 80, value.tag+'-search').setScale(0.13).setInteractive().setVisible(false);
+                        let productIcone = this.add.image((window.innerWidth/nbUnderCat2)*(compt3+1), searchIcone.y + 75, value.tag+'-search').setScale(0.13).setInteractive().setVisible(false);
                         if(!value.unlock) {
                             productIcone.setAlpha(0.5);
                         }
