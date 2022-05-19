@@ -124,7 +124,7 @@ let data = [
         name: 'Chameau',
         desc: 'Production de viande de cuir, et de lait',
         info: 'les chameaux ont une grande capacité à puiser dans leurs réserves d\'énergie lorsque les ressources alimentaires se font rare. Une aubaine face au réchauffement climatique actuel et aux périodes de sécheresse dont l\'élevage européen fait face.',
-        climat: ['desert']
+        climat: ['aride']
     },
 
     {
@@ -185,7 +185,7 @@ let data = [
         name: 'Blé',
         desc: 'Céréales',
         info: 'Chaque année, 650 à 685 millions de tonnes de blé sont produites, 654 à 660 millions de tonnes sont consommées',
-        climat: ['europe', 'polaire', 'desert']
+        climat: ['europe', 'polaire', 'aride']
     },
 
     {
@@ -198,7 +198,7 @@ let data = [
         name: 'Carottes',
         desc: 'Légumes',
         info: 'La carotte est cultivée pratiquement partout sur la planète, et elle fait partie des légumes les plus consommés sur la planète . Aujourd’hui, on dénombre pas moins de 500 variétés de carottes dans le monde',
-        climat: ['europe', 'polaire', 'desert']
+        climat: ['europe', 'polaire', 'aride']
     },
 
     {
@@ -211,7 +211,7 @@ let data = [
         name: 'Maïs',
         desc: 'Céréale',
         info: 'Annuellement, le maïs est la céréale la plus produite dans le monde avec environ 850 millions de tonnes produites sur approximativement 162 millions d’hectares, soit un rendement moyen de 5.2 t/ha. ',
-        climat: ['europe', 'tropic', 'polaire', 'desert']
+        climat: ['europe', 'tropic', 'polaire', 'aride']
     },
 
     {
@@ -224,7 +224,7 @@ let data = [
         name: 'Avoine',
         desc: 'Céréale',
         info: 'La production mondiale d\'avoine représente près de 800 kilos par seconde, soit 25 millions de tonnes par an. L\'Union européenne est le 1er production d\'avoine',
-        climat: ['europe', 'tropic', 'polaire', 'desert']
+        climat: ['europe', 'tropic', 'polaire', 'aride']
     },
 
     {
@@ -237,7 +237,7 @@ let data = [
         name: 'Pommes de Terre',
         desc: 'Tubercules/Féculent',
         info: 'En 2011, la production de pommes de terre s\'est élevée à près de 12 000 kilos chaque seconde (compteur), soit 374 millions de tonnes. La Chine est le premier producteur mondial de pommes de terre',
-        climat: ['europe', 'tropic', 'desert']
+        climat: ['europe', 'tropic', 'aride']
     },
 
     {
@@ -315,7 +315,7 @@ let data = [
         name: 'Oignon',
         desc: 'Plante potagère',
         info: 'La production mondiale d\'oignons représente 85 millions de tonnes. Les principaux producteurs d\'oignons sont la Chine, l\'Inde et les États-Unis. ',
-        climat: ['europe', 'tropic', 'polaire', 'desert']
+        climat: ['europe', 'tropic', 'polaire', 'aride']
     },
 
     {
@@ -328,7 +328,7 @@ let data = [
         name: 'Betterave',
         desc: 'Plante fourragère',
         info: 'En 2011, 5 069 362 hectares de betteraves à sucre ont été cultivés dans le monde, la Russie étant la première zone de production.  ',
-        climat: ['europe', 'polaire', 'desert']
+        climat: ['europe', 'polaire', 'aride']
     },
     {
         tag: 'colza',
