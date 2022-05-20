@@ -848,8 +848,8 @@ class Europe extends Phaser.Scene {
             let percent = bat.fertility/100;
             let percent2 = (bat.maxWeeds - bat.weeds)/10;
             console.log(percent, percent2);
-            let moneyWin = bat.seed.money*percent*percent2;
-            let hungerWin = 5*percent*percent2;
+            let moneyWin = Math.round(bat.seed.money*percent*percent2*100)/100;
+            let hungerWin = Math.round(5*percent*percent2*100)/100;
 
             // Compte l'echainement des graines
             let looseFertility = 0;
