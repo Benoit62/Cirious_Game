@@ -1399,7 +1399,7 @@ class Tuto extends Phaser.Scene {
             if (this.money() >= destroyRef.cost) {
                 if(bat.type == 'animal') {
                     this.images[bat.key - 1].destroy();
-                    this.images[bat.key - 1] = this.physics.add.image(bat.x, bat.y, 'build').setScale(bat.scale);
+                    this.images[bat.key - 1] = this.physics.add.image(bat.x, bat.y, 'build'+this.gameScene).setScale(bat.scale);
                     if(!bat.dead) {
                         //Si il vend le batiment des animaux pas mort il gagne un bonus bien-être
                         this.updateJauge('animalCare', 20);
@@ -1431,7 +1431,7 @@ class Tuto extends Phaser.Scene {
                     if(bat.plant) {
                         this.images[bat.key - 1]['plant'].destroy();
                     }
-                    this.images[bat.key - 1] = this.physics.add.image(bat.x, bat.y, 'build').setScale(bat.scale);
+                    this.images[bat.key - 1] = this.physics.add.image(bat.x, bat.y, 'build'+this.gameScene).setScale(bat.scale);
                     bat.seed = {};
                     bat.oldseed = [];
                     bat.dead = false;
@@ -1450,7 +1450,7 @@ class Tuto extends Phaser.Scene {
                 }
                 if(bat.type == 'struct') {
                     this.images[bat.key - 1].destroy();
-                    this.images[bat.key - 1] = this.physics.add.image(bat.x, bat.y, 'build').setScale(bat.scale);
+                    this.images[bat.key - 1] = this.physics.add.image(bat.x, bat.y, 'build'+this.gameScene).setScale(bat.scale);
 
                     let textMoney = this.add.text(bat.x, bat.y, '-'+destroyRef.cost, { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
                     let moneyButton = this.add.image(textMoney.x + textMoney.width / 1.5, textMoney.y, 'dollar').setScale(0.08).setOrigin(0,0.5);

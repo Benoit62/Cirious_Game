@@ -36,7 +36,8 @@ class Europe extends Phaser.Scene {
 
         this.finish = false;
 
-        this.spritePlayer = 'player';
+
+        this.speedPlayer = 200;
     }
 
     create() {
@@ -421,6 +422,12 @@ class Europe extends Phaser.Scene {
             this.registry.set('hunger'+this.gameScene, this.registry.get('hunger'+this.gameScene) < 90 ? this.registry.get('hunger'+this.gameScene) + 10 : this.registry.get('hunger'+this.gameScene));
         }, this);
 
+
+        this.input.keyboard.on('keydown_V', function(){
+            this.speedPlayer += 20;
+            if(this.speedPlayer > 860) this.speedPlayer = 860;
+        }, this);
+
         /*this.input.keyboard.on('keydown_M', function(){
             if(this.spritePlayer == 'player') {
                 let currentX = this.player.x;
@@ -446,11 +453,11 @@ class Europe extends Phaser.Scene {
         }
 
         if (this.cursors.up.isDown) {
-            this.player.setVelocityY(-650);
+            this.player.setVelocityY(-this.speedPlayer);
             this.menuScene.closeSavoirPlus();
             this.player.anims.play('up_player', true);
         } else if (this.cursors.down.isDown) {
-            this.player.setVelocityY(650);
+            this.player.setVelocityY(this.speedPlayer);
             this.menuScene.closeSavoirPlus();
 
             console.log('down');
@@ -460,12 +467,12 @@ class Europe extends Phaser.Scene {
         }
 
         if (this.cursors.left.isDown) {
-            this.player.setVelocityX(-650);
+            this.player.setVelocityX(-this.speedPlayer);
             this.menuScene.closeSavoirPlus();
 
             this.player.anims.play('left_player', true);
         } else if (this.cursors.right.isDown) {
-            this.player.setVelocityX(650);
+            this.player.setVelocityX(this.speedPlayer);
             this.menuScene.closeSavoirPlus();
 
             this.player.anims.play('right_player', true);
@@ -996,7 +1003,7 @@ class Europe extends Phaser.Scene {
             if (this.money() >= destroyRef.cost) {
                 if(bat.type == 'animal') {
                     this.images[bat.key - 1].destroy();
-                    this.images[bat.key - 1] = this.physics.add.image(bat.x, bat.y, 'build').setScale(bat.scale);
+                    this.images[bat.key - 1] = this.physics.add.image(bat.x, bat.y, 'build'+this.gameScene).setScale(bat.scale);
                     if(!bat.dead) {
                         //Si il vend le batiment des animaux pas mort il gagne un bonus bien-être
                         this.updateJauge('animalCare', 20);
@@ -1028,7 +1035,7 @@ class Europe extends Phaser.Scene {
                     if(bat.plant) {
                         this.images[bat.key - 1]['plant'].destroy();
                     }
-                    this.images[bat.key - 1] = this.physics.add.image(bat.x, bat.y, 'build').setScale(bat.scale);
+                    this.images[bat.key - 1] = this.physics.add.image(bat.x, bat.y, 'build'+this.gameScene).setScale(bat.scale);
                     bat.seed = {};
                     bat.oldseed = [];
                     bat.dead = false;
@@ -1047,7 +1054,7 @@ class Europe extends Phaser.Scene {
                 }
                 if(bat.type == 'struct') {
                     this.images[bat.key - 1].destroy();
-                    this.images[bat.key - 1] = this.physics.add.image(bat.x, bat.y, 'build').setScale(bat.scale);
+                    this.images[bat.key - 1] = this.physics.add.image(bat.x, bat.y, 'build'+this.gameScene).setScale(bat.scale);
 
                     let textMoney = this.add.text(bat.x, bat.y, '-'+destroyRef.cost, { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
                     let moneyButton = this.add.image(textMoney.x + textMoney.width / 1.5, textMoney.y, 'dollar').setScale(0.08).setOrigin(0,0.5);
