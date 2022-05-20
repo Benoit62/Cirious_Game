@@ -16,7 +16,7 @@ This project was made by :
 *   [Bocquet Corentin](https://github.com/Corentin-Bocquet)
 *   [Letey Hugo](https://github.com/hletey)
 *   [Sellier Mathieu](https://github.com/Sellierm)
-*   [Wattigne Benoît](https://github.com/Benoit62)
+*   [Wattinne Benoît](https://github.com/Benoit62)
 
 ## Purpose
 
