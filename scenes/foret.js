@@ -676,6 +676,11 @@ class Foret extends Phaser.Scene {
                     this.images[bat.key - 1]['weeds'] = this.add.image(bat.x, bat.y, 'weeds', bat.weeds);
                     this.images[bat.key - 1]['plant'];
                     bat.ref = getByTag(bat.tag)[0];
+                    
+                    if (bat.rotate) {
+                        this.images[bat.key - 1]['ground'].rotation = 3.141592 / 2;
+                        this.images[bat.key - 1]['weeds'].rotation = 3.141592 / 2;
+                    }
 
                     let textMoney = this.add.text(bat.x, bat.y, '-'+ref.buildCost, { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
                     let moneyButton = this.add.image(textMoney.x + textMoney.width / 1.5, textMoney.y, 'dollar').setScale(0.08).setOrigin(0,0.5);
