@@ -35,7 +35,7 @@ class Desert extends Phaser.Scene {
 
         this.finish = false;
 
-        this.speedPlayer = 200;
+        this.speedPlayer = 300;
     }
 
     create ()
