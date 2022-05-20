@@ -18,7 +18,7 @@ This project was made by :
 *   [Sellier Mathieu](https://github.com/Sellierm)
 *   [Wattinne Benoit](https://github.com/Benoit62)
 
-and with the help of :
+And with the help of :
 
 * Baptiste Sellier, who made videos with a drone for the trailer of the game
 ## Purpose
