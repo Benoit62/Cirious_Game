@@ -20,7 +20,7 @@ This project was made by :
 
 and with the help of :
 
-* Baptiste Sellier, who made videos for the trailler with a drone 
+* Baptiste Sellier, who made videos for the trailer with a drone 
 ## Purpose
 
 The main purpose of this project is to sensibilize the population about the farm of the future, by guiding them through a game were he has to fill 3 progress bar wich reprensents :
