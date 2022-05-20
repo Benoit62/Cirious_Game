@@ -311,7 +311,7 @@ class Tuto extends Phaser.Scene {
             var content = [
                 "Nous voici arrivés dans ta nouvelle ferme.",
                 "Tout d'abord, tu peux voir en haut de l'écran 3 jauges.",
-                "Elles réprésentent le bien être animal, l'écologie, et la production de nourriture,",
+                "Elles représentent le bien-être animal, l'écologie, et la production de nourriture,",
                 "les trois objectifs que tu dois remplir, pour atteindre la ferme du futur.",
                 "Quand elles ont toutes atteintes au moins 90%, tu débloques la ferme suivante",
                 "A gauches des jauges, tu peux voir l'argent que tu gagnes et quelques détails.",
@@ -385,10 +385,10 @@ class Tuto extends Phaser.Scene {
                         txt += 1;
                         txt = txt % 2;
                         i++;
-                        wait = 1000;
+                        wait = 1500;
                         if (i < content.length && content[i].length == 0) {
                             i++;
-                            wait = 1000;
+                            wait = 1500;
                             txt = 0;
                             bool = true;
                         }
@@ -401,7 +401,7 @@ class Tuto extends Phaser.Scene {
                     else {
                         setTimeout(function () {
                             This.introCow = true;
-                        }, 1000);
+                        }, 1500);
                     }
                 }, wait)
             }
@@ -506,10 +506,10 @@ class Tuto extends Phaser.Scene {
                             txt += 1;
                             txt = txt % 2;
                             i++;
-                            wait = 1000;
+                            wait = 1500;
                             if (i < content.length && content[i].length == 0) {
                                 i++;
-                                wait = 1000;
+                                wait = 1500;
                                 txt = 0;
                                 bool = true;
                             }
@@ -522,7 +522,7 @@ class Tuto extends Phaser.Scene {
                         else {
                             setTimeout(function () {
                                 This.introBat = true;
-                            }, 1000);
+                            }, 1500);
                         }
                     }, wait)
                 }
@@ -638,10 +638,10 @@ class Tuto extends Phaser.Scene {
                             txt += 1;
                             txt = txt % 2;
                             i++;
-                            wait = 1000;
+                            wait = 1500;
                             if (i < content.length && content[i].length == 0) {
                                 i++;
-                                wait = 1000;
+                                wait = 1500;
                                 txt = 0;
                                 bool = true;
                             }
@@ -659,7 +659,7 @@ class Tuto extends Phaser.Scene {
                                 This.text2.destroy();
                                 This.seedi.destroy();
                                 This.introField = true;
-                            }, 1000);
+                            }, 1500);
                         }
                     }, wait)
                 }
@@ -767,10 +767,10 @@ class Tuto extends Phaser.Scene {
                             txt += 1;
                             txt = txt % 2;
                             i++;
-                            wait = 1000;
+                            wait = 1500;
                             if (i < content.length && content[i].length == 0) {
                                 i++;
-                                wait = 1000;
+                                wait = 1500;
                                 txt = 0;
                                 bool = true;
                             }
@@ -783,7 +783,7 @@ class Tuto extends Phaser.Scene {
                         else {
                             setTimeout(function () {
                                 This.introM = true;
-                            }, 1000);
+                            }, 1500);
                         }
                     }, wait)
                 }
@@ -876,7 +876,7 @@ class Tuto extends Phaser.Scene {
 
                             if (i < content.length && content[i].length == 0) {
                                 i++;
-                                wait = 1000;
+                                wait = 1500;
                                 txt = 0;
                                 bool = true;
                             }

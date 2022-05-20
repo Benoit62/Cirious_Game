@@ -85,28 +85,29 @@ class Cinematique1 extends Phaser.Scene {
             dialBox.fillStyle(0x70402a, 1);
             dialBox.fillRect(0, 0, window.innerWidth, 130);
             var content = [
-                "Bonjour "+namePlayer+", je suis Chênebleu, directeur générale de L'Organisation des Nations unies pour l’alimentation et l’agriculture",
+                "Bonjour "+namePlayer+", je suis Chênebleu, directeur général de l'Organisation des Nations Unies pour l’alimentation et l’agriculture",
                 "J'ai besoin de ton aide pour une mission très importante.",
                 "",
                 ""+namePlayer+"",
                 "Quelle est donc cette mission ?",
                 "",
-                "Chênebleu :",
+                "Chênebleu",
                 "L'agriculture d'aujourd'hui va mal, il faut nourrir de plus en plus de monde et nos méthodes sont dépassées.",
-                "J'ai besoin de toi pour produire plus et nourrir le monde.",
+                "J'ai besoin de toi pour produire plus de ressources agricoles et nourrir le monde.",
                 "",
                 ""+namePlayer+"",
                 "J'accepte cette mission, mais nous devons aussi faire attention à l'écologie.",
-                "La planète va mal et nous devons en même temps développer une ferme durable en pensant aux générations futures.",
+                "La planète va mal et nous devons en même temps développer une ferme durable et penser aux générations futures.",
                 "",
-                "Chênebleu :",
+                "Chênebleu",
                 "C'est vrai, tu as raison, nous devons aussi préserver la planète et tous ses écosystèmes.",
                 "",
                 ""+namePlayer+"",
                 "Ainsi que le bien-être animal !",
                 "",
-                "Chênebleu :",
-                "Je vois que tu as bien compris les enjeux de ta mission, je t'envoie partout dans le monde pour aider toutes les populations à développer leur ferme du futur.",
+                "Chênebleu",
+                "Je vois que tu as bien compris les enjeux de ta mission,",
+                "je t'envoie partout dans le monde pour aider toutes les populations à développer leur ferme du futur.",
                 "Commence par l'Europe pour te faire la main et réaliser de nombreuses recherches qui te serviront ailleurs dans le monde.",
                 "Va rejoindre Seedy qui sera ta guide dans cette aventure.",
                 "",
@@ -143,11 +144,11 @@ class Cinematique1 extends Phaser.Scene {
             var tmp = '';
             var i = 0;
             var j = 0;
-            var wait = 50;
+            var wait = 60;
             var bool = false;
             function loop() {
                 setTimeout(function () {
-                    wait = 50;
+                    wait = 60;
                     if (bool) {
                         text0.setText(content[i]);
                         text1.setText('');
@@ -297,7 +298,7 @@ class Cinematique2 extends Phaser.Scene {
                 "Salut moi c'est Seedy ! Je serai ta guide dans cette nouvelle aventure !",
                 "",
                 ""+namePlayer+"",
-                "Enchanté de faire ta connaissance Seedy, moi c’est "+namePlayer+", Chênebleu m'a dit que tu serai ma guide.",
+                "Enchanté de faire ta connaissance Seedy, moi c’est "+namePlayer+", Chênebleu m'a dit que tu serais ma guide.",
                 "",
                 "Seedy :",
                 "Parfait ! Maintenant que les présentations sont faites, suis-moi, nous allons débuter ta formation !",
@@ -335,11 +336,11 @@ class Cinematique2 extends Phaser.Scene {
             var tmp = '';
             var i = 0;
             var j = 0;
-            var wait = 50;
+            var wait = 60;
             var bool = false;
             function loop() {
                 setTimeout(function () {
-                    wait = 50;
+                    wait = 60;
                     if (bool) {
                         text0.setText(content[i]);
                         text1.setText('');
