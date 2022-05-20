@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['autorisation']) && $_SESSION['autorisation'] != 'iseed') {
-  header('location: connexion.php');
+  header('location: login.php');
 }
 
 include("config/configbdd.php");
