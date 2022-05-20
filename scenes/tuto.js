@@ -36,7 +36,7 @@ class Tuto extends Phaser.Scene {
         this.scene.bringToTop('headerScene');
         this.scene.bringToTop('menuScene');
 
-        this.musique = this.sound.add('game_musique', {
+        this.musique = this.sound.add(this.gameScene+'_musique', {
             mute: false,
             volume: 0.1,
             rate: 1,

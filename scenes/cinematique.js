@@ -5,6 +5,7 @@ class Cinematique1 extends Phaser.Scene {
         super({
             key: 'cinematiqueScene1'
         });
+        this.musique;
     }
 
     preload() {
@@ -12,6 +13,16 @@ class Cinematique1 extends Phaser.Scene {
     }
 
     create() {
+        this.musique = this.sound.add('cinematique_musique', {
+            mute: false,
+            volume: 0.2,
+            rate: 1,
+            detune: 0,
+            seek: 0,
+            loop: true,
+            delay: 0
+        });
+        this.musique.play();
         /*this.background = this.add.image(window.innerWidth / 2, window.innerHeight / 2 + 100, 'bg')
         
         Phaser.Display.Align.In.Center(this.background, this.add.zone(window.innerWidth/2, window.innerHeight/2, window.innerWidth, window.innerHeight));

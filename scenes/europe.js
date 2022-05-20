@@ -40,9 +40,9 @@ class Europe extends Phaser.Scene {
     }
 
     create() {
-        this.musique = this.sound.add('game_musique', {
+        this.musique = this.sound.add(this.gameScene+'_musique', {
             mute: false,
-            volume: 0.1,
+            volume: 0.2,
             rate: 1,
             detune: 0,
             seek: 0,

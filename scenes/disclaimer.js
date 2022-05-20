@@ -18,6 +18,7 @@ class Disclaimer extends Phaser.Scene {
         if(this.esc) {
             /*this.scene.start('mapScene');
             this.scene.stop('disclaimerScene');*/
+            this.scene.get('cinematiqueScene1').musique.stop();
             this.scene.start('tutoScene');
             this.scene.launch('menuScene');
             this.scene.launch('headerScene');
@@ -44,6 +45,7 @@ class Disclaimer extends Phaser.Scene {
     }
 
     start() {
+        this.scene.get('cinematiqueScene1').musique.stop();
         this.scene.start('tutoScene');
         this.scene.launch('menuScene');
         this.scene.launch('headerScene');
