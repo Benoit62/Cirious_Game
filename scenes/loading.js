@@ -37,6 +37,7 @@ class Loading extends Phaser.Scene {
         this.load.image('europe', 'assets/map/europe.png');
         this.load.image('desert', 'assets/map/desert.png');
         this.load.image('tropic', 'assets/map/tropic.png');
+        this.load.image('polaire', 'assets/map/polaire.png');
         this.load.image('cadenas', 'assets/map/cadenas.png');
         this.load.image('errorLock', 'assets/map/errorLock.png');
 
