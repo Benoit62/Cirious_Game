@@ -151,7 +151,7 @@ h1 span {
     cursor: pointer;
     transition: box-shadow 0.5s,background-color 0.5s, transform 0.5s;
     font-size:350%;
-    font-family: 'Oleo Script', cursive;
+    font-family: 'Bangers', cursive;
 }
 
 .Connection:hover{
