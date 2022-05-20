@@ -362,7 +362,7 @@ class Tuto extends Phaser.Scene {
             var bool = false;
             function loop() {
                 setTimeout(function () {
-                    wait = 30;
+                    wait = 50;
                     if (bool) {
                         This.text0.setText(content[i]);
                         This.text1.setText('');
@@ -483,7 +483,7 @@ class Tuto extends Phaser.Scene {
                 var bool = false;
                 function loop() {
                     setTimeout(function () {
-                        wait = 30;
+                        wait = 50;
                         if (bool) {
                             This.text0.setText(content[i]);
                             This.text1.setText('');
@@ -615,7 +615,7 @@ class Tuto extends Phaser.Scene {
                 var bool = false;
                 function loop() {
                     setTimeout(function () {
-                        wait = 30;
+                        wait = 50;
                         if (bool) {
                             This.text0.setText(content[i]);
                             This.text1.setText('');
@@ -744,7 +744,7 @@ class Tuto extends Phaser.Scene {
                 var bool = false;
                 function loop() {
                     setTimeout(function () {
-                        wait = 30;
+                        wait = 50;
                         if (bool) {
                             This.text0.setText(content[i]);
                             This.text1.setText('');
@@ -851,7 +851,7 @@ class Tuto extends Phaser.Scene {
                 var bool = false;
                 function loop() {
                     setTimeout(function () {
-                        wait = 30;
+                        wait = 50;
                         if (bool) {
                             This.text0.setText(content[i]);
                             This.text1.setText('');

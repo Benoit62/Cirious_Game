@@ -1121,6 +1121,10 @@ class Menu extends Phaser.Scene {
                 tmpText = '\nFélicitation vous venez de débloquer une nouvelle île ! \n\n'+getByTag(this.registry.get('lock')[0])[0].name;
                 text.setText(tmpText).setTint(0xf00020);
                 break;
+            case 'finish':
+                tmpText = '\nFélicitation vous avez atteint tous les objectifs dans le monde, vous avez fait du bon boulot !';
+                text.setText(tmpText).setTint(0xf00020);
+                break;
             default:
                 seedy.destroy();
                 text.destroy();

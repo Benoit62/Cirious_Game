@@ -147,7 +147,7 @@ class Cinematique1 extends Phaser.Scene {
             var bool = false;
             function loop() {
                 setTimeout(function () {
-                    wait = 40;
+                    wait = 50;
                     if (bool) {
                         text0.setText(content[i]);
                         text1.setText('');
@@ -174,7 +174,7 @@ class Cinematique1 extends Phaser.Scene {
 
                         if (i < content.length && content[i].length == 0) {
                             i++;
-                            wait = 1000;
+                            wait = 1500;
                             txt = 0;
                             bool = true;
                         }
@@ -339,7 +339,7 @@ class Cinematique2 extends Phaser.Scene {
             var bool = false;
             function loop() {
                 setTimeout(function () {
-                    wait = 40;
+                    wait = 50;
                     if (bool) {
                         text0.setText(content[i]);
                         text1.setText('');
@@ -365,7 +365,7 @@ class Cinematique2 extends Phaser.Scene {
 
                         if (i < content.length && content[i].length == 0) {
                             i++;
-                            wait = 1000;
+                            wait = 1500;
                             txt = 0;
                             bool = true;
                         }
@@ -382,7 +382,7 @@ class Cinematique2 extends Phaser.Scene {
                             text1.destroy();
                             text2.destroy();
                             This.scene.start('disclaimerScene');
-                        }, 1000);
+                        }, 1500);
                     }
                 }, wait)
             }

@@ -397,8 +397,7 @@ class Glace extends Phaser.Scene {
     update() {
         if(this.registry.get('ecology'+this.gameScene) >= 90 && this.registry.get('animalCare'+this.gameScene) >= 90 && this.registry.get('hunger'+this.gameScene) >= 90 && !this.finish) {
             this.finish = true;
-            this.menuScene.seedyAdvice('unlock');
-            this.menuScene.unlock();
+            this.menuScene.seedyAdvice('finish');
             console.log('unlock');
         }
 

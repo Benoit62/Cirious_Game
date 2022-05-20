@@ -216,7 +216,7 @@ class Foret extends Phaser.Scene {
         this.cameras.main.zoom = 0.8;
 
         // Player
-        this.player = this.physics.add.sprite(800, -250, 'farmer').setDepth(2000).setScale(0.7);
+        this.player = this.physics.add.sprite(600, -250, 'farmer').setDepth(2000).setScale(0.7);
 
 
         this.physics.add.overlap(this.player, farm, this.closeOverLap, function () { return true; }, this);
