@@ -1126,7 +1126,7 @@ class Menu extends Phaser.Scene {
                 text.setText(tmpText).setTint(0x008000);
                 break;
             case 'deforest':
-                tmpText = '\nTu te rends compte de ce que tu viens de faire ? Abattre plusieurs hectares de forêt pour tes champs alors que la déforestation dans le monde est déjà bien trop importante. JE comprend que tu as besoin d\'espace pour cultiver mais fais plus attention à l\'avenir';
+                tmpText = 'Tu te rends compte de ce que tu viens de faire ? Abattre plusieurs hectares de forêt pour ta ferme alors que la déforestation dans le monde est déjà bien trop importante. Je comprend que tu as besoin d\'espace pour te développer mais sert toi de tes recherches pour être plus efficace !';
                 text.setText(tmpText).setTint(0xf00020);
                 break;
             default:

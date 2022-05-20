@@ -654,20 +654,30 @@ class Foret extends Phaser.Scene {
                         let textAnimal = this.add.text(bat.x, textMoney.y + textMoney.height*0.8, '-40', { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
                         let animalButton = this.add.image(textAnimal.x + textAnimal.width / 1.5, textAnimal.y, 'animal-care').setScale(0.08).setOrigin(0,0.5);
 
+                        let textEcology = this.add.text(bat.x, textAnimal.y + textAnimal.height*0.8, '-40', { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
+                        let ecologyButton = this.add.image(textEcology.x + textEcology.width / 1.5, textEcology.y, 'ecology-care').setScale(0.08).setOrigin(0,0.5);
+
                         setTimeout(() => {
                             textMoney.destroy();
                             moneyButton.destroy();
                             textAnimal.destroy();
                             animalButton.destroy();
+                            textEcology.destroy();
+                            ecologyButton.destroy();
                         }, 3000);
                     }
                     else {
                         let textMoney = this.add.text(bat.x, bat.y, '-'+ref.buildCost, { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
                         let moneyButton = this.add.image(textMoney.x + textMoney.width / 1.5, textMoney.y, 'dollar').setScale(0.08).setOrigin(0,0.5);
+                        
+                        let textEcology = this.add.text(bat.x, textMoney.y + textMoney.height*0.8, '-40', { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
+                        let ecologyButton = this.add.image(textEcology.x + textEcology.width / 1.5, textEcology.y, 'ecology-care').setScale(0.08).setOrigin(0,0.5);
 
                         setTimeout(() => {
                             textMoney.destroy();
                             moneyButton.destroy();
+                            textEcology.destroy();
+                            ecologyButton.destroy();
                         }, 3000);
                     }
                 }
@@ -684,12 +694,23 @@ class Foret extends Phaser.Scene {
 
                     let textMoney = this.add.text(bat.x, bat.y, '-'+ref.buildCost, { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
                     let moneyButton = this.add.image(textMoney.x + textMoney.width / 1.5, textMoney.y, 'dollar').setScale(0.08).setOrigin(0,0.5);
+                        
+                    let textEcology = this.add.text(bat.x, textMoney.y + textMoney.height*0.8, '-40', { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
+                    let ecologyButton = this.add.image(textEcology.x + textEcology.width / 1.5, textEcology.y, 'ecology-care').setScale(0.08).setOrigin(0,0.5);
 
                     setTimeout(() => {
                         textMoney.destroy();
                         moneyButton.destroy();
+                        textEcology.destroy();
+                        ecologyButton.destroy();
                     }, 3000);
                 }
+
+                
+                this.updateJauge('ecology', -40);
+                setTimeout(() => {
+                    this.menuScene.seedyAdvice('deforest');
+                }, 2000);
             }
             else {
                 console.log('Not enought money')
@@ -1000,11 +1021,17 @@ class Foret extends Phaser.Scene {
 
                         let textAnimal = this.add.text(bat.x, textMoney.y + textMoney.height*0.8, +20, { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
                         let animalButton = this.add.image(textAnimal.x + textAnimal.width / 1.5, textAnimal.y, 'animal-care').setScale(0.08).setOrigin(0,0.5);
+
+                        let textEcology = this.add.text(bat.x, textAnimal.y + textAnimal.height*0.8, '+30', { lineSpacing:10, fontSize:40, color:'#ffffff' }).setOrigin(0.5, 0.5);
+                        let ecologyButton = this.add.image(textEcology.x + textEcology.width / 1.5, textEcology.y, 'ecology-care').setScale(0.08).setOrigin(0,0.5);
+                        
                         setTimeout(() => {
                             textMoney.destroy();
                             moneyButton.destroy();
                             textAnimal.destroy();
                             animalButton.destroy();
+                            textEcology.destroy();
+                            ecologyButton.destroy();
                         }, 3000);
                     }
                     bat.dead = false;
@@ -1034,9 +1061,14 @@ class Foret extends Phaser.Scene {
                     let textMoney = this.add.text(bat.x, bat.y, '-'+destroyRef.cost, { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
                     let moneyButton = this.add.image(textMoney.x + textMoney.width / 1.5, textMoney.y, 'dollar').setScale(0.08).setOrigin(0,0.5);
 
+                    let textEcology = this.add.text(bat.x, textMoney.y + textMoney.height*0.8, '+10', { lineSpacing:10, fontSize:40, color:'#ffffff' }).setOrigin(0.5, 0.5);
+                    let ecologyButton = this.add.image(textEcology.x + textEcology.width / 1.5, textEcology.y, 'ecology-care').setScale(0.08).setOrigin(0,0.5);
+
                     setTimeout(() => {
                         textMoney.destroy();
                         moneyButton.destroy();
+                        textEcology.destroy();
+                        ecologyButton.destroy();
                     }, 3000);
                 }
                 if(bat.type == 'struct') {
@@ -1046,13 +1078,20 @@ class Foret extends Phaser.Scene {
                     let textMoney = this.add.text(bat.x, bat.y, '-'+destroyRef.cost, { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
                     let moneyButton = this.add.image(textMoney.x + textMoney.width / 1.5, textMoney.y, 'dollar').setScale(0.08).setOrigin(0,0.5);
 
+                    let textEcology = this.add.text(bat.x, textMoney.y + textMoney.height*0.8, '+10', { lineSpacing:10, fontSize:40, color:'#ffffff' }).setOrigin(0.5, 0.5);
+                    let ecologyButton = this.add.image(textEcology.x + textEcology.width / 1.5, textEcology.y, 'ecology-care').setScale(0.08).setOrigin(0,0.5);
+
                     setTimeout(() => {
                         textMoney.destroy();
                         moneyButton.destroy();
+                        textEcology.destroy();
+                        ecologyButton.destroy();
                     }, 3000);
                 }
 
                 this.physics.add.overlap(this.player, this.images[bat.key - 1], this.overlapBat, null, this);
+
+                this.updateJauge('ecology', +10);
             }
             else {
                 console.log('Not enought money')
