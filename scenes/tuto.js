@@ -311,11 +311,14 @@ class Tuto extends Phaser.Scene {
             var content = [
                 "Nous voici arrivés dans ta nouvelle ferme.",
                 "Tout d'abord, tu peux voir en haut de l'écran 3 jauges.",
-                "Elles représentent le bien-être animal, l'écologie, et la production de nourriture,",
-                "les trois objectifs que tu dois remplir, pour atteindre la ferme du futur.",
-                "Quand elles ont toutes atteintes au moins 90%, tu débloques la ferme suivante",
-                "A gauches des jauges, tu peux voir l'argent que tu gagnes et quelques détails.",
+                "Elles représentent le bien-être animal, l'écologie, et la production de nourriture.",
+                "                                       ",
+                "Ce sont les trois objectifs que tu dois remplir pour atteindre la ferme du futur.",
+                "Quand elles ont toutes atteintes au moins 90%, tu débloques la ferme suivante.",
+                "A gauche des jauges, tu peux voir l'argent que tu gagnes et quelques détails.",
+                "                            ",
                 "A droite se trouvent les boutons : Recherche, Carte et Quitter.",
+                "                             ",
                 "Le bouton Recherche permet de débloquer des nouvelles méthodes de cultures ou d'élevage,",
                 "ainsi que de nouvelles technologies. Je te laisse découvrir par toi-même.",
                 "Maintenant je vais te présenter la ferme et les actions que tu peux y faire.",
@@ -433,14 +436,15 @@ class Tuto extends Phaser.Scene {
                 This.seedi.setScrollFactor(0);
                 This.seedi.setOrigin(0, 0);
                 var content = [
-                    "Ici se trouve un batiment d'élevage, tu peux élever différents animaux, mais fais bien atttention,",
+                    "Ici se trouve un batiment d'élevage, tu peux y placer différents animaux, mais fais bien atttention,",
                     "chaque animal s'adapte plus au moins bien au climat de la ferme.",
-                    "Tu peux améliorer le bâtiment en appuyant sur le premier bouton du menu, si tu as assez d'argent",
-                    "ou en appuyant sur la touche 'A' de ton clavier ",
                     "Les actions réalisables pour chaque bâtiment sont affichées en surbrillance, sois curieux(se)",
                     "Comme pour tous les bâtiments que tu rencontrera, de nombreuses informations sont présentées sur le coté.",
                     "Ici on y retrouve notamment la nourriture ainsi que les quantité de vaches présentes.",
-                    "A toi de bien les surveiller",
+                    /*"A toi de bien les surveiller",*/
+                    "                                     ",
+                    "Tu peux améliorer le bâtiment en appuyant sur le premier bouton du menu ou avec la touche 'A'",
+                    "                                                                                           ",
                     "",
                 ];
                 This.text0 = this.make.text({
@@ -567,12 +571,12 @@ class Tuto extends Phaser.Scene {
                 This.seedi.setScrollFactor(0);
                 This.seedi.setOrigin(0, 0);
                 var content = [
-                    "Ici se trouve une zone vide, où tu peux construire un bâtiment selon le type d'emplacement ou tu es.",
-                    "Quelques informations du bâtiment s'affichent dans la carte blanche.",
+                    "Ici se trouve une zone vide, tu peux y construire un bâtiment selon le type d'emplacement où tu te trouve.",
+                    "Quelques informations du bâtiment que te souhaite construire sont affichés.",
                     "Les bâtiment Infrastructures permettent de générer un revenu passif pour la ferme.",
-                    "Chaque bâtiment produit une ressource qu'il est possible de valoriser via des recherches.",
-                    "Ces recherches augmentent les revenus de la ferme.",
+                    "Chaque bâtiment produit une ressource qu'il est possible de valoriser via des recherches qui augmentent tes revenus",
                     "Tu peux par exemple contruire un réservoir à eau en appuyant sur le deuxième bouton",
+                    "                                ",
                     ""
                 ];
                 This.text0 = this.make.text({
@@ -695,11 +699,13 @@ class Tuto extends Phaser.Scene {
                     "Ici se trouve un champ.",
                     "C'est là que tu peux planter différents types de cultures, mais attention,",
                     "comme pour les animaux, tu dois bien faire attention au climat.",
-                    "Tu peux essayer de planter une culture.",
                     "Là aussi se trouvent de nombreuses informations concernant le champs, comme sa fertilité ou sa santé,",
-                    "surveille les bien !",
-                    "Les revenus potentiellements générés sont affiché en fonction des données du champs,",
-                    "par rapport aux revenus maximum qu'il est possible d'obtenir.",
+                    "surveille les bien, tes revenus en dépendent",
+                    "                                                     ",
+                    /*"Les revenus potentiellements générés sont affiché en fonction des données du champs,",
+                    "par rapport aux revenus maximum qu'il est possible d'obtenir.",*/
+                    "Tu peux essayer de planter ta première culture !",
+                    "                                                        ",
                     "Tu peux aussi replanter la culture précédante en appuyant sur la touche 'E'.",
                     "Une fois le champs prêt, tu peux le récolter via le bouton Récolte ou en appuyant sur la touche 'Z'.",
                     ""

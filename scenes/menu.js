@@ -1119,10 +1119,14 @@ class Menu extends Phaser.Scene {
 
             case 'unlock':
                 tmpText = '\nFélicitation vous venez de débloquer une nouvelle île ! \n\n'+getByTag(this.registry.get('lock')[0])[0].name;
-                text.setText(tmpText).setTint(0xf00020);
+                text.setText(tmpText).setTint(0x008000);
                 break;
             case 'finish':
                 tmpText = '\nFélicitation vous avez atteint tous les objectifs dans le monde, vous avez fait du bon boulot !';
+                text.setText(tmpText).setTint(0x008000);
+                break;
+            case 'deforest':
+                tmpText = '\nTu te rends compte de ce que tu viens de faire ? Abattre plusieurs hectares de forêt pour tes champs alors que la déforestation dans le monde est déjà bien trop importante. JE comprend que tu as besoin d\'espace pour cultiver mais fais plus attention à l\'avenir';
                 text.setText(tmpText).setTint(0xf00020);
                 break;
             default:

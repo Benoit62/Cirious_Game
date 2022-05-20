@@ -24,23 +24,29 @@ class Header extends Phaser.Scene {
         this.search = this.add.image(window.innerWidth-125, 25, 'search').setInteractive().setScale(0.08);
 
         this.turnOff.on('pointerup', function() {
-            window.location.href = 'profil.php';
+            if(this.registry.get('gameScene') != 'tuto') {
+                window.location.href = 'profil.php';
+            }
         }, this);
 
         this.globe.on('pointerup', function() {
-            this.scene.sleep(this.registry.get('gameScene')+'Scene');
-            this.scene.stop('headerScene');
-            this.scene.stop('menuScene');
-            this.scene.start('mapScene');
-            this.gameScene.musique.stop();
+            if(this.registry.get('gameScene') != 'tuto') {
+                this.scene.sleep(this.registry.get('gameScene')+'Scene');
+                this.scene.stop('headerScene');
+                this.scene.stop('menuScene');
+                this.scene.start('mapScene');
+                this.gameScene.musique.stop();
+            }
         }, this);
 
         this.search.on('pointerup', function() {
             //Update game same but no render
-            this.scene.setVisible(false, this.registry.get('gameScene')+'Scene');
-            this.scene.stop('headerScene');
-            this.scene.stop('menuScene');
-            this.scene.start('searchScene');
+            if(this.registry.get('gameScene') != 'tuto') {
+                this.scene.setVisible(false, this.registry.get('gameScene')+'Scene');
+                this.scene.stop('headerScene');
+                this.scene.stop('menuScene');
+                this.scene.start('searchScene');
+            }
         }, this);
 
         // Money 
