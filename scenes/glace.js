@@ -1,8 +1,8 @@
-class Desert extends Phaser.Scene {
+class Glace extends Phaser.Scene {
 
     constructor ()
     {
-        super({ key: 'arideScene' });
+        super({ key: 'polaireScene' });
         this.player;
         this.cursors;
         this.animal1;
@@ -29,7 +29,7 @@ class Desert extends Phaser.Scene {
         this.timerBirth = 0;
 
         this.climat = 'polaire';
-        this.gameScene = 'glace';
+        this.gameScene = 'polaire';
 
         this.musique;
 
@@ -53,7 +53,7 @@ class Desert extends Phaser.Scene {
 
 
         this.registry.set('climat', 'polaire');
-        this.registry.set('gameScene', 'glace');
+        this.registry.set('gameScene', 'polaire');
 
 
         // Animaux

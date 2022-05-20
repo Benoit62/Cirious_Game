@@ -427,12 +427,12 @@ class Foret extends Phaser.Scene {
     }
 
     update() {
-        /*if(this.registry.get('ecology'+this.gameScene) >= 90 && this.registry.get('animalCare'+this.gameScene) >= 90 && this.registry.get('hunger'+this.gameScene) >= 90 && !this.finish) {
+        if(this.registry.get('ecology'+this.gameScene) >= 90 && this.registry.get('animalCare'+this.gameScene) >= 90 && this.registry.get('hunger'+this.gameScene) >= 90 && !this.finish) {
             this.finish = true;
             this.menuScene.seedyAdvice('unlock');
             this.menuScene.unlock();
             console.log('unlock');
-        }*/
+        }
 
         if (this.cursors.up.isDown) {
             this.player.setVelocityY(-this.speedPlayer);

@@ -202,17 +202,24 @@ include("config/configbdd.php");
                 Phaser.Display.Align.In.Center(this.glace, this.add.zone(window.innerWidth/2, window.innerHeight/2, window.innerWidth, window.innerHeight));
                 this.glace.setX(this.glace.x+982);
                 this.glace.setY(this.glace.y-772);
-                if(!this.registry.get('unlock').includes('glace')) {
+                if(!this.registry.get('unlock').includes('polaire')) {
                     this.add.image(this.glace.x, this.glace.y, 'cadenas').setScale(0.6);
                 }
                 this.glace.on('pointerdown', function(){
-                    if(this.registry.get('unlock').includes('glace')) {
-                        if(this.scene.isSleeping('glaceScene')) {                        
-                            this.scene.wake('glaceScene');
+                    if(this.registry.get('unlock').includes('polaire')) {
+                        if(this.scene.isSleeping('polaireScene')) {                        
+                            this.scene.wake('polaireScene');
+                            this.scene.get('polaireScene').musique.play();
+                            this.registry.set('climat', 'polaire');
+                            this.registry.set('gameScene', 'polaire');
                         }
                         else {
-                            this.scene.start('glaceScene');
+                            this.scene.start('polaireScene');
                         }
+                        this.scene.stop('mapScene');
+                        this.scene.launch('menuScene');
+                        this.scene.launch('headerScene');
+                        music.stop();
                     }
                     else {
                         this.errorText('Vous n\'avez pas encore débloqué cette île');
