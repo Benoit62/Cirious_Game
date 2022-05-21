@@ -46,6 +46,7 @@ include("config/configbdd.php");
     <script type="text/javascript" src="scenes/foret.js"></script>
     <script type="text/javascript" src="scenes/glace.js"></script>
     <script type="text/javascript" src="scenes/europe.js"></script>
+    <script type="text/javascript" src="scenes/naming.js"></script>
     <script type="text/javascript" src="scenes/saving.js"></script>
     <script type="text/javascript">
         let namePlayer = '<?=$_SESSION['pseudo']?>';
@@ -353,7 +354,7 @@ include("config/configbdd.php");
             audio: {
                 disableWebAudio: false
             },
-            scene: [Loading, Play, Cinematique1, Cinematique2, Map, Europe, Desert, Foret, Glace, Header, Menu, Search, Disclaimer, Tuto, Saving]
+            scene: [Loading, Play, Cinematique1, Cinematique2, Map, Europe, Desert, Foret, Glace, Header, Menu, Search, Disclaimer, Tuto, Saving, Naming]
         };
 
         let game = new Phaser.Game(config);

@@ -346,6 +346,10 @@ class Loading extends Phaser.Scene {
         }
 
 
+        //Formulaire
+        
+        this.load.html('form', 'assets/form.html');
+
     }
     create() {
         /*var progressBar = this.add.graphics();

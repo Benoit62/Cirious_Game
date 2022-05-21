@@ -1,4 +1,3 @@
-//loading par le S
 class Saving extends Phaser.Scene {
 
     constructor() {
@@ -30,8 +29,8 @@ class Saving extends Phaser.Scene {
         blur.fillStyle(0x060606, 0.5);
         blur.fillRect(-100, -100, window.innerWidth + 100, window.innerHeight + 100);
 
-        var progressBar = this.add.graphics();
         var progressBox = this.add.graphics();
+        var progressBar = this.add.graphics();
         progressBox.fillStyle(0x222222, 0.8);
 
         var width = this.cameras.main.width;
