@@ -175,7 +175,7 @@ class Desert extends Phaser.Scene {
         // Maison/labo
         this.data.set('bat7', {
             key: 7,
-            x: 676,// 432
+            x: 678,// 432
             y: 352,// 304
             dataType:'bat',
             type: 'house',
