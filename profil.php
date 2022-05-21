@@ -26,6 +26,11 @@ $query->closeCursor();
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
   <link rel="shortcut icon" href="images/logo.png" type="image/x-icon">
   <link rel="icon" href="images/logo.png" type="image/x-icon">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
+
   <title>profile</title>
 </head>
 
@@ -130,9 +135,17 @@ $query->closeCursor();
 
   <div class="disp">
     <img src="./images/background_profil.jpg">
+
+    
     <div class="container">
-      <!--<a ><span>Continue</span></a>-->
-      <a href="game.php"><span>New game</span></a>
+
+    <main>
+	<button onclick="window.location.href='game.php';">New Game</button>
+  </main>
+
+      <!--<a ><span>Continue</span></a>
+      <a href="game.php"><span>New game</span></a>-->
+      
     </div>
 
     
