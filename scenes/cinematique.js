@@ -159,11 +159,11 @@ class Cinematique1 extends Phaser.Scene {
             var tmp = '';
             var i = 0;
             var j = 0;
-            var wait = 70;
+            var wait = 60;
             var bool = false;
             function loop() {
                 setTimeout(function () {
-                    wait = 70;
+                    wait = 60;
                     if (bool) {
                         text0.setText(content[i]);
                         text1.setText('');
@@ -190,7 +190,7 @@ class Cinematique1 extends Phaser.Scene {
 
                         if (i < content.length && content[i].length == 0) {
                             i++;
-                            wait = 1700;
+                            wait = 1500;
                             txt = 0;
                             bool = true;
                         }
@@ -202,13 +202,15 @@ class Cinematique1 extends Phaser.Scene {
                         loop();
                     }
                     else {
-                        dialBox.destroy();
-                        text0.destroy();
-                        text1.destroy();
-                        text2.destroy();
-                        This.nextS = true;
+                        setTimeout(function(){
+                            dialBox.destroy();
+                            text0.destroy();
+                            text1.destroy();
+                            text2.destroy();
+                            This.nextS = true;
+                        },2500)
                     }
-                }, 1700)
+                }, wait)
             }
             loop();
         }
@@ -354,11 +356,11 @@ class Cinematique2 extends Phaser.Scene {
             var tmp = '';
             var i = 0;
             var j = 0;
-            var wait = 70;
+            var wait = 60;
             var bool = false;
             function loop() {
                 setTimeout(function () {
-                    wait = 70;
+                    wait = 60;
                     if (bool) {
                         text0.setText(content[i]);
                         text1.setText('');
@@ -384,7 +386,7 @@ class Cinematique2 extends Phaser.Scene {
 
                         if (i < content.length && content[i].length == 0) {
                             i++;
-                            wait = 1700;
+                            wait = 1500;
                             txt = 0;
                             bool = true;
                         }
@@ -401,9 +403,9 @@ class Cinematique2 extends Phaser.Scene {
                             text1.destroy();
                             text2.destroy();
                             This.scene.start('disclaimerScene');
-                        }, 1700);
+                        }, 2500);
                     }
-                }, 1700)
+                }, wait)
             }
             loop();
         }
