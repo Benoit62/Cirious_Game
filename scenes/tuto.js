@@ -55,8 +55,8 @@ class Tuto extends Phaser.Scene {
         // Animaux
         this.data.set('bat1', {
             key: 1,
-            x: 115,
-            y: 160,
+            x: 130,
+            y: 32,
             dataType: 'bat',
             type: 'animal',
             typeName: 'Elevage',
@@ -72,8 +72,8 @@ class Tuto extends Phaser.Scene {
 
         this.data.set('bat2', {
             key: 2,
-            x: -32,
-            y: -240,
+            x: -16,
+            y: -368,
             dataType: 'bat',
             type: 'struct',
             typeName: 'Infrastructure',
@@ -86,8 +86,8 @@ class Tuto extends Phaser.Scene {
 
         this.data.set('bat3', {
             key: 3,
-            x: -368,
-            y: -128,
+            x: -320,
+            y: -256,
             dataType: 'bat',
             type: 'field',
             typeName: 'Culture',
@@ -109,8 +109,8 @@ class Tuto extends Phaser.Scene {
         // Maison/labo
         this.data.set('bat4', {
             key: 4,
-            x: 700 / 2,
-            y: -480 / 2,
+            x: 374,
+            y: -368,
             dataType: 'bat',
             type: 'house',
             typeName: 'Laboratoire',
@@ -124,7 +124,7 @@ class Tuto extends Phaser.Scene {
         this.cameras.main.zoom = 1;
 
         // Player
-        this.player = this.physics.add.sprite(415, -80, 'farmer').setDepth(2000).setScale(0.7);
+        this.player = this.physics.add.sprite(435, -208, 'farmer').setDepth(2000).setScale(0.7);
 
 
         this.physics.add.overlap(this.player, farm, this.closeOverLap, function () { return true; }, this);
@@ -315,13 +315,12 @@ class Tuto extends Phaser.Scene {
                 "                                       ",
                 "Ce sont les trois objectifs que tu dois remplir pour atteindre la ferme du futur.",
                 /*"Quand elles ont toutes atteintes au moins 90%, tu débloques la ferme suivante.",*/
-                "A gauche des jauges, tu peux voir l'argent que tu gagnes et quelques détails.",
-                "                            ",
+                "A gauche des jauges, tu peux voir l'argent que tu gagnes et quelques détails.                        ",
                 "A droite se trouvent les boutons : Recherche, Carte et Quitter.",
                 "                             ",
                 "Le bouton Recherche permet de débloquer des nouvelles méthodes de cultures ou d'élevage,",
                 "ainsi que de nouvelles technologies. Je te laisse découvrir par toi-même.",
-                "Maintenant je vais te présenter la ferme et les actions que tu peux y faire.",
+                /*"Maintenant je vais te présenter la ferme et les actions que tu peux y faire.",*/
                 /*"Chaque action aura un impact sur les jauges, à toi d'apprendre et de les équilibrer au mieux.",*/
                 ""
             ];
@@ -417,7 +416,7 @@ class Tuto extends Phaser.Scene {
             This.text1.destroy();
             This.text2.destroy();
             This.seedi.destroy();
-            if (this.player.y < 160)
+            if (this.player.y < 100)
                 this.player.y += 3;
             else if (this.player.x >= 310) {
                 this.player.anims.play('left', true);

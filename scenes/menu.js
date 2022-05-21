@@ -274,7 +274,7 @@ class Menu extends Phaser.Scene {
             }, this);
             this.bull[i.tag].on('pointermove', function(){
                 this.cardInfo.setVisible(true);
-                this.textInfo.setText(i.name+'\nPrix : '+i.buildCost);
+                this.textInfo.setText(i.name+'\nPrix : '+i.cost);
             }, this);
             this.bull[i.tag].on('pointerout', function(){
                 this.cardInfo.setVisible(false);
