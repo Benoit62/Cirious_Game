@@ -6,7 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ISeed</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="index.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -54,7 +56,10 @@
                 </ul>
                 <button class="Connection" onclick="window.location.href='login.php';">Se Connecter</button>
             </figure>
-
+            <iframe width="660" height="385" src="https://www.youtube.com/embed/ig8RuGaqJ_E"
+                title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
         </div>
 
     </div>
@@ -164,12 +169,6 @@
 
 
     <footer class="footer">
-        <div class="waves">
-            <div class="wave" id="wave1"></div>
-            <div class="wave" id="wave2"></div>
-            <div class="wave" id="wave3"></div>
-            <div class="wave" id="wave4"></div>
-        </div>
         <ul class="social-icon">
             <li class="social-icon__item"><a class="social-icon__link" href="https://fr-fr.facebook.com/ISEN.Lille/">
                     <ion-icon name="logo-facebook"></ion-icon>
@@ -222,15 +221,6 @@
 
 
     <script>
-        let med = document.getElementsByClassName('medias')[0];
-        med.children[0].style.display='none';
-        med.children[1].style.display='none';
-        med.children[2].style.display='none';
-        med.children[3].style.display='none';
-        setTimeout(()=>{med.children[0].style.display='flex'},1500)
-        setTimeout(()=>{med.children[1].style.display='flex'},1800)
-        setTimeout(()=>{med.children[2].style.display='flex'},2100)
-        setTimeout(()=>{med.children[3].style.display='flex'},2400)
         const btn = document.querySelector('.container-btns');
         btn.onmousemove = function (e) {
             const x = e.pageX - btn.offsetLeft;
