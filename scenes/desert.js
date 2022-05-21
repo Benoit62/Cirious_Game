@@ -78,7 +78,7 @@ class Desert extends Phaser.Scene {
             ref: {},
             dead:false,
             feed:100,
-            qt:100
+            qt:15
         });
 
         // Structures
@@ -299,6 +299,11 @@ class Desert extends Phaser.Scene {
                         if (bat.rotate) {
                             this.images[j].rotation = 3.141592 / 2;
                         }
+                        
+                        if(bat.qt <= 100) this.images[j].setFrame((bat.level - 1));
+                        if(bat.qt < 75) this.images[j].setFrame((bat.level - 1) + 4 * bat.ref.lvlMax);
+                        if(bat.qt < 50) this.images[j].setFrame((bat.level - 1) + 2 * bat.ref.lvlMax);
+                        if(bat.qt < 25) this.images[j].setFrame((bat.level - 1) + 3 * bat.ref.lvlMax);
                     }
                     if(bat.type == 'field') {
                         if(!bat.plant) {
@@ -412,13 +417,13 @@ class Desert extends Phaser.Scene {
         if (this.cursors.up.isDown) {
             this.player.setVelocityY(-this.speedPlayer);
             this.menuScene.closeSavoirPlus();
-            this.player.anims.play('up_player', true);
+            //this.player.anims.play('up_player', true);
         } else if (this.cursors.down.isDown) {
             this.player.setVelocityY(this.speedPlayer);
             this.menuScene.closeSavoirPlus();
 
             console.log('down');
-            this.player.anims.play('down_player', true);
+            //this.player.anims.play('down_player', true);
         } else {
             this.player.setVelocityY(0);
         }
@@ -466,7 +471,7 @@ class Desert extends Phaser.Scene {
         }
 
         this.timerWeeds++;
-        if (this.timerWeeds == 2500) {
+        if (this.timerWeeds == 3000) {
             console.log('Check weeds');
             this.weeds();
             this.timerWeeds = 0 - Phaser.Math.Between(0, 600);
@@ -502,7 +507,7 @@ class Desert extends Phaser.Scene {
         }
 
         this.timerBirth++;
-        if (this.timerBirth == 1000) {
+        if (this.timerBirth == 2500) {
             console.log('Check birth');
             this.birth();
             this.timerBirth = 0 - Phaser.Math.Between(0, 400);
@@ -635,6 +640,11 @@ class Desert extends Phaser.Scene {
                             textAnimal.destroy();
                             animalButton.destroy();
                         }, 3000);
+                        
+                        if(bat.qt <= 100) this.images[bat.key - 1].setFrame((bat.level - 1));
+                        if(bat.qt < 75) this.images[bat.key - 1].setFrame((bat.level - 1) + 4 * bat.ref.lvlMax);
+                        if(bat.qt < 50) this.images[bat.key - 1].setFrame((bat.level - 1) + 2 * bat.ref.lvlMax);
+                        if(bat.qt < 25) this.images[bat.key - 1].setFrame((bat.level - 1) + 3 * bat.ref.lvlMax);
                     }
                     else {
                         let textMoney = this.add.text(bat.x, bat.y, '-'+ref.buildCost, { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
@@ -753,7 +763,7 @@ class Desert extends Phaser.Scene {
         for (let i in this.data.values) {
             let bat = this.data.values[i];
             if (bat.level == 1 && bat.type == 'field') {
-                if (Phaser.Math.Between(1, 5) <= 2) {
+                if (Phaser.Math.Between(1, 10) <= 3) {
                     bat.weeds++;
                     if(bat.weeds > bat.maxWeeds) bat.weeds = bat.maxWeeds;
                     console.log('Weeds !', bat);
@@ -815,7 +825,7 @@ class Desert extends Phaser.Scene {
             let percent2 = (bat.maxWeeds - bat.weeds)/10;
             console.log(percent, percent2);
             let moneyWin = Math.round(bat.seed.money*percent*percent2*100)/100;
-            let hungerWin = Math.round(5*percent*percent2*100)/100;
+            let hungerWin = Math.round(10*percent*percent2*100)/100;
 
             // Compte l'echainement des graines
             let looseFertility = 0;
@@ -981,7 +991,7 @@ class Desert extends Phaser.Scene {
                     }
                     bat.dead = false;
                     bat.feed = 90;
-                    bat.qt = 90;
+                    bat.qt = 15;
                 }
                 bat.level = 0;
                 bat.tag = 'build';
@@ -1115,7 +1125,7 @@ class Desert extends Phaser.Scene {
             let bat = this.data.values[i];
             if (bat.level > 0 && bat.type == 'animal' && !bat.dead && bat.qt < 100) {
                 if (bat.feed >= 35) {
-                    if (Phaser.Math.Between(1, 10) <= 7) {
+                    if (Phaser.Math.Between(1, 10) <= 5) {
                         bat.qt += 5;
                         console.log('Birth animal !', bat);
 

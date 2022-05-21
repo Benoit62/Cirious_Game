@@ -331,7 +331,7 @@ class Menu extends Phaser.Scene {
             this.sells[i.tag].on('pointermove', function(){
                 if(i.unlock) {
                     this.cardInfo.setVisible(true);
-                    this.textInfo.setText(i.name+'\nGain : '+i.money+' $\nBien-être : '+i.care);
+                    this.textInfo.setText(i.name+'\nGain : '+i.money+' $\nBien-être : '+i.care+'\nNourriture : +'+i.hunger);
                 }
             }, this);
             this.sells[i.tag].on('pointerout', function(){
@@ -979,6 +979,7 @@ class Menu extends Phaser.Scene {
                     tmpText+='Santé : '+sante+' / '+this.batOverlap.maxWeeds+'\n';
                     tmpText+='Climats : '+climats+'\n';
                     tmpText+='Description culture : '+this.batOverlap.seed.desc+'\n';
+                    tmpText+='Information : '+this.batOverlap.seed.info+'\n';
                 }
                 tmpText+='Historique : ';
                 this.batOverlap.oldseed.forEach(value => {
