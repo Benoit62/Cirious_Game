@@ -374,7 +374,7 @@ class Desert extends Phaser.Scene {
 
 
         //this.registry.set('money', 100000);
-        this.registry.set('money', this.registry.get('money') || 100000);
+        this.registry.set('money', this.registry.get('money') || 20000);
         this.registry.set('moneyPerTick', 0);
         this.registry.set('mult', 1);
 

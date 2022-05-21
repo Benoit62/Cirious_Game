@@ -194,7 +194,7 @@ class Glace extends Phaser.Scene {
         this.cameras.main.zoom = 0.8;
 
         // Player
-        this.player = this.physics.add.sprite(800, -250, 'farmer').setDepth(2000).setScale(0.7);
+        this.player = this.physics.add.sprite(-412, 4, 'farmer').setDepth(2000).setScale(0.7);
 
 
         this.physics.add.overlap(this.player, farm, this.closeOverLap, function () { return true; }, this);
@@ -344,7 +344,7 @@ class Glace extends Phaser.Scene {
             }
         });*/
         //polygone des hitboxs
-        var dataRiv = [-880, -440, -630, -440, -610, -405, -355, -405, -355, -315, -250, -315, -250, -470, -50, -470, -50, -270, -15, -270, -15, -90, -290, -90, -290, -315, -355, -315, -355, -90, -465, -90, -465, -65, -850, -65, -850, -185, -910, -185, -910, -405, -880, -440];
+        var dataRiv = [-882, 416, -555, 416, -537, 405, -537, 360, -497, 341, -497, 176, -755, 167, -755, 271, -842, 271, -842, 416, -882, 416, -882, 470, -872, 495, -502, 495, -447, 434, -258, 434, -258, 156, -231, 131, -192, 131, -162, 156, -162, 291, -132, 316, -132, 495, 400, 495, 400, 381, 463, 381, 463, 306, 337, 306, 337, 381, 400, 381, 400, 495, 937, 495, 937, 126, 907, 101, 907, -384, 877, -414, 877, -1500, 667, -1500, 667, -342, 572, -342, 572, -248, 797, -248, 797, -53, 412, -53, 412, -130, 430, -154, 478, -154, 478, -515, 60, -515, 30, -480, -127, -480, -150, -515, -700, -515, -700, -428, -462, -428, -462, -322, -615, -322, -645, -287, -847, -287, -847, -428, -700, -428, -700, -515, -882, -515, -882, -194, -847, -159, -847, 60, -817, 96, -817, 131, -882, 196, -882, 416];
         // The boundary
         this.Bounds = new Phaser.Geom.Polygon(dataRiv);
 
@@ -362,7 +362,7 @@ class Glace extends Phaser.Scene {
 
 
         //this.registry.set('money', 100000);
-        this.registry.set('money', this.registry.get('money') || 100000);
+        this.registry.set('money', this.registry.get('money') || 20000);
         this.registry.set('moneyPerTick', 0);
         this.registry.set('mult', 1);
 
@@ -1203,19 +1203,19 @@ class Glace extends Phaser.Scene {
         if (blocked.down) velocity.y = Phaser.Math.Clamp(velocity.y, -Infinity, 0);
     }
     setBlocked(blocked, rect, bounds) {
-        if (bounds.contains(rect.left, rect.top)) {
+        if (!bounds.contains(rect.left, rect.top)) {
             blocked.left = true;
             blocked.up = true;
         }
-        if (bounds.contains(rect.left, rect.bottom)) {
+        if (!bounds.contains(rect.left, rect.bottom)) {
             blocked.left = true;
             blocked.down = true;
         }
-        if (bounds.contains(rect.right, rect.top)) {
+        if (!bounds.contains(rect.right, rect.top)) {
             blocked.right = true;
             blocked.up = true;
         }
-        if (bounds.contains(rect.right, rect.bottom)) {
+        if (!bounds.contains(rect.right, rect.bottom)) {
             blocked.right = true;
             blocked.down = true;
         }

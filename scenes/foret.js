@@ -72,8 +72,8 @@ class Foret extends Phaser.Scene {
             dataType: "bat",
             type: "animal",
             typeName: "Elevage",
-            level: 1,
-            tag: "cow",
+            level: 0,
+            tag: "build",
             scale: 1,
             ref: {},
             dead: false,
@@ -104,8 +104,8 @@ class Foret extends Phaser.Scene {
             dataType: "bat",
             type: "struct",
             typeName: "Infrastructure",
-            level: 1,
-            tag: "tank",
+            level: 0,
+            tag: "build",
             scale: 0.5,
             ref: {},
         });
@@ -130,8 +130,8 @@ class Foret extends Phaser.Scene {
             dataType: "bat",
             type: "field",
             typeName: "Culture",
-            level: 1,
-            tag: "labor",
+            level: 0,
+            tag: "build",
             scale: 0.7,
             ref: {},
             plant: false,
@@ -150,8 +150,8 @@ class Foret extends Phaser.Scene {
             dataType: "bat",
             type: "field",
             typeName: "Culture",
-            level: 1,
-            tag: "labor",
+            level: 0,
+            tag: "build",
             scale: 0.8,
             ref: {},
             plant: false,
@@ -219,7 +219,7 @@ class Foret extends Phaser.Scene {
         this.cameras.main.zoom = 0.8;
 
         // Player
-        this.player = this.physics.add.sprite(600, -250, 'farmer').setDepth(2000).setScale(0.7);
+        this.player = this.physics.add.sprite(530, -250, 'farmer').setDepth(2000).setScale(0.7);
 
 
         this.physics.add.overlap(this.player, farm, this.closeOverLap, function () { return true; }, this);
@@ -386,7 +386,7 @@ class Foret extends Phaser.Scene {
         this.scene.bringToTop('menuScene');
 
 
-        this.registry.set('money', this.registry.get('money') || 100000);
+        this.registry.set('money', this.registry.get('money') || 20000);
         this.registry.set('moneyPerTick', 0);
         this.registry.set('mult', 1);
 
