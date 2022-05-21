@@ -45,6 +45,7 @@ class Foret extends Phaser.Scene {
       this.finish = false;
     }
 
+<<<<<<< Updated upstream
     this.musique = this.sound.add(this.gameScene + "_musique", {
       mute: false,
       volume: 0.2,
@@ -389,6 +390,326 @@ class Foret extends Phaser.Scene {
               this.images[j]["weeds"].rotation = 3.141592 / 2;
               if (this.images[j]["plant"])
                 this.images[j]["plant"].rotation = 3.141592 / 2;
+=======
+    create() {
+        if(this.registry.get('unlock').includes('polaire')) {
+            this.finish = true;
+        }
+        else {
+            this.finish = false;
+        }
+
+        this.musique = this.sound.add(this.gameScene+'_musique', {
+            mute: false,
+            volume: 0.2,
+            rate: 1,
+            detune: 0,
+            seek: 0,
+            loop: true,
+            delay: 0
+        });
+        this.musique.play();
+
+
+        this.registry.set('climat', 'tropic');
+        this.registry.set('gameScene', 'tropic');
+
+
+        // Animaux
+        this.data.set('bat1', {
+            key: 1,
+            x: -322,
+            y: 300,
+            dataType:'bat',
+            type: 'animal',
+            typeName:'Elevage',
+            level: 1,
+            tag: 'cow',
+            scale: 1,
+            ref: {},
+            dead:false,
+            feed:100,
+            qt:100
+        });
+        this.data.set('bat2', {
+            key: 2,
+            x: 196,
+            y: 264,
+            dataType:'bat',
+            type: 'animal',
+            typeName:'Elevage',
+            level: 2,
+            tag: 'cow',
+            scale: 1,
+            ref: {},
+            dead:false,
+            feed:100,
+            qt:100
+        });
+
+        // Structures
+        this.data.set('bat3', {
+            key: 3,
+            x: 772,
+            y: -384,
+            dataType:'bat',
+            type: 'struct',
+            typeName:'Infrastructure',
+            level: 1,
+            tag: 'tank',
+            scale: 0.5,
+            ref: {}
+        });
+        this.data.set('bat4', {
+            key: 4,
+            x: -762,
+            y: 390,
+            dataType:'bat',
+            type: 'struct',
+            typeName:'Infrastructure',
+            level: 1,
+            tag: 'solaire',
+            scale: 0.5,
+            ref: {}
+        });
+
+        //Champs
+        this.data.set('bat5', {
+            key: 5,
+            x: -804,
+            y: -328,
+            dataType:'bat',
+            type: 'field',
+            typeName:'Culture',
+            level: 1,
+            tag: 'labor',
+            scale: 0.7,
+            ref: {},
+            plant: false,
+            seed: {},
+            oldseed: [],
+            grow: 0,
+            dead:false,
+            fertility:100,
+            weeds:0,
+            maxWeeds:10
+        });
+        this.data.set('bat6', {
+            key: 6,
+            x: -426,
+            y: -372,
+            dataType:'bat',
+            type: 'field',
+            typeName:'Culture',
+            level: 1,
+            tag: 'labor',
+            scale: 0.8,
+            ref: {},
+            plant: false,
+            seed: {},
+            oldseed: [],
+            grow: 0,
+            dead:false,
+            fertility:100,
+            weeds:0,
+            maxWeeds:10,
+            rotate:true
+        });
+        this.data.set('bat7', {
+            key: 7,
+            x: +674,
+            y: 312,
+            dataType:'bat',
+            type: 'field',
+            typeName:'Culture',
+            level: 1,
+            tag: 'labor',
+            scale: 0.8,
+            ref: {},
+            plant: false,
+            seed: {},
+            oldseed: [],
+            grow: 0,
+            dead:false,
+            fertility:100,
+            weeds:0,
+            maxWeeds:10,
+            rotate:true
+        });
+
+
+        // Maison/labo
+        this.data.set('bat8', {
+            key: 8,
+            x: 300,
+            y: -214,
+            dataType:'bat',
+            type: 'house',
+            typeName:'Laboratoire',
+            level: 1,
+            tag: 'house',
+            scale: 0.3,
+            ref: {}
+        });
+
+
+        this.data.set('bat9', {
+            key: 9,
+            x: 0,
+            y: 0,
+            type: 'river',
+            typeName:'Rivière',
+            pollution: 0,
+            tag: 'river',
+            desc:''
+        })
+
+
+
+
+        const farm = this.physics.add.image(0, 0, 'tropic');
+
+        this.cameras.main.zoom = 0.8;
+
+        // Player
+        this.player = this.physics.add.sprite(600, -250, 'farmer').setDepth(2000).setScale(0.7);
+
+
+        this.physics.add.overlap(this.player, farm, this.closeOverLap, function () { return true; }, this);
+
+
+        //  Our player animations, turning, walking left and walking right.
+        this.anims.create({
+            key: 'left_player',
+            frames: this.anims.generateFrameNumbers('farmer', {
+                start: 3,
+                end: 5
+            }),
+            frameRate: 10,
+            repeat: -1
+        });
+
+        this.anims.create({
+            key: 'turn_player',
+            frames: [{
+                key: 'farmer',
+                frame: 0
+            }],
+            frameRate: 20
+        });
+
+        this.anims.create({
+            key: 'right_player',
+            frames: this.anims.generateFrameNumbers('farmer', {
+                start: 9,
+                end: 11
+            }),
+            frameRate: 10,
+            repeat: -1
+        });
+
+        this.anims.create({
+            key: 'up_player',
+            frames: this.anims.generateFrameNumbers('farmer', {
+                start: 6,
+                end: 8
+            }),
+            frameRate: 10,
+            repeat: -1
+        });
+
+        this.anims.create({
+            key: 'down_player',
+            frames: this.anims.generateFrameNumbers('farmer', {
+                start: 0,
+                end: 2
+            }),
+            frameRate: 10,
+            repeat: -1
+        });
+
+
+        // On délimite la map aux bords de l'image
+        // On décale la caméra par rapport à la hauteur du header
+        this.cameras.main.setBounds(farm.x - farm.width / 2 - 366, farm.y - farm.height / 2 - 60, farm.width + 366, farm.height + 60);
+        this.physics.world.setBounds(farm.x - farm.width / 2, farm.y - farm.height / 2, farm.width, farm.height);
+
+        // Pour suivre le joueur avec la camera
+        this.cameras.main.startFollow(this.player);
+
+        // Ajoute une collision entre le joueur et les bords de la map
+        this.player.setCollideWorldBounds(true);
+
+        //  Input Events
+        this.cursors = this.input.keyboard.createCursorKeys();
+
+        // Affiche tous les batiments prédéfinis dans la data
+        let j = 0;
+        for (let i in this.data.values) {
+            let bat = this.data.values[i];
+            if(bat.dataType == 'bat'){
+                if (bat.level > 0 && bat.tag != 'build') {
+                    if(bat.type != 'field' && bat.type != 'animal') {
+                        this.images.push(this.physics.add.image(bat.x, bat.y, bat.tag+this.gameScene, bat.level - 1));
+                        bat.ref = getByTag(bat.tag)[0];
+                        if (bat.rotate) {
+                            this.images[j].rotation = 3.141592 / 2;
+                        }
+                    }
+                    if(bat.type == 'animal') {
+                        this.images.push(this.physics.add.image(bat.x, bat.y, bat.tag+this.gameScene, bat.level - 1));
+                        bat.ref = getByTag(bat.tag)[0];
+                        if(bat.dead) {
+                            this.images[j].setFrame((bat.level - 1) + bat.ref.lvlMax);
+                        }
+                        if (bat.rotate) {
+                            this.images[j].rotation = 3.141592 / 2;
+                        }
+                        
+                        if(bat.qt <= 100) this.images[j].setFrame((bat.level - 1));
+                        if(bat.qt < 75) this.images[j].setFrame((bat.level - 1) + 4 * bat.ref.lvlMax);
+                        if(bat.qt < 50) this.images[j].setFrame((bat.level - 1) + 2 * bat.ref.lvlMax);
+                        if(bat.qt < 25) this.images[j].setFrame((bat.level - 1) + 3 * bat.ref.lvlMax);
+                    }
+                    if(bat.type == 'field') {
+                        if(!bat.plant) {
+                            let arrayField = [];
+                            arrayField['ground'] = this.physics.add.image(bat.x, bat.y, bat.tag+this.gameScene, bat.level - 1);
+                            arrayField['weeds'] = this.add.image(bat.x, bat.y, 'weeds', bat.weeds);
+                            arrayField['plant'] = null;
+                            bat.ref = getByTag(bat.tag)[0];
+                            this.images.push(arrayField);
+                        }
+                        else {
+                            let seed = getByTag(bat.tag)[0];
+                            bat.seed = seed;
+                            let arrayField = [];
+                            arrayField['ground'] = this.physics.add.image(bat.x, bat.y, seed.ground+this.gameScene, bat.level - 1);
+                            arrayField['weeds'] = this.add.image(bat.x, bat.y, 'weeds', bat.weeds);
+                            arrayField['plant'] = this.add.image(bat.x, bat.y, bat.tag, bat.grow);
+                            bat.tag = seed.tag;
+                            bat.ref = getByTag(bat.tag)[0];
+                            bat.seed = seed;
+                            this.images.push(arrayField);
+                        }
+                        if (bat.rotate) {
+                            this.images[j]['ground'].rotation = 3.141592 / 2;
+                            this.images[j]['weeds'].rotation = 3.141592 / 2;
+                            if(this.images[j]['plant']) this.images[j]['plant'].rotation = 3.141592 / 2;
+                        }
+                    }
+                }
+                else if(bat.tag != 'river') {
+                    this.images.push(this.physics.add.image(bat.x, bat.y, 'build'+this.gameScene).setScale(bat.scale));
+                }
+                if(bat.type == 'field' && bat.level > 0 && bat.tag != 'build'+this.gameScene) {
+                    this.physics.add.overlap(this.player, this.images[j]['ground'], this.overlapBat, null, this);
+                }
+                else {
+                    this.physics.add.overlap(this.player, this.images[j], this.overlapBat, null, this);
+                }
+                j++;
+>>>>>>> Stashed changes
             }
           }
         } else if (bat.tag != "river") {
@@ -552,6 +873,7 @@ class Foret extends Phaser.Scene {
       console.log("unlock");
     }
 
+<<<<<<< Updated upstream
     if (this.cursors.up.isDown) {
       this.player.setVelocityY(-this.speedPlayer);
       this.menuScene.closeSavoirPlus();
@@ -565,6 +887,32 @@ class Foret extends Phaser.Scene {
     } else {
       this.player.setVelocityY(0);
     }
+=======
+    update() {
+        if(this.registry.get('ecology'+this.gameScene) >= 90 && this.registry.get('animalCare'+this.gameScene) >= 90 && this.registry.get('hunger'+this.gameScene) >= 90 && !this.finish) {
+            this.finish = true;
+            this.menuScene.unlock();
+            console.log('unlock');
+        }
+
+        if (this.cursors.up.isDown) {
+            this.player.setVelocityY(-this.speedPlayer);
+            this.menuScene.closeSavoirPlus();
+            //this.player.anims.play('up_player', true);
+        } else if (this.cursors.down.isDown) {
+            this.player.setVelocityY(this.speedPlayer);
+            this.menuScene.closeSavoirPlus();
+
+            console.log('down');
+            //this.player.anims.play('down_player', true);
+        } else {
+            this.player.setVelocityY(0);
+        }
+
+        if (this.cursors.left.isDown) {
+            this.player.setVelocityX(-this.speedPlayer);
+            this.menuScene.closeSavoirPlus();
+>>>>>>> Stashed changes
 
     if (this.cursors.left.isDown) {
       this.player.setVelocityX(-this.speedPlayer);
@@ -606,12 +954,35 @@ class Foret extends Phaser.Scene {
       this.timerHunger = 0 - Phaser.Math.Between(0, 500);
     }
 
+<<<<<<< Updated upstream
     this.timerWeeds++;
     if (this.timerWeeds == 2500) {
       console.log("Check weeds");
       this.weeds();
       this.timerWeeds = 0 - Phaser.Math.Between(0, 600);
     }
+=======
+        this.timerHunger++;
+        if (this.timerHunger == 800) {
+            console.log('Check weeds');
+            this.updateJauge('hunger', -1);
+            this.timerHunger = 0 - Phaser.Math.Between(0, 500);
+        }
+
+        this.timerWeeds++;
+        if (this.timerWeeds == 3000) {
+            console.log('Check weeds');
+            this.weeds();
+            this.timerWeeds = 0 - Phaser.Math.Between(0, 600);
+        }
+
+        this.timerGrowth++;
+        if (this.timerGrowth == 500) {
+            console.log('Check Pousse');
+            this.grow();
+            this.timerGrowth = 0 - Phaser.Math.Between(0, 200);
+        }
+>>>>>>> Stashed changes
 
     this.timerGrowth++;
     if (this.timerGrowth == 500) {
@@ -641,12 +1012,21 @@ class Foret extends Phaser.Scene {
       this.timerMeal = 0 - Phaser.Math.Between(0, 400);
     }
 
+<<<<<<< Updated upstream
     this.timerBirth++;
     if (this.timerBirth == 1000) {
       console.log("Check birth");
       this.birth();
       this.timerBirth = 0 - Phaser.Math.Between(0, 400);
     }
+=======
+        this.timerBirth++;
+        if (this.timerBirth == 2500) {
+            console.log('Check birth');
+            this.birth();
+            this.timerBirth = 0 - Phaser.Math.Between(0, 400);
+        }
+>>>>>>> Stashed changes
 
     let mult = 1;
     if (this.timer % 60 == 0) {
@@ -958,6 +1338,7 @@ class Foret extends Phaser.Scene {
         this.menuScene.errorText("Not enought money");
       }
     }
+<<<<<<< Updated upstream
   }
   plant(bat, seed) {
     console.log("Plantation : ", bat);
@@ -1007,6 +1388,93 @@ class Foret extends Phaser.Scene {
             let nbOldSeed = 0;
             while (bat.seed == bat.oldseed[nbOldSeed]) {
               nbOldSeed++;
+=======
+    buildBat(bat, ref) {
+        console.log('Construction batiment : ', bat);
+        if (bat.level == 0 && bat.tag == "build") {
+            if (this.money() >= ref.buildCost) {
+                bat.level += 1;
+                bat.tag = ref.tag;
+                bat.ref = ref;
+                this.registry.set('money', this.registry.get('money') - ref.buildCost);
+                if(bat.type != 'field') {
+                    console.log('Builded !', bat);
+                    this.images[bat.key - 1] = this.physics.add.image(bat.x, bat.y, bat.tag+this.gameScene, bat.level - 1);
+                    if (bat.rotate) {
+                        this.images[bat.key - 1].rotation = 3.141592 / 2;
+                    }
+                    if(bat.type == 'animal') {
+                        this.updateJauge('animalCare', -30);
+
+                        let textMoney = this.add.text(bat.x, bat.y, '-'+ref.buildCost, { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
+                        let moneyButton = this.add.image(textMoney.x + textMoney.width / 1.5, textMoney.y, 'dollar').setScale(0.08).setOrigin(0,0.5);
+
+                        let textAnimal = this.add.text(bat.x, textMoney.y + textMoney.height*0.8, '-40', { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
+                        let animalButton = this.add.image(textAnimal.x + textAnimal.width / 1.5, textAnimal.y, 'animal-care').setScale(0.08).setOrigin(0,0.5);
+
+                        let textEcology = this.add.text(bat.x, textAnimal.y + textAnimal.height*0.8, '-40', { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
+                        let ecologyButton = this.add.image(textEcology.x + textEcology.width / 1.5, textEcology.y, 'ecology-care').setScale(0.08).setOrigin(0,0.5);
+
+                        setTimeout(() => {
+                            textMoney.destroy();
+                            moneyButton.destroy();
+                            textAnimal.destroy();
+                            animalButton.destroy();
+                            textEcology.destroy();
+                            ecologyButton.destroy();
+                        }, 3000);
+                        
+                        if(bat.qt <= 100) this.images[bat.key - 1].setFrame((bat.level - 1));
+                        if(bat.qt < 75) this.images[bat.key - 1].setFrame((bat.level - 1) + 4 * bat.ref.lvlMax);
+                        if(bat.qt < 50) this.images[bat.key - 1].setFrame((bat.level - 1) + 2 * bat.ref.lvlMax);
+                        if(bat.qt < 25) this.images[bat.key - 1].setFrame((bat.level - 1) + 3 * bat.ref.lvlMax);
+                    }
+                    else {
+                        let textMoney = this.add.text(bat.x, bat.y, '-'+ref.buildCost, { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
+                        let moneyButton = this.add.image(textMoney.x + textMoney.width / 1.5, textMoney.y, 'dollar').setScale(0.08).setOrigin(0,0.5);
+                        
+                        let textEcology = this.add.text(bat.x, textMoney.y + textMoney.height*0.8, '-40', { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
+                        let ecologyButton = this.add.image(textEcology.x + textEcology.width / 1.5, textEcology.y, 'ecology-care').setScale(0.08).setOrigin(0,0.5);
+
+                        setTimeout(() => {
+                            textMoney.destroy();
+                            moneyButton.destroy();
+                            textEcology.destroy();
+                            ecologyButton.destroy();
+                        }, 3000);
+                    }
+                }
+                else {
+                    this.images[bat.key - 1]['ground'] = this.physics.add.image(bat.x, bat.y, ref.tag+this.gameScene, bat.level - 1);
+                    this.images[bat.key - 1]['weeds'] = this.add.image(bat.x, bat.y, 'weeds', bat.weeds);
+                    this.images[bat.key - 1]['plant'];
+                    bat.ref = getByTag(bat.tag)[0];
+                    
+                    if (bat.rotate) {
+                        this.images[bat.key - 1]['ground'].rotation = 3.141592 / 2;
+                        this.images[bat.key - 1]['weeds'].rotation = 3.141592 / 2;
+                    }
+
+                    let textMoney = this.add.text(bat.x, bat.y, '-'+ref.buildCost, { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
+                    let moneyButton = this.add.image(textMoney.x + textMoney.width / 1.5, textMoney.y, 'dollar').setScale(0.08).setOrigin(0,0.5);
+                        
+                    let textEcology = this.add.text(bat.x, textMoney.y + textMoney.height*0.8, '-40', { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
+                    let ecologyButton = this.add.image(textEcology.x + textEcology.width / 1.5, textEcology.y, 'ecology-care').setScale(0.08).setOrigin(0,0.5);
+
+                    setTimeout(() => {
+                        textMoney.destroy();
+                        moneyButton.destroy();
+                        textEcology.destroy();
+                        ecologyButton.destroy();
+                    }, 3000);
+                }
+
+                
+                this.updateJauge('ecology', -40);
+                setTimeout(() => {
+                    this.menuScene.seedyAdvice('hint', 'deforest');
+                }, 2000);
+>>>>>>> Stashed changes
             }
             if (nbOldSeed == 1) {
               this.menuScene.seedyAdvice("hint", "sameSeed", bat.seed);
@@ -1073,6 +1541,7 @@ class Foret extends Phaser.Scene {
         }
       }
     }
+<<<<<<< Updated upstream
   }
   weeds() {
     for (let i in this.data.values) {
@@ -1104,12 +1573,139 @@ class Foret extends Phaser.Scene {
             textHealth.destroy();
             healthButton.destroy();
           }, 3000);
+=======
+    weeds(){
+        for (let i in this.data.values) {
+            let bat = this.data.values[i];
+            if (bat.level == 1 && bat.type == 'field') {
+                if (Phaser.Math.Between(1, 10) <= 3) {
+                    bat.weeds++;
+                    if(bat.weeds > bat.maxWeeds) bat.weeds = bat.maxWeeds;
+                    console.log('Weeds !', bat);
+                    this.images[bat.key - 1]['weeds'].setFrame(bat.weeds);
+
+
+                    let textHealth = this.add.text(bat.x, bat.y, '-1', { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
+                    let healthButton = this.add.image(textHealth.x + textHealth.width / 1.5, textHealth.y, 'health').setScale(0.08).setOrigin(0,0.5);
+
+                    setTimeout(() => {
+                        textHealth.destroy();
+                        healthButton.destroy();
+                    }, 3000);
+                }
+                if(bat.weed == 8) {
+                    
+                    this.menuScene.seedyAdvice('hint', 'weeds', bat.ref);
+                }
+                if(bat.weed == 10) {
+                    
+                    this.menuScene.seedyAdvice('hint', 'fullWeeds', bat.ref);
+                }
+            }
+>>>>>>> Stashed changes
         }
         if (bat.weed == 8) {
           this.menuScene.seedyAdvice("hint", "weeds", bat.ref);
         }
+<<<<<<< Updated upstream
         if (bat.weed == 10) {
           this.menuScene.seedyAdvice("hint", "fullWeeds", bat.ref);
+=======
+    }
+    recolte(bat) {
+        console.log('Recolte : ', bat);
+        if (bat.type == 'field' && bat.plant && bat.level == 1 && (bat.tag != 'labor' || bat.tag != 'water') && (bat.grow == bat.seed.maxGrow || bat.dead)) {
+            let percent = bat.fertility/100;
+            let percent2 = (bat.maxWeeds - bat.weeds)/10;
+            console.log(percent, percent2);
+            let moneyWin = Math.round(bat.seed.money*percent*percent2*100)/100;
+            let hungerWin = Math.round(10*percent*percent2*100)/100;
+
+            // Compte l'echainement des graines
+            let looseFertility = 0;
+            let nbOldSeed = 0;
+            while(bat.seed == bat.oldseed[nbOldSeed]){
+                nbOldSeed++;
+                looseFertility += 10*nbOldSeed;
+            }
+            if(nbOldSeed == 0) {
+                looseFertility += 5;
+            }
+            bat.fertility -= looseFertility;
+            if(bat.fertility < 0) bat.fertility = 0;
+
+            if(!bat.dead) {
+                bat.plant = false;
+                bat.oldseed.unshift(bat.seed);
+                bat.tag = bat.seed.ground;
+                bat.grow = 0;
+                this.registry.set('money', this.registry.get('money') + moneyWin);
+                this.updateJauge('hunger', hungerWin);
+                console.log('Recolté !', bat);
+                this.images[bat.key - 1]['plant'].destroy();
+
+                
+
+                setTimeout(() => {
+                    if(moneyWin < bat.seed.money * 0.15) {
+                    
+                        this.menuScene.seedyAdvice('hint', 'lowWinPlant', bat, bat.seed);
+                    }
+    
+                    setTimeout(() => {
+                        if(bat.fertility < 25 && bat.fertility >= 20) {
+                        
+                            this.menuScene.seedyAdvice('hint', 'lowFertility', bat.fertility);
+                        }
+                        if(bat.fertility < 10) {
+                            
+                            this.menuScene.seedyAdvice('hint', 'veryLowFertility', bat.fertility);
+                        }
+                        if(bat.fertility == 0) {
+                            
+                            this.menuScene.seedyAdvice('hint', 'noFertility', bat.fertility);
+                        }
+                    }, 10000);
+                }, 5000);
+
+                bat.seed = {};
+
+                let textMoney = this.add.text(bat.x, bat.y, '+'+moneyWin, { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
+                let moneyButton = this.add.image(textMoney.x + textMoney.width / 1.5, textMoney.y, 'dollar').setScale(0.08).setOrigin(0,0.5);
+                let textHunger = this.add.text(bat.x, textMoney.y + textMoney.height*0.8, hungerWin, { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
+                let hungerButton = this.add.image(textHunger.x + textHunger.width / 1.5, textHunger.y, 'hunger-care').setScale(0.08).setOrigin(0,0.5);
+                let textHealth = this.add.text(bat.x, textHunger.y + textHunger.height*0.8, '-'+looseFertility, { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
+                let healthButton = this.add.image(textHealth.x + textHealth.width / 1.5, textHealth.y, 'fertility').setScale(0.08).setOrigin(0,0.5);
+                setTimeout(() => {
+                    textMoney.destroy();
+                    moneyButton.destroy();
+                    textHunger.destroy();
+                    hungerButton.destroy();
+                    textHealth.destroy();
+                    healthButton.destroy();
+                }, 3000);
+            }
+            else {
+                bat.plant = false;
+                bat.oldseed.unshift(bat.seed);
+                bat.tag = bat.seed.ground;
+                bat.grow = 0;
+                //this.money() += bat.seed.money;
+                bat.seed = {};
+                bat.dead = false;
+                this.updateJauge('hunger', -10);
+                console.log('Nettoyé !', bat);
+                this.images[bat.key - 1]['plant'].destroy();
+
+
+                let textHunger = this.add.text(bat.x, bat.y, '-10', { lineSpacing:10, fontSize:40, color:'#ffffff' }).setOrigin(0.5, 0.5);
+                let hungerButton = this.add.image(textHunger.x + textHunger.width / 1.5, textHunger.y, 'hunger-care').setScale(0.08).setOrigin(0,0.5);
+                setTimeout(() => {
+                    textHunger.destroy();
+                    hungerButton.destroy();
+                }, 3000);
+            }
+>>>>>>> Stashed changes
         }
       }
     }
@@ -1566,6 +2162,7 @@ class Foret extends Phaser.Scene {
             ecologyButton.destroy();
           }, 3000);
         }
+<<<<<<< Updated upstream
         if (bat.type == "struct") {
           this.images[bat.key - 1].destroy();
           this.images[bat.key - 1] = this.physics.add
@@ -1606,6 +2203,32 @@ class Foret extends Phaser.Scene {
             textEcology.destroy();
             ecologyButton.destroy();
           }, 3000);
+=======
+    }
+
+    birth() {
+        for (let i in this.data.values) {
+            let bat = this.data.values[i];
+            if (bat.level > 0 && bat.type == 'animal' && !bat.dead && bat.qt < 100) {
+                if (bat.feed >= 35) {
+                    if (Phaser.Math.Between(1, 10) <= 5) {
+                        bat.qt += 5;
+                        console.log('Birth animal !', bat);
+
+                        if(bat.qt > 100) bat.qt = 100;
+                        if(bat.qt <= 100) this.images[bat.key - 1].setFrame((bat.level - 1));
+                        if(bat.qt < 75) this.images[bat.key - 1].setFrame((bat.level - 1) + 4 * bat.ref.lvlMax);
+                        if(bat.qt < 50) this.images[bat.key - 1].setFrame((bat.level - 1) + 2 * bat.ref.lvlMax);
+                        if(bat.qt < 25) this.images[bat.key - 1].setFrame((bat.level - 1) + 3 * bat.ref.lvlMax);
+                    }
+                }
+                if(bat.feed < 35 && bat.feed >= 30) {
+                    
+                    this.menuScene.seedyAdvice('hint', 'notEnoughtMeal', bat.ref);
+                }
+
+            }
+>>>>>>> Stashed changes
         }
 
         this.physics.add.overlap(
