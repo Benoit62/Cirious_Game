@@ -670,7 +670,7 @@ class Glace extends Phaser.Scene {
                     bat.seed = seed;
                     console.log('Planted !', bat);
                     this.images[bat.key - 1]['plant'] = this.add.image(bat.x, bat.y, seed.tag, bat.grow);
-                    if(bat.rotate) this.images[j]['plant'].rotation = 3.141592 / 2;
+                    if(bat.rotate) this.images[bat.key - 1]['plant'].rotation = 3.141592 / 2;
 
                     let textMoney = this.add.text(bat.x, bat.y, '-'+seed.costPlant, { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
                     let moneyButton = this.add.image(textMoney.x + textMoney.width / 1.5, textMoney.y, 'dollar').setScale(0.08).setOrigin(0,0.5);
