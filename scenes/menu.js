@@ -1047,10 +1047,10 @@ class Menu extends Phaser.Scene {
         let seedy;
         switch(seedyType) {
             case 'cool':
-                seedy = this.add.image(window.innerWidth - 290.8, window.innerHeight - 264, 'seedyAdvice').setScrollFactor(0).setScale(0.8).setOrigin(0.5,0.5);
+                seedy = this.add.image(window.innerWidth - 290.8, window.innerHeight - 264, 'seedyAdvice2').setScrollFactor(0).setScale(0.8).setOrigin(0.5,0.5);
                 break;
             case 'hint':
-                seedy = this.add.image(window.innerWidth - 290.8, window.innerHeight - 264, 'seedyAdvice2').setScrollFactor(0).setScale(0.8).setOrigin(0.5,0.5);
+                seedy = this.add.image(window.innerWidth - 290.8, window.innerHeight - 264, 'seedyAdvice').setScrollFactor(0).setScale(0.8).setOrigin(0.5,0.5);
                 break;
             default:
                 seedy = this.add.image(window.innerWidth - 290.8, window.innerHeight - 264, 'seedyAdvice').setScrollFactor(0).setScale(0.8).setOrigin(0.5,0.5);

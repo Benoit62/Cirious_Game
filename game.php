@@ -55,7 +55,7 @@ include("config/configbdd.php");
             }
 
             create() {
-                const txt = this.add.text(0, 0, 'Play').setFontSize(64);
+                const txt = this.add.text(0, 0, 'Jouer', { fontSize:75, fontFamily:'MC', });
                 Phaser.Display.Align.In.Center(txt, this.add.zone(window.innerWidth / 2, window.innerHeight / 2, window.innerWidth, window.innerHeight));
 
                 this.input.once('pointerdown', this.start, this);

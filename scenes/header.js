@@ -105,10 +105,11 @@ class Header extends Phaser.Scene {
         // Money 
         //521px *0.05 => 25px
         this.add.image(315, 18, 'dollar').setScale(0.05);
-        this.moneyText = this.add.text(330, 18, '0', { fontSize:20, fontFamily:'monospace' }).setOrigin(0,0.5);
-        this.winText = this.add.text(338, 35, '0', { fontSize:12, fontFamily:'monospace' }).setOrigin(0,0.5);
-        this.moneyPerTickText = this.add.text(410, 15, '0', { fontSize:15, fontFamily:'monospace' }).setOrigin(0,0.5);
-        this.multText = this.add.text(410, 35, '0', { fontSize:15, fontFamily:'monospace' }).setOrigin(0,0.5);
+        this.moneyText = this.add.text(330, 18, '0', { fontSize:20, fontFamily:'MC' }).setOrigin(0,0.5);
+        this.winText = this.add.text(338, 35, '0', { fontSize:12, fontFamily:'MC' }).setOrigin(0,0.5);
+        this.moneyPerTickText = this.add.text(410, 15, '0', { fontSize:15, fontFamily:'MC' }).setOrigin(0,0.5);
+        this.multText = this.add.text(410, 35, '0', { fontSize:15, fontFamily:'MC' }).setOrigin(0,0.5);
+        this.climat = this.add.text(310, 65, 'Climat : '+getByTag(this.gameScene.climat)[0].name, { fontSize:18, fontFamily:'MC', color:'#dbdbdb' }).setOrigin(0,0.5);
 
 
         // Barre de progressions
@@ -142,7 +143,7 @@ class Header extends Phaser.Scene {
             y: h1 + 15,
             text: '',
             style: {
-                font: '18px monospace',
+                font: '18px MC',
                 fill: '#ffffff'
             }
         });
@@ -153,7 +154,7 @@ class Header extends Phaser.Scene {
             y: h2 + 15,
             text: '',
             style: {
-                font: '18px monospace',
+                font: '18px MC',
                 fill: '#ffffff'
             }
         });
@@ -164,7 +165,7 @@ class Header extends Phaser.Scene {
             y: h3 + 15,
             text: '',
             style: {
-                font: '18px monospace',
+                font: '18px MC',
                 fill: '#ffffff'
             }
         });
