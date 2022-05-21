@@ -101,7 +101,11 @@ class Menu extends Phaser.Scene {
             }, this);
             this.animals[i.tag].on('pointermove', function(){
                 this.cardInfo.setVisible(true);
-                this.textInfo.setText('Animal : '+i.name+'\nPrix : '+i.buildCost);
+                let climats = '';
+                for(let clm in i.climat) {
+                    climats+=getByTag(i.climat[clm])[0].name+' ';
+                }
+                this.textInfo.setText('Animal : '+i.name+'\nPrix : '+i.buildCost+'\nBien-être animal : -40'+'\nClimats : '+climats);
             }, this);
             this.animals[i.tag].on('pointerout', function(){
                 this.cardInfo.setVisible(false);
@@ -183,7 +187,7 @@ class Menu extends Phaser.Scene {
             }, this);
             this.structs[i.tag].on('pointermove', function(){
                 this.cardInfo.setVisible(true);
-                this.textInfo.setText('Batiment : '+i.name+'\nPrix : '+i.buildCost);
+                this.textInfo.setText('Batiment : '+i.name+'\nPrix : '+i.buildCost+'\nRecherches disponibles : '+getByType(i.product).length);
             }, this);
             this.structs[i.tag].on('pointerout', function(){
                 this.cardInfo.setVisible(false);
@@ -298,7 +302,7 @@ class Menu extends Phaser.Scene {
             this.meals[i.tag].on('pointermove', function(){
                 if(i.unlock) {
                     this.cardInfo.setVisible(true);
-                    this.textInfo.setText('Nourriture '+i.name+'\nApport en nourriture : '+i.feed+'\nBien-être animal : '+i.care+'\nPrix : '+i.prix);
+                    this.textInfo.setText('Nourriture : '+i.name+'\nApport en nourriture : '+i.feed+'\nBien-être animal : '+i.care+'\nPrix : '+i.prix);
                 }
             }, this);
             this.meals[i.tag].on('pointerout', function(){
@@ -365,7 +369,8 @@ class Menu extends Phaser.Scene {
                 }
                 if(this.batOverlap.type == 'animal' && !this.batOverlap.dead) {
                     this.cardInfo.setVisible(true);
-                    this.textInfo.setText('Prix : '+this.batOverlap.ref.upgrade[this.batOverlap.level+1]);
+                    let care = 10 * (this.batOverlap.level+1);
+                    this.textInfo.setText('Prix : '+this.batOverlap.ref.upgrade[this.batOverlap.level+1]+'\nBien-être animal : +'+care);
                 }
             }
         }, this);

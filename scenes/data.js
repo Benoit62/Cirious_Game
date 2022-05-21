@@ -574,7 +574,7 @@ let data = [
         tag: 'indus',
         type: 'meal',
         typeName: 'Nourriture pour animaux',
-        name: 'Aliments industriels complets ou semi-complets',
+        name: 'Aliments industriels',
         desc: 'L\'industrie peut fournir la ration complète des animaux d\'élevage, adaptée à chaque situation. C\'est généralement le cas en élevage avicole et cunicole et c\'est très fréquent en élevage porcin. Les rations semi-complètes apportent le complément à un ou plusieurs aliments de base produits ou non sur la ferme. Elles sont de plus en plus proposées pour les ruminants : rations sèches ou rations mash complétées par du foin.',
         info: 'Baisse moyenne du bonheur animal',
         unlock: false,
