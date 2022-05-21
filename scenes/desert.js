@@ -67,13 +67,13 @@ class Desert extends Phaser.Scene {
         // Animaux
         this.data.set('bat1', {
             key: 1,
-            x: -245,
+            x: -244,
             y: 338,
             dataType:'bat',
             type: 'animal',
             typeName:'Elevage',
-            level: 0,
-            tag: 'build',
+            level: 1,
+            tag: 'sheep',
             scale: 0.5,
             ref: {},
             dead:false,
@@ -89,8 +89,8 @@ class Desert extends Phaser.Scene {
             dataType:'bat',
             type: 'struct',
             typeName:'Infrastructure',
-            level: 0,
-            tag: 'build',
+            level: 1,
+            tag: 'methane',
             scale: 0.3,
             ref: {}
         });
@@ -101,8 +101,8 @@ class Desert extends Phaser.Scene {
             dataType:'bat',
             type: 'struct',
             typeName:'Infrastructure',
-            level: 0,
-            tag: 'build',
+            level: 1,
+            tag: 'tank',
             scale: 0.3,
             ref: {}
         });
@@ -110,7 +110,7 @@ class Desert extends Phaser.Scene {
         //Champs
         this.data.set('bat4', {
             key: 4,
-            x: 280,
+            x: 272,
             y: -310,
             dataType:'bat',
             type: 'field',
@@ -131,12 +131,12 @@ class Desert extends Phaser.Scene {
         this.data.set('bat5', {
             key: 5,
             x: -784,
-            y: 298,
+            y: 304,
             dataType:'bat',
             type: 'field',
             typeName:'Culture',
-            level: 0,
-            tag: 'build',
+            level: 1,
+            tag: 'labor',
             scale: 0.5,
             ref: {},
             plant: false,
@@ -151,13 +151,13 @@ class Desert extends Phaser.Scene {
         
         this.data.set('bat6', {
             key: 6,
-            x: 710,
-            y: -185,
+            x: 716,
+            y: -176,
             dataType:'bat',
             type: 'field',
             typeName:'Culture',
-            level: 0,
-            tag: 'build',
+            level: 1,
+            tag: 'labor',
             scale: 0.5,
             ref: {},
             plant: false,
