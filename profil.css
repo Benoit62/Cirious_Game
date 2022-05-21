@@ -313,6 +313,7 @@ form a:hover {
     color: #fff;
     transition: 0.5s;
     height: 90px;
+    
 }
 
 .container a:nth-child(1) {
@@ -338,6 +339,8 @@ form a:hover {
     width: 50%;
     height: 100%;
     background: rgba(255, 255, 255, .2);
+    border: solid black;
+    border-radius: 5%;
 }
 
 .container a:before {

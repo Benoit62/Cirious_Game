@@ -134,6 +134,10 @@ $query->closeCursor();
       <!--<a ><span>Continue</span></a>-->
       <a href="game.php"><span>New game</span></a>
     </div>
+
+    
+
+
     <!--<div class="info">
        <ul>
         <li>Niveau :</li>
