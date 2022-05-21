@@ -25,8 +25,8 @@ class Header extends Phaser.Scene {
 
         this.turnOff.on('pointerup', function() {
             if(this.registry.get('gameScene') != 'tuto') {
-                //window.location.href = 'profil.php';
-                let registryData = '';
+                window.location.href = 'profil.php';
+                /*let registryData = '';
                 //this.registry.values.forEach(value => registryData += value);
                 console.log(this.registry.values);
                 for(let i in this.registry.values) {
@@ -78,7 +78,7 @@ class Header extends Phaser.Scene {
                 
 
 
-                window.location.href = 'config/save.php?'+registryData+gameData;
+                window.location.href = 'config/save.php?'+registryData+gameData;*/
             }
         }, this);
 
