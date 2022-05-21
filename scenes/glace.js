@@ -33,13 +33,21 @@ class Glace extends Phaser.Scene {
 
         this.musique;
 
-        this.finish = false;
+        this.finish;
+
 
         this.speedPlayer = 300;
     }
 
-    create ()
-    {
+    create() {
+        if(this.registry.get('unlock').includes(this.climat)) {
+            this.finish = true;
+        }
+        else {
+            this.finish = false;
+        }
+
+
         this.musique = this.sound.add(this.gameScene+'_musique', {
             mute: false,
             volume: 0.2,
@@ -397,7 +405,7 @@ class Glace extends Phaser.Scene {
     update() {
         if(this.registry.get('ecology'+this.gameScene) >= 90 && this.registry.get('animalCare'+this.gameScene) >= 90 && this.registry.get('hunger'+this.gameScene) >= 90 && !this.finish) {
             this.finish = true;
-            this.menuScene.seedyAdvice('finish');
+            this.menuScene.seedyAdvice('cool', 'finish');
             console.log('unlock');
         }
 
@@ -670,6 +678,7 @@ class Glace extends Phaser.Scene {
                     bat.seed = seed;
                     console.log('Planted !', bat);
                     this.images[bat.key - 1]['plant'] = this.add.image(bat.x, bat.y, seed.tag, bat.grow);
+                    if(bat.rotate) this.images[bat.key - 1]['plant'].rotation = 3.141592 / 2;
 
                     let textMoney = this.add.text(bat.x, bat.y, '-'+seed.costPlant, { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
                     let moneyButton = this.add.image(textMoney.x + textMoney.width / 1.5, textMoney.y, 'dollar').setScale(0.08).setOrigin(0,0.5);
@@ -685,13 +694,13 @@ class Glace extends Phaser.Scene {
                             nbOldSeed++;
                         }
                         if(nbOldSeed == 1) {
-                            this.menuScene.seedyAdvice('sameSeed', bat.seed);
+                            this.menuScene.seedyAdvice('hint', 'sameSeed', bat.seed);
                         }
                         if(nbOldSeed == 2) {
-                            this.menuScene.seedyAdvice('sameSeed2', bat.seed);
+                            this.menuScene.seedyAdvice('hint', 'sameSeed2', bat.seed);
                         }
                         if(nbOldSeed >= 3) {
-                            this.menuScene.seedyAdvice('toMuchSameSeed', bat.seed);
+                            this.menuScene.seedyAdvice('hint', 'toMuchSameSeed', bat.seed);
                         }
                     }, 4000);
                 }
@@ -734,7 +743,7 @@ class Glace extends Phaser.Scene {
                     bat.dead = true;
                     console.log('Dead plant !', bat);
                     this.images[bat.key - 1]['plant'].setFrame(bat.seed.maxGrow + 1);
-                    this.menuScene.seedyAdvice('deadPlantClimat', bat.seed);
+                    this.menuScene.seedyAdvice('hint', 'deadPlantClimat', bat.seed);
                 }
             }
         }
@@ -760,11 +769,11 @@ class Glace extends Phaser.Scene {
                 }
                 if(bat.weed == 8) {
                     
-                    this.menuScene.seedyAdvice('weeds', bat.ref);
+                    this.menuScene.seedyAdvice('hint', 'weeds', bat.ref);
                 }
                 if(bat.weed == 10) {
                     
-                    this.menuScene.seedyAdvice('fullWeeds', bat.ref);
+                    this.menuScene.seedyAdvice('hint', 'fullWeeds', bat.ref);
                 }
             }
         }
@@ -835,21 +844,21 @@ class Glace extends Phaser.Scene {
                 setTimeout(() => {
                     if(moneyWin < bat.seed.money * 0.15) {
                     
-                        this.menuScene.seedyAdvice('lowWinPlant', bat, bat.seed);
+                        this.menuScene.seedyAdvice('hint', 'lowWinPlant', bat, bat.seed);
                     }
     
                     setTimeout(() => {
                         if(bat.fertility < 25 && bat.fertility >= 20) {
                         
-                            this.menuScene.seedyAdvice('lowFertility', bat.fertility);
+                            this.menuScene.seedyAdvice('hint', 'lowFertility', bat.fertility);
                         }
                         if(bat.fertility < 10) {
                             
-                            this.menuScene.seedyAdvice('veryLowFertility', bat.fertility);
+                            this.menuScene.seedyAdvice('hint', 'veryLowFertility', bat.fertility);
                         }
                         if(bat.fertility == 0) {
                             
-                            this.menuScene.seedyAdvice('noFertility', bat.fertility);
+                            this.menuScene.seedyAdvice('hint', 'noFertility', bat.fertility);
                         }
                     }, 10000);
                 }, 5000);
@@ -931,7 +940,7 @@ class Glace extends Phaser.Scene {
                     console.log('Dead animal !', bat);
                     this.images[bat.key - 1].setFrame((bat.level - 1) + bat.ref.lvlMax);
 
-                    this.menuScene.seedyAdvice('deadAnimalClimat', bat.ref);
+                    this.menuScene.seedyAdvice('hint', 'deadAnimalClimat', bat.ref);
 
                     this.updateJauge('animalCare', -40);
 
@@ -1057,7 +1066,7 @@ class Glace extends Phaser.Scene {
                         console.log('Eat animal !', bat);
 
                         if(bat.feed <= 0) {
-                            this.menuScene.seedyAdvice('noMeal');
+                            this.menuScene.seedyAdvice('hint', 'noMeal');
                             bat.feed = 0;
                             setTimeout(() => {
                                 bat.dead = true;
@@ -1088,10 +1097,10 @@ class Glace extends Phaser.Scene {
 
                             //Seedy Advice
                             if(bat.feed >= 5 && bat.feed < 10) {
-                                this.menuScene.seedyAdvice('veryLowMeal');
+                                this.menuScene.seedyAdvice('hint', 'veryLowMeal');
                             }
                             if(bat.feed >= 20 && bat.feed < 25) {
-                                this.menuScene.seedyAdvice('lowMeal');
+                                this.menuScene.seedyAdvice('hint', 'lowMeal');
                             }
                         }
                     }
@@ -1118,7 +1127,7 @@ class Glace extends Phaser.Scene {
                 }
                 if(bat.feed < 35 && bat.feed >= 30) {
                     
-                    this.menuScene.seedyAdvice('notEnoughtMeal', bat.ref);
+                    this.menuScene.seedyAdvice('hint', 'notEnoughtMeal', bat.ref);
                 }
 
             }

@@ -117,7 +117,7 @@ class Cinematique1 extends Phaser.Scene {
                 "",
                 ""+namePlayer+"",
                 "J'accepte cette mission, mais nous devons aussi faire attention à l'écologie.",
-                "La planète va mal alors il faut développer une agriculture durable en pensant aux générations futures.",
+                "Il faut développer une agriculture durable en pensant aux générations futures.",
                 "De même le bien-être animal est un sujet important et bien trop souvent négligé.",
                 "",
                 "Chênebleu",

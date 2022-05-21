@@ -17,10 +17,10 @@ class Loading extends Phaser.Scene {
 
         var loadingText = this.make.text({
             x: 2*width,
-            y: height - 50,
-            text: 'Loading',
+            y: height - 55,
+            text: 'Chargement',
             style: {
-                font: '20px monospace',
+                font: '25px monospace',
                 fill: '#ffffff'
             }
         });
@@ -45,14 +45,11 @@ class Loading extends Phaser.Scene {
             progressBar.fillStyle(0xffffff, 1);
             progressBar.fillRect(width, height - 25, 2*width*value, 50);
             if(percent > 48) percentText.setTint(0x000000)
-            /*if (value*100 % 20 == 12) {
-                var points = '';
-                for (let j = 0; j <= value*100 % 3; j++) {
-                    points += '.';
-                }
-                loadingText.setText('Loading' + points);
-            }*/
-    
+            let points = '';
+            if(percent > 25) points+='.';
+            if(percent > 50) points+='.';
+            if(percent > 75) points+='.';
+            loadingText.setText('Chargement' + points);
         }, this);
     
         this.load.on('complete', function () {
@@ -275,6 +272,7 @@ class Loading extends Phaser.Scene {
         this.load.image("savoirPlus", "assets/menu/savoirPlus.png"); 
         this.load.image('error', 'assets/menu/error.png');
         this.load.image('seedyAdvice', 'assets/menu/seedyAdvice.png');
+        this.load.image('seedyAdvice2', 'assets/menu/seedyAdvice2.png');
         this.load.image('white', 'assets/menu/white.png');
 
 

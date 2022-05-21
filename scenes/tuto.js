@@ -55,8 +55,8 @@ class Tuto extends Phaser.Scene {
         // Animaux
         this.data.set('bat1', {
             key: 1,
-            x: 115,
-            y: 160,
+            x: 130,
+            y: 32,
             dataType: 'bat',
             type: 'animal',
             typeName: 'Elevage',
@@ -72,8 +72,8 @@ class Tuto extends Phaser.Scene {
 
         this.data.set('bat2', {
             key: 2,
-            x: -32,
-            y: -240,
+            x: -16,
+            y: -368,
             dataType: 'bat',
             type: 'struct',
             typeName: 'Infrastructure',
@@ -86,8 +86,8 @@ class Tuto extends Phaser.Scene {
 
         this.data.set('bat3', {
             key: 3,
-            x: -368,
-            y: -128,
+            x: -320,
+            y: -256,
             dataType: 'bat',
             type: 'field',
             typeName: 'Culture',
@@ -109,8 +109,8 @@ class Tuto extends Phaser.Scene {
         // Maison/labo
         this.data.set('bat4', {
             key: 4,
-            x: 700 / 2,
-            y: -480 / 2,
+            x: 374,
+            y: -368,
             dataType: 'bat',
             type: 'house',
             typeName: 'Laboratoire',
@@ -124,7 +124,7 @@ class Tuto extends Phaser.Scene {
         this.cameras.main.zoom = 1;
 
         // Player
-        this.player = this.physics.add.sprite(415, -80, 'farmer').setDepth(2000).setScale(0.7);
+        this.player = this.physics.add.sprite(435, -208, 'farmer').setDepth(2000).setScale(0.7);
 
 
         this.physics.add.overlap(this.player, farm, this.closeOverLap, function () { return true; }, this);
@@ -315,13 +315,12 @@ class Tuto extends Phaser.Scene {
                 "                                       ",
                 "Ce sont les trois objectifs que tu dois remplir pour atteindre la ferme du futur.",
                 /*"Quand elles ont toutes atteintes au moins 90%, tu débloques la ferme suivante.",*/
-                "A gauche des jauges, tu peux voir l'argent que tu gagnes et quelques détails.",
-                "                            ",
+                "A gauche des jauges, tu peux voir l'argent que tu gagnes et quelques détails.                        ",
                 "A droite se trouvent les boutons : Recherche, Carte et Quitter.",
                 "                             ",
                 "Le bouton Recherche permet de débloquer des nouvelles méthodes de cultures ou d'élevage,",
                 "ainsi que de nouvelles technologies. Je te laisse découvrir par toi-même.",
-                "Maintenant je vais te présenter la ferme et les actions que tu peux y faire.",
+                /*"Maintenant je vais te présenter la ferme et les actions que tu peux y faire.",*/
                 /*"Chaque action aura un impact sur les jauges, à toi d'apprendre et de les équilibrer au mieux.",*/
                 ""
             ];
@@ -417,7 +416,7 @@ class Tuto extends Phaser.Scene {
             This.text1.destroy();
             This.text2.destroy();
             This.seedi.destroy();
-            if (this.player.y < 160)
+            if (this.player.y < 100)
                 this.player.y += 3;
             else if (this.player.x >= 310) {
                 this.player.anims.play('left', true);
@@ -1119,6 +1118,7 @@ class Tuto extends Phaser.Scene {
                     bat.seed = seed;
                     console.log('Planted !', bat);
                     this.images[bat.key - 1]['plant'] = this.add.image(bat.x, bat.y, seed.tag, bat.grow);
+                    if(bat.rotate) this.images[j]['plant'].rotation = 3.141592 / 2;
 
                     let textMoney = this.add.text(bat.x, bat.y, '-'+seed.costPlant, { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
                     let moneyButton = this.add.image(textMoney.x + textMoney.width / 1.5, textMoney.y, 'dollar').setScale(0.08).setOrigin(0,0.5);
@@ -1128,21 +1128,6 @@ class Tuto extends Phaser.Scene {
                         moneyButton.destroy();
                     }, 3000);
 
-                    setTimeout(() => {
-                        let nbOldSeed = 0;
-                        while(bat.seed == bat.oldseed[nbOldSeed]){
-                            nbOldSeed++;
-                        }
-                        if(nbOldSeed == 1) {
-                            this.menuScene.seedyAdvice('sameSeed', bat.seed);
-                        }
-                        if(nbOldSeed == 2) {
-                            this.menuScene.seedyAdvice('sameSeed2', bat.seed);
-                        }
-                        if(nbOldSeed >= 3) {
-                            this.menuScene.seedyAdvice('toMuchSameSeed', bat.seed);
-                        }
-                    }, 4000);
                 }
                 else {
                     console.log('Can\'t plant riz on dirt or others on water');
@@ -1183,7 +1168,6 @@ class Tuto extends Phaser.Scene {
                     bat.dead = true;
                     console.log('Dead plant !', bat);
                     this.images[bat.key - 1]['plant'].setFrame(bat.seed.maxGrow + 1);
-                    this.menuScene.seedyAdvice('deadPlantClimat', bat.seed);
                 }
             }
         }
@@ -1206,14 +1190,6 @@ class Tuto extends Phaser.Scene {
                         textHealth.destroy();
                         healthButton.destroy();
                     }, 3000);
-                }
-                if(bat.weed == 8) {
-                    
-                    this.menuScene.seedyAdvice('weeds', bat.ref);
-                }
-                if(bat.weed == 10) {
-                    
-                    this.menuScene.seedyAdvice('fullWeeds', bat.ref);
                 }
             }
         }
@@ -1278,30 +1254,6 @@ class Tuto extends Phaser.Scene {
                 this.updateJauge('hunger', hungerWin);
                 console.log('Recolté !', bat);
                 this.images[bat.key - 1]['plant'].destroy();
-
-                
-
-                setTimeout(() => {
-                    if(moneyWin < bat.seed.money * 0.15) {
-                    
-                        this.menuScene.seedyAdvice('lowWinPlant', bat, bat.seed);
-                    }
-    
-                    setTimeout(() => {
-                        if(bat.fertility < 25 && bat.fertility >= 20) {
-                        
-                            this.menuScene.seedyAdvice('lowFertility', bat.fertility);
-                        }
-                        if(bat.fertility < 10) {
-                            
-                            this.menuScene.seedyAdvice('veryLowFertility', bat.fertility);
-                        }
-                        if(bat.fertility == 0) {
-                            
-                            this.menuScene.seedyAdvice('noFertility', bat.fertility);
-                        }
-                    }, 10000);
-                }, 5000);
 
                 bat.seed = {};
 
@@ -1379,8 +1331,6 @@ class Tuto extends Phaser.Scene {
                     bat.qt = 0;
                     console.log('Dead animal !', bat);
                     this.images[bat.key - 1].setFrame((bat.level - 1) + bat.ref.lvlMax);
-
-                    this.menuScene.seedyAdvice('deadAnimalClimat', bat.ref);
 
                     this.updateJauge('animalCare', -40);
 
@@ -1506,7 +1456,6 @@ class Tuto extends Phaser.Scene {
                         console.log('Eat animal !', bat);
 
                         if(bat.feed <= 0) {
-                            this.menuScene.seedyAdvice('noMeal');
                             bat.feed = 0;
                             setTimeout(() => {
                                 bat.dead = true;
@@ -1534,14 +1483,6 @@ class Tuto extends Phaser.Scene {
                                 textAnimal.destroy();
                                 animalButton.destroy();
                             }, 3000);
-
-                            //Seedy Advice
-                            if(bat.feed >= 5 && bat.feed < 10) {
-                                this.menuScene.seedyAdvice('veryLowMeal');
-                            }
-                            if(bat.feed >= 20 && bat.feed < 25) {
-                                this.menuScene.seedyAdvice('lowMeal');
-                            }
                         }
                     }
                 }
@@ -1565,11 +1506,6 @@ class Tuto extends Phaser.Scene {
                         if(bat.qt < 25) this.images[bat.key - 1].setFrame((bat.level - 1) + 3 * bat.ref.lvlMax);
                     }
                 }
-                if(bat.feed < 35 && bat.feed >= 30) {
-                    
-                    this.menuScene.seedyAdvice('notEnoughtMeal', bat.ref);
-                }
-
             }
         }
     }
