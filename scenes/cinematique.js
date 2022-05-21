@@ -159,11 +159,11 @@ class Cinematique1 extends Phaser.Scene {
             var tmp = '';
             var i = 0;
             var j = 0;
-            var wait = 60;
+            var wait = 70;
             var bool = false;
             function loop() {
                 setTimeout(function () {
-                    wait = 60;
+                    wait = 70;
                     if (bool) {
                         text0.setText(content[i]);
                         text1.setText('');
@@ -356,11 +356,11 @@ class Cinematique2 extends Phaser.Scene {
             var tmp = '';
             var i = 0;
             var j = 0;
-            var wait = 60;
+            var wait = 70;
             var bool = false;
             function loop() {
                 setTimeout(function () {
-                    wait = 60;
+                    wait = 70;
                     if (bool) {
                         text0.setText(content[i]);
                         text1.setText('');
