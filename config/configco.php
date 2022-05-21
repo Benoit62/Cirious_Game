@@ -11,14 +11,14 @@ if(!empty($_POST) && $_POST['valider'] == 'connexion'){
     // Test si les variables ne sont pas vides
     if (!empty($pseudo) && !empty($mdp)){
 
-        $verifmail = $bdd->prepare('SELECT * FROM comptes WHERE pseudo = :pseudo');
-        $verifmail->bindValue(':pseudo', $pseudo, PDO::PARAM_STR);
-        $verifmail->execute();
-        $resultCheck = $verifmail->rowCount();
+        $verifcompte = $bdd->prepare('SELECT * FROM comptes WHERE pseudo = :pseudo');
+        $verifcompte->bindValue(':pseudo', $pseudo, PDO::PARAM_STR);
+        $verifcompte->execute();
+        $resultCheck = $verifcompte->rowCount();
         // Cherche si le mail entré existe
         if ($resultCheck == 1){
-            $data = $verifmail->fetch();
-            $verifmail->closeCursor();
+            $data = $verifcompte->fetch();
+            $verifcompte->closeCursor();
             $result = $data['mdp'];
             $hashedPasswordCheck = password_verify($mdp, $result);
 

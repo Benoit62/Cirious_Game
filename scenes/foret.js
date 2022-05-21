@@ -65,153 +65,151 @@ class Foret extends Phaser.Scene {
 
 
         // Animaux
-        this.data.set('bat1', {
+        this.data.set("bat1", {
             key: 1,
-            x: -322,
+            x: -334,
             y: 300,
-            dataType:'bat',
-            type: 'animal',
-            typeName:'Elevage',
+            dataType: "bat",
+            type: "animal",
+            typeName: "Elevage",
             level: 1,
-            tag: 'cow',
+            tag: "cow",
             scale: 1,
             ref: {},
-            dead:false,
-            feed:100,
-            qt:100
+            dead: false,
+            feed: 100,
+            qt: 100,
         });
-        this.data.set('bat2', {
+        this.data.set("bat2", {
             key: 2,
-            x: 196,
-            y: 264,
-            dataType:'bat',
-            type: 'animal',
-            typeName:'Elevage',
+            x: 203,
+            y: 265,
+            dataType: "bat",
+            type: "animal",
+            typeName: "Elevage",
             level: 2,
-            tag: 'cow',
+            tag: "cow",
             scale: 1,
             ref: {},
-            dead:false,
-            feed:100,
-            qt:100
+            dead: false,
+            feed: 100,
+            qt: 100,
         });
-
+    
         // Structures
-        this.data.set('bat3', {
+        this.data.set("bat3", {
             key: 3,
             x: 772,
             y: -384,
-            dataType:'bat',
-            type: 'struct',
-            typeName:'Infrastructure',
+            dataType: "bat",
+            type: "struct",
+            typeName: "Infrastructure",
             level: 1,
-            tag: 'tank',
+            tag: "tank",
             scale: 0.5,
-            ref: {}
+            ref: {},
         });
-        this.data.set('bat4', {
+        this.data.set("bat4", {
             key: 4,
-            x: -762,
-            y: 390,
-            dataType:'bat',
-            type: 'struct',
-            typeName:'Infrastructure',
+            x: -760,
+            y: 388,
+            dataType: "bat",
+            type: "struct",
+            typeName: "Infrastructure",
             level: 1,
-            tag: 'solaire',
+            tag: "solaire",
             scale: 0.5,
-            ref: {}
+            ref: {},
         });
-
+    
         //Champs
-        this.data.set('bat5', {
+        this.data.set("bat5", {
             key: 5,
             x: -804,
             y: -328,
-            dataType:'bat',
-            type: 'field',
-            typeName:'Culture',
+            dataType: "bat",
+            type: "field",
+            typeName: "Culture",
             level: 1,
-            tag: 'labor',
+            tag: "labor",
             scale: 0.7,
             ref: {},
             plant: false,
             seed: {},
             oldseed: [],
             grow: 0,
-            dead:false,
-            fertility:100,
-            weeds:0,
-            maxWeeds:10
+            dead: false,
+            fertility: 100,
+            weeds: 0,
+            maxWeeds: 10,
         });
-        this.data.set('bat6', {
+        this.data.set("bat6", {
             key: 6,
-            x: -426,
+            x: -428,
             y: -372,
-            dataType:'bat',
-            type: 'field',
-            typeName:'Culture',
+            dataType: "bat",
+            type: "field",
+            typeName: "Culture",
             level: 1,
-            tag: 'labor',
+            tag: "labor",
             scale: 0.8,
             ref: {},
             plant: false,
             seed: {},
             oldseed: [],
             grow: 0,
-            dead:false,
-            fertility:100,
-            weeds:0,
-            maxWeeds:10,
-            rotate:true
+            dead: false,
+            fertility: 100,
+            weeds: 0,
+            maxWeeds: 10,
+            rotate: true,
         });
-        this.data.set('bat7', {
+        this.data.set("bat7", {
             key: 7,
-            x: +674,
-            y: 312,
-            dataType:'bat',
-            type: 'field',
-            typeName:'Culture',
+            x: +689,
+            y: 336,
+            dataType: "bat",
+            type: "field",
+            typeName: "Culture",
             level: 1,
-            tag: 'labor',
+            tag: "labor",
             scale: 0.8,
             ref: {},
             plant: false,
             seed: {},
             oldseed: [],
             grow: 0,
-            dead:false,
-            fertility:100,
-            weeds:0,
-            maxWeeds:10,
-            rotate:true
+            dead: false,
+            fertility: 100,
+            weeds: 0,
+            maxWeeds: 10,
+            rotate: true,
         });
-
-
+    
         // Maison/labo
-        this.data.set('bat8', {
+        this.data.set("bat8", {
             key: 8,
-            x: 300,
-            y: -214,
-            dataType:'bat',
-            type: 'house',
-            typeName:'Laboratoire',
+            x: 293,
+            y: -220,
+            dataType: "bat",
+            type: "house",
+            typeName: "Laboratoire",
             level: 1,
-            tag: 'house',
+            tag: "house",
             scale: 0.3,
-            ref: {}
+            ref: {},
         });
-
-
-        this.data.set('bat9', {
+    
+        this.data.set("bat9", {
             key: 9,
             x: 0,
             y: 0,
-            type: 'river',
-            typeName:'Rivière',
+            type: "river",
+            typeName: "Rivière",
             pollution: 0,
-            tag: 'river',
-            desc:''
-        })
+            tag: "river",
+            desc: "",
+        });
 
 
 

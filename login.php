@@ -58,7 +58,7 @@ $bdd=NULL;
                         <form method="POST" action="config/configinsc.php">
                             <h2>Create an account</h2>
                             <input id="pseudo" type="text" name="pseudo" value="" placeholder="Username" minlength="2" maxlength="30" required>
-                            <input id="mail" type="email" name="mail" value="" placeholder="Email Address" minlength="3" maxlength="100" required>
+                            <!--<input id="mail" type="email" name="mail" value="" placeholder="Email Address" minlength="3" maxlength="100" required>-->
                             <input id="mdp" type="password" name="mdp" value="" placeholder="Create Password" minlength="2" maxlength="256" required>
 						    <ion-icon id="cp2" name="eye-off-outline"></ion-icon>
                             <input id="verif_mdp" type="password" name="verif_mdp" value="" placeholder="Confirm Password" minlength="2" maxlength="256" required>
