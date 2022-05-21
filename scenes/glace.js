@@ -66,8 +66,25 @@ class Glace extends Phaser.Scene {
             dataType:'bat',
             type: 'animal',
             typeName:'Elevage',
-            level: 0,
-            tag: 'build',
+            level: 1,
+            tag: 'cow',
+            scale: 0.5,
+            ref: {},
+            dead:false,
+            feed:100,
+            qt:100
+        });
+
+        
+        this.data.set('bat2', {
+            key: 2,
+            x: -245,
+            y: 338,
+            dataType:'bat',
+            type: 'animal',
+            typeName:'Elevage',
+            level: 1,
+            tag: 'cow',
             scale: 0.5,
             ref: {},
             dead:false,
@@ -76,34 +93,34 @@ class Glace extends Phaser.Scene {
         });
 
         // Structures
-        this.data.set('bat2', {
-            key: 2,
+        this.data.set('bat3', {
+            key: 3,
             x: 260,
             y: 415,
             dataType:'bat',
             type: 'struct',
             typeName:'Infrastructure',
-            level: 0,
-            tag: 'build',
+            level: 1,
+            tag: 'tank',
             scale: 0.3,
             ref: {}
         });
-        this.data.set('bat3', {
-            key: 3,
+        this.data.set('bat4', {
+            key: 4,
             x: 700,
             y: -448,
             dataType:'bat',
             type: 'struct',
             typeName:'Infrastructure',
-            level: 0,
-            tag: 'build',
+            level: 1,
+            tag: 'solaire',
             scale: 0.3,
             ref: {}
         });
 
         //Champs
-        this.data.set('bat4', {
-            key: 4,
+        this.data.set('bat5', {
+            key: 5,
             x: 280,
             y: -310,
             dataType:'bat',
@@ -122,15 +139,15 @@ class Glace extends Phaser.Scene {
             weeds:0,
             maxWeeds:10
         });
-        this.data.set('bat5', {
-            key: 5,
+        this.data.set('bat6', {
+            key: 6,
             x: -784,
             y: 298,
             dataType:'bat',
             type: 'field',
             typeName:'Culture',
-            level: 0,
-            tag: 'build',
+            level: 1,
+            tag: 'labor',
             scale: 0.5,
             ref: {},
             plant: false,
@@ -141,28 +158,6 @@ class Glace extends Phaser.Scene {
             fertility:100,
             weeds:0,
             maxWeeds:10
-        });
-        
-        this.data.set('bat6', {
-            key: 6,
-            x: 710,
-            y: -185,
-            dataType:'bat',
-            type: 'field',
-            typeName:'Culture',
-            level: 0,
-            tag: 'build',
-            scale: 0.5,
-            ref: {},
-            plant: false,
-            seed: {},
-            oldseed: [getByTag('carrot')[0]],
-            grow: 0,
-            dead:false,
-            fertility:100,
-            weeds:0,
-            maxWeeds:10,
-            rotate:true
         });
 
 
