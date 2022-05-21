@@ -96,8 +96,8 @@ class Loading extends Phaser.Scene {
             });
 
             // Data
-            this.registry.set('unlock', ['europe']);
-            this.registry.set('lock', ['aride', 'tropic', 'polaire']);
+            this.registry.set('unlock', ['europe','aride', 'tropic', 'polaire']);
+            this.registry.set('lock', []);
 
 
             progressBar.destroy();
