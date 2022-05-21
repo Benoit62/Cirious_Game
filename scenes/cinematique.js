@@ -318,7 +318,7 @@ class Cinematique2 extends Phaser.Scene {
                 "Seedy :",
                 "Parfait ! Maintenant que les présentations sont faites, suis-moi, nous allons débuter ta formation !",
                 "",*/
-                "Salut, moi c'est Seedy ! Je serai ta guide dans cette nouvelle aventure !",
+                "Salut, moi c'est Seedy ! Je serai ta guide tout au long de ton parcours !",
                 "Suis-moi, nous allons débuter ta formation !",
                 "",
             ];

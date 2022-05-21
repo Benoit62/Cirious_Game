@@ -322,7 +322,7 @@ class Tuto extends Phaser.Scene {
                 "Le bouton Recherche permet de débloquer des nouvelles méthodes de cultures ou d'élevage,",
                 "ainsi que de nouvelles technologies. Je te laisse découvrir par toi-même.",
                 "Maintenant je vais te présenter la ferme et les actions que tu peux y faire.",
-                "Chaque action aura un impact sur les jauges, à toi d'apprendre et de les équilibrer au mieux.",
+                /*"Chaque action aura un impact sur les jauges, à toi d'apprendre et de les équilibrer au mieux.",*/
                 ""
             ];
             This.text0 = this.make.text({
@@ -438,13 +438,13 @@ class Tuto extends Phaser.Scene {
                 var content = [
                     "Ici se trouve un batiment d'élevage, tu peux y placer différents animaux, mais fais bien atttention,",
                     "chaque animal s'adapte plus au moins bien au climat de la ferme.",
-                    "Les actions réalisables pour chaque bâtiment sont affichées en surbrillance, sois curieux(se)",
-                    "Comme pour tous les bâtiments que tu rencontrera, de nombreuses informations sont présentées sur le coté.",
+                    "Les actions réalisables pour chaque bâtiment sont affichées en surbrillance.",
+                    "Comme pour tous les bâtiments de ta ferme, de nombreuses informations sont présentées à gauche.",
                     "Ici on y retrouve notamment la nourriture ainsi que les quantité de vaches présentes.",
                     /*"A toi de bien les surveiller",*/
                     "                                     ",
                     "Tu peux améliorer le bâtiment en appuyant sur le premier bouton du menu ou avec la touche 'A'",
-                    "                                                                                           ",
+                    "Tu devrai gagner du bien-être animal                                                                                     ",
                     "",
                 ];
                 This.text0 = this.make.text({
@@ -571,10 +571,10 @@ class Tuto extends Phaser.Scene {
                 This.seedi.setScrollFactor(0);
                 This.seedi.setOrigin(0, 0);
                 var content = [
-                    "Ici se trouve une zone vide, tu peux y construire un bâtiment selon le type d'emplacement où tu te trouve.",
-                    "Quelques informations du bâtiment que te souhaite construire sont affichés.",
+                    "Ici se trouve une zone vide, tu peux y construire un bâtiment en fonction de l'emplacement où tu es.",
+                    "Quelques informations du bâtiment que te souhaite construire sont affichées.",
                     "Les bâtiment Infrastructures permettent de générer un revenu passif pour la ferme.",
-                    "Chaque bâtiment produit une ressource qu'il est possible de valoriser via des recherches.",
+                    "Chaque Infrastructure produit une ressource qu'il est possible de valoriser via des recherches.",
                     "Tu peux par exemple contruire un réservoir à eau en appuyant sur le deuxième bouton",
                     "                                ",
                     ""
@@ -696,18 +696,17 @@ class Tuto extends Phaser.Scene {
                 This.seedi.setScrollFactor(0);
                 This.seedi.setOrigin(0, 0);
                 var content = [
-                    "Ici se trouve un champ.",
-                    "C'est là que tu peux planter différents types de cultures, mais attention,",
+                    "Ici se trouve un champ, tu peux planter différents types de cultures, mais attention",
                     "comme pour les animaux, tu dois bien faire attention au climat.",
-                    "Là aussi se trouvent de nombreuses informations concernant le champs, comme sa fertilité ou sa santé,",
-                    "surveille les bien, tes revenus en dépendent.",
+                    "Là aussi se trouvent de nombreuses informations concernant le champs,",
+                    "comme sa fertilité ou sa santé. Attention, tes revenus en dépendent.",
                     "                                                     ",
                     /*"Les revenus potentiellements générés sont affiché en fonction des données du champs,",
                     "par rapport aux revenus maximum qu'il est possible d'obtenir.",*/
                     "Tu peux essayer de planter ta première culture !",
                     "                                                        ",
-                    "Tu peux aussi replanter la culture précédante en appuyant sur la touche 'E'.",
-                    "Une fois le champs prêt, tu peux le récolter via le bouton Récolte ou en appuyant sur la touche 'Z'.",
+                    /*"Tu peux aussi replanter la culture précédante en appuyant sur la touche 'E'.",*/
+                    /*"Une fois le champs prêt, tu peux le récolter via le bouton Récolte ou en appuyant sur la touche 'Z'.",*/
                     ""
                 ];
                 This.text0 = this.make.text({
