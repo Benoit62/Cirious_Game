@@ -332,7 +332,7 @@ class Tuto extends Phaser.Scene {
                 style: {
                     fontSize: 25,
                     color: '#f00020',
-                    fontFamily: 'Arial',
+                    fontFamily: 'MC',
                 }
             });
             This.text0.setTint(0xff0000);
@@ -342,7 +342,7 @@ class Tuto extends Phaser.Scene {
                 text: '',
                 style: {
                     fontSize: 20,
-                    fontFamily: 'Arial',
+                    fontFamily: 'MC',
                 }
             });
             This.text2 = this.make.text({
@@ -351,7 +351,7 @@ class Tuto extends Phaser.Scene {
                 text: '',
                 style: {
                     fontSize: 20,
-                    fontFamily: 'Arial',
+                    fontFamily: 'MC',
                 }
             });
             This.text0.setScrollFactor(0);
@@ -454,7 +454,7 @@ class Tuto extends Phaser.Scene {
                     style: {
                         fontSize: 25,
                         color: '#f00020',
-                        fontFamily: 'Arial',
+                        fontFamily: 'MC',
                     }
                 });
                 This.text0.setTint(0xff0000);
@@ -464,7 +464,7 @@ class Tuto extends Phaser.Scene {
                     text: '',
                     style: {
                         fontSize: 20,
-                        fontFamily: 'Arial',
+                        fontFamily: 'MC',
                     }
                 });
                 This.text2 = this.make.text({
@@ -473,7 +473,7 @@ class Tuto extends Phaser.Scene {
                     text: '',
                     style: {
                         fontSize: 20,
-                        fontFamily: 'Arial',
+                        fontFamily: 'MC',
                     }
                 });
                 This.text0.setScrollFactor(0);
@@ -586,7 +586,7 @@ class Tuto extends Phaser.Scene {
                     style: {
                         fontSize: 25,
                         color: '#f00020',
-                        fontFamily: 'Arial',
+                        fontFamily: 'MC',
                     }
                 });
                 This.text0.setTint(0xff0000);
@@ -596,7 +596,7 @@ class Tuto extends Phaser.Scene {
                     text: '',
                     style: {
                         fontSize: 20,
-                        fontFamily: 'Arial',
+                        fontFamily: 'MC',
                     }
                 });
                 This.text2 = this.make.text({
@@ -605,7 +605,7 @@ class Tuto extends Phaser.Scene {
                     text: '',
                     style: {
                         fontSize: 20,
-                        fontFamily: 'Arial',
+                        fontFamily: 'MC',
                     }
                 });
                 This.text0.setScrollFactor(0);
@@ -717,7 +717,7 @@ class Tuto extends Phaser.Scene {
                     style: {
                         fontSize: 25,
                         color: '#f00020',
-                        fontFamily: 'Arial',
+                        fontFamily: 'MC',
                     }
                 });
                 This.text0.setTint(0xff0000);
@@ -727,7 +727,7 @@ class Tuto extends Phaser.Scene {
                     text: '',
                     style: {
                         fontSize: 20,
-                        fontFamily: 'Arial',
+                        fontFamily: 'MC',
                     }
                 });
                 This.text2 = this.make.text({
@@ -736,7 +736,7 @@ class Tuto extends Phaser.Scene {
                     text: '',
                     style: {
                         fontSize: 20,
-                        fontFamily: 'Arial',
+                        fontFamily: 'MC',
                     }
                 });
                 This.text0.setScrollFactor(0);
@@ -823,7 +823,7 @@ class Tuto extends Phaser.Scene {
                     style: {
                         fontSize: 25,
                         color: '#f00020',
-                        fontFamily: 'Arial',
+                        fontFamily: 'MC',
                     }
                 });
                 This.text0.setTint(0xff0000);
@@ -833,7 +833,7 @@ class Tuto extends Phaser.Scene {
                     text: '',
                     style: {
                         fontSize: 20,
-                        fontFamily: 'Arial',
+                        fontFamily: 'MC',
                     }
                 });
                 This.text2 = this.make.text({
@@ -842,7 +842,7 @@ class Tuto extends Phaser.Scene {
                     text: '',
                     style: {
                         fontSize: 20,
-                        fontFamily: 'Arial',
+                        fontFamily: 'MC',
                     }
                 });
                 This.text2.setTint(0xff0000)

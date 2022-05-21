@@ -132,7 +132,7 @@ class Cinematique1 extends Phaser.Scene {
                 y: 10,
                 text: 'Chênebleu :',
                 style: {
-                    font: '25px monospace',
+                    font: '25px MC',
                     fill: '#ffffff'
                 }
             });
@@ -142,7 +142,7 @@ class Cinematique1 extends Phaser.Scene {
                 y: 50,
                 text: '',
                 style: {
-                    font: '18px monospace',
+                    font: '18px MC',
                     fill: '#ffffff'
                 }
             });
@@ -151,7 +151,7 @@ class Cinematique1 extends Phaser.Scene {
                 y: 90,
                 text: '',
                 style: {
-                    font: '18px monospace',
+                    font: '18px MC',
                     fill: '#ffffff'
                 }
             });
@@ -327,7 +327,7 @@ class Cinematique2 extends Phaser.Scene {
                 y: 10,
                 text: 'Seedy :',
                 style: {
-                    font: '25px monospace',
+                    font: '25px MC',
                     fill: '#ffffff'
                 }
             });
@@ -337,7 +337,7 @@ class Cinematique2 extends Phaser.Scene {
                 y: 50,
                 text: '',
                 style: {
-                    font: '18px monospace',
+                    font: '18px MC',
                     fill: '#ffffff'
                 }
             });
@@ -346,7 +346,7 @@ class Cinematique2 extends Phaser.Scene {
                 y: 90,
                 text: '',
                 style: {
-                    font: '18px monospace',
+                    font: '18px MC',
                     fill: '#ffffff'
                 }
             });

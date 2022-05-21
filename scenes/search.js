@@ -144,7 +144,7 @@ class Search extends Phaser.Scene {
             style:{
                 color:'#ffffff',
                 fontSize:40,
-                fontFamily:'monospace',
+                fontFamily:'MC',
                 align:'center',
                 wordWrap:{
                     width:window.innerWidth
@@ -160,7 +160,7 @@ class Search extends Phaser.Scene {
             style:{
                 color:'#0080ff',
                 fontSize:25,
-                fontFamily:'monospace',
+                fontFamily:'MC',
                 align:'center',
                 wordWrap:{
                     width:window.innerWidth/3
@@ -176,7 +176,7 @@ class Search extends Phaser.Scene {
             style:{
                 color:'#0080ff',
                 fontSize:25,
-                fontFamily:'monospace',
+                fontFamily:'MC',
                 align:'center',
                 wordWrap:{
                     width:window.innerWidth/3
@@ -193,7 +193,7 @@ class Search extends Phaser.Scene {
             style:{
                 color:'#0080ff',
                 fontSize:25,
-                fontFamily:'monospace',
+                fontFamily:'MC',
                 align:'center',
                 wordWrap:{
                     width:window.innerWidth/3
@@ -210,7 +210,7 @@ class Search extends Phaser.Scene {
             style:{
                 color:'#ffffff ',
                 fontSize:17,
-                fontFamily:'monospace',
+                fontFamily:'MC',
                 align:'center',
                 wordWrap:{
                     width:window.innerWidth/2 - 50
@@ -226,7 +226,7 @@ class Search extends Phaser.Scene {
             style:{
                 color:'#ffffff ',
                 fontSize:17,
-                fontFamily:'monospace',
+                fontFamily:'MC',
                 align:'center',
                 wordWrap:{
                     width:window.innerWidth/2 - 50
@@ -238,7 +238,7 @@ class Search extends Phaser.Scene {
         this.barre = this.add.graphics();
 
 
-        let close = this.add.text(50, 50, 'X', { fontSize: 70, fontColor:'#ffffff', fontFamily:'monospace'}).setOrigin(0.5,0.5).setInteractive().on('pointerdown', function(){
+        let close = this.add.text(50, 50, 'X', { fontSize: 70, fontColor:'#ffffff', fontFamily:'MC'}).setOrigin(0.5,0.5).setInteractive().on('pointerdown', function(){
             this.scene.stop('searchScene');
             this.scene.setVisible(true, this.registry.get('gameScene')+'Scene');            
             this.scene.launch('headerScene');

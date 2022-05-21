@@ -30,21 +30,55 @@ class Header extends Phaser.Scene {
                 //this.registry.values.forEach(value => registryData += value);
                 console.log(this.registry.values);
                 for(let i in this.registry.values) {
-                    console.log(i);
-                    console.log(this.registry.values[i]);
-                    for(let j in this.registry.values[i]) {
-                        console.log(j, this.registry.values[i][j]);
+                    console.log(i, this.registry.values[i]);
+                    console.log(typeof this.registry.values[i]);
+                    if(typeof this.registry.values[i] == 'object') {
+                        registryData+=i+'=';
+                        for(let j in this.registry.values[i]) {
+                            console.log(j, this.registry.values[i][j]);
+                            if(j != 'children') {
+                                registryData+=j+'='+this.registry.values[i][j]+','
+                            }
+                        }
+                        registryData+='&';
+                    }
+                    else {
+                        if(i != 'gameScene' && i != 'moneyPerTick' && i != 'mult' && i != 'climat') {
+                            registryData+=i+'='+this.registry.values[i]+'&';
+                        }
                     }
 
-                    registryData+=i+'='+this.registry.values[i]+'&';
+                    
                 }
+                console.log(registryData);
+                
                 let gameData = '';
-                for(let i in this.gameScene.data.values) {
-                    console.log(i);
-                    console.log(this.gameScene.data.values[i]);
-                    gameData+=i+'='+this.gameScene.data.values[i]+'&';
+                for(let i in this.registry.get('unlock')) {
+                    console.log(i, this.registry.get('unlock')[i])
+                    gameData+=this.registry.get('unlock')[i]+'='
+                    for(let j in this.scene.get(this.registry.get('unlock')[i]+'Scene').data.values) {
+                        console.log(j, this.scene.get(this.registry.get('unlock')[i]+'Scene').data.values[j]);
+                        gameData+=j+'='
+                        for(let k in this.scene.get(this.registry.get('unlock')[i]+'Scene').data.values[j]) {
+                            console.log(k, this.scene.get(this.registry.get('unlock')[i]+'Scene').data.values[j][k]);
+                            if(k == 'ref') {
+                                gameData+=k+'='+this.scene.get(this.registry.get('unlock')[i]+'Scene').data.values[j][k].tag+',';
+                            }
+                            else if(k == 'ref') {
+                                gameData+=k+'='+this.scene.get(this.registry.get('unlock')[i]+'Scene').data.values[j][k].tag+',';
+                            }
+                            else {
+                                gameData+=k+'='+this.scene.get(this.registry.get('unlock')[i]+'Scene').data.values[j][k]+',';
+                            }
+                        }
+                        gameData+='|';
+                    }
+                    gameData+=i+'&'
                 }
-                window.location.href = 'config/save.php?'+registryData+'&value='+gameData;
+                
+
+
+                window.location.href = 'config/save.php?'+registryData+gameData;
             }
         }, this);
 

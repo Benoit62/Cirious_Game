@@ -8,6 +8,10 @@ html {
     padding: 0;
 }
 
+@font-face { font-family: ElfBoy; src: url('fonts/elf-boy-classic-font/Elfboyclassic-PKZgZ.ttf'); } 
+@font-face { font-family: KarmaS; src: url('fonts/karma/karmasuture.otf'); } 
+@font-face { font-family: MC; src: url('fonts/minecraft-font/MinecraftRegular-Bmg3.otf'); } 
+
 /*canvas {
     position: absolute;
     top: 0;
