@@ -25,7 +25,26 @@ class Header extends Phaser.Scene {
 
         this.turnOff.on('pointerup', function() {
             if(this.registry.get('gameScene') != 'tuto') {
-                window.location.href = 'profil.php';
+                //window.location.href = 'profil.php';
+                let registryData = '';
+                //this.registry.values.forEach(value => registryData += value);
+                console.log(this.registry.values);
+                for(let i in this.registry.values) {
+                    console.log(i);
+                    console.log(this.registry.values[i]);
+                    for(let j in this.registry.values[i]) {
+                        console.log(j, this.registry.values[i][j]);
+                    }
+
+                    registryData+=i+'='+this.registry.values[i]+'&';
+                }
+                let gameData = '';
+                for(let i in this.gameScene.data.values) {
+                    console.log(i);
+                    console.log(this.gameScene.data.values[i]);
+                    gameData+=i+'='+this.gameScene.data.values[i]+'&';
+                }
+                window.location.href = 'config/save.php?'+registryData+'&value='+gameData;
             }
         }, this);
 

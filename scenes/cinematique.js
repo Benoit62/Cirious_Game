@@ -37,7 +37,7 @@ class Cinematique1 extends Phaser.Scene {
         Phaser.Display.Align.In.Center(this.background, this.add.zone(window.innerWidth / 2, window.innerHeight / 2, window.innerWidth, window.innerHeight));
 
 
-        this.Mathieu = this.add.sprite(window.innerWidth / 4, window.innerHeight - 105/2, 'sellier', 9);
+        this.Mathieu = this.add.sprite(window.innerWidth / 2 - 100, window.innerHeight - 105/2, 'sellier', 9);
 
         this.anims.create({
             key: 'walkE1',
@@ -77,15 +77,15 @@ class Cinematique1 extends Phaser.Scene {
 
         if (this.walkE) this.eddison.x -= 5;
 
-        if (this.eddison.x <= 480 && this.walkE) {
+        if (this.eddison.x <= this.Mathieu.x + 200 && this.walkE) {
             this.eddison.destroy();
-            this.eddison = this.add.sprite(480, window.innerHeight - 42, 'scient', 4).setScale(2);
+            this.eddison = this.add.sprite(this.Mathieu.x + 200, window.innerHeight - 42, 'scient', 4).setScale(2);
             this.walkE = false;
             var dialBox = this.add.graphics();
             dialBox.fillStyle(0x70402a, 1);
             dialBox.fillRect(0, 0, window.innerWidth, 130);
             var content = [
-                "Bonjour "+namePlayer+", je suis Chênebleu, directeur général de l'Organisation des Nations Unies pour l’alimentation et l’agriculture",
+                /*"Bonjour "+namePlayer+", je suis Chênebleu, directeur général de l'Organisation des Nations Unies pour l’alimentation et l’agriculture",
                 "J'ai besoin de ton aide pour une mission très importante.",
                 "",
                 ""+namePlayer+"",
@@ -104,6 +104,21 @@ class Cinematique1 extends Phaser.Scene {
                 "",
                 ""+namePlayer+"",
                 "Ainsi que le bien-être animal !",
+                "",
+                "Chênebleu",
+                "Je vois que tu as bien compris les enjeux de ta mission,",
+                "je t'envoie partout dans le monde pour aider toutes les populations à développer leur ferme du futur.",
+                "Commence par l'Europe pour te faire la main et réaliser de nombreuses recherches qui te serviront ailleurs dans le monde.",
+                "Va rejoindre Seedy qui sera ta guide dans cette aventure.",
+                "",*/
+                "Bonjour "+namePlayer+", je suis Chênebleu, directeur général de l'Organisation des Nations Unies pour l’alimentation et l’agriculture.",
+                "L'agriculture d'aujourd'hui va mal, il faut nourrir de plus en plus de monde et nos méthodes sont dépassées.",
+                "J'ai besoin de ton aide pour produire plus de ressources agricoles et nourrir le monde.",
+                "",
+                ""+namePlayer+"",
+                "J'accepte cette mission, mais nous devons aussi faire attention à l'écologie.",
+                "La planète va mal alors il faut développer une agriculture durable en pensant aux générations futures.",
+                "De même le bien-être animal est un sujet important et bien trop souvent négligé.",
                 "",
                 "Chênebleu",
                 "Je vois que tu as bien compris les enjeux de ta mission,",
@@ -201,13 +216,13 @@ class Cinematique1 extends Phaser.Scene {
         //console.log(this.walkS)
 
         if (this.nextS && !this.walkS) {
-            this.eddison = this.add.sprite(480, window.innerHeight - 42, 'scient', 0).setScale(2);
+            this.eddison = this.add.sprite(this.Mathieu.x + 200, window.innerHeight - 42, 'scient', 0).setScale(2);
             this.Mathieu.play('walkL1');
             this.Mathieu.y += 10;
             this.walkS = true;
         }
         if (this.Mathieu.frame.name == 5 && this.bool == true) {
-            this.Mathieu.x -= 30;
+            this.Mathieu.x -= 40;
             this.bool = false;
         }
         else if (this.Mathieu.frame.name == 4) {
@@ -248,7 +263,7 @@ class Cinematique2 extends Phaser.Scene {
 
 
         // Taille 531x398 => 106.2x
-        this.seedi = this.add.image(200, window.innerHeight - 106.2/2, 'seedySlt').setScale(0.2);//assigner a la variable differentes 
+        this.seedi = this.add.image(window.innerWidth/2 - 100, window.innerHeight - 106.2/2, 'seedySlt').setScale(0.2);//assigner a la variable differentes 
         this.anims.create({
             key: 'walkL2',
             frames: this.anims.generateFrameNumbers('sellier', { frames: [5, 4] }),
@@ -279,7 +294,7 @@ class Cinematique2 extends Phaser.Scene {
 
         var This = this;
         if (this.Mathieu.frame.name == 5 && this.bool == true) {
-            this.Mathieu.x -= 30;
+            this.Mathieu.x -= 40;
             this.bool = false;
 
         }
@@ -287,21 +302,24 @@ class Cinematique2 extends Phaser.Scene {
             this.bool = true;
         }
 
-        if (this.Mathieu.x <= 300 && !this.nextS && this.walk) {
+        if (this.Mathieu.x <= this.seedi.x + 200 && !this.nextS && this.walk) {
             this.walk = false;
             this.Mathieu.destroy();
-            this.Mathieu = this.add.sprite(300, window.innerHeight - 100/2, 'sellier', 3);
+            this.Mathieu = this.add.sprite(this.seedi.x + 200, window.innerHeight - 100/2, 'sellier', 3);
             var dialBox = this.add.graphics();
             dialBox.fillStyle(0x70402a, 1);
             dialBox.fillRect(0, 0, window.innerWidth, 130);
             var content = [
-                "Salut moi c'est Seedy ! Je serai ta guide dans cette nouvelle aventure !",
+                /*"Salut moi c'est Seedy ! Je serai ta guide dans cette nouvelle aventure !",
                 "",
                 ""+namePlayer+"",
-                "Enchanté de faire ta connaissance Seedy, moi c’est "+namePlayer+", Chênebleu m'a dit que tu serais ma guide.",
+                "Enchanté de faire ta connaissance Seedy, moi c’est "+namePlayer+".",
                 "",
                 "Seedy :",
                 "Parfait ! Maintenant que les présentations sont faites, suis-moi, nous allons débuter ta formation !",
+                "",*/
+                "Salut, moi c'est Seedy ! Je serai ta guide dans cette nouvelle aventure !",
+                "Suis-moi, nous allons débuter ta formation !",
                 "",
             ];
             var text0 = this.make.text({

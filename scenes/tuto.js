@@ -100,8 +100,8 @@ class Tuto extends Phaser.Scene {
             oldseed: [getByTag('carrot')[0]],
             grow: 0,
             dead: false,
-            fertility: 65,
-            weeds: 3,
+            fertility: 90,
+            weeds: 0,
             maxWeeds: 10
         });
 
@@ -574,7 +574,7 @@ class Tuto extends Phaser.Scene {
                     "Ici se trouve une zone vide, tu peux y construire un bâtiment selon le type d'emplacement où tu te trouve.",
                     "Quelques informations du bâtiment que te souhaite construire sont affichés.",
                     "Les bâtiment Infrastructures permettent de générer un revenu passif pour la ferme.",
-                    "Chaque bâtiment produit une ressource qu'il est possible de valoriser via des recherches qui augmentent tes revenus",
+                    "Chaque bâtiment produit une ressource qu'il est possible de valoriser via des recherches.",
                     "Tu peux par exemple contruire un réservoir à eau en appuyant sur le deuxième bouton",
                     "                                ",
                     ""
@@ -700,7 +700,7 @@ class Tuto extends Phaser.Scene {
                     "C'est là que tu peux planter différents types de cultures, mais attention,",
                     "comme pour les animaux, tu dois bien faire attention au climat.",
                     "Là aussi se trouvent de nombreuses informations concernant le champs, comme sa fertilité ou sa santé,",
-                    "surveille les bien, tes revenus en dépendent",
+                    "surveille les bien, tes revenus en dépendent.",
                     "                                                     ",
                     /*"Les revenus potentiellements générés sont affiché en fonction des données du champs,",
                     "par rapport aux revenus maximum qu'il est possible d'obtenir.",*/
