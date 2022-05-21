@@ -7,6 +7,110 @@ class Loading extends Phaser.Scene {
         });
     }
     preload() {
+        var progressBox = this.add.graphics();
+        progressBox.fillStyle(0x222222, 0.8);
+        var progressBar = this.add.graphics();
+
+        var width = window.innerWidth/4;
+        var height = window.innerHeight/2;
+        progressBox.fillRect(width, height - 25, 2*width, 50);
+
+        var loadingText = this.make.text({
+            x: 2*width,
+            y: height - 50,
+            text: 'Loading',
+            style: {
+                font: '20px monospace',
+                fill: '#ffffff'
+            }
+        });
+        loadingText.setOrigin(0.5, 0.5);
+
+        var percentText = this.make.text({
+            x: 2*width,
+            y: height,
+            text: '0%',
+            style: {
+                font: '18px monospace',
+                fill: '#ffffff'
+            }
+        });
+        percentText.setOrigin(0.5, 0.5);
+
+        var progress = this.add.graphics();
+        this.load.on('progress', function (value) {
+            let percent = Math.round(value*100);
+            percentText.setText(percent + '%');
+            progressBar.clear();
+            progressBar.fillStyle(0xffffff, 1);
+            progressBar.fillRect(width, height - 25, 2*width*value, 50);
+            if(percent > 48) percentText.setTint(0x000000)
+            /*if (value*100 % 20 == 12) {
+                var points = '';
+                for (let j = 0; j <= value*100 % 3; j++) {
+                    points += '.';
+                }
+                loadingText.setText('Loading' + points);
+            }*/
+    
+        }, this);
+    
+        this.load.on('complete', function () {
+            // Création des donnée globales du jeu
+            this.registry.set('search1', {
+                type:'search',
+                tag:'fertility',
+                name:'Engrais',
+                children:getByType('fertility'),
+                desc:'La fertilité des sols est une notion importante dans les domaines de l\'agriculture et de l\'agronomie, désignant l\'aptitude d\'un sol à produire dans les conditions actuelles de culture. Elle est une des composantes de la qualité des sols.',
+                info:''
+            });
+            this.registry.set('search2', {
+                type:'search',
+                tag:'health',
+                name:'Protection des plantes',
+                children:getByType('health'),
+                desc:'Veiller à la santé des végétaux et des terres, c’est contribuer à la production agricole et à la sécurité alimentaire, favoriser le développement économique (emplois, production, export) et protéger l’environnement. La protection des plantes constitue un enjeu crucial.',
+                info:''
+            });
+            this.registry.set('search3', {
+                type:'search',
+                tag:'meal',
+                name:'Nourriture pour animaux',
+                children:getByType('meal'),
+                desc:'Faut bien nourrir les vaches',
+                info:''
+            });
+            this.registry.set('search4', {
+                type:'search',
+                tag:'sell',
+                name:'Abbattages des animaux',
+                children:getByType('sell'),
+                desc:'Miam la viande',
+                info:''
+            });
+            this.registry.set('search5', {
+                type:'search',
+                tag:'struct',
+                name:'Gestion des ressources',
+                children:getByType('struct'),
+                desc:'Valorisez les ressources que vous produisez en recherchant de nouvelles technologies',
+                info:''
+            });
+
+            // Data
+            this.registry.set('unlock', ['europe','aride', 'tropic', 'polaire']);
+            this.registry.set('lock', []);
+
+
+            progressBar.destroy();
+            progressBox.destroy();
+            loadingText.destroy();
+            percentText.destroy();
+            this.scene.start('playScene');
+        }, this);
+
+
         //Cinematique
         this.load.image('mapmonde', 'assets/cinematique/map.png');
         this.load.image('bg', 'assets/cinematique/clouds.png');
@@ -217,7 +321,7 @@ class Loading extends Phaser.Scene {
 
     }
     create() {
-        var progressBar = this.add.graphics();
+        /*var progressBar = this.add.graphics();
         var progressBox = this.add.graphics();
         progressBox.fillStyle(0x222222, 0.8);
 
@@ -287,55 +391,11 @@ class Loading extends Phaser.Scene {
                 progress(i);
                 i+=10;
             }
-        }
+        }*/
 
 
 
-        // Création des donnée globales du jeu
-        this.registry.set('search1', {
-            type:'search',
-            tag:'fertility',
-            name:'Engrais',
-            children:getByType('fertility'),
-            desc:'La fertilité des sols est une notion importante dans les domaines de l\'agriculture et de l\'agronomie, désignant l\'aptitude d\'un sol à produire dans les conditions actuelles de culture. Elle est une des composantes de la qualité des sols.',
-            info:''
-        });
-        this.registry.set('search2', {
-            type:'search',
-            tag:'health',
-            name:'Protection des plantes',
-            children:getByType('health'),
-            desc:'Veiller à la santé des végétaux et des terres, c’est contribuer à la production agricole et à la sécurité alimentaire, favoriser le développement économique (emplois, production, export) et protéger l’environnement. La protection des plantes constitue un enjeu crucial.',
-            info:''
-        });
-        this.registry.set('search3', {
-            type:'search',
-            tag:'meal',
-            name:'Nourriture pour animaux',
-            children:getByType('meal'),
-            desc:'Faut bien nourrir les vaches',
-            info:''
-        });
-        this.registry.set('search4', {
-            type:'search',
-            tag:'sell',
-            name:'Abbattages des animaux',
-            children:getByType('sell'),
-            desc:'Miam la viande',
-            info:''
-        });
-        this.registry.set('search5', {
-            type:'search',
-            tag:'struct',
-            name:'Gestion des ressources',
-            children:getByType('struct'),
-            desc:'Valorisez les ressources que vous produisez en recherchant de nouvelles technologies',
-            info:''
-        });
-
-        // Data
-        this.registry.set('unlock', ['europe','aride', 'tropic', 'polaire']);
-        this.registry.set('lock', []);
+        
     }
 
 }
