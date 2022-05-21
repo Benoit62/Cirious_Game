@@ -25,6 +25,8 @@ class Header extends Phaser.Scene {
 
         this.turnOff.on('pointerup', function() {
             if(this.registry.get('gameScene') != 'tuto') {
+                this.scene.pause(this.registry.get('gameScene')+'Scene');
+                this.scene.launch('saving');
                 //window.location.href = 'profil.php';
                 /*let registryData = '';
                 //this.registry.values.forEach(value => registryData += value);
@@ -74,7 +76,7 @@ class Header extends Phaser.Scene {
                         gameData+='|';
                     }
                     gameData+=i+'&'
-                }*/
+                }
                 
                 let jsonRegistry = JSON.stringify(this.registry.values);
                 console.log(jsonRegistry);
@@ -90,7 +92,7 @@ class Header extends Phaser.Scene {
                 }
                 setTimeout(() => {
                     window.location.href = 'profil.php';
-                }, 10000);
+                }, 10000);*/
             }
         }, this);
 
