@@ -1031,18 +1031,33 @@ class Menu extends Phaser.Scene {
     unlock() {
         let unlock = this.registry.get('unlock');
         let lock = this.registry.get('lock');
-        unlock.push(lock[0]);
-        this.registry.set('unlock', unlock);
-        lock.shift();
-        this.registry.set('lock', lock);
+        if(lock[0]) {
+            this.seedyAdvice('unlock', lock[0]);
+            unlock.push(lock[0]);
+            this.registry.set('unlock', unlock);
+            lock.shift();
+            this.registry.set('lock', lock);
+        }
     }
 
 
-    seedyAdvice(type, ref, ref2){
+    seedyAdvice(seedyType, type, ref, ref2){
         this.scene.pause(this.registry.get('climat')+'Scene');
         // Seedy 727x660  scale 0.8 => 581.6x528
-        let seedy = this.add.image(window.innerWidth - 290.8, window.innerHeight - 264, 'seedyAdvice').setScrollFactor(0).setScale(0.8).setOrigin(0.5,0.5);
-        let text = this.add.text(seedy.x - (seedy.width*0.8)/2 + 25, seedy.y - (seedy.height*0.8)/2 + 20, '', { lineSpacing:7, wordWrap: { width: 400 }, fontSize:19, fontFamily:'MC', color:'#FFFFFF' }).setScrollFactor(0).setOrigin(0,0);
+        let seedy;
+        switch(seedyType) {
+            case 'cool':
+                seedy = this.add.image(window.innerWidth - 290.8, window.innerHeight - 264, 'seedyAdvice').setScrollFactor(0).setScale(0.8).setOrigin(0.5,0.5);
+                break;
+            case 'hint':
+                seedy = this.add.image(window.innerWidth - 290.8, window.innerHeight - 264, 'seedyAdvice2').setScrollFactor(0).setScale(0.8).setOrigin(0.5,0.5);
+                break;
+            default:
+                seedy = this.add.image(window.innerWidth - 290.8, window.innerHeight - 264, 'seedyAdvice').setScrollFactor(0).setScale(0.8).setOrigin(0.5,0.5);
+                break;
+        }
+        
+        let text = this.add.text(seedy.x - (seedy.width*0.8)/2 + 25, seedy.y - (seedy.height*0.8)/2 + 20, '', { lineSpacing:7, wordWrap: { width: 400 }, fontSize:19, fontFamily:'MC', color:'#000000' }).setScrollFactor(0).setOrigin(0,0);
         let tmpText = '';
         switch(type){
             case 'lowMeal':
@@ -1118,7 +1133,7 @@ class Menu extends Phaser.Scene {
 
 
             case 'unlock':
-                tmpText = '\nFélicitation vous venez de débloquer une nouvelle île ! \n\n'+getByTag(this.registry.get('lock')[0])[0].name;
+                tmpText = '\nFélicitation vous venez de débloquer une nouvelle île ! \n\n'+getByTag(ref)[0].name;
                 text.setText(tmpText).setTint(0x008000);
                 break;
             case 'finish':

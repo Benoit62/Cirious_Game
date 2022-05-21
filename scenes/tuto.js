@@ -1129,21 +1129,6 @@ class Tuto extends Phaser.Scene {
                         moneyButton.destroy();
                     }, 3000);
 
-                    setTimeout(() => {
-                        let nbOldSeed = 0;
-                        while(bat.seed == bat.oldseed[nbOldSeed]){
-                            nbOldSeed++;
-                        }
-                        if(nbOldSeed == 1) {
-                            this.menuScene.seedyAdvice('sameSeed', bat.seed);
-                        }
-                        if(nbOldSeed == 2) {
-                            this.menuScene.seedyAdvice('sameSeed2', bat.seed);
-                        }
-                        if(nbOldSeed >= 3) {
-                            this.menuScene.seedyAdvice('toMuchSameSeed', bat.seed);
-                        }
-                    }, 4000);
                 }
                 else {
                     console.log('Can\'t plant riz on dirt or others on water');
@@ -1184,7 +1169,6 @@ class Tuto extends Phaser.Scene {
                     bat.dead = true;
                     console.log('Dead plant !', bat);
                     this.images[bat.key - 1]['plant'].setFrame(bat.seed.maxGrow + 1);
-                    this.menuScene.seedyAdvice('deadPlantClimat', bat.seed);
                 }
             }
         }
@@ -1207,14 +1191,6 @@ class Tuto extends Phaser.Scene {
                         textHealth.destroy();
                         healthButton.destroy();
                     }, 3000);
-                }
-                if(bat.weed == 8) {
-                    
-                    this.menuScene.seedyAdvice('weeds', bat.ref);
-                }
-                if(bat.weed == 10) {
-                    
-                    this.menuScene.seedyAdvice('fullWeeds', bat.ref);
                 }
             }
         }
@@ -1279,30 +1255,6 @@ class Tuto extends Phaser.Scene {
                 this.updateJauge('hunger', hungerWin);
                 console.log('Recolté !', bat);
                 this.images[bat.key - 1]['plant'].destroy();
-
-                
-
-                setTimeout(() => {
-                    if(moneyWin < bat.seed.money * 0.15) {
-                    
-                        this.menuScene.seedyAdvice('lowWinPlant', bat, bat.seed);
-                    }
-    
-                    setTimeout(() => {
-                        if(bat.fertility < 25 && bat.fertility >= 20) {
-                        
-                            this.menuScene.seedyAdvice('lowFertility', bat.fertility);
-                        }
-                        if(bat.fertility < 10) {
-                            
-                            this.menuScene.seedyAdvice('veryLowFertility', bat.fertility);
-                        }
-                        if(bat.fertility == 0) {
-                            
-                            this.menuScene.seedyAdvice('noFertility', bat.fertility);
-                        }
-                    }, 10000);
-                }, 5000);
 
                 bat.seed = {};
 
@@ -1380,8 +1332,6 @@ class Tuto extends Phaser.Scene {
                     bat.qt = 0;
                     console.log('Dead animal !', bat);
                     this.images[bat.key - 1].setFrame((bat.level - 1) + bat.ref.lvlMax);
-
-                    this.menuScene.seedyAdvice('deadAnimalClimat', bat.ref);
 
                     this.updateJauge('animalCare', -40);
 
@@ -1507,7 +1457,6 @@ class Tuto extends Phaser.Scene {
                         console.log('Eat animal !', bat);
 
                         if(bat.feed <= 0) {
-                            this.menuScene.seedyAdvice('noMeal');
                             bat.feed = 0;
                             setTimeout(() => {
                                 bat.dead = true;
@@ -1535,14 +1484,6 @@ class Tuto extends Phaser.Scene {
                                 textAnimal.destroy();
                                 animalButton.destroy();
                             }, 3000);
-
-                            //Seedy Advice
-                            if(bat.feed >= 5 && bat.feed < 10) {
-                                this.menuScene.seedyAdvice('veryLowMeal');
-                            }
-                            if(bat.feed >= 20 && bat.feed < 25) {
-                                this.menuScene.seedyAdvice('lowMeal');
-                            }
                         }
                     }
                 }
@@ -1566,11 +1507,6 @@ class Tuto extends Phaser.Scene {
                         if(bat.qt < 25) this.images[bat.key - 1].setFrame((bat.level - 1) + 3 * bat.ref.lvlMax);
                     }
                 }
-                if(bat.feed < 35 && bat.feed >= 30) {
-                    
-                    this.menuScene.seedyAdvice('notEnoughtMeal', bat.ref);
-                }
-
             }
         }
     }
