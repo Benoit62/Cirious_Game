@@ -3,6 +3,16 @@ session_start();
 if (!isset($_SESSION['autorisation']) && $_SESSION['autorisation'] != 'iseed') {
     header('location: login.php');
 }
+if(!empty($_GET['id'])) {
+    include('config/configbdd.php');
+    $_SESSION['game'] = $_GET['id'];
+    $query = $bdd->prepare("SELECT * FROM games WHERE id = :id");
+    $query->bindValue(':id', $_GET['id'], PDO::PARAM_INT);
+    $query->execute();
+    $game = $query->fetch();
+    $query->closeCursor();
+}
+
 
 include("config/configbdd.php");
 ?>
@@ -16,7 +26,7 @@ include("config/configbdd.php");
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="game.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <title>ISEED</title>
     <script src="https://cdn.jsdelivr.net/npm/phaser@3.11.0/dist/phaser.js"></script>
     <link rel="shortcut icon" href="images/logo.png" type="image/x-icon">
@@ -39,7 +49,60 @@ include("config/configbdd.php");
     <script type="text/javascript">
         let namePlayer = '<?=$_SESSION['pseudo']?>';
 
-        
+        function saveData(jsonRegistry, jsonEurope, jsonAride, jsonTropic, jsonPolaire) {
+            $.ajax({
+                type: 'POST',
+                url: 'config/save.php',
+                data: {
+                    data:true,
+                    registry:jsonRegistry,
+                    europe:jsonEurope,
+                    aride:jsonAride,
+                    tropic:jsonTropic,
+                    polaire:jsonPolaire,
+                },
+                success: function (response) {
+                    console.log(response);
+                }
+            });
+            
+            return true;
+        }
+
+
+        function updateData(jsonRegistry, jsonEurope, jsonAride, jsonTropic, jsonPolaire) {
+            $.ajax({
+                type: 'POST',
+                url: 'config/update.php',
+                data: {
+                    data:true,
+                    registry:jsonRegistry,
+                    europe:jsonEurope,
+                    aride:jsonAride,
+                    tropic:jsonTropic,
+                    polaire:jsonPolaire,
+                },
+                success: function (response) {
+                    console.log(response);
+                }
+            });
+            
+            return true;
+        }
+
+        <?php if(!empty($game)) { ?>
+            let sav = true;
+            let registryData = <?=$game['registry']?>;
+            let europeData = <?=$game['europe']?>;
+            let arideData = <?=$game['aride']?>;
+            let polaireData = <?=$game['polaire']?>;
+            let tropicData = <?=$game['tropic']?>;
+        <?php } else { ?>
+            let sav = false;
+        <?php } ?>
+        if(sav) {
+            console.log(registryData, europeData, arideData, polaireData, tropicData);
+        }
 
         //scenes par Benoit
         class Play extends Phaser.Scene {
@@ -246,7 +309,6 @@ include("config/configbdd.php");
                     this.soundButton.visible = !this.soundButton.visible;
                     music.mute = !music.mute;
                 }, this);
-                console.log(this.mute, this.sound);
 
             }
 

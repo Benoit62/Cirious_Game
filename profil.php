@@ -13,6 +13,12 @@ $query->bindValue(':id', $compte, PDO::PARAM_INT);
 $query->execute();
 $profil = $query->fetch();
 $query->closeCursor();
+
+$query = $bdd->prepare("SELECT * FROM games WHERE profil = :profil");
+$query->bindValue(':profil', $compte, PDO::PARAM_INT);
+$query->execute();
+$games = $query->fetchAll();
+$query->closeCursor();
 ?>
 
 <!DOCTYPE html>
@@ -139,16 +145,20 @@ $query->closeCursor();
     
     <div class="container">
 
-    <main>
-	<button onclick="window.location.href='game.php';">New Game</button>
-  </main>
+      <main>
+        <button onclick="window.location.href='game.php';">New Game</button>
+      </main>
 
       <!--<a ><span>Continue</span></a>
       <a href="game.php"><span>New game</span></a>-->
       
     </div>
 
-    
+    <?php
+      foreach($games as $game) {
+        echo '<a href="game.php?id='.$game['id'].'">Continue</a>';
+      }
+    ?>
 
 
     <!--<div class="info">

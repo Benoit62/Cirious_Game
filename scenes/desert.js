@@ -41,10 +41,10 @@ class Desert extends Phaser.Scene {
 
     create() {
         if(this.registry.get('unlock').includes('tropic')) {
-            this.finish = true;
+            this.data.set('finish', true);
         }
         else {
-            this.finish = false;
+            this.data.set('finish', false);
         }
 
 
@@ -90,7 +90,7 @@ class Desert extends Phaser.Scene {
             type: 'struct',
             typeName:'Infrastructure',
             level: 0,
-            tag: '',
+            tag: 'build',
             scale: 0.3,
             ref: {}
         });
@@ -277,6 +277,15 @@ class Desert extends Phaser.Scene {
         //  Input Events
         this.cursors = this.input.keyboard.createCursorKeys();
 
+
+        //Sauvegarde
+        if(sav && arideData.bat1) {
+            for(let i in arideData) {
+                this.data.set(i, arideData[i]);
+                console.log(this.data.values);
+            }
+        }
+
         // Affiche tous les batiments prédéfinis dans la data
         let j = 0;
         for (let i in this.data.values) {
@@ -379,9 +388,9 @@ class Desert extends Phaser.Scene {
         this.registry.set('mult', 1);
 
 
-        this.registry.set('ecology'+this.gameScene, 10);
+        /*this.registry.set('ecology'+this.gameScene, 10);
         this.registry.set('animalCare'+this.gameScene, 60);
-        this.registry.set('hunger'+this.gameScene, 10);
+        this.registry.set('hunger'+this.gameScene, 10);*/
 
 
         //Code triche
@@ -405,11 +414,14 @@ class Desert extends Phaser.Scene {
             this.speedPlayer += 20;
             if(this.speedPlayer > 860) this.speedPlayer = 860;
         }, this);
+
+
+
     }
 
     update() {
-        if(this.registry.get('ecology'+this.gameScene) >= 90 && this.registry.get('animalCare'+this.gameScene) >= 90 && this.registry.get('hunger'+this.gameScene) >= 90 && !this.finish) {
-            this.finish = true;
+        if(this.registry.get('ecology'+this.gameScene) >= 90 && this.registry.get('animalCare'+this.gameScene) >= 90 && this.registry.get('hunger'+this.gameScene) >= 90 && !this.data.get('finish')) {
+            this.data.set('finish', true);
             this.menuScene.unlock();
             console.log('unlock');
         }

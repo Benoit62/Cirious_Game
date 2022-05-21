@@ -265,6 +265,14 @@ class Glace extends Phaser.Scene {
         //  Input Events
         this.cursors = this.input.keyboard.createCursorKeys();
 
+
+        //Sauvegarde
+        if(sav && polaireData.bat1) {
+            for(let i in polaireData) {
+                this.data.set(i, polaireData[i]);
+            }
+        }
+
         // Affiche tous les batiments prédéfinis dans la data
         let j = 0;
         for (let i in this.data.values) {
@@ -367,9 +375,9 @@ class Glace extends Phaser.Scene {
         this.registry.set('mult', 1);
 
 
-        this.registry.set('ecology'+this.gameScene, 10);
+        /*this.registry.set('ecology'+this.gameScene, 10);
         this.registry.set('animalCare'+this.gameScene, 60);
-        this.registry.set('hunger'+this.gameScene, 10);
+        this.registry.set('hunger'+this.gameScene, 10);*/
 
 
         //Code triche
@@ -393,6 +401,7 @@ class Glace extends Phaser.Scene {
             this.speedPlayer += 20;
             if(this.speedPlayer > 860) this.speedPlayer = 860;
         }, this);
+
     }
 
     update() {

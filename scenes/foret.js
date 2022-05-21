@@ -42,10 +42,10 @@ class Foret extends Phaser.Scene {
 
     create() {
         if(this.registry.get('unlock').includes('polaire')) {
-            this.finish = true;
+            this.data.set('finish', true);
         }
         else {
-            this.finish = false;
+            this.data.set('finish', false);
         }
 
         this.musique = this.sound.add(this.gameScene+'_musique', {
@@ -290,6 +290,15 @@ class Foret extends Phaser.Scene {
         //  Input Events
         this.cursors = this.input.keyboard.createCursorKeys();
 
+
+
+        //Sauvegarde
+        if(sav && tropicData.bat1) {
+            for(let i in tropicData) {
+                this.data.set(i, tropicData[i]);
+            }
+        }
+
         // Affiche tous les batiments prédéfinis dans la data
         let j = 0;
         for (let i in this.data.values) {
@@ -391,9 +400,9 @@ class Foret extends Phaser.Scene {
         this.registry.set('mult', 1);
 
 
-        this.registry.set('ecology'+this.gameScene, 10);
+        /*this.registry.set('ecology'+this.gameScene, 10);
         this.registry.set('animalCare'+this.gameScene, 60);
-        this.registry.set('hunger'+this.gameScene, 10);
+        this.registry.set('hunger'+this.gameScene, 10);*/
 
 
         //Code triche
@@ -435,8 +444,8 @@ class Foret extends Phaser.Scene {
     }
 
     update() {
-        if(this.registry.get('ecology'+this.gameScene) >= 90 && this.registry.get('animalCare'+this.gameScene) >= 90 && this.registry.get('hunger'+this.gameScene) >= 90 && !this.finish) {
-            this.finish = true;
+        if(this.registry.get('ecology'+this.gameScene) >= 90 && this.registry.get('animalCare'+this.gameScene) >= 90 && this.registry.get('hunger'+this.gameScene) >= 90 && !this.data.get('finish')) {
+            this.data.set('finish', true);
             this.menuScene.unlock();
             console.log('unlock');
         }

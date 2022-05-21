@@ -34,18 +34,16 @@ class Europe extends Phaser.Scene {
 
         this.musique;
 
-        this.finish;
-
 
         this.speedPlayer = 300;
     }
 
     create() {
         if(this.registry.get('unlock').includes('aride')) {
-            this.finish = true;
+            this.data.set('finish', true);
         }
         else {
-            this.finish = false;
+            this.data.set('finish', false);
         }
 
         this.musique = this.sound.add(this.gameScene+'_musique', {
@@ -310,6 +308,16 @@ class Europe extends Phaser.Scene {
         //  Input Events
         this.cursors = this.input.keyboard.createCursorKeys();
 
+
+        //Sauvegarde
+        if(sav && europeData.bat1) {
+            for(let i in europeData) {
+                this.data.set(i, europeData[i]);
+            }
+        }
+
+
+
         // Affiche tous les batiments prédéfinis dans la data
         let j = 0;
         for (let i in this.data.values) {
@@ -406,15 +414,15 @@ class Europe extends Phaser.Scene {
         this.scene.bringToTop('menuScene');
 
 
-        this.registry.set('money', 20000);
+        this.registry.set('money', this.registry.get('money') || 20000);
         //Pour les autres carte => this.registry.set('money', this.registry.get('money') || 100000);
         this.registry.set('moneyPerTick', 0);
         this.registry.set('mult', 1);
 
 
-        this.registry.set('ecology'+this.gameScene, 10);
+        /*this.registry.set('ecology'+this.gameScene, 10);
         this.registry.set('animalCare'+this.gameScene, 60);
-        this.registry.set('hunger'+this.gameScene, 10);
+        this.registry.set('hunger'+this.gameScene, 10);*/
 
 
         //Code triche
@@ -454,11 +462,13 @@ class Europe extends Phaser.Scene {
                 this.spritePlayer = 'player';
             }
         }, this);*/
+
+
     }
 
     update() {
-        if(this.registry.get('ecology'+this.gameScene) >= 90 && this.registry.get('animalCare'+this.gameScene) >= 90 && this.registry.get('hunger'+this.gameScene) >= 90 && !this.finish) {
-            this.finish = true;
+        if(this.registry.get('ecology'+this.gameScene) >= 90 && this.registry.get('animalCare'+this.gameScene) >= 90 && this.registry.get('hunger'+this.gameScene) >= 90 && !this.data.get('finish')) {
+            this.data.set('finish', true);
             this.menuScene.unlock();
             console.log('unlock');
         }

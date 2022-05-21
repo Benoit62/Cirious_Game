@@ -25,7 +25,7 @@ class Header extends Phaser.Scene {
 
         this.turnOff.on('pointerup', function() {
             if(this.registry.get('gameScene') != 'tuto') {
-                window.location.href = 'profil.php';
+                //window.location.href = 'profil.php';
                 /*let registryData = '';
                 //this.registry.values.forEach(value => registryData += value);
                 console.log(this.registry.values);
@@ -74,11 +74,23 @@ class Header extends Phaser.Scene {
                         gameData+='|';
                     }
                     gameData+=i+'&'
-                }
+                }*/
                 
-
-
-                window.location.href = 'config/save.php?'+registryData+gameData;*/
+                let jsonRegistry = JSON.stringify(this.registry.values);
+                console.log(jsonRegistry);
+                let jsonEurope = JSON.stringify(this.scene.get('europeScene').data.values);
+                let jsonAride = JSON.stringify(this.scene.get('arideScene').data.values);
+                let jsonTropic = JSON.stringify(this.scene.get('tropicScene').data.values);
+                let jsonPolaire = JSON.stringify(this.scene.get('polaireScene').data.values);
+                if(!sav) {
+                    if(saveData(jsonRegistry, jsonEurope, jsonAride, jsonTropic, jsonPolaire))window.location.href = 'profil.php';
+                }
+                else {
+                    if(updateData(jsonRegistry, jsonEurope, jsonAride, jsonTropic, jsonPolaire))window.location.href = 'profil.php';
+                }
+                setTimeout(() => {
+                    window.location.href = 'profil.php';
+                }, 10000);
             }
         }, this);
 
