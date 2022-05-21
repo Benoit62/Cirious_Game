@@ -86,7 +86,7 @@ class Tuto extends Phaser.Scene {
 
         this.data.set('bat3', {
             key: 3,
-            x: -320,
+            x: -352,
             y: -256,
             dataType: 'bat',
             type: 'field',
@@ -416,7 +416,7 @@ class Tuto extends Phaser.Scene {
             This.text1.destroy();
             This.text2.destroy();
             This.seedi.destroy();
-            if (this.player.y < 100)
+            if (this.player.y < 30)
                 this.player.y += 3;
             else if (this.player.x >= 310) {
                 this.player.anims.play('left', true);
@@ -537,20 +537,19 @@ class Tuto extends Phaser.Scene {
             This.text1.destroy();
             This.text2.destroy();
             This.seedi.destroy();
-            if (this.player.x < 420 && this.player.y > -80) {
+            if (this.player.x < 435 && this.player.y > -230) {
                 this.player.x += 3;
                 this.player.anims.play('right', true);
             }
-            else if (this.player.y > -110) {
+            else if (this.player.y > -230) {
                 this.player.y -= 3;
                 this.player.anims.play('up', true);
             }
-
-            else if (this.player.x > -30) {
+            else if (this.player.x > -14) {
                 this.player.x -= 3;
                 this.player.anims.play('left', true);
             }
-            else if (this.player.y > -150) {
+            else if (this.player.y > -290) {
                 this.player.y -= 3;
             }
             else {
@@ -671,10 +670,10 @@ class Tuto extends Phaser.Scene {
         }
 
         if (this.introField && this.data.list.bat2.level >= 1) {
-            if (this.player.y < -110) {
+            if (this.player.y < -230) {
                 this.player.y += 3;
             }
-            else if (this.player.x > -300) {
+            else if (this.player.x > -280) {
                 this.player.x -= 3;
                 this.player.anims.play('left', true);
             }

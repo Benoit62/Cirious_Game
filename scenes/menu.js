@@ -1037,7 +1037,7 @@ class Menu extends Phaser.Scene {
         let unlock = this.registry.get('unlock');
         let lock = this.registry.get('lock');
         if(lock[0]) {
-            this.seedyAdvice('unlock', lock[0]);
+            this.seedyAdvice('cool', 'unlock', lock[0]);
             unlock.push(lock[0]);
             this.registry.set('unlock', unlock);
             lock.shift();
@@ -1062,27 +1062,27 @@ class Menu extends Phaser.Scene {
                 break;
         }
         
-        let text = this.add.text(seedy.x - (seedy.width*0.8)/2 + 25, seedy.y - (seedy.height*0.8)/2 + 20, '', { lineSpacing:7, wordWrap: { width: 400 }, fontSize:19, fontFamily:'MC', color:'#000000' }).setScrollFactor(0).setOrigin(0,0);
+        let text = this.add.text(seedy.x - (seedy.width*0.8)/2 + 25, seedy.y - (seedy.height*0.8)/2 + 20, '', { lineSpacing:7, wordWrap: { width: 400 }, fontSize:19, fontFamily:'MC' }).setScrollFactor(0).setOrigin(0,0);
         let tmpText = '';
         switch(type){
             case 'lowMeal':
-                text.setText('Certains de vos animaux manquent de nourritures, nourrissez les rapidement ou vous allez perdre du bien-être animal');
+                text.setText('Certains de vos animaux manquent de nourritures, nourrissez les rapidement ou vous allez perdre du bien-être animal').setTint(0x000000);
                 break;
             case 'veryLowMeal':
-                text.setText('Certains de vos animaux manquent cruellement de nourritures, nourrissez les au plus vite avant qu\'ils ne meurent');
+                text.setText('Certains de vos animaux manquent cruellement de nourritures, nourrissez les au plus vite avant qu\'ils ne meurent').setTint(0x000000);
                 break;
             case 'noMeal':
-                text.setText('Certains de vos animaux n\'ont plus de nourriture, il ne vous reste que 10 secondes avant qu\'ils ne meurent');
+                text.setText('Certains de vos animaux n\'ont plus de nourriture, il ne vous reste que 10 secondes avant qu\'ils ne meurent').setTint(0x000000);
                 break;
             case 'deadAnimalClimat':
                 tmpText = 'Vos '+ref.name+' sont mort(e)s car ils/elles ne sont pas dans le bon climat. Leur climat favorable est ';
                 ref.climat.forEach(value => tmpText += getByTag(value)[0].name+' ');
                 tmpText+='\nDétruisez le bâtiment pour pouvoir reconstruire';
-                text.setText(tmpText);
+                text.setText(tmpText).setTint(0x000000);
                 break;
             case 'notEnoughtMeal':
                 tmpText = 'Vos '+ref.name+' n\'ont plus assez de nourriture pour se reproduire, donnez leur à manger pour que le nombre augmente à nouveau ';
-                text.setText(tmpText);
+                text.setText(tmpText).setTint(0x000000);
                 break;
 
 
@@ -1090,50 +1090,50 @@ class Menu extends Phaser.Scene {
                 tmpText = 'Vos '+ref.name+' sont mort(e)s car ils/elles ne sont pas dans le bon climat. Leur climat favorable est ';
                 ref.climat.forEach(value => tmpText += getByTag(value)[0].name+' ');
                 tmpText+='\n\nRécoltez les et planter de nouvelles cultures.';
-                text.setText(tmpText);
+                text.setText(tmpText).setTint(0x000000);
                 break;
             case 'lowWinPlant':
                 tmpText = 'Vos revenus pour '+ref2.name+' sont inférieurs à 15% du revenu maximum. Vérifiez la santé du champ : ';
                 let sante = ref.maxWeeds - ref.weeds;
                 tmpText+=sante+' ainsi que sa fertilité : '+ref.fertility;
                 tmpText+='\n\nDébloquez des nouvelles méthodes de fertilisation et de protection des cultures et prenez soin de vos champs.';
-                text.setText(tmpText);
+                text.setText(tmpText).setTint(0x000000);
                 break;
             case 'sameSeed':
                 tmpText = 'Attention, vous venez de planter deux fois de suite la même plante dans un de vos champs : '+ref.name+'\n\nPensez à la rotation des cultures pour laisser au sol le temps de se régénérer';
-                text.setText(tmpText);
+                text.setText(tmpText).setTint(0x000000);
                 break;
             case 'sameSeed2':
                 tmpText = 'Attention, vous venez de planter trois fois de suite la même plante dans un de vos champs : '+ref.name+'\n\nSi vous ne variez pas les cultures votre sol va s\'appauvrir rapidement';
-                text.setText(tmpText);
+                text.setText(tmpText).setTint(0x000000);
                 break;
             case 'toMuchSameSeed':
                 tmpText = 'Attention, vous venez de planter plus de 4 fois de suite la même plante dans un de vos champs : '+ref.name+'\n\nChangez de culture !!';
-                text.setText(tmpText);
+                text.setText(tmpText).setTint(0x000000);
                 break;
 
             case 'weeds':
                 tmpText = 'Vérifiez vos champs, l\'un d\'eux est très sale et ne produit plus beaucoup : ';
                 let weeds = ref.maxWeeds - ref.weeds;
                 tmpText+=weeds;
-                text.setText(tmpText);
+                text.setText(tmpText).setTint(0x000000);
                 break;
             case 'fullWeeds':
                 tmpText = 'Vérifiez vos champs, l\'un d\'eux est complètement sale et ne produira plus rien : ';
                 tmpText+=weeds;
-                text.setText(tmpText);
+                text.setText(tmpText).setTint(0x000000);
                 break;
             case 'lowFertility':
                 tmpText = 'La fertilité d\'un de vos champs baisse fortement : '+ref+' / 100\n\nFertilisez le au plus vite !';
-                text.setText(tmpText);
+                text.setText(tmpText).setTint(0x000000);
                 break;
             case 'veryLowFertility':
                 tmpText = 'La fertilité d\'un de vos champs est très faible : '+ref+' / 100\n\nFertilisez le au plus vite sinon vous ne recolterez bientôt plus rien !';
-                text.setText(tmpText);
+                text.setText(tmpText).setTint(0x000000);
                 break;
             case 'noFertility':
                 tmpText = 'La fertilité d\'un de vos champs est nulle.\n\nFertilisez le au plus vite !';
-                text.setText(tmpText);
+                text.setText(tmpText).setTint(0x000000);
                 break;
 
 

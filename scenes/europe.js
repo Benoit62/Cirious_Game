@@ -41,7 +41,7 @@ class Europe extends Phaser.Scene {
     }
 
     create() {
-        if(this.registry.get('unlock').includes(this.climat)) {
+        if(this.registry.get('unlock').includes('aride')) {
             this.finish = true;
         }
         else {

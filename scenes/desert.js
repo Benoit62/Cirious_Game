@@ -40,7 +40,7 @@ class Desert extends Phaser.Scene {
     }
 
     create() {
-        if(this.registry.get('unlock').includes(this.climat)) {
+        if(this.registry.get('unlock').includes('tropic')) {
             this.finish = true;
         }
         else {

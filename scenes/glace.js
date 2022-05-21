@@ -33,19 +33,13 @@ class Glace extends Phaser.Scene {
 
         this.musique;
 
-        this.finish;
+        this.finish = false;
 
 
         this.speedPlayer = 300;
     }
 
     create() {
-        if(this.registry.get('unlock').includes(this.climat)) {
-            this.finish = true;
-        }
-        else {
-            this.finish = false;
-        }
 
 
         this.musique = this.sound.add(this.gameScene+'_musique', {
