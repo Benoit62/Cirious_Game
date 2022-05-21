@@ -37,7 +37,7 @@ let data = [
         tag: 'methane',
         type: 'struct',
         lvlMax: 3,
-        buildCost: 400000,
+        buildCost: 40000,
         upgrade: [0, 20000, 37000, 50000],
         passif: [0, 50, 100, 200],
         name: 'Usine de méthanisation',
