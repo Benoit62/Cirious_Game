@@ -159,11 +159,11 @@ class Cinematique1 extends Phaser.Scene {
             var tmp = '';
             var i = 0;
             var j = 0;
-            var wait = 60;
+            var wait = 70;
             var bool = false;
             function loop() {
                 setTimeout(function () {
-                    wait = 60;
+                    wait = 70;
                     if (bool) {
                         text0.setText(content[i]);
                         text1.setText('');
@@ -190,7 +190,7 @@ class Cinematique1 extends Phaser.Scene {
 
                         if (i < content.length && content[i].length == 0) {
                             i++;
-                            wait = 1500;
+                            wait = 1700;
                             txt = 0;
                             bool = true;
                         }
@@ -208,7 +208,7 @@ class Cinematique1 extends Phaser.Scene {
                         text2.destroy();
                         This.nextS = true;
                     }
-                }, wait)
+                }, 1700)
             }
             loop();
         }
@@ -354,11 +354,11 @@ class Cinematique2 extends Phaser.Scene {
             var tmp = '';
             var i = 0;
             var j = 0;
-            var wait = 60;
+            var wait = 70;
             var bool = false;
             function loop() {
                 setTimeout(function () {
-                    wait = 60;
+                    wait = 70;
                     if (bool) {
                         text0.setText(content[i]);
                         text1.setText('');
@@ -384,7 +384,7 @@ class Cinematique2 extends Phaser.Scene {
 
                         if (i < content.length && content[i].length == 0) {
                             i++;
-                            wait = 1500;
+                            wait = 1700;
                             txt = 0;
                             bool = true;
                         }
@@ -401,9 +401,9 @@ class Cinematique2 extends Phaser.Scene {
                             text1.destroy();
                             text2.destroy();
                             This.scene.start('disclaimerScene');
-                        }, 1500);
+                        }, 1700);
                     }
-                }, wait)
+                }, 1700)
             }
             loop();
         }

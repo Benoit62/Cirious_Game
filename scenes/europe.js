@@ -566,7 +566,7 @@ class Europe extends Phaser.Scene {
         }
 
         this.timerBirth++;
-        if (this.timerBirth == 2500) {
+        if (this.timerBirth == 2000) {
             console.log('Check birth');
             this.birth();
             this.timerBirth = 0 - Phaser.Math.Between(0, 400);
@@ -635,7 +635,11 @@ class Europe extends Phaser.Scene {
                         bat.level += 1;
                         this.registry.set('money', this.registry.get('money') - bat.ref.upgrade[bat.level]);
                         console.log('Upgraded !', bat);
-                        this.images[bat.key - 1].setFrame(bat.level - 1);
+
+                        if(bat.qt <= 100) this.images[bat.key - 1].setFrame((bat.level - 1));
+                        if(bat.qt < 75) this.images[bat.key - 1].setFrame((bat.level - 1) + 4 * bat.ref.lvlMax);
+                        if(bat.qt < 50) this.images[bat.key - 1].setFrame((bat.level - 1) + 2 * bat.ref.lvlMax);
+                        if(bat.qt < 25) this.images[bat.key - 1].setFrame((bat.level - 1) + 3 * bat.ref.lvlMax);
                     }
                     if(bat.type == 'animal') {
                         this.updateJauge('animalCare', 10 * bat.level);
@@ -822,7 +826,7 @@ class Europe extends Phaser.Scene {
         for (let i in this.data.values) {
             let bat = this.data.values[i];
             if (bat.level == 1 && bat.type == 'field') {
-                if (Phaser.Math.Between(1, 10) <= 3) {
+                if (Phaser.Math.Between(1, 10) <= 4) {
                     bat.weeds++;
                     if(bat.weeds > bat.maxWeeds) bat.weeds = bat.maxWeeds;
                     console.log('Weeds !', bat);
@@ -891,10 +895,10 @@ class Europe extends Phaser.Scene {
             let nbOldSeed = 0;
             while(bat.seed == bat.oldseed[nbOldSeed]){
                 nbOldSeed++;
-                looseFertility += 10*nbOldSeed;
+                looseFertility += 10*(nbOldSeed+1);
             }
             if(nbOldSeed == 0) {
-                looseFertility += 5;
+                looseFertility += 10;
             }
             bat.fertility -= looseFertility;
             if(bat.fertility < 0) bat.fertility = 0;
@@ -1034,7 +1038,7 @@ class Europe extends Phaser.Scene {
                     this.images[bat.key - 1] = this.physics.add.image(bat.x, bat.y, 'build'+this.gameScene).setScale(bat.scale);
                     if(!bat.dead) {
                         //Si il vend le batiment des animaux pas mort il gagne un bonus bien-être
-                        this.updateJauge('animalCare', 20);
+                        this.updateJauge('animalCare', 30);
 
                         let textMoney = this.add.text(bat.x, bat.y, '-'+destroyRef.cost, { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
                         let moneyButton = this.add.image(textMoney.x + textMoney.width / 1.5, textMoney.y, 'dollar').setScale(0.08).setOrigin(0,0.5);
@@ -1184,7 +1188,7 @@ class Europe extends Phaser.Scene {
             let bat = this.data.values[i];
             if (bat.level > 0 && bat.type == 'animal' && !bat.dead && bat.qt < 100) {
                 if (bat.feed >= 35) {
-                    if (Phaser.Math.Between(1, 10) <= 5) {
+                    if (Phaser.Math.Between(1, 10) <= 7) {
                         bat.qt += 5;
                         console.log('Birth animal !', bat);
 
