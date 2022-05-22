@@ -468,14 +468,14 @@ class Glace extends Phaser.Scene {
         }
 
         this.timerWeeds++;
-        if (this.timerWeeds == 3000) {
+        if (this.timerWeeds == 2700) {
             console.log('Check weeds');
             this.weeds();
             this.timerWeeds = 0 - Phaser.Math.Between(0, 600);
         }
 
         this.timerGrowth++;
-        if (this.timerGrowth == 2100) {
+        if (this.timerGrowth == 1500) {
             console.log('Check Pousse');
             this.grow();
             this.timerGrowth = 0 - Phaser.Math.Between(0, 200);
@@ -840,7 +840,7 @@ class Glace extends Phaser.Scene {
                 looseFertility += 10*(nbOldSeed+1);
             }
             if(nbOldSeed == 0) {
-                looseFertility += 10;
+                looseFertility += 13;
             }
             bat.fertility -= looseFertility;
             if(bat.fertility < 0) bat.fertility = 0;
@@ -1140,6 +1140,20 @@ class Glace extends Phaser.Scene {
                         if(bat.qt < 75) this.images[bat.key - 1].setFrame((bat.level - 1) + 4 * bat.ref.lvlMax);
                         if(bat.qt < 50) this.images[bat.key - 1].setFrame((bat.level - 1) + 2 * bat.ref.lvlMax);
                         if(bat.qt < 25) this.images[bat.key - 1].setFrame((bat.level - 1) + 3 * bat.ref.lvlMax);
+
+
+                        let textSell = this.add.text(bat.x, bat.y, '+5', { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
+                        let sellButton = this.add.image(textSell.x + textSell.width / 1.5, textSell.y, 'sellAnimal').setScale(0.08).setOrigin(0,0.5);
+
+                        let textFeed = this.add.text(bat.x, textSell.y + textSell.height*0.8, '-3', { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
+                        let feedButton = this.add.image(textFeed.x + textFeed.width / 1.5, textFeed.y, 'meal').setScale(0.08).setOrigin(0,0.5);
+
+                        setTimeout(() => {
+                            textFeed.destroy();
+                            feedButton.destroy();
+                            textSell.destroy();
+                            sellButton.destroy();
+                        }, 3000);
                     }
                 }
                 if(bat.feed < 35 && bat.feed >= 30) {
@@ -1175,12 +1189,17 @@ class Glace extends Phaser.Scene {
             let textAnimal = this.add.text(bat.x, textMoney.y + textMoney.height*0.8, sell.care.toString(), { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
             let animalButton = this.add.image(textAnimal.x + textAnimal.width / 1.5, textAnimal.y, 'animal-care').setScale(0.08).setOrigin(0,0.5);
 
-            let texthunger = this.add.text(bat.x, textAnimal.y + textAnimal.height*0.8, sell.hunger.toString(), { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
+            let textSell = this.add.text(bat.x, textAnimal.y + textAnimal.height*0.8, '-20', { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
+            let sellButton = this.add.image(textSell.x + textSell.width / 1.5, textSell.y, 'sellAnimal').setScale(0.08).setOrigin(0,0.5);
+
+            let texthunger = this.add.text(bat.x, textSell.y + textSell.height*0.8, sell.hunger.toString(), { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
             let hungerButton = this.add.image(texthunger.x + texthunger.width / 1.5, texthunger.y, 'hunger-care').setScale(0.08).setOrigin(0,0.5);
             console.log(textAnimal);
             setTimeout(() => {
                 textMoney.destroy();
                 moneyButton.destroy();
+                textSell.destroy();
+                sellButton.destroy();
                 textAnimal.destroy();
                 animalButton.destroy();
                 texthunger.destroy();

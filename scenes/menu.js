@@ -213,6 +213,9 @@ class Menu extends Phaser.Scene {
                         this.engrais[i.tag].setVisible(false);
                     }*/
                 }
+                else {
+                    this.errorText('Débloquer cette méthode via l\'onglet Recherche');
+                }
             }, this);
             this.engrais[i.tag].on('pointermove', function(){
                 if(i.unlock) {
@@ -241,6 +244,9 @@ class Menu extends Phaser.Scene {
                     /*for(let i of getByType('health')) {
                         this.luttes[i.tag].setVisible(false);
                     }*/
+                }
+                else {
+                    this.errorText('Débloquer cette méthode via l\'onglet Recherche');
                 }
             }, this);
             this.luttes[i.tag].on('pointermove', function(){
@@ -298,6 +304,9 @@ class Menu extends Phaser.Scene {
                         this.meals[i.tag].setVisible(false);
                     }*/
                 }
+                else {
+                    this.errorText('Débloquer cette méthode via l\'onglet Recherche');
+                }
             }, this);
             this.meals[i.tag].on('pointermove', function(){
                 if(i.unlock) {
@@ -326,6 +335,9 @@ class Menu extends Phaser.Scene {
                     /*for(let i of getByType('sell')) {
                         this.sells[i.tag].setVisible(false);
                     }*/
+                }
+                else {
+                    this.errorText('Débloquer cette méthode via l\'onglet Recherche');
                 }
             }, this);
             this.sells[i.tag].on('pointermove', function(){
