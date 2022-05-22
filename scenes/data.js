@@ -706,8 +706,8 @@ let data = [
         type:'methane_product',
         typeName:'Gestion du méthane',
         name:'Fabrication de dihydrogène',
-        desc:'',
-        info:'',
+        desc:'Utilise la pyrolyse de méthane, qui ne rejette pas de CO2, et produit de l\'hydrogène et du carbone solide qui peut-être valorisé',
+        info:'Cette technique est encore au stade expérimentale dans le monde.',
         unlock:false,
         unlockPrice:5000,
         need:'',
@@ -723,6 +723,31 @@ let data = [
         unlock:false,
         unlockPrice:10000,
         need:'h2',
+        passif:200
+    },
+    {
+        tag:'serre',
+        type:'methane_product',
+        typeName:'Gestion du méthane',
+        name:'Serre en carbone',
+        desc:'Valorisez le carbone de la pyrolyse du méthane pour développer une serre nouvelle génération.',
+        info:'',
+        unlock:false,
+        unlockPrice:15000,
+        need:'h2',
+        passif:0,
+        prix:10000
+    },
+    {
+        tag:'chauffage',
+        type:'methane_product',
+        typeName:'Gestion du méthane',
+        name:'Chauffage',
+        desc:'Produisez du biogaz à partir de l\'usine de méthanisation et utilisez le pour chauffer la serre et les autres bâtiments de la ferme',
+        info:'',
+        unlock:false,
+        unlockPrice:10000,
+        need:'serre',
         passif:200
     },
 ];

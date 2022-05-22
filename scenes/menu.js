@@ -27,6 +27,8 @@ class Menu extends Phaser.Scene {
 
         this.bull = [];
 
+        this.serre = [];
+
         this.circleBuild;
         this.circlePlanter;
         this.circleUpgrade;
@@ -264,33 +266,6 @@ class Menu extends Phaser.Scene {
         }
 
 
-        //Creation du bouton desctruction
-
-        compt = 0;
-        let p = 0;
-        for(let i of getByType('destroy')) {
-            this.bull[i.tag] = this.add.image(32 +(p%5)*55, 140 + 45*compt, i.tag+"-button").setScale(0.08).setInteractive().setVisible(false)/*.setVisible(false)*/;
-            this.bull[i.tag].on('pointerdown', function(){
-                if(this.batOverlap.level > 0 && this.batOverlap.tag != 'build') {
-                    this.gameScene.destroyBat(this.batOverlap, i);
-                    for(let i of getByType('destroy')) {
-                        this.bull[i.tag].setVisible(false);
-                    }
-                }
-            }, this);
-            this.bull[i.tag].on('pointermove', function(){
-                this.cardInfo.setVisible(true);
-                this.textInfo.setText(i.name+'\nPrix : '+i.cost);
-            }, this);
-            this.bull[i.tag].on('pointerout', function(){
-                this.cardInfo.setVisible(false);
-                this.textInfo.setText('');
-            }, this);
-            p++;
-            if(p%5==0)compt++;
-        }
-
-
         // Création des boutons Nourriture
         compt=0;
         let q = 0;
@@ -353,6 +328,68 @@ class Menu extends Phaser.Scene {
             r++;
             if(r%5==0)compt++;
         }
+
+
+        //Creation du bouton desctruction
+
+        compt = 0;
+        let p = 0;
+        for(let i of getByType('destroy')) {
+            this.bull[i.tag] = this.add.image(32 +(p%5)*55, 140 + 45*compt, i.tag+"-button").setScale(0.08).setInteractive().setVisible(false)/*.setVisible(false)*/;
+            this.bull[i.tag].on('pointerdown', function(){
+                if(this.batOverlap.level > 0 && this.batOverlap.tag != 'build') {
+                    this.gameScene.destroyBat(this.batOverlap, i);
+                    for(let i of getByType('destroy')) {
+                        this.bull[i.tag].setVisible(false);
+                    }
+                }
+            }, this);
+            this.bull[i.tag].on('pointermove', function(){
+                this.cardInfo.setVisible(true);
+                this.textInfo.setText(i.name+'\nPrix : '+i.cost);
+            }, this);
+            this.bull[i.tag].on('pointerout', function(){
+                this.cardInfo.setVisible(false);
+                this.textInfo.setText('');
+            }, this);
+            p++;
+            if(p%5==0)compt++;
+        }
+
+
+        //Creation du bouton serre
+
+        compt = 0;
+        let s = 1;
+        for(let i of getByTag('serre')) {
+            console.log(i);
+            this.serre[i.tag] = this.add.image(32 +(s%5)*55, 140 + 45*compt, i.tag+"-search").setScale(0.08).setInteractive().setVisible(false);
+            if(!i.unlock)this.serre[i.tag].setAlpha(0.5);
+            this.serre[i.tag].on('pointerdown', function(){
+                if(i.unlock){
+                    if(this.batOverlap.level > 0 && this.batOverlap.tag != 'build' && this.registry.get('climat') == 'polaire' && this.batOverlap.type == 'field' && !this.batOverlap.serre) {
+                        this.gameScene.buildSerre(this.batOverlap, i);
+                        for(let i of getByTag('serre')) {
+                            this.serre[i.tag].setVisible(false);
+                        }
+                    }
+                }
+                else {
+                    this.errorText('Débloquer cette technologie via l\'onglet Recherche');
+                }
+            }, this);
+            this.serre[i.tag].on('pointermove', function(){
+                this.cardInfo.setVisible(true);
+                this.textInfo.setText(i.name+'\nPrix : '+i.prix);
+            }, this);
+            this.serre[i.tag].on('pointerout', function(){
+                this.cardInfo.setVisible(false);
+                this.textInfo.setText('');
+            }, this);
+            s++;
+            if(s%5==0)compt++;
+        }
+        console.log(this.serre);
 
          
 
@@ -430,6 +467,11 @@ class Menu extends Phaser.Scene {
                     this.bull[i.tag].setVisible(true);
                 }
             }
+            if(this.batOverlap.level > 0 && this.batOverlap.tag != 'build' && this.registry.get('climat') == 'polaire' && this.batOverlap.type == 'field' && !this.batOverlap.serre) {
+                for(let i of getByTag('serre')) {
+                    this.serre[i.tag].setVisible(true);
+                }
+            }
             
         }, this);
 
@@ -467,6 +509,12 @@ class Menu extends Phaser.Scene {
                 this.closeButtons();
                 for(let i of getByType('plant')) {
                     this.plants[i.tag].setVisible(true);
+                }
+                for(let i of getByTag('serre')) {
+                    this.serre[i.tag].setVisible(false);
+                }
+                for(let i of getByType('destroy')) {
+                    this.bull[i.tag].setVisible(false);
                 }
             }
             
@@ -628,6 +676,9 @@ class Menu extends Phaser.Scene {
             if(this.batOverlap.type != 'animal' && this.batOverlap.level == 0 && this.batOverlap.tag == 'build') {
                 this.circleBuild.setVisible(true);
             }
+            else if (this.registry.get('climat') == 'polaire' && this.batOverlap.type == 'field' && !this.batOverlap.serre) {
+                this.circleBuild.setVisible(true);
+            }
             else if(this.batOverlap.dead || (this.batOverlap.level == 0 && this.batOverlap.tag == 'build')) {
                 this.circleBuild.setVisible(true);
             }
@@ -652,10 +703,16 @@ class Menu extends Phaser.Scene {
             for(let i of getByType('field')) {
                 this.fields[i.tag].setVisible(false);
             }
+            for(let i of getByTag('serre')) {
+                this.serre[i.tag].setVisible(false);
+            }
         }
         if(this.batOverlap.type == 'build') {
             for(let i of getByType('destroy')) {
                 this.bull[i.tag].setVisible(false);
+            }
+            for(let i of getByTag('serre')) {
+                this.serre[i.tag].setVisible(false);
             }
         }
 
@@ -1174,6 +1231,20 @@ class Menu extends Phaser.Scene {
             case 'ecologyJauge':
                 tmpText = 'Attention, la jauge pour l\'écologie est très basse, utilise des méthodes de culture écologiques que tu peux débloquer via la Recherche.';
                 text.setText(tmpText).setTint(0xf00020);
+                break;
+
+
+            case 'slowGrowth':
+                tmpText = 'Vous n\'avez pas débloqué la technologie pour chauffer vos serres, les plantes y poussent deux fois plus lentement.';
+                text.setText(tmpText).setTint(0xf00020);
+                break;
+            case 'slowGrowth2':
+                tmpText = 'Pour que le chauffage fonctionne dans vos serres il vous faut une usine de méthane au niveau 2 ou deux usines de niveau 1.';
+                text.setText(tmpText).setTint(0x000000);
+                break;
+            case 'deadPlantFroid':
+                tmpText = 'Vos '+ref.name+' sont mort(e)s car ils/elles ne sont pas protégés par une serre. Débloquer la technologie des serres en carbone grâce à votre production de méthane et placez en une sur votre champ.';
+                text.setText(tmpText).setTint(0x000000);
                 break;
             default:
                 seedy.destroy();

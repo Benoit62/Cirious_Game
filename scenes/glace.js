@@ -99,8 +99,8 @@ class Glace extends Phaser.Scene {
             dataType: "bat",
             type: "struct",
             typeName: "Infrastructure",
-            level: 1,
-            tag: "tank",
+            level: 0,
+            tag: "build",
             scale: 0.3,
             ref: {},
         });
@@ -137,7 +137,8 @@ class Glace extends Phaser.Scene {
             fertility: 100,
             weeds: 0,
             maxWeeds: 10,
-            rotate:true
+            rotate:true,
+            serre:false
         });
         this.data.set("bat6", {
             key: 6,
@@ -158,7 +159,8 @@ class Glace extends Phaser.Scene {
             fertility: 100,
             weeds: 0,
             maxWeeds: 10,
-            rotate:true
+            rotate:true,
+            serre:false
         });
     
         // Maison/labo
@@ -327,6 +329,12 @@ class Glace extends Phaser.Scene {
                             this.images[j]['weeds'].rotation = 3.141592 / 2;
                             if(this.images[j]['plant']) this.images[j]['plant'].rotation = 3.141592 / 2;
                         }
+                        if(bat.serre) {
+                            this.images[j]['serre'] = this.add.image(bat.x, bat.y, 'serre').setScale(1.8);
+                            if (bat.rotate) {
+                                this.images[j]['serre'].rotation = 3.141592 / 2;
+                            }
+                        }
                     }
                 }
                 else if(bat.tag != 'river') {
@@ -475,8 +483,16 @@ class Glace extends Phaser.Scene {
         }
 
         this.timerGrowth++;
-        if (this.timerGrowth == 1500) {
+        let growDelay;
+        if(getByTag('chauffage')[0].unlock && this.getNbMethane() >= 2){
+            growDelay = 1700;
+        }
+        else{
+            growDelay = 3400;
+        }
+        if (this.timerGrowth == growDelay) {
             console.log('Check Pousse');
+            console.log(growDelay)
             this.grow();
             this.timerGrowth = 0 - Phaser.Math.Between(0, 200);
         }
@@ -683,6 +699,41 @@ class Glace extends Phaser.Scene {
             }
         }
     }
+    buildSerre(bat, ref) {
+        console.log('Construction serre : ', bat);
+        if (bat.level > 0 && bat.tag != "build" && bat.type == 'field' && !bat.serre) {
+            if(ref.unlock) {
+                if(this.getNbMethane() >= 1) {
+                    if (this.money() >= ref.prix) {
+                        this.registry.set('money', this.registry.get('money') - ref.prix);
+                            this.images[bat.key - 1]['serre'] = this.add.image(bat.x, bat.y, 'serre').setScale(1.8);
+                            bat.serre = true;
+                            if (bat.rotate) {
+                                this.images[bat.key - 1]['serre'].rotation = 3.141592 / 2;
+                            }
+
+                            let textMoney = this.add.text(bat.x, bat.y, '-'+ref.prix, { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
+                            let moneyButton = this.add.image(textMoney.x + textMoney.width / 1.5, textMoney.y, 'dollar').setScale(0.08).setOrigin(0,0.5);
+
+                            setTimeout(() => {
+                                textMoney.destroy();
+                                moneyButton.destroy();
+                            }, 3000);
+                    }
+                    else {
+                        console.log('Vous n\'avez pas assez d\'argent')
+                        this.menuScene.errorText('Vous n\'avez pas assez d\'argent');
+                    }
+                }
+                else {
+                    this.menuScene.errorText('Vous avez besoin d\'une usine de méthane pour construire une serre.');
+                }
+            }
+            else {
+                this.menuScene.errorText('Vous devez d\'abord débloquer la technologie Serre');
+            }
+        }
+    }
     plant(bat, seed) {
         console.log('Plantation : ', bat);
         if (bat.type == 'field' && !bat.plant && bat.level == 1 && (bat.tag == 'labor' || bat.tag == 'water')) {
@@ -695,6 +746,15 @@ class Glace extends Phaser.Scene {
                     console.log('Planted !', bat);
                     this.images[bat.key - 1]['plant'] = this.add.image(bat.x, bat.y, seed.tag, bat.grow);
                     if(bat.rotate) this.images[bat.key - 1]['plant'].rotation = 3.141592 / 2;
+
+                    if(bat.serre) {
+                        this.images[bat.key - 1]['serre'].destroy();
+                        this.images[bat.key - 1]['serre'] = this.add.image(bat.x, bat.y, 'serre').setScale(1.8);
+                        
+                        if (bat.rotate) {
+                            this.images[bat.key - 1]['serre'].rotation = 3.141592 / 2;
+                        }
+                    }
 
                     let textMoney = this.add.text(bat.x, bat.y, '-'+seed.costPlant, { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
                     let moneyButton = this.add.image(textMoney.x + textMoney.width / 1.5, textMoney.y, 'dollar').setScale(0.08).setOrigin(0,0.5);
@@ -743,9 +803,17 @@ class Glace extends Phaser.Scene {
             let bat = this.data.values[i];
             if (bat.level == 1 && bat.type == 'field' && bat.tag != 'labor' && bat.plant) {
                 if (bat.grow < bat.seed.maxGrow && !bat.dead) {
-                    if (Phaser.Math.Between(1, 5) <= 3) {
+                    if (Phaser.Math.Between(1, 5) <= 4) {
                         bat.grow++;
                         this.images[bat.key - 1]['plant'].setFrame(bat.grow);
+                        
+                        if(!getByTag('chauffage')[0].unlock && bat.grow == 1 && !bat.dead && bat.serre) {
+                            this.menuScene.seedyAdvice('hint', 'slowGrowth');
+                        }
+                        
+                        if(this.getNbMethane() < 2 && getByTag('chauffage')[0].unlock && bat.grow == 2 && !bat.dead && bat.serre) {
+                            this.menuScene.seedyAdvice('hint', 'slowGrowth2');
+                        }
                     }
                 }
             }
@@ -760,6 +828,12 @@ class Glace extends Phaser.Scene {
                     console.log('Dead plant !', bat);
                     this.images[bat.key - 1]['plant'].setFrame(bat.seed.maxGrow + 1);
                     this.menuScene.seedyAdvice('hint', 'deadPlantClimat', bat.seed);
+                }
+                if(!bat.serre) {
+                    bat.dead = true;
+                    console.log('Dead plant !', bat);
+                    this.images[bat.key - 1]['plant'].setFrame(bat.seed.maxGrow + 1);
+                    this.menuScene.seedyAdvice('hint', 'deadPlantFroid', bat.seed);
                 }
             }
         }
@@ -1009,6 +1083,9 @@ class Glace extends Phaser.Scene {
                     if(bat.plant) {
                         this.images[bat.key - 1]['plant'].destroy();
                     }
+                    if(bat.serre) {
+                        this.images[bat.key - 1]['serre'].destroy();
+                    }
                     this.images[bat.key - 1] = this.physics.add.image(bat.x, bat.y, 'build'+this.gameScene).setScale(bat.scale);
                     bat.seed = {};
                     bat.oldseed = [];
@@ -1206,6 +1283,17 @@ class Glace extends Phaser.Scene {
                 hungerButton.destroy();
             }, 3000);
         }
+    }
+
+    getNbMethane(){
+        let nb = 0;
+        for (let i in this.data.values) {
+            let bat = this.data.values[i];
+            if (bat.level > 0 && bat.type == 'struct' && bat.tag != 'build' && bat.tag == 'methane') {
+                nb+=bat.level;
+            }
+        }
+        return nb;
     }
 
 
