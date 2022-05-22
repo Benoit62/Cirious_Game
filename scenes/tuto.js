@@ -436,7 +436,7 @@ class Tuto extends Phaser.Scene {
                 This.seedi.setScrollFactor(0);
                 This.seedi.setOrigin(0, 0);
                 var content = [
-                    "Ici se trouve un batiment d'élevage, tu peux y placer différents animaux, mais atttention,",
+                    "Ici se trouve un bâtiment d'élevage, tu peux y placer différents animaux, mais atttention,",
                     "chaque animal s'adapte plus ou moins bien au climat de la ferme.",
                     /*"Les actions réalisables pour chaque bâtiment sont affichées en surbrillance.",*/
                     "Comme pour tous les bâtiments, de nombreuses informations sont présentées à gauche.",
