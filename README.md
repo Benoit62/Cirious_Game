@@ -35,7 +35,7 @@ To redeploy this project you will need to
 *  Clone this repository in your htdocs folder
 *  Launch XAMPP 
 *  Start MySQL
-*  Create a database named iseed and import [this](https://pastebin.com/Zg0XBmrN) as a .sql file
+*  Create a database named iseed and import [this](https://pastebin.com/Zg0XBmrN) and [this](https://pastebin.com/ZYdMFp6N) as .sql file
 *  Start Apache
 *  Now you can launch the Cirious_Game folder in your localhost and enjoy the game
 
