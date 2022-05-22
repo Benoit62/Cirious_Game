@@ -55,3 +55,6 @@ To redeploy this project you will need to
 *  http://geoconfluences.ens-lyon.fr/informations-scientifiques/dossiers-regionaux/asie-du-sud-est/articles-scientifiques/agricultures-mondialisation#:~:text=L'agriculture%20d'Asie%20du,Indon%C3%A9sie%2C%20Malaisie%2C%20Tha%C3%AFlande
 *  https://www.oecd-ilibrary.org/docserver/312b7d43-fr.pdf?expires=1652955512&id=id&accname=guest&checksum=A1B7CC3982CE48FAC8461D27502C099C#:~:text=La%20r%C3%A9gion%20se%20positionne%20comme,et%20de%20fruits%20et%20l%C3%A9gumes
 *  https://www.zerowastefrance.org/6eme-rapport-du-giec-sobriete/
+*  https://www.un.org/fr/
+*  https://www.lemonde.fr/idees/article/2021/04/21/l-elevage-intensif-est-une-impasse-environnementale-economique-sanitaire-et-sociale_6077489_3232.html
+*  https://farmofthefuture.nl/en/
