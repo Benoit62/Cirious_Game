@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!empty($_SESSION['autorisation']) && $_SESSION['autorisation'] == 'iseed') {
-    if(!empty($_POST['data'])){
+    if(!empty($_POST['update'])){
         include('configbdd.php');
         $profil = $_SESSION['id'];
         
@@ -37,6 +37,13 @@ if (!empty($_SESSION['autorisation']) && $_SESSION['autorisation'] == 'iseed') {
             $query = $bdd->prepare('UPDATE games SET polaire = :polaire WHERE id = :id && profil = :profil');
             $query->bindValue(':profil', $profil, PDO::PARAM_INT);
             $query->bindValue(':polaire', $_POST['polaire'], PDO::PARAM_STR);
+            $query->bindValue(':id', $_SESSION['game'], PDO::PARAM_INT);
+            $insertion = $query->execute();
+        }
+        if($_POST['dataGlobal'] != "{}") {
+            $query = $bdd->prepare('UPDATE games SET dataGlobal = :dataGlobal WHERE id = :id && profil = :profil');
+            $query->bindValue(':profil', $profil, PDO::PARAM_INT);
+            $query->bindValue(':dataGlobal', $_POST['dataGlobal'], PDO::PARAM_STR);
             $query->bindValue(':id', $_SESSION['game'], PDO::PARAM_INT);
             $insertion = $query->execute();
         }

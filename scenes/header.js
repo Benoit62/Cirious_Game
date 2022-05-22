@@ -198,9 +198,12 @@ class Header extends Phaser.Scene {
             this.winText.setText('+ '+win);
             this.moneyPerTickText.setText(this.registry.get('moneyPerTick')+'/s');
             this.multText.setText('x '+this.registry.get('mult'));
-            percentText1.setText(this.registry.get('animalCare'+this.registry.get('gameScene'))+'%');
-            percentText2.setText(this.registry.get('ecology'+this.registry.get('gameScene'))+'%');
-            percentText3.setText(this.registry.get('hunger'+this.registry.get('gameScene'))+'%');
+            let animalCare = Math.round(this.registry.get('animalCare'+this.registry.get('gameScene'))*100)/100;
+            let ecology = Math.round(this.registry.get('ecology'+this.registry.get('gameScene'))*100)/100;
+            let hunger = Math.round(this.registry.get('hunger'+this.registry.get('gameScene'))*100)/100;
+            percentText1.setText(animalCare+'%');
+            percentText2.setText(ecology+'%');
+            percentText3.setText(hunger+'%');
             progressBar1.clear();
             progressBar1.fillStyle(0x0080ff, 1);
             progressBar1.fillRect(w1, h1, widthBar*(this.registry.get('animalCare'+this.registry.get('gameScene'))/100), heightBar);

@@ -113,6 +113,8 @@ class Loading extends Phaser.Scene {
                 console.log(this.registry.get('unlock'));
             }
             else {
+                data = globalData;
+                console.log(data, globalData);
                 let datas = registryData;
                 for(let i in datas) {
                     if(typeof datas[i] == 'object' && i.type == 'search') {

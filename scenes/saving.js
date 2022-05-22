@@ -7,16 +7,16 @@ class Saving extends Phaser.Scene {
     }
     init(){
         let jsonRegistry = JSON.stringify(this.registry.values);
-        console.log(jsonRegistry);
         let jsonEurope = JSON.stringify(this.scene.get('europeScene').data.values);
         let jsonAride = JSON.stringify(this.scene.get('arideScene').data.values);
         let jsonTropic = JSON.stringify(this.scene.get('tropicScene').data.values);
         let jsonPolaire = JSON.stringify(this.scene.get('polaireScene').data.values);
+        let dataGlobal = JSON.stringify(data);
         if(!sav) {
-            saveData(jsonRegistry, jsonEurope, jsonAride, jsonTropic, jsonPolaire);
+            saveData(jsonRegistry, jsonEurope, jsonAride, jsonTropic, jsonPolaire, dataGlobal);
         }
         else {
-            updateData(jsonRegistry, jsonEurope, jsonAride, jsonTropic, jsonPolaire);
+            updateData(jsonRegistry, jsonEurope, jsonAride, jsonTropic, jsonPolaire, dataGlobal);
         }
     }
     preload() {

@@ -56,17 +56,18 @@ include("config/configbdd.php");
     <script type="text/javascript">
         let namePlayer = '<?=$profil['pseudo']?>';
 
-        function saveData(jsonRegistry, jsonEurope, jsonAride, jsonTropic, jsonPolaire) {
+        function saveData(jsonRegistry, jsonEurope, jsonAride, jsonTropic, jsonPolaire, data) {
             $.ajax({
                 type: 'POST',
                 url: 'config/save.php',
                 data: {
-                    data:true,
+                    save:true,
                     registry:jsonRegistry,
                     europe:jsonEurope,
                     aride:jsonAride,
                     tropic:jsonTropic,
                     polaire:jsonPolaire,
+                    dataGlobal:data
                 },
                 success: function (response) {
                     console.log(response);
@@ -77,17 +78,18 @@ include("config/configbdd.php");
         }
 
 
-        function updateData(jsonRegistry, jsonEurope, jsonAride, jsonTropic, jsonPolaire) {
+        function updateData(jsonRegistry, jsonEurope, jsonAride, jsonTropic, jsonPolaire, data) {
             $.ajax({
                 type: 'POST',
                 url: 'config/update.php',
                 data: {
-                    data:true,
+                    update:true,
                     registry:jsonRegistry,
                     europe:jsonEurope,
                     aride:jsonAride,
                     tropic:jsonTropic,
                     polaire:jsonPolaire,
+                    dataGlobal:data
                 },
                 success: function (response) {
                     console.log(response);
@@ -104,11 +106,12 @@ include("config/configbdd.php");
             let arideData = <?=$game['aride']?>;
             let polaireData = <?=$game['polaire']?>;
             let tropicData = <?=$game['tropic']?>;
+            let globalData = <?=$game['dataGlobal']?>;
         <?php } else { ?>
             let sav = false;
         <?php } ?>
         if(sav) {
-            console.log(registryData, europeData, arideData, polaireData, tropicData);
+            console.log(registryData, europeData, arideData, polaireData, tropicData, globalData);
         }
 
         //scenes par Benoit
