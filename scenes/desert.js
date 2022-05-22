@@ -344,12 +344,9 @@ class Desert extends Phaser.Scene {
                             if(this.images[j]['plant']) this.images[j]['plant'].rotation = 3.141592 / 2;
                         }
                         if(bat.irrig) {
-                            this.images[j]['irrig'] = this.add.image(bat.x, bat.y, 'irrig').setScale(1);
+                            this.images[j]['irrig'] = this.add.image(bat.x, bat.y, 'irrig').setScale(1.2);
                             if (bat.rotate) {
                                 this.images[j]['irrig'].rotation = 3.141592 / 2;
-                            }
-                            if(this.getNbMethane() >= 2 && getByTag('chauffage')[0].unlock) {
-                                this.images[bat.key - 1]['irrig'].setFrame(1);
                             }
                         }
                     }
@@ -717,7 +714,7 @@ class Desert extends Phaser.Scene {
                 if(this.getNbWater() >= 1) {
                     if (this.money() >= ref.prix) {
                         this.registry.set('money', this.registry.get('money') - ref.prix);
-                            this.images[bat.key - 1]['irrig'] = this.add.image(bat.x, bat.y, 'irrig').setScale(1);
+                            this.images[bat.key - 1]['irrig'] = this.add.image(bat.x, bat.y, 'irrig').setScale(1.2);
                             bat.irrig = true;
                             if (bat.rotate) {
                                 this.images[bat.key - 1]['irrig'].rotation = 3.141592 / 2;
