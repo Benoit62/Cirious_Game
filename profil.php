@@ -145,8 +145,11 @@ $query->closeCursor();
     <div class="container">
 
       <main>
-        <button id="continue" onclick="window.location.href='game.php';">Continue</button>
         <button onclick="window.location.href='game.php';">New Game</button>
+        <?php foreach ($games as $game) { ?>
+          <button id="continue" onclick="window.location.href='game.php?id=<?=$game['id']?>';">Continue</button>
+        <?php } ?>
+        
 
       </main>
       <div id="info">
@@ -157,11 +160,7 @@ $query->closeCursor();
       </div>
     </div>
 
-    <?php
-    foreach ($games as $game) {
-      echo '<a href="game.php?id=' . $game['id'] . '">Continue</a>';
-    }
-    ?>
+    
 
 
     <!--<div class="info">

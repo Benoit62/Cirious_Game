@@ -514,7 +514,7 @@ class Foret extends Phaser.Scene {
         }
 
         this.timerGrowth++;
-        if (this.timerGrowth == 500) {
+        if (this.timerGrowth == 1300) {
             console.log('Check Pousse');
             this.grow();
             this.timerGrowth = 0 - Phaser.Math.Between(0, 200);
@@ -543,7 +543,7 @@ class Foret extends Phaser.Scene {
         }
 
         this.timerBirth++;
-        if (this.timerBirth == 2000) {
+        if (this.timerBirth == 1700) {
             console.log('Check birth');
             this.birth();
             this.timerBirth = 0 - Phaser.Math.Between(0, 400);
@@ -1210,6 +1210,7 @@ class Foret extends Phaser.Scene {
                 if (bat.feed >= 35) {
                     if (Phaser.Math.Between(1, 10) <= 7) {
                         bat.qt += 5;
+                        bat.feed -= 3;
                         console.log('Birth animal !', bat);
 
                         if(bat.qt > 100) bat.qt = 100;
@@ -1230,7 +1231,7 @@ class Foret extends Phaser.Scene {
 
     sell(bat, sell) {
         console.log('Sell : ', bat);
-        if (bat.type == 'animal' && !bat.dead && bat.level > 0 && bat.qt > 25) {
+        if (bat.type == 'animal' && !bat.dead && bat.level > 0 && bat.qt > 20) {
             bat.qt -= 20;
             console.log('Selled !', bat);
 

@@ -321,7 +321,7 @@ class Menu extends Phaser.Scene {
             this.sells[i.tag] = this.add.image(35 +(r%5)*60, 140 + 45*compt, i.tag+"-button").setScale(0.08).setInteractive().setVisible(false);
             if(!i.unlock) this.sells[i.tag].setAlpha(0.4);
             this.sells[i.tag].on('pointerdown', function(){
-                if(i.unlock && this.batOverlap.type == 'animal' && this.batOverlap.level > 0 && !this.batOverlap.dead && this.batOverlap.qt > 25) {
+                if(i.unlock && this.batOverlap.type == 'animal' && this.batOverlap.level > 0 && !this.batOverlap.dead && this.batOverlap.qt > 20) {
                     this.gameScene.sell(this.batOverlap, i);
                     /*for(let i of getByType('sell')) {
                         this.sells[i.tag].setVisible(false);
@@ -438,7 +438,7 @@ class Menu extends Phaser.Scene {
         // Bouton Vendre
         this.sell = this.add.image(245, 35, "sellAnimal").setScale(0.1).setInteractive();
         this.sell.on('pointerdown', function(){
-            if(this.batOverlap.type == 'animal' && this.batOverlap.level > 0 && !this.batOverlap.dead && this.batOverlap.qt > 25) {
+            if(this.batOverlap.type == 'animal' && this.batOverlap.level > 0 && !this.batOverlap.dead && this.batOverlap.qt > 20) {
                 this.closeButtons();
                 for(let i of getByType('sell')) {
                     this.sells[i.tag].setVisible(true);
@@ -678,7 +678,7 @@ class Menu extends Phaser.Scene {
         }
 
         //Vendre
-        if(this.batOverlap.type == 'animal' && this.batOverlap.level > 0 && !this.batOverlap.dead && this.batOverlap.qt > 25) {
+        if(this.batOverlap.type == 'animal' && this.batOverlap.level > 0 && !this.batOverlap.dead && this.batOverlap.qt > 20) {
             this.circleSell.setVisible(true);
         }
         else {

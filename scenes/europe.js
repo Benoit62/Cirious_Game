@@ -76,7 +76,7 @@ class Europe extends Phaser.Scene {
             ref: {},
             dead:false,
             feed:100,
-            qt:10
+            qt:30
         });
         this.data.set('bat2', {
             key: 2,
@@ -91,7 +91,7 @@ class Europe extends Phaser.Scene {
             ref: {},
             dead:false,
             feed:95,
-            qt:10
+            qt:30
         });
 
         // Structures
@@ -189,11 +189,11 @@ class Europe extends Phaser.Scene {
             type: 'field',
             typeName:'Culture',
             level: 1,
-            tag: 'labor',
+            tag: 'ble',
             scale: 0.5,
             ref: {},
-            plant: false,
-            seed: {},
+            plant: true,
+            seed: getByTag('ble')[0],
             oldseed: [getByTag('carrot')[0]],
             grow: 0,
             dead:false,
@@ -537,7 +537,7 @@ class Europe extends Phaser.Scene {
         }
 
         this.timerGrowth++;
-        if (this.timerGrowth == 500) {
+        if (this.timerGrowth == 1200) {
             console.log('Check Pousse');
             this.grow();
             this.timerGrowth = 0 - Phaser.Math.Between(0, 200);
@@ -566,7 +566,7 @@ class Europe extends Phaser.Scene {
         }
 
         this.timerBirth++;
-        if (this.timerBirth == 2000) {
+        if (this.timerBirth == 1700) {
             console.log('Check birth');
             this.birth();
             this.timerBirth = 0 - Phaser.Math.Between(0, 400);
@@ -1195,6 +1195,7 @@ class Europe extends Phaser.Scene {
                 if (bat.feed >= 35) {
                     if (Phaser.Math.Between(1, 10) <= 7) {
                         bat.qt += 5;
+                        bat.feed -= 3;
                         console.log('Birth animal !', bat);
 
                         if(bat.qt > 100) bat.qt = 100;
@@ -1215,7 +1216,7 @@ class Europe extends Phaser.Scene {
 
     sell(bat, sell) {
         console.log('Sell : ', bat);
-        if (bat.type == 'animal' && !bat.dead && bat.level > 0 && bat.qt > 25) {
+        if (bat.type == 'animal' && !bat.dead && bat.level > 0 && bat.qt > 20) {
             bat.qt -= 20;
             console.log('Selled !', bat);
 
@@ -1253,7 +1254,7 @@ class Europe extends Phaser.Scene {
 
 
     updateJauge(jauge, value){
-        let result = this.registry.get(jauge+this.gameScene) + value;
+        let result = Math.round((this.registry.get(jauge+this.gameScene) + value)*100)/100;
         if(result > 100) result = 100;
         if(result < 0) result = 0;
         this.registry.set(jauge+this.gameScene, result);

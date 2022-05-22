@@ -190,7 +190,7 @@ class Cinematique1 extends Phaser.Scene {
 
                         if (i < content.length && content[i].length == 0) {
                             i++;
-                            wait = 1500;
+                            wait = 3000;
                             txt = 0;
                             bool = true;
                         }
@@ -386,7 +386,7 @@ class Cinematique2 extends Phaser.Scene {
 
                         if (i < content.length && content[i].length == 0) {
                             i++;
-                            wait = 1500;
+                            wait = 3000;
                             txt = 0;
                             bool = true;
                         }

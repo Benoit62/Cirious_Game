@@ -3,8 +3,8 @@ session_start();
 if (!isset($_SESSION['autorisation']) && $_SESSION['autorisation'] != 'iseed') {
     header('location: login.php');
 }
+include('config/configbdd.php');
 if(!empty($_GET['id'])) {
-    include('config/configbdd.php');
     $_SESSION['game'] = $_GET['id'];
     $query = $bdd->prepare("SELECT * FROM games WHERE id = :id");
     $query->bindValue(':id', $_GET['id'], PDO::PARAM_INT);
@@ -13,6 +13,11 @@ if(!empty($_GET['id'])) {
     $query->closeCursor();
 }
 
+$query = $bdd->prepare("SELECT * FROM comptes WHERE id = :id");
+$query->bindValue(':id', $_SESSION['id'], PDO::PARAM_INT);
+$query->execute();
+$profil = $query->fetch();
+$query->closeCursor();
 
 include("config/configbdd.php");
 ?>
@@ -49,7 +54,7 @@ include("config/configbdd.php");
     <script type="text/javascript" src="scenes/naming.js"></script>
     <script type="text/javascript" src="scenes/saving.js"></script>
     <script type="text/javascript">
-        let namePlayer = '<?=$_SESSION['pseudo']?>';
+        let namePlayer = '<?=$profil['pseudo']?>';
 
         function saveData(jsonRegistry, jsonEurope, jsonAride, jsonTropic, jsonPolaire) {
             $.ajax({
