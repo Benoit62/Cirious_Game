@@ -1,26 +1,3 @@
-<?php
-session_start();
-if (!isset($_SESSION['autorisation']) && $_SESSION['autorisation'] != 'iseed') {
-  header('location: login.php');
-}
-
-include("config/configbdd.php");
-
-$compte = $_SESSION['id'];
-
-$query = $bdd->prepare("SELECT * FROM comptes WHERE id = :id");
-$query->bindValue(':id', $compte, PDO::PARAM_INT);
-$query->execute();
-$profil = $query->fetch();
-$query->closeCursor();
-
-$query = $bdd->prepare("SELECT * FROM games WHERE profil = :profil");
-$query->bindValue(':profil', $compte, PDO::PARAM_INT);
-$query->execute();
-$games = $query->fetchAll();
-$query->closeCursor();
-?>
-
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -34,8 +11,8 @@ $query->closeCursor();
   <link rel="icon" href="images/logo.png" type="image/x-icon">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
 
   <title>profile</title>
 </head>
@@ -142,22 +119,26 @@ $query->closeCursor();
   <div class="disp">
     <img src="./images/background_profil.jpg">
 
-    
+
     <div class="container">
 
       <main>
+        <button id="continue" onclick="window.location.href='game.php';">Continue</button>
         <button onclick="window.location.href='game.php';">New Game</button>
-      </main>
 
-      <!--<a ><span>Continue</span></a>
-      <a href="game.php"><span>New game</span></a>-->
-      
+      </main>
+      <div id="info">
+        <ul>
+          <li>Niveau :</li>
+          <li>Argent :</li>
+        </ul>
+      </div>
     </div>
 
     <?php
-      foreach($games as $game) {
-        echo '<a href="game.php?id='.$game['id'].'">Continue</a>';
-      }
+    foreach ($games as $game) {
+      echo '<a href="game.php?id=' . $game['id'] . '">Continue</a>';
+    }
     ?>
 
 
@@ -184,9 +165,18 @@ $query->closeCursor();
     const navigation = document.querySelector('.navigation');
     menu_toggle.addEventListener('click', () => {
       navigation.classList.toggle('active');
-      if(document.getElementsByClassName('disp')[0].children[0].style.height!="130%")
-      document.getElementsByClassName('disp')[0].children[0].style.height="130%";
-      else document.getElementsByClassName('disp')[0].children[0].style.height="105%";
+      if (document.getElementsByClassName('disp')[0].children[0].style.height != "130%")
+        document.getElementsByClassName('disp')[0].children[0].style.height = "130%";
+      else document.getElementsByClassName('disp')[0].children[0].style.height = "105%";
+    })
+    var info = document.getElementById('info');
+    var cont = document.getElementById('continue');
+    info.style.display = 'none';
+    cont.addEventListener('mouseover', function() {
+      info.style.display = 'block';
+    })
+    cont.addEventListener('mouseout', function() {
+      info.style.display = 'none';
     })
   </script>
 
