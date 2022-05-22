@@ -126,7 +126,8 @@ class Desert extends Phaser.Scene {
             dead:false,
             fertility:100,
             weeds:0,
-            maxWeeds:10
+            maxWeeds:10,
+            irrig:false
         });
         this.data.set('bat5', {
             key: 5,
@@ -146,7 +147,8 @@ class Desert extends Phaser.Scene {
             dead:false,
             fertility:100,
             weeds:0,
-            maxWeeds:10
+            maxWeeds:10,
+            irrig:false
         });
         
         this.data.set('bat6', {
@@ -168,7 +170,8 @@ class Desert extends Phaser.Scene {
             fertility:100,
             weeds:0,
             maxWeeds:10,
-            rotate:true
+            rotate:true,
+            irrig:false
         });
 
 
@@ -340,6 +343,15 @@ class Desert extends Phaser.Scene {
                             this.images[j]['weeds'].rotation = 3.141592 / 2;
                             if(this.images[j]['plant']) this.images[j]['plant'].rotation = 3.141592 / 2;
                         }
+                        if(bat.irrig) {
+                            this.images[j]['irrig'] = this.add.image(bat.x, bat.y, 'irrig').setScale(1);
+                            if (bat.rotate) {
+                                this.images[j]['irrig'].rotation = 3.141592 / 2;
+                            }
+                            if(this.getNbMethane() >= 2 && getByTag('chauffage')[0].unlock) {
+                                this.images[bat.key - 1]['irrig'].setFrame(1);
+                            }
+                        }
                     }
                 }
                 else if(bat.tag != 'river') {
@@ -490,7 +502,7 @@ class Desert extends Phaser.Scene {
         }
 
         this.timerGrowth++;
-        if (this.timerGrowth == 1000) {
+        if (this.timerGrowth == 1200) {
             console.log('Check Pousse');
             this.grow();
             this.timerGrowth = 0 - Phaser.Math.Between(0, 200);
@@ -698,6 +710,41 @@ class Desert extends Phaser.Scene {
             }
         }
     }
+    buildIrrig(bat, ref) {
+        console.log('Construction irrigation : ', bat);
+        if (bat.level > 0 && bat.tag != "build" && bat.type == 'field' && !bat.irrig) {
+            if(ref.unlock) {
+                if(this.getNbWater() >= 1) {
+                    if (this.money() >= ref.prix) {
+                        this.registry.set('money', this.registry.get('money') - ref.prix);
+                            this.images[bat.key - 1]['irrig'] = this.add.image(bat.x, bat.y, 'irrig').setScale(1);
+                            bat.irrig = true;
+                            if (bat.rotate) {
+                                this.images[bat.key - 1]['irrig'].rotation = 3.141592 / 2;
+                            }
+
+                            let textMoney = this.add.text(bat.x, bat.y, '-'+ref.prix, { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
+                            let moneyButton = this.add.image(textMoney.x + textMoney.width / 1.5, textMoney.y, 'dollar').setScale(0.08).setOrigin(0,0.5);
+
+                            setTimeout(() => {
+                                textMoney.destroy();
+                                moneyButton.destroy();
+                            }, 3000);
+                    }
+                    else {
+                        console.log('Vous n\'avez pas assez d\'argent')
+                        this.menuScene.errorText('Vous n\'avez pas assez d\'argent');
+                    }
+                }
+                else {
+                    this.menuScene.errorText('Vous avez besoin d\'un réservoir d\'eau pour construire un système d\'irrigation');
+                }
+            }
+            else {
+                this.menuScene.errorText('Vous devez d\'abord débloquer la technologie Serre');
+            }
+        }
+    }
     plant(bat, seed) {
         console.log('Plantation : ', bat);
         if (bat.type == 'field' && !bat.plant && bat.level == 1 && (bat.tag == 'labor' || bat.tag == 'water')) {
@@ -759,10 +806,18 @@ class Desert extends Phaser.Scene {
             let bat = this.data.values[i];
             if (bat.level == 1 && bat.type == 'field' && bat.tag != 'labor' && bat.plant) {
                 if (bat.grow < bat.seed.maxGrow && !bat.dead) {
-                    if (Phaser.Math.Between(1, 5) <= 3) {
+                    let randVar;
+                    if(bat.irrig)randVar=7;
+                    if(!bat.irrig)randVar=4;
+                    if (Phaser.Math.Between(1, 10) <= randVar) {
                         bat.grow++;
                         this.images[bat.key - 1]['plant'].setFrame(bat.grow);
+
+                        if(bat.grow == 1 && !bat.dead && !bat.irrig) {
+                            this.menuScene.seedyAdvice('hint', 'irrig');
+                        }
                     }
+                    console.log(randVar);
                 }
             }
         }
@@ -1033,6 +1088,7 @@ class Desert extends Phaser.Scene {
                     bat.weeds = 0;
                     bat.plant = false;
                     bat.fertility = 100;
+                    bat.irrig = false;
 
                     let textMoney = this.add.text(bat.x, bat.y, '-'+destroyRef.cost, { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
                     let moneyButton = this.add.image(textMoney.x + textMoney.width / 1.5, textMoney.y, 'dollar').setScale(0.08).setOrigin(0,0.5);
@@ -1222,6 +1278,17 @@ class Desert extends Phaser.Scene {
                 hungerButton.destroy();
             }, 3000);
         }
+    }
+
+    getNbWater(){
+        let nb = 0;
+        for (let i in this.data.values) {
+            let bat = this.data.values[i];
+            if (bat.level > 0 && bat.type == 'struct' && bat.tag != 'build' && bat.tag == 'tank') {
+                nb+=bat.level;
+            }
+        }
+        return nb;
     }
 
 

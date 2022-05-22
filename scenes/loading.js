@@ -179,7 +179,8 @@ class Loading extends Phaser.Scene {
         this.load.spritesheet('tanktuto', 'assets/tuto/build/tank.png', { frameWidth: 192, frameHeight: 192 });
         this.load.spritesheet('cowtuto', 'assets/tuto/animal/cow.png', { frameWidth: 416, frameHeight: 416 });
 
-        this.load.image('serre', 'assets/serre.png');
+        this.load.spritesheet('serre', 'assets/serre.png', { frameWidth: 168, frameHeight: 251 });
+        this.load.image('irrig', 'assets/irrig.png');
 
         //Autres maps
         for(let z of getByType('climat')) {

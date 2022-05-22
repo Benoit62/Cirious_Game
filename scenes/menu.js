@@ -29,6 +29,8 @@ class Menu extends Phaser.Scene {
 
         this.serre = [];
 
+        this.irrig = [];
+
         this.circleBuild;
         this.circlePlanter;
         this.circleUpgrade;
@@ -389,7 +391,40 @@ class Menu extends Phaser.Scene {
             s++;
             if(s%5==0)compt++;
         }
-        console.log(this.serre);
+
+
+        //Creation du bouton serre
+
+        compt = 0;
+        let t = 1;
+        for(let i of getByTag('irrig')) {
+            console.log(i);
+            this.irrig[i.tag] = this.add.image(32 +(t%5)*55, 140 + 45*compt, i.tag+"-search").setScale(0.08).setInteractive().setVisible(false);
+            if(!i.unlock)this.irrig[i.tag].setAlpha(0.5);
+            this.irrig[i.tag].on('pointerdown', function(){
+                if(i.unlock){
+                    if(this.batOverlap.level > 0 && this.batOverlap.tag != 'build' && this.registry.get('climat') == 'aride' && this.batOverlap.type == 'field' && !this.batOverlap.irrig) {
+                        this.gameScene.buildIrrig(this.batOverlap, i);
+                        for(let i of getByTag('irrig')) {
+                            this.irrig[i.tag].setVisible(false);
+                        }
+                    }
+                }
+                else {
+                    this.errorText('Débloquer cette technologie via l\'onglet Recherche');
+                }
+            }, this);
+            this.irrig[i.tag].on('pointermove', function(){
+                this.cardInfo.setVisible(true);
+                this.textInfo.setText(i.name+'\nPrix : '+i.prix);
+            }, this);
+            this.irrig[i.tag].on('pointerout', function(){
+                this.cardInfo.setVisible(false);
+                this.textInfo.setText('');
+            }, this);
+            t++;
+            if(t%5==0)compt++;
+        }
 
          
 
@@ -472,6 +507,11 @@ class Menu extends Phaser.Scene {
                     this.serre[i.tag].setVisible(true);
                 }
             }
+            if(this.batOverlap.level > 0 && this.batOverlap.tag != 'build' && this.registry.get('climat') == 'aride' && this.batOverlap.type == 'field' && !this.batOverlap.irrig) {
+                for(let i of getByTag('irrig')) {
+                    this.irrig[i.tag].setVisible(true);
+                }
+            }
             
         }, this);
 
@@ -512,6 +552,9 @@ class Menu extends Phaser.Scene {
                 }
                 for(let i of getByTag('serre')) {
                     this.serre[i.tag].setVisible(false);
+                }
+                for(let i of getByTag('irrig')) {
+                    this.irrig[i.tag].setVisible(false);
                 }
                 for(let i of getByType('destroy')) {
                     this.bull[i.tag].setVisible(false);
@@ -677,6 +720,9 @@ class Menu extends Phaser.Scene {
                 this.circleBuild.setVisible(true);
             }
             else if (this.registry.get('climat') == 'polaire' && this.batOverlap.type == 'field' && !this.batOverlap.serre) {
+                this.circleBuild.setVisible(true);
+            }
+            else if (this.registry.get('climat') == 'aride' && this.batOverlap.type == 'field' && !this.batOverlap.irrig) {
                 this.circleBuild.setVisible(true);
             }
             else if(this.batOverlap.dead || (this.batOverlap.level == 0 && this.batOverlap.tag == 'build')) {
@@ -1244,6 +1290,11 @@ class Menu extends Phaser.Scene {
                 break;
             case 'deadPlantFroid':
                 tmpText = 'Vos '+ref.name+' sont mort(e)s car ils/elles ne sont pas protégés par une serre. Débloquer la technologie des serres en carbone grâce à votre production de méthane et placez en une sur votre champ.';
+                text.setText(tmpText).setTint(0x000000);
+                break;
+
+            case 'irrig':
+                tmpText = 'Irriguez vos champs si vous voulez que vos cultures poussent plus vite !';
                 text.setText(tmpText).setTint(0x000000);
                 break;
             default:

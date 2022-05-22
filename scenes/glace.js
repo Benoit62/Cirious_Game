@@ -330,9 +330,12 @@ class Glace extends Phaser.Scene {
                             if(this.images[j]['plant']) this.images[j]['plant'].rotation = 3.141592 / 2;
                         }
                         if(bat.serre) {
-                            this.images[j]['serre'] = this.add.image(bat.x, bat.y, 'serre').setScale(1.8);
+                            this.images[j]['serre'] = this.add.image(bat.x, bat.y, 'serre', 0).setScale(1.8);
                             if (bat.rotate) {
                                 this.images[j]['serre'].rotation = 3.141592 / 2;
+                            }
+                            if(this.getNbMethane() >= 2 && getByTag('chauffage')[0].unlock) {
+                                this.images[bat.key - 1]['serre'].setFrame(1);
                             }
                         }
                     }
@@ -545,6 +548,15 @@ class Glace extends Phaser.Scene {
             this.registry.set('mult', mult);
         }
         this.timer++;
+
+
+        //Update affichage des serres
+        for (let i in this.data.values) {
+            let bat = this.data.values[i];
+            if (bat.level == 1 && bat.type == 'field' && bat.serre && this.getNbMethane() >= 2 && getByTag('chauffage')[0].unlock) {
+                this.images[bat.key - 1]['serre'].setFrame(1);
+            }
+        }
     }
 
     // Calcul de l'argent
@@ -706,10 +718,13 @@ class Glace extends Phaser.Scene {
                 if(this.getNbMethane() >= 1) {
                     if (this.money() >= ref.prix) {
                         this.registry.set('money', this.registry.get('money') - ref.prix);
-                            this.images[bat.key - 1]['serre'] = this.add.image(bat.x, bat.y, 'serre').setScale(1.8);
+                            this.images[bat.key - 1]['serre'] = this.add.image(bat.x, bat.y, 'serre', 0).setScale(1.8);
                             bat.serre = true;
                             if (bat.rotate) {
                                 this.images[bat.key - 1]['serre'].rotation = 3.141592 / 2;
+                            }
+                            if(this.getNbMethane() >= 2 && getByTag('chauffage')[0].unlock) {
+                                this.images[bat.key - 1]['serre'].setFrame(1);
                             }
 
                             let textMoney = this.add.text(bat.x, bat.y, '-'+ref.prix, { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
@@ -749,10 +764,13 @@ class Glace extends Phaser.Scene {
 
                     if(bat.serre) {
                         this.images[bat.key - 1]['serre'].destroy();
-                        this.images[bat.key - 1]['serre'] = this.add.image(bat.x, bat.y, 'serre').setScale(1.8);
+                        this.images[bat.key - 1]['serre'] = this.add.image(bat.x, bat.y, 'serre', 0).setScale(1.8);
                         
                         if (bat.rotate) {
                             this.images[bat.key - 1]['serre'].rotation = 3.141592 / 2;
+                        }
+                        if(this.getNbMethane() >= 2 && getByTag('chauffage')[0].unlock) {
+                            this.images[bat.key - 1]['serre'].setFrame(1);
                         }
                     }
 
@@ -1094,6 +1112,7 @@ class Glace extends Phaser.Scene {
                     bat.weeds = 0;
                     bat.plant = false;
                     bat.fertility = 100;
+                    bat.serre = false;
 
                     let textMoney = this.add.text(bat.x, bat.y, '-'+destroyRef.cost, { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
                     let moneyButton = this.add.image(textMoney.x + textMoney.width / 1.5, textMoney.y, 'dollar').setScale(0.08).setOrigin(0,0.5);

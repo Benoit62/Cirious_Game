@@ -675,7 +675,8 @@ let data = [
         unlock:false,
         unlockPrice:15000,
         need:'rain',
-        passif:60
+        passif:60,
+        prix:300
     },
     {
         tag:'light',
