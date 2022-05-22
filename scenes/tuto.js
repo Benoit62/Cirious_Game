@@ -572,7 +572,7 @@ class Tuto extends Phaser.Scene {
                     /*"Quelques informations du bâtiment que te souhaite construire sont affichées.",*/
                     "Les bâtiment Infrastructures permettent de générer un revenu passif pour la ferme.",
                     "Chaque Infrastructure produit une ressource qu'il est possible de valoriser via des recherches.",
-                    "Tu peux par exemple contruire un réservoir à eau en appuyant sur le deuxième bouton                                ",
+                    "Tu peux par exemple construire un réservoir à eau en appuyant sur le deuxième bouton                                ",
                     ""
                 ];
                 This.text0 = this.make.text({
@@ -699,7 +699,7 @@ class Tuto extends Phaser.Scene {
                     /*"Les revenus potentiellements générés sont affiché en fonction des données du champs,",
                     "par rapport aux revenus maximum qu'il est possible d'obtenir.",*/
                     "Tu peux essayer de planter ta première culture !",
-                    "                                                        ",
+                    "N'oublie pas de la récolter une fois qu'elle est prête                                                        ",
                     /*"Tu peux aussi replanter la culture précédante en appuyant sur la touche 'E'.",*/
                     /*"Une fois le champs prêt, tu peux le récolter via le bouton Récolte ou en appuyant sur la touche 'Z'.",*/
                     ""

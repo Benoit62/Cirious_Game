@@ -321,7 +321,7 @@ class Menu extends Phaser.Scene {
             this.sells[i.tag] = this.add.image(35 +(r%5)*60, 140 + 45*compt, i.tag+"-button").setScale(0.08).setInteractive().setVisible(false);
             if(!i.unlock) this.sells[i.tag].setAlpha(0.4);
             this.sells[i.tag].on('pointerdown', function(){
-                if(i.unlock && this.batOverlap.type == 'animal' && this.batOverlap.level > 0 && !this.batOverlap.dead && this.batOverlap.qt > 40) {
+                if(i.unlock && this.batOverlap.type == 'animal' && this.batOverlap.level > 0 && !this.batOverlap.dead && this.batOverlap.qt > 25) {
                     this.gameScene.sell(this.batOverlap, i);
                     /*for(let i of getByType('sell')) {
                         this.sells[i.tag].setVisible(false);
@@ -438,7 +438,7 @@ class Menu extends Phaser.Scene {
         // Bouton Vendre
         this.sell = this.add.image(245, 35, "sellAnimal").setScale(0.1).setInteractive();
         this.sell.on('pointerdown', function(){
-            if(this.batOverlap.type == 'animal' && this.batOverlap.level > 0 && !this.batOverlap.dead && this.batOverlap.qt > 40) {
+            if(this.batOverlap.type == 'animal' && this.batOverlap.level > 0 && !this.batOverlap.dead && this.batOverlap.qt > 25) {
                 this.closeButtons();
                 for(let i of getByType('sell')) {
                     this.sells[i.tag].setVisible(true);
@@ -678,7 +678,7 @@ class Menu extends Phaser.Scene {
         }
 
         //Vendre
-        if(this.batOverlap.type == 'animal' && this.batOverlap.level > 0 && !this.batOverlap.dead && this.batOverlap.qt > 40) {
+        if(this.batOverlap.type == 'animal' && this.batOverlap.level > 0 && !this.batOverlap.dead && this.batOverlap.qt > 25) {
             this.circleSell.setVisible(true);
         }
         else {
@@ -921,10 +921,10 @@ class Menu extends Phaser.Scene {
     errorText(errorTxt) {
         //Width 1000px à 0.8 => 800  Height 350px à 0.8 => 280
         let container = this.add.image(0, 0, 'error').setScale(0.8);
-        let text = this.add.text(602, 572, errorTxt, { fontFamily: 'Arial', fontSize: 30, color: '#000000', wordWrap: { width: 600 }, align: 'center' }).setOrigin(0.5,0.5);
+        let text = this.add.text(602, 572, errorTxt, { fontFamily: 'Arial', fontSize: 30, color: '#000000', wordWrap: { width: 420 }, align: 'center' }).setOrigin(0.5,0.5);
         Phaser.Display.Align.In.Center(container, this.add.zone(window.innerWidth/2, window.innerHeight/2, window.innerWidth, window.innerHeight));
         Phaser.Display.Align.In.Center(text, this.add.zone(container.x, container.y, container.width*0.8, container.height*0.8));
-        text.setX(text.x+100).setY(text.y-20);
+        text.setX(text.x+100).setY(text.y-25);
         setTimeout(() => {
             text.destroy();
             container.destroy();

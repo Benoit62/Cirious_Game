@@ -645,8 +645,8 @@ class Foret extends Phaser.Scene {
                     }
                 }
                 else {
-                    console.log('Not enought money')
-                    this.menuScene.errorText('Not enought money');
+                    console.log('Vous n\'avez pas assez d\'argent')
+                    this.menuScene.errorText('Vous n\'avez pas assez d\'argent');
                 }
             }
         }
@@ -738,8 +738,8 @@ class Foret extends Phaser.Scene {
                 }, 2000);
             }
             else {
-                console.log('Not enought money')
-                this.menuScene.errorText('Not enought money');
+                console.log('Vous n\'avez pas assez d\'argent')
+                this.menuScene.errorText('Vous n\'avez pas assez d\'argent');
             }
         }
     }
@@ -786,8 +786,8 @@ class Foret extends Phaser.Scene {
                 }
             }
             else {
-                console.log('Not enought money')
-                this.menuScene.errorText('Not enought money');
+                console.log('Vous n\'avez pas assez d\'argent')
+                this.menuScene.errorText('Vous n\'avez pas assez d\'argent');
             }
         }
     }
@@ -890,7 +890,7 @@ class Foret extends Phaser.Scene {
             let percent2 = (bat.maxWeeds - bat.weeds)/10;
             console.log(percent, percent2);
             let moneyWin = Math.round(bat.seed.money*percent*percent2*100)/100;
-            let hungerWin = Math.round(10*percent*percent2*100)/100;
+            let hungerWin = Math.round(6*percent*percent2*100)/100;
 
             // Compte l'echainement des graines
             let looseFertility = 0;
@@ -1120,8 +1120,8 @@ class Foret extends Phaser.Scene {
                 this.updateJauge('ecology', +10);
             }
             else {
-                console.log('Not enought money')
-                this.menuScene.errorText('Not enought money');
+                console.log('Vous n\'avez pas assez d\'argent')
+                this.menuScene.errorText('Vous n\'avez pas assez d\'argent');
             }
         }
     }
@@ -1230,8 +1230,8 @@ class Foret extends Phaser.Scene {
 
     sell(bat, sell) {
         console.log('Sell : ', bat);
-        if (bat.type == 'animal' && !bat.dead && bat.level > 0 && bat.qt > 40) {
-            bat.qt -= 30;
+        if (bat.type == 'animal' && !bat.dead && bat.level > 0 && bat.qt > 25) {
+            bat.qt -= 20;
             console.log('Selled !', bat);
 
             if(bat.qt <= 100) this.images[bat.key - 1].setFrame((bat.level - 1));
@@ -1239,7 +1239,7 @@ class Foret extends Phaser.Scene {
             if(bat.qt < 50) this.images[bat.key - 1].setFrame((bat.level - 1) + 2 * bat.ref.lvlMax);
             if(bat.qt < 25) this.images[bat.key - 1].setFrame((bat.level - 1) + 3 * bat.ref.lvlMax);
 
-            let moneyWin = sell.money*30;
+            let moneyWin = sell.money*20;
 
             this.registry.set('money', this.registry.get('money') + moneyWin);
             this.updateJauge('hunger', sell.hunger);

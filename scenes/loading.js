@@ -76,15 +76,15 @@ class Loading extends Phaser.Scene {
                     tag:'meal',
                     name:'Nourriture pour animaux',
                     children:getByType('meal'),
-                    desc:'Faut bien nourrir les vaches',
+                    desc:'L\'alimentation animale décrit les besoins alimentaires des animaux d\'élevage et les moyens et méthodes permettant de les satisfaire. Ces méthodes doivent aussi être compatibles avec le maintien en bonne santé des animaux, assurer la qualité finale des produits d\'élevage et rester économiques pour l\'éleveur.',
                     info:''
                 });
                 this.registry.set('search4', {
                     type:'search',
                     tag:'sell',
-                    name:'Abbattages des animaux',
+                    name:'Abattage des animaux',
                     children:getByType('sell'),
-                    desc:'Miam la viande',
+                    desc:'L\'abattage désigne généralement la mise à mort des animaux d\'élevage dévolus à la production de viande ou de fourrure. Il doit être le plus respectueux possible du bien-être animal, ce qui n\'est pas toujours le cas malheureusement.',
                     info:''
                 });
                 this.registry.set('search5', {

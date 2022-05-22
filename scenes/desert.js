@@ -621,8 +621,8 @@ class Desert extends Phaser.Scene {
                     }
                 }
                 else {
-                    console.log('Not enought money')
-                    this.menuScene.errorText('Not enought money');
+                    console.log('Vous n\'avez pas assez d\'argent')
+                    this.menuScene.errorText('Vous n\'avez pas assez d\'argent');
                 }
             }
         }
@@ -678,6 +678,11 @@ class Desert extends Phaser.Scene {
                     this.images[bat.key - 1]['plant'];
                     bat.ref = getByTag(bat.tag)[0];
 
+                    if (bat.rotate) {
+                        this.images[bat.key - 1]['ground'].rotation = 3.141592 / 2;
+                        this.images[bat.key - 1]['weeds'].rotation = 3.141592 / 2;
+                    }
+
                     let textMoney = this.add.text(bat.x, bat.y, '-'+ref.buildCost, { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
                     let moneyButton = this.add.image(textMoney.x + textMoney.width / 1.5, textMoney.y, 'dollar').setScale(0.08).setOrigin(0,0.5);
 
@@ -688,8 +693,8 @@ class Desert extends Phaser.Scene {
                 }
             }
             else {
-                console.log('Not enought money')
-                this.menuScene.errorText('Not enought money');
+                console.log('Vous n\'avez pas assez d\'argent')
+                this.menuScene.errorText('Vous n\'avez pas assez d\'argent');
             }
         }
     }
@@ -737,8 +742,8 @@ class Desert extends Phaser.Scene {
                 }
             }
             else {
-                console.log('Not enought money')
-                this.menuScene.errorText('Not enought money');
+                console.log('Vous n\'avez pas assez d\'argent')
+                this.menuScene.errorText('Vous n\'avez pas assez d\'argent');
             }
         }
     }
@@ -841,7 +846,7 @@ class Desert extends Phaser.Scene {
             let percent2 = (bat.maxWeeds - bat.weeds)/10;
             console.log(percent, percent2);
             let moneyWin = Math.round(bat.seed.money*percent*percent2*100)/100;
-            let hungerWin = Math.round(10*percent*percent2*100)/100;
+            let hungerWin = Math.round(6*percent*percent2*100)/100;
 
             // Compte l'echainement des graines
             let looseFertility = 0;
@@ -1053,8 +1058,8 @@ class Desert extends Phaser.Scene {
                 this.physics.add.overlap(this.player, this.images[bat.key - 1], this.overlapBat, null, this);
             }
             else {
-                console.log('Not enought money')
-                this.menuScene.errorText('Not enought money');
+                console.log('Vous n\'avez pas assez d\'argent')
+                this.menuScene.errorText('Vous n\'avez pas assez d\'argent');
             }
         }
     }
@@ -1163,8 +1168,8 @@ class Desert extends Phaser.Scene {
 
     sell(bat, sell) {
         console.log('Sell : ', bat);
-        if (bat.type == 'animal' && !bat.dead && bat.level > 0 && bat.qt > 40) {
-            bat.qt -= 30;
+        if (bat.type == 'animal' && !bat.dead && bat.level > 0 && bat.qt > 25) {
+            bat.qt -= 20;
             console.log('Selled !', bat);
 
             if(bat.qt <= 100) this.images[bat.key - 1].setFrame((bat.level - 1));
@@ -1172,7 +1177,7 @@ class Desert extends Phaser.Scene {
             if(bat.qt < 50) this.images[bat.key - 1].setFrame((bat.level - 1) + 2 * bat.ref.lvlMax);
             if(bat.qt < 25) this.images[bat.key - 1].setFrame((bat.level - 1) + 3 * bat.ref.lvlMax);
 
-            let moneyWin = sell.money*30;
+            let moneyWin = sell.money*20;
 
             this.registry.set('money', this.registry.get('money') + moneyWin);
             this.updateJauge('hunger', sell.hunger);
