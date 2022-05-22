@@ -13,8 +13,8 @@ let data = [
         tag: 'tank',
         type: 'struct',
         lvlMax: 3,
-        buildCost: 10000,
-        upgrade: [0, 5000, 15000, 30000],
+        buildCost: 5000,
+        upgrade: [0, 3000, 10000, 20000],
         passif: [0, 5, 10, 30],
         name: 'Reservoir d\'eau',
         desc: 'Le tank permet de recuperer et stocker de l\'eau qui pourra être utilisé pour les cultures',
@@ -25,8 +25,8 @@ let data = [
         tag: 'solaire',
         type: 'struct',
         lvlMax: 3,
-        buildCost: 15000,
-        upgrade: [0, 7000, 10000, 15000],
+        buildCost: 10000,
+        upgrade: [0, 5000, 12000, 20000],
         passif: [0, 10, 20, 50],
         name: 'Panneau solaire',
         desc: 'Le panneau solaire permet de produire de l\'électricité',
@@ -37,8 +37,8 @@ let data = [
         tag: 'methane',
         type: 'struct',
         lvlMax: 3,
-        buildCost: 40000,
-        upgrade: [0, 20000, 37000, 50000],
+        buildCost: 20000,
+        upgrade: [0, 15000, 28000, 50000],
         passif: [0, 50, 100, 200],
         name: 'Usine de méthanisation',
         desc: 'Produit du méthane, grande source d\'énergie',
@@ -52,8 +52,8 @@ let data = [
         tag: 'pig',
         type: 'animal',
         lvlMax: 3,
-        buildCost: 30000,
-        upgrade: [0, 10000, 20000, 30000],
+        buildCost: 15000,
+        upgrade: [0, 5000, 7000, 10000],
         name: 'Cochon',
         desc: 'Production de viande',
         info: 'La population porcine mondiale est estimée à 826 millions de têtes (FAO, 1988). C\'est le porc qui, comparé aux autres espèces domestiques, qui offre la productivité la plus élevée. ',
@@ -63,8 +63,8 @@ let data = [
         tag: 'cow',
         type: 'animal',
         lvlMax: 3,
-        buildCost: 30000,
-        upgrade: [0, 10000, 20000, 30000],
+        buildCost: 15000,
+        upgrade: [0, 5000, 7000, 10000],
         name: 'Vache',
         desc: 'Production de viande, de cuir, de lait',
         info: 'Permet de fournir de la viande, du lait cru, des peaux, un travail de traction, du fumier, du combustible, des sous-produits et l\'entretien des espaces ouverts',
@@ -74,8 +74,8 @@ let data = [
         tag: 'sheep',
         type: 'animal',
         lvlMax: 3,
-        buildCost: 25000, //moins rentable que l'elevage bovin niveau rendement 
-        upgrade: [0, 7000, 18000, 25000],
+        buildCost: 15000, //moins rentable que l'elevage bovin niveau rendement 
+        upgrade: [0, 5000, 7000, 10000],
         name: 'Mouton',
         desc: 'Production de viande et de laine',
         info: 'En plus d\'être élevé pour leur lait,laine et viande, les moutons donnent une image positive aux paysages urbains. Ils sont un atout fort d’un point de vue touristique',
@@ -85,8 +85,8 @@ let data = [
         tag: 'salmon',
         type: 'animal',
         lvlMax: 3,
-        buildCost: 30000,
-        upgrade: [0, 7000, 15000, 23000],
+        buildCost: 15000,
+        upgrade: [0, 5000, 7000, 10000],
         name: 'Saumon',
         desc: 'Production de viande',
         info: 'Le réel avantage de la pisciculture est la protection des ressources halieutiques mondiales qui commencent sérieusement à se raréfier',
@@ -96,8 +96,8 @@ let data = [
         tag: 'renne',
         type: 'animal',
         lvlMax: 3,
-        buildCost: 30000,
-        upgrade: [0, 10000, 20000, 30000],
+        buildCost: 20000,
+        upgrade: [0, 7000, 10000, 20000],
         name: 'Renne',
         desc: 'Production de viande de cuir, et de lait',
         info: 'Elevés pour leur lait et leur viande, cette espèce est adaptée aux climats froids',
@@ -107,8 +107,8 @@ let data = [
         tag: 'bison',
         type: 'animal',
         lvlMax: 3,
-        buildCost: 30000,
-        upgrade: [0, 10000, 20000, 30000],
+        buildCost: 15000,
+        upgrade: [0, 5000, 7000, 10000],
         name: 'Bison',
         desc: 'Production de viande de cuir, et de lait',
         info: 'Il en existe deux espèces : bisons d\'Europe et le bisons d\'Amerique (ayant comme sous-espèce les bisons des bois et des plaines) majoritairement élevé pour sa viande ',
@@ -119,8 +119,8 @@ let data = [
         tag: 'chamel',
         type: 'animal',
         lvlMax: 3,
-        buildCost: 35000,
-        upgrade: [0, 10000, 20000, 30000],
+        buildCost: 20000,
+        upgrade: [0, 10000, 15000, 30000],
         name: 'Chameau',
         desc: 'Production de viande de cuir, et de lait',
         info: 'les chameaux ont une grande capacité à puiser dans leurs réserves d\'énergie lorsque les ressources alimentaires se font rare. Une aubaine face au réchauffement climatique actuel et aux périodes de sécheresse dont l\'élevage européen fait face.',
@@ -131,8 +131,8 @@ let data = [
         tag:'poule',
         type:'animal',
         lvlMax:3,
-        buildCost:20000,
-        upgrade:[0,12000,24000,36000],
+        buildCost:10000,
+        upgrade:[0,10000,15000,25000],
         name:'Poule',
         desc:'Production d\'oeufs et de viande',
         info:'Près de 107 millions de tonnes de volaille sont produites chaque année dans le monde. Le Royaume-Uni reste le premier producteur européen en 2013',
@@ -146,7 +146,7 @@ let data = [
         tag: 'labor',
         type: 'field',
         lvlMax: 1,
-        buildCost: 10000,
+        buildCost: 5000,
         upgrade: [0, 0, 0, 0],
         name: 'Champs',
         desc: '',
@@ -156,7 +156,7 @@ let data = [
         tag: 'water',
         type: 'field',
         lvlMax: 1,
-        buildCost: 15000,
+        buildCost: 10000,
         upgrade: [0, 0, 0, 0],
         name: 'Rizière',
         desc: 'La rizière permet de planter du riz',
@@ -179,8 +179,8 @@ let data = [
         tag: 'ble',
         type: 'plant',
         ground: 'labor',
-        costPlant: 1500,
-        money: 5000,
+        costPlant: 1200,
+        money: 7000,
         maxGrow: 3,
         name: 'Blé',
         desc: 'Céréales',
@@ -391,7 +391,7 @@ let data = [
         unlockPrice: 1000,
         fertility: 15,
         ecology: -5,
-        prix: 1000
+        prix: 500
     },
     {
         tag: 'vert',
@@ -404,7 +404,7 @@ let data = [
         unlockPrice: 7000,
         fertility: 10,
         ecology: 6,
-        prix: 1000
+        prix: 500
     },
     {
         tag: 'fumier',
@@ -417,7 +417,7 @@ let data = [
         unlockPrice: 5000,
         fertility: 12,
         ecology: 3,
-        prix: 1000
+        prix: 500
     },
     {
         tag: 'compost',
@@ -431,7 +431,7 @@ let data = [
         unlockPrice: 1000,
         fertility: 3,
         ecology: 10,
-        prix: 1000
+        prix: 500
     },
 
 
@@ -448,7 +448,7 @@ let data = [
         unlockPrice: 1000,
         health: 4,
         ecology: -8,
-        prix: 1000
+        prix: 500
     },
     {
         tag: 'lutte_physique',
@@ -458,10 +458,10 @@ let data = [
         desc: 'Mécanique, pneumatique, chaleur',
         info: 'Efficace mais demande de la préparation et du temps, cependant faible pollution',
         unlock: false,
-        unlockPrice: 5000,
+        unlockPrice: 2000,
         health: 3,
         ecology: -2,
-        prix: 1500
+        prix: 1200
     },
     {
         tag: 'humain',
@@ -474,7 +474,7 @@ let data = [
         unlockPrice:1200,
         health: 1,
         ecology: 6,
-        prix: 1000
+        prix: 800
     },
     {
         tag: 'drone',
@@ -484,7 +484,7 @@ let data = [
         desc: 'Drone agricole de pulvérisation',
         info: 'Efficace et précis, il permet de cibler les zones à traiter et rejette moins de pesticides qu\'un traitement classique',
         unlock: false,
-        unlockPrice: 10000,
+        unlockPrice: 4000,
         health: 3,
         ecology: -6,
         prix: 1000
@@ -497,10 +497,10 @@ let data = [
         desc: 'Sarcloir autonome, en développement',
         info: 'Très efficace car il cible précisement chaque herbe non désirée et peut tourner jour et nuit',
         unlock: false,
-        unlockPrice: 20000,
+        unlockPrice: 6000,
         health: 5,
         ecology: 5,
-        prix: 2000
+        prix: 1500
     },
     {
         tag: 'lutte_bio',
@@ -510,7 +510,7 @@ let data = [
         desc: 'Parasites, prédateurs, plantes transgéniques (OGM)',
         info: 'Moyennement efficace et demande du temps, cependant attention à la biodiversité si ce n\'est pas suffisameent controlé',
         unlock: false,
-        unlockPrice: 10000,
+        unlockPrice:9000,
         health: 2,
         ecology: 2,
         prix: 1000
@@ -523,10 +523,10 @@ let data = [
         desc: 'Extraits de plantes, bactéries et virus pathogènes, nématodes',
         info: 'Efficacité moyenne',
         unlock: false,
-        unlockPrice: 20000,
+        unlockPrice: 10000,
         health: 3,
         ecology: 2,
-        prix: 1500
+        prix: 1200
     },
 
 
@@ -541,8 +541,8 @@ let data = [
         unlock: true,
         unlockPrice: 1000,
         feed: 15,
-        care: 4,
-        prix: 4000
+        care: 6,
+        prix: 1500
     },
     {
         tag: 'grains',
@@ -554,8 +554,8 @@ let data = [
         unlock: false,
         unlockPrice: 10000,
         feed: 18,
-        care: 2,
-        prix: 1200
+        care: 4,
+        prix: 1000
     },
     {
         tag: 'ration',
@@ -567,8 +567,8 @@ let data = [
         unlock: false,
         unlockPrice: 10000,
         feed: 30,
-        care: -3,
-        prix: 1200
+        care: -2,
+        prix: 800
     },
     {
         tag: 'indus',
@@ -580,8 +580,8 @@ let data = [
         unlock: false,
         unlockPrice: 10000,
         feed: 10,
-        care: -8,
-        prix: 1000
+        care: -4,
+        prix: 500
     },
 
 
@@ -621,9 +621,9 @@ let data = [
         info: 'Même si cela semble cruel, c\'est le mieux pour l\'animal dans le cas où on veut l\'abattre',
         unlock: false,
         unlockPrice: 5000,
-        money: 250,
+        money: 300,
         care: 0,
-        hunger: 10
+        hunger: 12
     },
 
 
@@ -637,7 +637,7 @@ let data = [
         desc:'',
         info:'',
         unlock:true,
-        unlockPrice:5000,
+        unlockPrice:3000,
         need:'',
         passif:10
     },
@@ -649,7 +649,7 @@ let data = [
         desc:'',
         info:'',
         unlock:false,
-        unlockPrice:10000,
+        unlockPrice:7000,
         need:'',
         passif:20
     },
@@ -661,7 +661,7 @@ let data = [
         desc:'',
         info:'',
         unlock:false,
-        unlockPrice:15000,
+        unlockPrice:10000,
         need:'',
         passif:30
     },
@@ -673,7 +673,7 @@ let data = [
         desc:'Utilise l\'eau de pluie et se fait de nuit pour ne pas gâcher l\'eau',
         info:'',
         unlock:false,
-        unlockPrice:25000,
+        unlockPrice:15000,
         need:'rain',
         passif:60
     },
@@ -687,7 +687,7 @@ let data = [
         unlock:false,
         unlockPrice:1000,
         need:'',
-        passif:10
+        passif:12
     },
     {
         tag:'hybrid',
@@ -697,7 +697,7 @@ let data = [
         desc:'',
         info:'',
         unlock:false,
-        unlockPrice:15000,
+        unlockPrice:3000,
         need:'light',
         passif:50
     },
@@ -709,7 +709,7 @@ let data = [
         desc:'',
         info:'',
         unlock:false,
-        unlockPrice:15000,
+        unlockPrice:5000,
         need:'',
         passif:30
     },
@@ -721,7 +721,7 @@ let data = [
         desc:'',
         info:'',
         unlock:false,
-        unlockPrice:50000,
+        unlockPrice:10000,
         need:'h2',
         passif:200
     },

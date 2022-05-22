@@ -512,14 +512,14 @@ class Desert extends Phaser.Scene {
         }
 
         this.timerMeal++;
-        if (this.timerMeal == 1000) {
+        if (this.timerMeal == 3000) {
             console.log('Check eat');
             this.eat();
             this.timerMeal = 0 - Phaser.Math.Between(0, 400);
         }
 
         this.timerBirth++;
-        if (this.timerBirth == 1700) {
+        if (this.timerBirth == 1100) {
             console.log('Check birth');
             this.birth();
             this.timerBirth = 0 - Phaser.Math.Between(0, 400);
@@ -1105,9 +1105,9 @@ class Desert extends Phaser.Scene {
                                 console.log('Dead animal !', bat);
                                 this.images[bat.key - 1].setFrame((bat.level - 1) + bat.ref.lvlMax);
 
-                                this.updateJauge('animalCare', -40);
+                                this.updateJauge('animalCare', -30);
 
-                                let textAnimal = this.add.text(bat.x, bat.y, '-40', { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
+                                let textAnimal = this.add.text(bat.x, bat.y, '-30', { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
                                 let animalButton = this.add.image(textAnimal.x + textAnimal.width / 1.5, textAnimal.y, 'animal-care').setScale(0.08).setOrigin(0,0.5);
                                 setTimeout(() => {
                                     textAnimal.destroy();
@@ -1118,9 +1118,9 @@ class Desert extends Phaser.Scene {
                         else if(bat.feed < 25) {
                             console.log('Hunger animal !', bat);
 
-                            this.updateJauge('animalCare', -4);
+                            this.updateJauge('animalCare', -2);
 
-                            let textAnimal = this.add.text(bat.x, bat.y, '-4', { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
+                            let textAnimal = this.add.text(bat.x, bat.y, '-2', { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
                             let animalButton = this.add.image(textAnimal.x + textAnimal.width / 1.5, textAnimal.y, 'animal-care').setScale(0.08).setOrigin(0,0.5);
                             setTimeout(() => {
                                 textAnimal.destroy();
@@ -1146,9 +1146,9 @@ class Desert extends Phaser.Scene {
             let bat = this.data.values[i];
             if (bat.level > 0 && bat.type == 'animal' && !bat.dead && bat.qt < 100) {
                 if (bat.feed >= 35) {
-                    if (Phaser.Math.Between(1, 10) <= 7) {
+                    if (Phaser.Math.Between(1, 10) <= 8) {
                         bat.qt += 5;
-                        bat.feed -= 3;
+                        bat.feed -= 1;
                         console.log('Birth animal !', bat);
 
                         if(bat.qt > 100) bat.qt = 100;
@@ -1161,7 +1161,7 @@ class Desert extends Phaser.Scene {
                         let textSell = this.add.text(bat.x, bat.y, '+5', { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
                         let sellButton = this.add.image(textSell.x + textSell.width / 1.5, textSell.y, 'sellAnimal').setScale(0.08).setOrigin(0,0.5);
 
-                        let textFeed = this.add.text(bat.x, textSell.y + textSell.height*0.8, '-3', { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
+                        let textFeed = this.add.text(bat.x, textSell.y + textSell.height*0.8, '-1', { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
                         let feedButton = this.add.image(textFeed.x + textFeed.width / 1.5, textFeed.y, 'meal').setScale(0.08).setOrigin(0,0.5);
 
                         setTimeout(() => {
