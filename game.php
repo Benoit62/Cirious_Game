@@ -291,8 +291,8 @@ include("config/configbdd.php");
                     }
                 }, this);
 
-                this.mute = this.add.image(0, 0, 'mute').setInteractive().setScale(0.4);
-                this.soundButton = this.add.image(0, 0, 'sound').setInteractive().setScale(0.4).setVisible(false);
+                this.mute = this.add.image(0, 0, 'sound').setInteractive().setScale(0.4);
+                this.soundButton = this.add.image(0, 0, 'mute').setInteractive().setScale(0.4).setVisible(false);
                 Phaser.Display.Align.In.Center(this.mute, this.add.zone(window.innerWidth/2, window.innerHeight/2, window.innerWidth, window.innerHeight));
                 Phaser.Display.Align.In.Center(this.soundButton, this.add.zone(window.innerWidth/2, window.innerHeight/2, window.innerWidth, window.innerHeight));
                 this.mute.setX(this.mute.x+(window.innerWidth/2)/zoom - 120);
