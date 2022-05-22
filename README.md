@@ -57,3 +57,4 @@ To redeploy this project you will need to
 *  https://www.zerowastefrance.org/6eme-rapport-du-giec-sobriete/
 *  https://www.un.org/fr/
 *  https://www.lemonde.fr/idees/article/2021/04/21/l-elevage-intensif-est-une-impasse-environnementale-economique-sanitaire-et-sociale_6077489_3232.html
+*  https://farmofthefuture.nl/en/
