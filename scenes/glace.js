@@ -800,7 +800,7 @@ class Glace extends Phaser.Scene {
                 }
                 else {
                     console.log('Can\'t plant riz on dirt or others on water');
-                    this.menuScene.errorText('Vous ne pouvez pas planter cette culture sur ce type de champs');
+                    this.menuScene.errorText('Vous ne pouvez pas planter cette culture sur ce type de champ');
                 }
             }
             else {

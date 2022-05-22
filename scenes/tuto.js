@@ -436,11 +436,11 @@ class Tuto extends Phaser.Scene {
                 This.seedi.setScrollFactor(0);
                 This.seedi.setOrigin(0, 0);
                 var content = [
-                    "Ici se trouve un bâtiment d'élevage, tu peux y placer différents animaux, mais atttention,",
+                    "Ici se trouve un bâtiment d'élevage, tu peux y placer différents animaux, mais attention,",
                     "chaque animal s'adapte plus ou moins bien au climat de la ferme.",
                     /*"Les actions réalisables pour chaque bâtiment sont affichées en surbrillance.",*/
                     "Comme pour tous les bâtiments, de nombreuses informations sont présentées à gauche.",
-                    "Ici on y retrouve notamment la nourriture ainsi que les quantité de vaches présentes.                                         ",
+                    "Ici on y retrouve notamment la nourriture ainsi que la quantité de vaches présentes.                                         ",
                     /*"A toi de bien les surveiller",*/
                     "Tu peux améliorer le bâtiment en appuyant sur le premier bouton du menu ou avec la touche 'A'",
                     "Tu devrais gagner du bien-être animal                                                                                     ",
@@ -571,7 +571,7 @@ class Tuto extends Phaser.Scene {
                 var content = [
                     "Ici se trouve une zone vide, tu peux y construire un bâtiment en fonction de l'emplacement où tu es.",
                     /*"Quelques informations du bâtiment que te souhaite construire sont affichées.",*/
-                    "Les bâtiment Infrastructures permettent de générer un revenu passif pour la ferme.",
+                    "Les bâtiments Infrastructures permettent de générer un revenu passif pour la ferme.",
                     "Chaque Infrastructure produit une ressource qu'il est possible de valoriser via des recherches.",
                     "Tu peux par exemple construire un réservoir à eau en appuyant sur le deuxième bouton                                ",
                     ""
@@ -695,14 +695,14 @@ class Tuto extends Phaser.Scene {
                 var content = [
                     "Ici se trouve un champ, tu peux planter différents types de cultures,",
                     "mais comme pour les animaux, tu dois bien faire attention au climat.",
-                    "Là aussi se trouvent de nombreuses informations concernant le champs,",
+                    "Là aussi se trouvent de nombreuses informations concernant le champ,",
                     "comme sa fertilité ou sa santé. Attention, tes revenus en dépendent.                               ",
-                    /*"Les revenus potentiellements générés sont affiché en fonction des données du champs,",
+                    /*"Les revenus potentiellements générés sont affiché en fonction des données du champ,",
                     "par rapport aux revenus maximum qu'il est possible d'obtenir.",*/
                     "Tu peux essayer de planter ta première culture !",
                     "N'oublie pas de la récolter une fois qu'elle est prête                                                        ",
                     /*"Tu peux aussi replanter la culture précédante en appuyant sur la touche 'E'.",*/
-                    /*"Une fois le champs prêt, tu peux le récolter via le bouton Récolte ou en appuyant sur la touche 'Z'.",*/
+                    /*"Une fois le champ prêt, tu peux le récolter via le bouton Récolte ou en appuyant sur la touche 'Z'.",*/
                     ""
                 ];
                 This.text0 = this.make.text({
@@ -1132,7 +1132,7 @@ class Tuto extends Phaser.Scene {
                 }
                 else {
                     console.log('Can\'t plant riz on dirt or others on water');
-                    this.menuScene.errorText('Vous ne pouvez pas planter cette culture sur ce type de champs');
+                    this.menuScene.errorText('Vous ne pouvez pas planter cette culture sur ce type de champ');
                 }
             }
             else {

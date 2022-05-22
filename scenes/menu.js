@@ -256,7 +256,7 @@ class Menu extends Phaser.Scene {
             this.luttes[i.tag].on('pointermove', function(){
                 if(i.unlock) {
                     this.cardInfo.setVisible(true);
-                    this.textInfo.setText('Lutte '+i.name+'\nEfficacité : '+i.health+'\nEcologie : '+i.ecology+'\nPrix : '+i.prix);
+                    this.textInfo.setText(i.name+'\nEfficacité : '+i.health+'\nEcologie : '+i.ecology+'\nPrix : '+i.prix);
                 }
             }, this);
             this.luttes[i.tag].on('pointerout', function(){
@@ -1182,10 +1182,10 @@ class Menu extends Phaser.Scene {
         let tmpText = '';
         switch(type){
             case 'lowMeal':
-                text.setText('Certains de vos animaux manquent de nourritures, nourrissez les rapidement ou vous allez perdre du bien-être animal').setTint(0x000000);
+                text.setText('Certains de vos animaux manquent de nourriture, nourrissez les rapidement ou vous allez perdre du bien-être animal').setTint(0x000000);
                 break;
             case 'veryLowMeal':
-                text.setText('Certains de vos animaux manquent cruellement de nourritures, nourrissez les au plus vite avant qu\'ils ne meurent').setTint(0x000000);
+                text.setText('Certains de vos animaux manquent cruellement de nourriture, nourrissez les au plus vite avant qu\'ils ne meurent').setTint(0x000000);
                 break;
             case 'noMeal':
                 text.setText('Certains de vos animaux n\'ont plus de nourriture, il ne vous reste que 10 secondes avant qu\'ils ne meurent').setTint(0x000000);
@@ -1258,11 +1258,11 @@ class Menu extends Phaser.Scene {
                 text.setText(tmpText).setTint(0x008000);
                 break;
             case 'finish':
-                tmpText = '\nFélicitation vous avez atteint tous les objectifs dans le monde, vous avez fait du bon boulot !';
+                tmpText = '\nFélicitations vous avez atteint tous les objectifs dans le monde, vous avez fait du bon boulot !';
                 text.setText(tmpText).setTint(0x008000);
                 break;
             case 'deforest':
-                tmpText = 'Tu te rends compte de ce que tu viens de faire ? Abattre plusieurs hectares de forêt pour ta ferme alors que la déforestation dans le monde est déjà bien trop importante. Je comprend que tu as besoin d\'espace pour te développer mais sert toi de tes recherches pour être plus efficace !';
+                tmpText = 'Tu te rends compte de ce que tu viens de faire ? Abattre plusieurs hectares de forêt pour ta ferme alors que la déforestation dans le monde est déjà bien trop importante. Je comprends que tu as besoin d\'espace pour te développer mais serts toi de tes recherches pour être plus efficace !';
                 text.setText(tmpText).setTint(0xf00020);
                 break;
 
