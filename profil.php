@@ -1,3 +1,25 @@
+<?php
+session_start();
+if (!isset($_SESSION['autorisation']) && $_SESSION['autorisation'] != 'iseed') {
+  header('location: login.php');
+}
+
+include("config/configbdd.php");
+
+$compte = $_SESSION['id'];
+
+$query = $bdd->prepare("SELECT * FROM comptes WHERE id = :id");
+$query->bindValue(':id', $compte, PDO::PARAM_INT);
+$query->execute();
+$profil = $query->fetch();
+$query->closeCursor();
+
+$query = $bdd->prepare("SELECT * FROM games WHERE profil = :profil");
+$query->bindValue(':profil', $compte, PDO::PARAM_INT);
+$query->execute();
+$games = $query->fetchAll();
+$query->closeCursor();
+?>
 <!DOCTYPE html>
 <html lang="fr">
 
