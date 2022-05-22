@@ -154,7 +154,7 @@ class Search extends Phaser.Scene {
         }).setOrigin(0.5,0);
 
         this.prix = this.make.text({
-            x: window.innerWidth/4,
+            x: 20,
             y: window.innerHeight - 200,
             text: '',
             style:{
@@ -163,14 +163,14 @@ class Search extends Phaser.Scene {
                 fontFamily:'MC',
                 align:'center',
                 wordWrap:{
-                    width:window.innerWidth/3
+                    width:window.innerWidth/4
                 },
                 lineSpacing:10
             }
-        }).setOrigin(0.5,0);
+        }).setOrigin(0,0);
 
         this.loss = this.make.text({
-            x: 2*window.innerWidth/4,
+            x: window.innerWidth/2 - 20,
             y: window.innerHeight -200,
             text: '',
             style:{
@@ -179,15 +179,15 @@ class Search extends Phaser.Scene {
                 fontFamily:'MC',
                 align:'center',
                 wordWrap:{
-                    width:window.innerWidth/3
+                    width:window.innerWidth/4
                 },
                 lineSpacing:10
             }
-        }).setOrigin(0.5,0);
+        }).setOrigin(1,0);
 
 
         this.apport = this.make.text({
-            x: 3*window.innerWidth/4,
+            x: window.innerWidth/2 + 20,
             y: window.innerHeight - 200,
             text: '',
             style:{
@@ -196,11 +196,27 @@ class Search extends Phaser.Scene {
                 fontFamily:'MC',
                 align:'center',
                 wordWrap:{
-                    width:window.innerWidth/3
+                    width:window.innerWidth/4
                 },
                 lineSpacing:10
             }
-        }).setOrigin(0.5,0);
+        }).setOrigin(0,0);
+
+        this.costUse = this.make.text({
+            x: window.innerWidth - 20,
+            y: window.innerHeight - 200,
+            text: '',
+            style:{
+                color:'#0080ff',
+                fontSize:25,
+                fontFamily:'MC',
+                align:'center',
+                wordWrap:{
+                    width:window.innerWidth/4
+                },
+                lineSpacing:10
+            }
+        }).setOrigin(1,0);
 
 
         this.desc = this.make.text({
@@ -236,6 +252,11 @@ class Search extends Phaser.Scene {
         });
 
         this.barre = this.add.graphics();
+        this.barre2 = this.add.graphics();
+        this.barre3 = this.add.graphics();
+        this.barre4 = this.add.graphics();
+        this.barreHoriz = this.add.graphics();
+        this.barreHoriz2 = this.add.graphics();
 
 
         let close = this.add.text(50, 50, 'X', { fontSize: 70, fontColor:'#ffffff', fontFamily:'MC'}).setOrigin(0.5,0.5).setInteractive().on('pointerdown', function(){
@@ -244,6 +265,22 @@ class Search extends Phaser.Scene {
             this.scene.launch('headerScene');
             this.scene.launch('menuScene');
             this.search = [];
+        }, this);
+
+        this.input.keyboard.on('keydown_ESC', function () {
+            this.scene.stop('searchScene');
+            this.scene.setVisible(true, this.registry.get('gameScene')+'Scene');            
+            this.scene.launch('headerScene');
+            this.scene.launch('menuScene');
+            this.search = [];
+        }, this);
+
+        
+        this.add.image(window.innerWidth - 15, 18, 'dollar').setScale(0.07);
+        this.moneyText = this.add.text(window.innerWidth - 30, 18, '0', { fontSize:25, fontFamily:'MC' }).setOrigin(1,0.5);
+
+        this.registry.events.on('changedata', function(){
+            this.moneyText.setText(this.registry.get('money'));
         }, this);
 
     }
@@ -259,20 +296,21 @@ class Search extends Phaser.Scene {
                 switch(ref.type) {
                     case 'fertility':
                         this.nom.setText(ref.name).setOrigin(0.5,0);
-                        this.prix.setText('Prix : '+ref.unlockPrice).setOrigin(0.5,0);
-                        this.loss.setText('Ecologie : '+ref.ecology).setOrigin(0.5,0);
-                        this.apport.setText('Fertilité : '+ref.fertility).setOrigin(0.5,0);
+                        this.prix.setText('Prix : '+ref.unlockPrice+' $');
+                        this.loss.setText('Ecologie : '+ref.ecology);
+                        this.apport.setText('Fertilité : '+ref.fertility);
+                        this.costUse.setText('Coût d\'utilisation : '+ref.prix);
                         this.desc.setText(ref.desc);
                         this.info.setText(ref.info);
                         this.barre.clear();
-                        this.barre.fillStyle(0xffffff, 1);
-                        this.barre.fillRect(window.innerWidth/2 - 1, window.innerHeight - 155, 2, 200);
                         break;
                     case 'health':
                         this.nom.setText(ref.name).setOrigin(0.5,0);
-                        this.prix.setText('Prix : '+ref.unlockPrice).setOrigin(0.5,0);
-                        this.loss.setText('Ecologie : '+ref.ecology).setOrigin(0.5,0);
-                        this.apport.setText('Santé : '+ref.health).setOrigin(0.5,0);
+                        this.prix.setText('Prix : '+ref.unlockPrice+' $');
+                        this.loss.setText('Ecologie : '+ref.ecology);
+                        this.apport.setText('Santé : '+ref.health);
+                        this.costUse.setText('Coût d\'utilisation : '+ref.prix);
+                        this.costUse.setText('');
                         this.desc.setText(ref.desc);
                         this.info.setText(ref.info);
                         this.barre.clear();
@@ -281,9 +319,10 @@ class Search extends Phaser.Scene {
                         break;
                     case 'meal':
                         this.nom.setText(ref.name).setOrigin(0.5,0);
-                        this.prix.setText('Prix : '+ref.unlockPrice).setOrigin(0.5,0);
-                        this.loss.setText('Bien-être animal : '+ref.care).setOrigin(0.5,0);
-                        this.apport.setText('Nourriture : '+ref.feed).setOrigin(0.5,0);
+                        this.prix.setText('Prix : '+ref.unlockPrice+' $');
+                        this.loss.setText('Bien-être animal : '+ref.care);
+                        this.apport.setText('Nourriture : '+ref.feed);
+                        this.costUse.setText('Coût d\'utilisation : '+ref.prix);
                         this.desc.setText(ref.desc);
                         this.info.setText(ref.info);
                         this.barre.clear();
@@ -292,9 +331,10 @@ class Search extends Phaser.Scene {
                         break;
                     case 'sell':
                         this.nom.setText(ref.name).setOrigin(0.5,0);
-                        this.prix.setText('Prix : '+ref.unlockPrice).setOrigin(0.5,0);
-                        this.loss.setText('Bien-être animal : '+ref.care).setOrigin(0.5,0);
-                        this.apport.setText('Faim dans le monde : '+ref.hunger).setOrigin(0.5,0);
+                        this.prix.setText('Prix : '+ref.unlockPrice+' $');
+                        this.loss.setText('Bien-être animal : '+ref.care);
+                        this.apport.setText('Faim dans le monde : '+ref.hunger);
+                        this.costUse.setText('');
                         this.desc.setText(ref.desc);
                         this.info.setText(ref.info);
                         this.barre.clear();
@@ -303,10 +343,11 @@ class Search extends Phaser.Scene {
                         break;
                     case 'water_product':
                         this.nom.setText(ref.name).setOrigin(0.5,0);
-                        this.prix.setText('Prix : '+ref.unlockPrice).setOrigin(0.5,0);
-                        if(ref.need) this.loss.setText('Requis : '+getByTag(ref.need)[0].name).setOrigin(0.5,0);
-                        if(!ref.need) this.loss.setText('').setOrigin(0.5,0);
-                        this.apport.setText('Gain passif : + '+ref.passif).setOrigin(0.5,0);
+                        this.prix.setText('Prix : '+ref.unlockPrice+' $');
+                        this.apport.setText('Gain passif : + '+ref.passif);
+                        if(ref.need) this.loss.setText('Requis : '+getByTag(ref.need)[0].name);
+                        if(!ref.need) this.loss.setText('');
+                        this.costUse.setText('');
                         this.desc.setText(ref.desc);
                         this.info.setText(ref.info);
                         this.barre.clear();
@@ -315,10 +356,11 @@ class Search extends Phaser.Scene {
                         break;
                     case 'electricity_product':
                         this.nom.setText(ref.name).setOrigin(0.5,0);
-                        this.prix.setText('Prix : '+ref.unlockPrice).setOrigin(0.5,0);
-                        if(ref.need) this.loss.setText('Requis : '+getByTag(ref.need)[0].name).setOrigin(0.5,0);
-                        if(!ref.need) this.loss.setText('').setOrigin(0.5,0);
-                        this.apport.setText('Gain passif : + '+ref.passif).setOrigin(0.5,0);
+                        this.prix.setText('Prix : '+ref.unlockPrice+' $');
+                        this.apport.setText('Gain passif : + '+ref.passif);
+                        if(ref.need) this.loss.setText('Requis : '+getByTag(ref.need)[0].name);
+                        if(!ref.need) this.loss.setText('');
+                        this.costUse.setText('');
                         this.desc.setText(ref.desc);
                         this.info.setText(ref.info);
                         this.barre.clear();
@@ -327,10 +369,11 @@ class Search extends Phaser.Scene {
                         break;
                     case 'methane_product':
                         this.nom.setText(ref.name).setOrigin(0.5,0);
-                        this.prix.setText('Prix : '+ref.unlockPrice).setOrigin(0.5,0);
-                        if(ref.need) this.loss.setText('Requis : '+getByTag(ref.need)[0].name).setOrigin(0.5,0);
-                        if(!ref.need) this.loss.setText('').setOrigin(0.5,0);
-                        this.apport.setText('Gain passif : + '+ref.passif).setOrigin(0.5,0);
+                        this.prix.setText('Prix : '+ref.unlockPrice+' $');
+                        this.apport.setText('Gain passif : + '+ref.passif);
+                        if(ref.need) this.loss.setText('Requis : '+getByTag(ref.need)[0].name);
+                        if(!ref.need) this.loss.setText('');
+                        this.costUse.setText('');
                         this.desc.setText(ref.desc);
                         this.info.setText(ref.info);
                         this.barre.clear();
@@ -342,11 +385,24 @@ class Search extends Phaser.Scene {
                         this.prix.setText('');
                         this.loss.setText('');
                         this.apport.setText('');
+                        this.costUse.setText('');
                         this.desc.setText('');
                         this.info.setText('');
                         this.barre.clear();
                         break;
                 }
+                this.barreHoriz.fillStyle(0xffffff, 1);
+                this.barreHoriz.fillRect(0, window.innerHeight - 156, window.innerWidth, 2);
+                this.barreHoriz2.fillStyle(0xffffff, 1);
+                this.barreHoriz2.fillRect(0, window.innerHeight - 216, window.innerWidth, 2);
+                this.barre.fillStyle(0xffffff, 1);
+                this.barre.fillRect(window.innerWidth/2 - 1, window.innerHeight - 155, 2, 200);
+                this.barre2.fillStyle(0xffffff, 1);
+                this.barre2.fillRect(window.innerWidth/4 - 1, window.innerHeight - 215, 2, 60);
+                this.barre3.fillStyle(0xffffff, 1);
+                this.barre3.fillRect(2*window.innerWidth/4 - 1, window.innerHeight - 215, 2, 60);
+                this.barre4.fillStyle(0xffffff, 1);
+                this.barre4.fillRect(3*window.innerWidth/4 - 1, window.innerHeight - 215, 2, 60);
                 break;
             case 'cat':
                 switch(ref.tag) {
@@ -355,6 +411,7 @@ class Search extends Phaser.Scene {
                         this.prix.setText('');
                         this.loss.setText('');
                         this.apport.setText('');
+                        this.costUse.setText('');
                         this.desc.setText(ref.desc);
                         this.info.setText(ref.info);
                         this.barre.clear();
@@ -366,6 +423,7 @@ class Search extends Phaser.Scene {
                         this.prix.setText('');
                         this.loss.setText('');
                         this.apport.setText('');
+                        this.costUse.setText('');
                         this.desc.setText(ref.desc);
                         this.info.setText(ref.info);
                         this.barre.clear();
@@ -377,6 +435,7 @@ class Search extends Phaser.Scene {
                         this.prix.setText('');
                         this.loss.setText('');
                         this.apport.setText('');
+                        this.costUse.setText('');
                         this.desc.setText(ref.desc);
                         this.info.setText(ref.info);
                         this.barre.clear();
@@ -388,6 +447,7 @@ class Search extends Phaser.Scene {
                         this.prix.setText('');
                         this.loss.setText('');
                         this.apport.setText('');
+                        this.costUse.setText('');
                         this.desc.setText(ref.desc);
                         this.info.setText(ref.info);
                         this.barre.clear();
@@ -399,6 +459,7 @@ class Search extends Phaser.Scene {
                         this.prix.setText('');
                         this.loss.setText('');
                         this.apport.setText('');
+                        this.costUse.setText('');
                         this.desc.setText(ref.desc);
                         this.info.setText(ref.info);
                         this.barre.clear();
@@ -410,11 +471,23 @@ class Search extends Phaser.Scene {
                         this.prix.setText('');
                         this.loss.setText('');
                         this.apport.setText('');
+                        this.costUse.setText('');
                         this.desc.setText('');
                         this.info.setText('');
                         this.barre.clear();
                         break;
                 }
+                
+                this.barreHoriz.clear();
+                this.barreHoriz2.clear();
+                this.barre.clear();
+                this.barre2.clear();
+                this.barre3.clear();
+                this.barre4.clear();
+                this.barreHoriz.fillStyle(0xffffff, 1);
+                this.barreHoriz.fillRect(0, window.innerHeight - 156, window.innerWidth, 2);
+                this.barre.fillStyle(0xffffff, 1);
+                this.barre.fillRect(window.innerWidth/2 - 1, window.innerHeight - 155, 2, 200);
                 break;
             case 'struct':
                 switch(ref.tag) {
@@ -423,6 +496,7 @@ class Search extends Phaser.Scene {
                         this.prix.setText('');
                         this.loss.setText('');
                         this.apport.setText('');
+                        this.costUse.setText('');
                         this.desc.setText(ref.desc);
                         this.info.setText(ref.info);
                         this.barre.clear();
@@ -434,6 +508,7 @@ class Search extends Phaser.Scene {
                         this.prix.setText('');
                         this.loss.setText('');
                         this.apport.setText('');
+                        this.costUse.setText('');
                         this.desc.setText(ref.desc);
                         this.info.setText(ref.info);
                         this.barre.clear();
@@ -445,6 +520,7 @@ class Search extends Phaser.Scene {
                         this.prix.setText('');
                         this.loss.setText('');
                         this.apport.setText('');
+                        this.costUse.setText('');
                         this.desc.setText(ref.desc);
                         this.info.setText(ref.info);
                         this.barre.clear();
@@ -456,6 +532,7 @@ class Search extends Phaser.Scene {
                         this.prix.setText('');
                         this.loss.setText('');
                         this.apport.setText('');
+                        this.costUse.setText('');
                         this.desc.setText(ref.desc);
                         this.info.setText(ref.info);
                         this.barre.clear();
@@ -467,17 +544,29 @@ class Search extends Phaser.Scene {
                         this.prix.setText('');
                         this.loss.setText('');
                         this.apport.setText('');
+                        this.costUse.setText('');
                         this.desc.setText('');
                         this.info.setText('');
                         this.barre.clear();
                         break;
                 }
+                this.barreHoriz.clear();
+                this.barreHoriz2.clear();
+                this.barre.clear();
+                this.barre2.clear();
+                this.barre3.clear();
+                this.barre4.clear();
+                this.barreHoriz.fillStyle(0xffffff, 1);
+                this.barreHoriz.fillRect(0, window.innerHeight - 156, window.innerWidth, 2);
+                this.barre.fillStyle(0xffffff, 1);
+                this.barre.fillRect(window.innerWidth/2 - 1, window.innerHeight - 155, 2, 200);
                 break;
             default:
                 this.nom.setText('');
                 this.prix.setText('');
                 this.loss.setText('');
                 this.apport.setText('');
+                this.costUse.setText('');
                 this.desc.setText('');
                 this.info.setText('');
                 this.barre.clear();

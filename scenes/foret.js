@@ -500,14 +500,14 @@ class Foret extends Phaser.Scene {
 
 
         this.timerHunger++;
-        if (this.timerHunger == 800) {
+        if (this.timerHunger == 1000) {
             console.log('Check weeds');
             this.updateJauge('hunger', -1);
-            this.timerHunger = 0 - Phaser.Math.Between(0, 500);
+            this.timerHunger = 0 - Phaser.Math.Between(0, 300);
         }
 
         this.timerWeeds++;
-        if (this.timerWeeds == 2200) {
+        if (this.timerWeeds == 3000) {
             console.log('Check weeds');
             this.weeds();
             this.timerWeeds = 0 - Phaser.Math.Between(0, 600);
@@ -536,7 +536,7 @@ class Foret extends Phaser.Scene {
         }
 
         this.timerMeal++;
-        if (this.timerMeal == 3000) {
+        if (this.timerMeal == 2500) {
             console.log('Check eat');
             this.eat();
             this.timerMeal = 0 - Phaser.Math.Between(0, 400);
@@ -890,7 +890,7 @@ class Foret extends Phaser.Scene {
             let percent2 = (bat.maxWeeds - bat.weeds)/10;
             console.log(percent, percent2);
             let moneyWin = Math.round(bat.seed.money*percent*percent2*100)/100;
-            let hungerWin = Math.round(6*percent*percent2*100)/100;
+            let hungerWin = Math.round(12*percent*percent2*100)/100;
 
             // Compte l'echainement des graines
             let looseFertility = 0;
@@ -1210,7 +1210,7 @@ class Foret extends Phaser.Scene {
                 if (bat.feed >= 35) {
                     if (Phaser.Math.Between(1, 10) <= 8) {
                         bat.qt += 5;
-                        bat.feed -= 1;
+                        bat.feed -= 2;
                         console.log('Birth animal !', bat);
 
                         if(bat.qt > 100) bat.qt = 100;
@@ -1223,7 +1223,7 @@ class Foret extends Phaser.Scene {
                         let textSell = this.add.text(bat.x, bat.y, '+5', { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
                         let sellButton = this.add.image(textSell.x + textSell.width / 1.5, textSell.y, 'sellAnimal').setScale(0.08).setOrigin(0,0.5);
 
-                        let textFeed = this.add.text(bat.x, textSell.y + textSell.height*0.8, '-1', { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
+                        let textFeed = this.add.text(bat.x, textSell.y + textSell.height*0.8, '-2', { lineSpacing:10, fontSize:40, color:'#ffffff ' }).setOrigin(0.5, 0.5);
                         let feedButton = this.add.image(textFeed.x + textFeed.width / 1.5, textFeed.y, 'meal').setScale(0.08).setOrigin(0,0.5);
 
                         setTimeout(() => {

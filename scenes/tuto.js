@@ -15,7 +15,7 @@ class Tuto extends Phaser.Scene {
 
         this.images = [];
 
-        this.moneyGame = 35000;
+        this.moneyGame = 10000;
 
         this.headerScene;
         this.menuScene;
@@ -281,6 +281,7 @@ class Tuto extends Phaser.Scene {
 
         this.input.keyboard.on('keydown_ESC', function () {
             this.musique.destroy();
+            this.registry.set('money', 15000);
             this.scene.stop('tutoScene');
             this.scene.stop('headerScene');
             this.scene.stop('menuScene');
@@ -555,8 +556,8 @@ class Tuto extends Phaser.Scene {
             else {
                 this.introBat = false;
                 this.player.anims.play('up', true);
-                this.moneyGame += 40000;
-                this.registry.set('money', 40000);
+                this.moneyGame += 5000;
+                this.registry.set('money', 5000);
             }
 
             if (!this.introBat) {
@@ -894,6 +895,7 @@ class Tuto extends Phaser.Scene {
                                 This.text2.destroy();
                                 This.seedi.destroy();
                                 This.musique.destroy();
+                                This.registry.set('money', 15000);
                                 This.scene.stop('tutoScene');
                                 This.scene.stop('headerScene');
                                 This.scene.stop('menuScene');

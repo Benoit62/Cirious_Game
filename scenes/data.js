@@ -53,7 +53,7 @@ let data = [
         type: 'animal',
         lvlMax: 3,
         buildCost: 15000,
-        upgrade: [0, 5000, 7000, 10000],
+        upgrade: [0, 0, 5000, 7000, 10000],
         name: 'Cochon',
         desc: 'Production de viande',
         info: 'La population porcine mondiale est estimée à 826 millions de têtes (FAO, 1988). C\'est le porc qui, comparé aux autres espèces domestiques, qui offre la productivité la plus élevée. ',
@@ -64,7 +64,7 @@ let data = [
         type: 'animal',
         lvlMax: 3,
         buildCost: 15000,
-        upgrade: [0, 5000, 7000, 10000],
+        upgrade: [0, 0, 5000, 7000, 10000],
         name: 'Vache',
         desc: 'Production de viande, de cuir, de lait',
         info: 'Permet de fournir de la viande, du lait cru, des peaux, un travail de traction, du fumier, du combustible, des sous-produits et l\'entretien des espaces ouverts',
@@ -75,7 +75,7 @@ let data = [
         type: 'animal',
         lvlMax: 3,
         buildCost: 15000, //moins rentable que l'elevage bovin niveau rendement 
-        upgrade: [0, 5000, 7000, 10000],
+        upgrade: [0, 0, 5000, 7000, 10000],
         name: 'Mouton',
         desc: 'Production de viande et de laine',
         info: 'En plus d\'être élevé pour leur lait,laine et viande, les moutons donnent une image positive aux paysages urbains. Ils sont un atout fort d’un point de vue touristique',
@@ -86,7 +86,7 @@ let data = [
         type: 'animal',
         lvlMax: 3,
         buildCost: 15000,
-        upgrade: [0, 5000, 7000, 10000],
+        upgrade: [0, 0, 5000, 7000, 10000],
         name: 'Saumon',
         desc: 'Production de viande',
         info: 'Le réel avantage de la pisciculture est la protection des ressources halieutiques mondiales qui commencent sérieusement à se raréfier',
@@ -97,7 +97,7 @@ let data = [
         type: 'animal',
         lvlMax: 3,
         buildCost: 20000,
-        upgrade: [0, 7000, 10000, 20000],
+        upgrade: [0, 0, 7000, 10000, 20000],
         name: 'Renne',
         desc: 'Production de viande de cuir, et de lait',
         info: 'Elevés pour leur lait et leur viande, cette espèce est adaptée aux climats froids',
@@ -108,7 +108,7 @@ let data = [
         type: 'animal',
         lvlMax: 3,
         buildCost: 15000,
-        upgrade: [0, 5000, 7000, 10000],
+        upgrade: [0, 0, 5000, 7000, 10000],
         name: 'Bison',
         desc: 'Production de viande de cuir, et de lait',
         info: 'Il en existe deux espèces : bisons d\'Europe et le bisons d\'Amerique (ayant comme sous-espèce les bisons des bois et des plaines) majoritairement élevé pour sa viande ',
@@ -120,7 +120,7 @@ let data = [
         type: 'animal',
         lvlMax: 3,
         buildCost: 20000,
-        upgrade: [0, 10000, 15000, 30000],
+        upgrade: [0, 0, 10000, 15000, 30000],
         name: 'Chameau',
         desc: 'Production de viande de cuir, et de lait',
         info: 'les chameaux ont une grande capacité à puiser dans leurs réserves d\'énergie lorsque les ressources alimentaires se font rare. Une aubaine face au réchauffement climatique actuel et aux périodes de sécheresse dont l\'élevage européen fait face.',
@@ -132,7 +132,7 @@ let data = [
         type:'animal',
         lvlMax:3,
         buildCost:10000,
-        upgrade:[0,10000,15000,25000],
+        upgrade:[0, 0,10000,15000,25000],
         name:'Poule',
         desc:'Production d\'oeufs et de viande',
         info:'Près de 107 millions de tonnes de volaille sont produites chaque année dans le monde. Le Royaume-Uni reste le premier producteur européen en 2013',
@@ -532,30 +532,17 @@ let data = [
 
     //Nourriture animaux
     {
-        tag: 'fourrages',
+        tag: 'indus',
         type: 'meal',
         typeName: 'Nourriture pour animaux',
-        name: 'Fourrages',
-        desc: 'Plante ou mélange de plantes, utilisé pour l\'alimentation des animaux d\'élevage.',
-        info: 'Alimentation nutritive et naturelle',
+        name: 'Aliments industriels',
+        desc: 'L\'industrie peut fournir la ration complète des animaux d\'élevage, adaptée à chaque situation. C\'est généralement le cas en élevage avicole et cunicole et c\'est très fréquent en élevage porcin. Les rations semi-complètes apportent le complément à un ou plusieurs aliments de base produits ou non sur la ferme.',
+        info: 'Baisse moyenne du bonheur animal',
         unlock: true,
-        unlockPrice: 1000,
-        feed: 15,
-        care: 6,
-        prix: 1500
-    },
-    {
-        tag: 'grains',
-        type: 'meal',
-        typeName: 'Nourriture pour animaux',
-        name: 'Grains',
-        desc: 'Les graines de céréales (riz, blé, avoine, orge, maïs...) fournissent dans presque tous les pays du monde la base énergétique de l\'alimentation.',
-        info: 'Augmentation très faible du bonheur animal',
-        unlock: false,
         unlockPrice: 10000,
-        feed: 18,
-        care: 4,
-        prix: 1000
+        feed: 10,
+        care: -4,
+        prix: 500
     },
     {
         tag: 'ration',
@@ -565,23 +552,36 @@ let data = [
         desc: 'La ration alimentaire représente la quantité d\'aliments à ingérer chaque jour pour couvrir la totalité des dépenses et assurer l\'équilibre nutritif de l\'individu',
         info: 'Faible baisse du bonheur animal',
         unlock: false,
-        unlockPrice: 10000,
+        unlockPrice: 2000,
         feed: 30,
         care: -2,
         prix: 800
     },
     {
-        tag: 'indus',
+        tag: 'grains',
         type: 'meal',
         typeName: 'Nourriture pour animaux',
-        name: 'Aliments industriels',
-        desc: 'L\'industrie peut fournir la ration complète des animaux d\'élevage, adaptée à chaque situation. C\'est généralement le cas en élevage avicole et cunicole et c\'est très fréquent en élevage porcin. Les rations semi-complètes apportent le complément à un ou plusieurs aliments de base produits ou non sur la ferme.',
-        info: 'Baisse moyenne du bonheur animal',
+        name: 'Grains',
+        desc: 'Les graines de céréales (riz, blé, avoine, orge, maïs...) fournissent dans presque tous les pays du monde la base énergétique de l\'alimentation.',
+        info: 'Augmentation très faible du bonheur animal',
         unlock: false,
-        unlockPrice: 10000,
-        feed: 10,
-        care: -4,
-        prix: 500
+        unlockPrice: 3000,
+        feed: 18,
+        care: 4,
+        prix: 1000
+    },
+    {
+        tag: 'fourrages',
+        type: 'meal',
+        typeName: 'Nourriture pour animaux',
+        name: 'Fourrages',
+        desc: 'Plante ou mélange de plantes, utilisé pour l\'alimentation des animaux d\'élevage.',
+        info: 'Alimentation nutritive et naturelle',
+        unlock: false,
+        unlockPrice: 2000,
+        feed: 15,
+        care: 6,
+        prix: 1500
     },
 
 
@@ -597,7 +597,7 @@ let data = [
         unlockPrice: 1000,
         money: 500,
         care: -10,
-        hunger: 15
+        hunger: 17
     },
     {
         tag: 'rituel',
@@ -610,7 +610,7 @@ let data = [
         unlockPrice: 1000,
         money: 500,
         care: -25,
-        hunger: 15
+        hunger: 17
     },
     {
         tag: 'propre',
@@ -623,7 +623,7 @@ let data = [
         unlockPrice: 5000,
         money: 300,
         care: 0,
-        hunger: 12
+        hunger: 13
     },
 
 

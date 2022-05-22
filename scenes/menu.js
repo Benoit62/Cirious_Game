@@ -105,7 +105,7 @@ class Menu extends Phaser.Scene {
                 for(let clm in i.climat) {
                     climats+=getByTag(i.climat[clm])[0].name+' ';
                 }
-                this.textInfo.setText('Animal : '+i.name+'\nPrix : '+i.buildCost+'\nBien-être animal : -40'+'\nClimats : '+climats);
+                this.textInfo.setText('Animal : '+i.name+'\nPrix : '+i.buildCost+'\nBien-être animal : -30'+'\nClimats : '+climats);
             }, this);
             this.animals[i.tag].on('pointerout', function(){
                 this.cardInfo.setVisible(false);
@@ -187,7 +187,7 @@ class Menu extends Phaser.Scene {
             }, this);
             this.structs[i.tag].on('pointermove', function(){
                 this.cardInfo.setVisible(true);
-                this.textInfo.setText('Batiment : '+i.name+'\nPrix : '+i.buildCost+'\nRecherches disponibles : '+getByType(i.product).length);
+                this.textInfo.setText('Batiment : '+i.name+'\nPrix : '+i.buildCost+'\nRecherches disponibles : '+getByType(i.product).length+'\nGain : '+i.passif[1]+'/s');
             }, this);
             this.structs[i.tag].on('pointerout', function(){
                 this.cardInfo.setVisible(false);
@@ -793,10 +793,10 @@ class Menu extends Phaser.Scene {
                 this.imgTechs.forEach(value => value.destroy());
                 buttons.forEach(function(value) {
                     this.imgTechs[compt] = this.add.image((300/taille)*(compt+1), window.innerHeight - 75, value.tag+'-search').setScale(0.08).setVisible(true);
-                    //this.textTechs[compt].setText('+'+value.passif).setX(this.imgTechs[compt].x).setY(this.imgTechs[compt].y + this.imgTechs[compt].height / 2 + 5).setVisible(true);
                     if(!value.unlock) {
-                        this.imgTechs[compt].setAlpha(0.5);
-                        //this.textTechs[compt].setVisible(false);
+                        this.imgTechs[compt].setAlpha(0.5).setInteractive().on('pointerdown', function(){
+                            this.errorText('Débloquer cette technologie via l\'onglet Recherche');
+                        }, this);
                     }
                     compt++;
                 }, this);
@@ -1160,6 +1160,19 @@ class Menu extends Phaser.Scene {
                 break;
             case 'deforest':
                 tmpText = 'Tu te rends compte de ce que tu viens de faire ? Abattre plusieurs hectares de forêt pour ta ferme alors que la déforestation dans le monde est déjà bien trop importante. Je comprend que tu as besoin d\'espace pour te développer mais sert toi de tes recherches pour être plus efficace !';
+                text.setText(tmpText).setTint(0xf00020);
+                break;
+
+            case 'hungerJauge':
+                tmpText = 'Attention, la jauge pour la faim dans le monde est très basse, cultive tes champs ou vend tes animaux pour la faire augmenter.';
+                text.setText(tmpText).setTint(0xf00020);
+                break;
+            case 'careJauge':
+                tmpText = 'Attention, la jauge pour le bien-être animal est très basse, nourri les bien, et vend les au bon endroit. Tu peux aussi améliorer les bâtiments de tes animaux pour les rendre heureux.';
+                text.setText(tmpText).setTint(0xf00020);
+                break;
+            case 'ecologyJauge':
+                tmpText = 'Attention, la jauge pour l\'écologie est très basse, utilise des méthodes de culture écologiques que tu peux débloquer via la Recherche.';
                 text.setText(tmpText).setTint(0xf00020);
                 break;
             default:
