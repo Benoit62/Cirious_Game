@@ -27,7 +27,7 @@ $bdd=NULL;
                     <div class="formBx">
                         <form method="POST" action="config/configco.php">
                             <h2>Sign In</h2>
-                            <input id="pseudo_co" type="text" name="pseudo" value="" placeholder="Username" minlength="2" maxlength="30" required>
+                            <input id="pseudo_co" type="text" name="pseudo" value="" placeholder="Username" minlength="2" maxlength="30" required autocomplete="off">
                             <input id="mdp_co" type="password" name="mdp" value="" placeholder="Password" minlength="2" maxlength="200" autocomplete="current-password" required>
 						    <ion-icon id="cp1" name="eye-off-outline"></ion-icon>
                             <input type="submit" name="valider" value="connexion">
@@ -57,7 +57,7 @@ $bdd=NULL;
                     <div class="formBx">
                         <form method="POST" action="config/configinsc.php">
                             <h2>Create an account</h2>
-                            <input id="pseudo" type="text" name="pseudo" value="" placeholder="Username" minlength="2" maxlength="30" required>
+                            <input id="pseudo" type="text" name="pseudo" value="" placeholder="Username" minlength="2" maxlength="30" required autocomplete="off">
                             <!--<input id="mail" type="email" name="mail" value="" placeholder="Email Address" minlength="3" maxlength="100" required>-->
                             <input id="mdp" type="password" name="mdp" value="" placeholder="Create Password" minlength="2" maxlength="256" required>
 						    <ion-icon id="cp2" name="eye-off-outline"></ion-icon>

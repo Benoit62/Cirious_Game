@@ -606,7 +606,7 @@ let data = [
         name: 'Abattage rituel',
         desc: 'Consiste dans la plupart des cas à égorger l\'animal alors qu\'il est encore conscient',
         info: 'Extrême cruauté',
-        unlock: true,
+        unlock: false,
         unlockPrice: 1000,
         money: 500,
         care: -25,

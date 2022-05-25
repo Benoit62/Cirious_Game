@@ -260,16 +260,16 @@ class Search extends Phaser.Scene {
 
 
         let close = this.add.text(50, 50, 'X', { fontSize: 70, fontColor:'#ffffff', fontFamily:'MC'}).setOrigin(0.5,0.5).setInteractive().on('pointerdown', function(){
+            this.scene.wake(this.registry.get('gameScene')+'Scene');
             this.scene.stop('searchScene');
-            this.scene.setVisible(true, this.registry.get('gameScene')+'Scene');            
             this.scene.launch('headerScene');
             this.scene.launch('menuScene');
             this.search = [];
         }, this);
 
         this.input.keyboard.on('keydown_ESC', function () {
-            this.scene.stop('searchScene');
-            this.scene.setVisible(true, this.registry.get('gameScene')+'Scene');            
+            this.scene.wake(this.registry.get('gameScene')+'Scene');  
+            this.scene.stop('searchScene');        
             this.scene.launch('headerScene');
             this.scene.launch('menuScene');
             this.search = [];
@@ -277,7 +277,7 @@ class Search extends Phaser.Scene {
 
         
         this.add.image(window.innerWidth - 15, 18, 'dollar').setScale(0.07);
-        this.moneyText = this.add.text(window.innerWidth - 30, 18, '0', { fontSize:25, fontFamily:'MC' }).setOrigin(1,0.5);
+        this.moneyText = this.add.text(window.innerWidth - 30, 18, this.registry.get('money'), { fontSize:25, fontFamily:'MC' }).setOrigin(1,0.5);
 
         this.registry.events.on('changedata', function(){
             this.moneyText.setText(this.registry.get('money'));

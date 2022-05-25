@@ -109,7 +109,7 @@ class Header extends Phaser.Scene {
         this.search.on('pointerup', function() {
             //Update game same but no render
             if(this.registry.get('gameScene') != 'tuto') {
-                this.scene.setVisible(false, this.registry.get('gameScene')+'Scene');
+                this.scene.sleep(this.registry.get('gameScene')+'Scene');
                 this.scene.stop('headerScene');
                 this.scene.stop('menuScene');
                 this.scene.start('searchScene');

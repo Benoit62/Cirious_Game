@@ -100,20 +100,20 @@ class Loading extends Phaser.Scene {
                 this.registry.set('unlock', ['europe']);
                 this.registry.set('lock', ['aride', 'tropic', 'polaire']);
 
-                this.registry.set('money', 20000);
+                this.registry.set('money', 2000000);
 
                 getByType('climat').forEach(function(climat){
-                    this.registry.set('ecology'+climat.tag, 20);
+                    this.registry.set('ecology'+climat.tag, 40);
                     this.registry.set('animalCare'+climat.tag, 50);
-                    this.registry.set('hunger'+climat.tag, 20);
+                    this.registry.set('hunger'+climat.tag, 40);
                 }, this);
 
-                console.log('on set les data');
                 console.log(this.registry.values);
                 console.log(this.registry.get('unlock'));
             }
             else {
-                data = globalData;
+                if(globalData)data = globalData;
+                
                 console.log(data, globalData);
                 let datas = registryData;
                 for(let i in datas) {

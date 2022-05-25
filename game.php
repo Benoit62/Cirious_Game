@@ -106,7 +106,7 @@ include("config/configbdd.php");
             let arideData = <?=$game['aride']?>;
             let polaireData = <?=$game['polaire']?>;
             let tropicData = <?=$game['tropic']?>;
-            let globalData = <?=$game['dataGlobal']?>;
+            let globalData = <?php if(!empty($game['dataGlobal'])) {echo $game['dataGlobal']; } else { echo 'null'; }?>;
         <?php } else { ?>
             let sav = false;
         <?php } ?>
