@@ -1,6 +1,6 @@
 # Cirious_Game
 
-* See the project at [iSeed](wattinnebenoit.alwaysdata.net)
+* See the project at [iSeed](https://wattinnebenoit.alwaysdata.net)
 
 ## Table of Contents
 
